@@ -1,0 +1,123 @@
+{
+  "version": 3,
+  "maj": "2026-11-16",
+  "statut": "initial, a calibrer apres les deux premiers jeux",
+  "veille": {
+    "pages_max_par_session": 40,
+    "pages_max_par_source_restreinte": 8,
+    "delai_min_s": 20,
+    "delai_max_s": 60,
+    "sessions_max_par_jour": 1,
+    "recherches_google_max": 10,
+    "gagnants_min": 10,
+    "faibles_min": 10,
+    "couverture_min_pct": 90
+  },
+  "concept": {
+    "elements_fiche": 7,
+    "premiere_action_max_s": 60,
+    "systemes_max": 3,
+    "iterations_max": 2
+  },
+  "economie": {
+    "premier_achat_max_s": 60,
+    "ecart_max_0_10min_s": 120,
+    "ecart_max_10_60min_s": 480,
+    "ecart_max_apres_60min_s": 900,
+    "payback_min_s": 30,
+    "payback_max_s": 300,
+    "chantier_max_s": 180,
+    "contenu_actif_min_min": 90,
+    "retard_lent_min_pct": 5,
+    "defauts_p0_max": 0,
+    "iterations_max": 2,
+    "contre_verifications_max_par_version": 3
+  },
+  "fun": {
+    "moyenne_min": 7.0,
+    "axe_min": 5.0,
+    "iterations_max": 2,
+    "moyenne_verifiable_papier_min": 7.0,
+    "note": "iterations_max = retours au concepteur ; le troisieme echec abandonne (regle A5 revisee). moyenne_verifiable_papier_min : passe papier, axes verifiables seulement (regle A9)."
+  },
+  "prototype": {
+    "premiere_action_max_s": 60,
+    "erreurs_console_max": 0
+  },
+  "qa": {
+    "clients_min": 2,
+    "erreurs_console_max": 0,
+    "p0_max": 0,
+    "p1_max": 0,
+    "fps_min_telephone": 30,
+    "bouton_min_px": 48,
+    "ecran_pc_min_px": [
+      1920,
+      1080
+    ],
+    "formats_ecran_obligatoires": [
+      "pc_plein_ecran",
+      "telephone"
+    ],
+    "stabilite_panneaux_duree_s": 30,
+    "stabilite_panneaux_echantillons_min": 60,
+    "stabilite_panneaux_ecart_max_px": 1,
+    "captures_monde_angles_min": 3,
+    "cycles_max": 3,
+    "note_beta_fermee_min": 6.0,
+    "note_public_min": 7.5
+  },
+  "beta": {
+    "cohorte_min": 200,
+    "j1_min_pct": 8.0,
+    "session_min_min": 8.0
+  },
+  "pub": {
+    "marge_30j_min": 0,
+    "promesses_vignette_min": 2
+  },
+  "exploitation": {
+    "fenetre_comparaison_j": 7
+  },
+  "reference_gameanalytics_2026": {
+    "j1_pct": 10.3,
+    "j7_pct": 1.6,
+    "j30_pct": 0.5,
+    "session_min": 9.8
+  },
+  "retours": {
+    "bug_joueurs_a_reproduire": 2,
+    "joueurs_distincts_pour_ameliorer": 3,
+    "actions_max_par_cycle": 5,
+    "purge_brut_jours": 90,
+    "suivi_apres_j": 7
+  },
+  "promo": {
+    "statut": "valeurs de depart sans source de plateforme, a calibrer sur les premieres campagnes",
+    "lot_initial": 6,
+    "videos_max": 12,
+    "presentations_min": 1000,
+    "vues_engagees_min": 300,
+    "choix_de_regarder_min_pct": 60,
+    "duree_moyenne_vue_min_pct": 70,
+    "vues_lot_min": 10000,
+    "joueurs_pour_1000_min": 1,
+    "piste_videos_min": 2,
+    "piste_joueurs_pour_1000_min": 3,
+    "piste_vues_min": 1000,
+    "travail_max_heures": 8,
+    "cohortes_insuffisantes_max": 2
+  },
+  "permanence": {
+    "statut": "valeurs de depart, a calibrer",
+    "tours_max_par_jour": 6,
+    "tours_par_battement": 2,
+    "heures_actives": "00-24",
+    "sans_progres_heures": 48,
+    "incident_refus_min": 20,
+    "incident_facteur_mediane": 5,
+    "chute_sessions_pct": 30,
+    "chute_mediane_min": 20,
+    "cout_stop_facteur": 3
+  }
+}

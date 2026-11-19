@@ -1,0 +1,37 @@
+local DSS=game:GetService("DataStoreService")
+local ds=DSS:GetDataStore("Limites")
+local store=banc.datastore("Limites")
+banc.configurer_datastore({latence_s=0.3,limites=true})
+local termine=false
+task.spawn(function() ds:SetAsync("a",1);termine=true end)
+banc.avancer(0.29)
+banc.egal(termine,false,"DataStore suspend avant la reponse")
+banc.egal(store:lire("a"),nil,"latence sans ecriture anticipee")
+banc.avancer(0.01)
+banc.verifier(termine,"reponse apres 0,3 seconde fictive")
+banc.egal(store:lire("a"),1,"ecriture terminee")
+banc.configurer_datastore({latence_s=0,limites=true})
+for _,f in {function() ds:SetAsync("a",2) end,function() ds:UpdateAsync("a",function() return 2 end) end,function() ds:IncrementAsync("a",1) end,function() ds:RemoveAsync("a") end} do
+    banc.erreur_attendue(f,"KeyThrottled")
+end
+banc.egal(store:lire("a"),1,"refus preserve la valeur")
+banc.egal(store:compteurs().ecritures,1,"refus non compte comme ecriture")
+banc.avancer(5.999)
+banc.erreur_attendue(function() ds:SetAsync("a",2) end,"KeyThrottled")
+banc.avancer(0.001)
+ds:UpdateAsync("a",function(v) return v+1 end)
+banc.egal(store:lire("a"),2,"ecriture acceptee exactement apres 6 secondes")
+ds:UpdateAsync("a",function() return nil end)
+banc.egal(store:compteurs().ecritures,2,"transformation annulee sans budget ecriture")
+-- 60 ?critures glissantes, partag?es par tous les magasins et m?thodes.
+local autre=DSS:GetDataStore("AutresLimites")
+for i=1,58 do autre:SetAsync(tostring(i),i) end
+banc.erreur_attendue(function() ds:SetAsync("nouvelle",1) end,"DatastoreThrottled")
+banc.joueur(8900,"Budget")
+for i=59,68 do autre:IncrementAsync(tostring(i),1) end
+banc.erreur_attendue(function() autre:SetAsync("trop",1) end,"DatastoreThrottled")
+banc.avancer(54.001)
+ds:SetAsync("nouvelle",1)
+banc.egal(store:lire("nouvelle"),1,"budget restitue a 60 secondes glissantes")
+banc.egal(store:compteurs().refus_cle,5,"refus par cle comptabilises")
+banc.egal(store:compteurs().refus_budget,1,"refus serveur comptabilises")

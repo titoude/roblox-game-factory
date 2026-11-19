@@ -1,0 +1,12 @@
+{
+  "jeu": "lave-la-tour",
+  "note": "Identifiants crees sur Roblox. Relire ce fichier avant toute creation ; y ecrire l'identifiant des qu'il est connu, avant toute autre action. Aucun secret ici : des identifiants publics seulement.",
+  "univers": { "test": "", "prod": "" },
+  "places": { "test": "", "prod": "" },
+  "passes": [],
+  "produits": [],
+  "badges": [],
+  "images": [],
+  "campagnes": [],
+  "versions_publiees": []
+}

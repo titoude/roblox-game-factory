@@ -1,0 +1,30 @@
+{
+  "slug": "archipel",
+  "nom": "Archipel",
+  "cree_le": "2026-11-15",
+  "etape": "06-qa",
+  "statut": "en_cours",
+  "blocage": "",
+  "place": {
+    "universeId_test": "",
+    "placeId_test": "",
+    "universeId_prod": "<ARCHIPEL_UNIVERSE_ID>",
+    "placeId_prod": "<ARCHIPEL_PLACE_ID>"
+  },
+  "portes": {},
+  "mode_degrade": [],
+  "historique": [
+    {
+      "date": "2026-11-15",
+      "evenement": "Jeu anterieur a l'usine, repris a l'etape release. Sources dans blox-craft (lecture seule depuis l'usine)."
+    },
+    {
+      "date": "2026-11-15",
+      "evenement": "Hors chaine : qualification independante 5,6/10 (beta fermee oui sous conditions, public non), aucun test a deux clients. Porte P5 a juger par l'orchestrateur apres un test de niveau B."
+    },
+    {
+      "date": "2026-11-15",
+      "evenement": "Release a venir bloquee par l'amorcage du proprietaire (PROCEDURES/10) et l'absence d'autorisation dans PLAFONDS.md ; la QA multijoueur peut se faire avant."
+    }
+  ]
+}

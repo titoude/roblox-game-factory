@@ -1,0 +1,38 @@
+#!/bin/sh
+# Crochet git de l'usine : refuse un commit qui ajoute un secret probable, un fichier vide ou un fichier lourd (G9, G16).
+# Activation (une fois par clone) : git config core.hooksPath OUTILS/hooks
+# Les motifs sont assembles par morceaux pour que ce fichier ne se detecte pas lui-meme.
+
+P1='_\|WARN''ING:-DO-NOT-SHARE'
+P2='discord(app)?\.com/api/(v[0-9]+/)?webhooks/[0-9]{6,}/[A-Za-z0-9_-]{20,}'
+P3='x-api-key[[:space:]]*[:=][[:space:]]*["'"'"']?[A-Za-z0-9+/=_-]{24,}'
+P4='ROBLOSECURITY[[:space:]]*[:=][[:space:]]*["'"'"']?[A-Za-z0-9_|:-]{24,}'
+P5='sk-(ant|proj)-[A-Za-z0-9_-]{16,}'
+P6='-----BEGIN [A-Z ]*PRIVATE KEY-----'
+
+echec=0
+ajouts=$(git diff --cached -U0 --no-color | grep -E '^\+' | grep -vE '^\+\+\+')
+for p in "$P1" "$P2" "$P3" "$P4" "$P5" "$P6"; do
+  if printf '%s\n' "$ajouts" | grep -Eq -e "$p"; then
+    echo "REFUS : secret probable dans les lignes ajoutees (garde-fou G9). Retirer le secret, puis recommencer." >&2
+    echec=1
+  fi
+done
+
+fautifs=$(git diff --cached --name-only --diff-filter=AM | while IFS= read -r f; do
+  case "$f" in
+    *.gitkeep) continue ;;
+  esac
+  if [ -f "$f" ]; then
+    taille=$(wc -c < "$f" | tr -d ' ')
+    if [ "$taille" -eq 0 ]; then echo "vide : $f"; fi
+    if [ "$taille" -gt 1048576 ]; then echo "lourd (plus de 1 Mo) : $f"; fi
+  fi
+done)
+if [ -n "$fautifs" ]; then
+  echo "REFUS : fichiers refuses (garde-fou G16) :" >&2
+  printf '%s\n' "$fautifs" >&2
+  echec=1
+fi
+
+exit $echec

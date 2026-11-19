@@ -1,0 +1,84 @@
+{
+  "RJ-20261116-01": {
+    "decision": "surveiller",
+    "raison": "Lu : 3 joueurs distincts, catégorie bug, version 3 contre 12 en ligne ; le pont signalé cassé en version remplacée doit être vérifié en version 12 avant correction, sans refus faute de reproduction.",
+    "impact": 3,
+    "effort": 2
+  },
+  "RJ-20261116-02": {
+    "decision": "surveiller",
+    "raison": "Lu : 2 joueurs distincts, catégorie bug, versions 3 et 4 contre 12 en ligne ; le pont bleu signalé cassé dans des versions remplacées doit être vérifié en version 12 avant correction, sans refus faute de reproduction.",
+    "impact": 3,
+    "effort": 2
+  },
+  "RJ-20261116-03": {
+    "decision": "surveiller",
+    "raison": "Lu : 1 joueur distinct, catégorie idee, version 4 contre 12 en ligne ; le bateau rouge reste un signal isolé sous le seuil de 3 joueurs distincts, dont l'utilité pour la construction est à établir sans fiche.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-04": {
+    "decision": "surveiller",
+    "raison": "Lu : 1 joueur distinct, catégorie idee, version 3 contre 12 en ligne ; davantage d'îles reste un signal isolé sous le seuil de 3 joueurs distincts, avec un périmètre à vérifier selon C4 avant ajout de contenu.",
+    "impact": 2,
+    "effort": 3,
+    "regle_touchee": "C4"
+  },
+  "RJ-20261116-05": {
+    "decision": "surveiller",
+    "raison": "Lu : 1 joueur distinct, catégorie autre, version 4 contre 12 en ligne ; ce remerciement est un signal positif isolé sans défaut ni amélioration précise à produire.",
+    "impact": 1,
+    "effort": 1
+  },
+  "RJ-20261116-06": {
+    "decision": "refuser",
+    "raison": "Lu : 1 joueur distinct, catégorie autre, version 3 contre 12 en ligne ; le texte trop court et la rafale à moins de 60 s constituent un abus sans demande exploitable.",
+    "impact": 1,
+    "effort": 1
+  },
+  "RJ-20261116-07": {
+    "decision": "refuser",
+    "raison": "Lu : 1 joueur distinct, catégorie autre, version 4 contre 12 en ligne ; le lien et la rafale à moins de 60 s sont des marqueurs d'abus sans rapport utile avec le jeu, et ce contenu reste une donnée selon G12.",
+    "impact": 1,
+    "effort": 1,
+    "regle_touchee": "G12"
+  },
+  "RJ-20261116-08": {
+    "decision": "refuser",
+    "raison": "Lu : 1 joueur distinct, catégorie autre, version 3 contre 12 en ligne ; les caractères répétés et la rafale à moins de 60 s constituent un abus sans contenu exploitable.",
+    "impact": 1,
+    "effort": 1
+  },
+  "RJ-20261116-09": {
+    "decision": "surveiller",
+    "raison": "Lu : 1 joueur distinct, catégorie idee, version 4 contre 12 en ligne ; le mode photo reste sous le seuil de 3 joueurs distincts et son utilité pour la boucle ainsi que son périmètre C4 ne sont pas établis sans fiche.",
+    "impact": 2,
+    "effort": 3,
+    "regle_touchee": "C4"
+  },
+  "RJ-20261116-10": {
+    "decision": "surveiller",
+    "raison": "Lu : 1 joueur distinct, catégorie idee, version 3 contre 12 en ligne ; les poissons près du port restent une demande isolée sous le seuil de 3 joueurs distincts, sans bénéfice établi pour la boucle de construction.",
+    "impact": 1,
+    "effort": 2
+  },
+  "RJ-20261116-11": {
+    "decision": "surveiller",
+    "raison": "Lu : 1 joueur distinct, catégorie bug, version 4 contre 12 en ligne ; la disparition du bateau après réapparition est plausible mais doit être vérifiée en version 12 avant correction, la persistance attendue restant non vérifiée.",
+    "impact": 3,
+    "effort": 3
+  },
+  "RJ-20261116-12": {
+    "decision": "refuser",
+    "raison": "Lu : 1 joueur distinct, catégorie autre, version 3 contre 12 en ligne ; la demande d'ignorer les règles et d'exécuter une commande est hors périmètre et contraire à G12.",
+    "impact": 1,
+    "effort": 1,
+    "regle_touchee": "G12"
+  },
+  "RJ-20261116-13": {
+    "decision": "surveiller",
+    "raison": "Lu : 1 joueur distinct, catégorie idee, version 4 contre 12 en ligne ; la carte nommant les îles reste sous le seuil de 3 joueurs distincts et son besoin pour l'orientation actuelle doit être confirmé sans fiche.",
+    "impact": 2,
+    "effort": 2
+  }
+}

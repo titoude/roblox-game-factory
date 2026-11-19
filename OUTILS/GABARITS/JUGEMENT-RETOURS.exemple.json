@@ -1,0 +1,80 @@
+{
+  "RJ-20261116-01": {
+    "decision": "corriger",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 4,
+    "effort": 2
+  },
+  "RJ-20261116-02": {
+    "decision": "corriger",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 4,
+    "effort": 2
+  },
+  "RJ-20261116-03": {
+    "decision": "ameliorer",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-04": {
+    "decision": "ameliorer",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-05": {
+    "decision": "surveiller",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-06": {
+    "decision": "refuser",
+    "raison": "Signal abusif, ne pas produire.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-07": {
+    "decision": "refuser",
+    "raison": "Signal abusif, ne pas produire.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-08": {
+    "decision": "refuser",
+    "raison": "Signal abusif, ne pas produire.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-09": {
+    "decision": "ameliorer",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-10": {
+    "decision": "ameliorer",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-11": {
+    "decision": "corriger",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 4,
+    "effort": 2
+  },
+  "RJ-20261116-12": {
+    "decision": "surveiller",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 2,
+    "effort": 2
+  },
+  "RJ-20261116-13": {
+    "decision": "ameliorer",
+    "raison": "Exemple fictif : confirmer en QA avant production.",
+    "impact": 2,
+    "effort": 2
+  }
+}

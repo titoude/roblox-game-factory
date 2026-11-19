@@ -1,0 +1,25 @@
+plateforme,id_video,date_publication_utc,duree_s,angle,accroche,cta,lien_partage,releve,vues,vues_engagees,presentations,choix_de_regarder_pct,duree_moyenne_vue_pct,partages,abonnes_gagnes,clics,nouveaux_joueurs_attribues,minutes_de_travail
+youtube,youtube-fiction-1,2026-10-01T12:00:00Z,20,defi,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-1,24h,1000,600,2000,65,80,3,1,50,4,20
+youtube,youtube-fiction-1,2026-10-01T12:00:00Z,20,defi,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-1,7j,2000,1200,4000,65,80,3,1,50,8,20
+youtube,youtube-fiction-2,2026-10-01T12:00:00Z,20,defi,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-2,24h,1500,900,3000,65,80,3,1,50,6,20
+youtube,youtube-fiction-2,2026-10-01T12:00:00Z,20,defi,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-2,7j,3000,1800,6000,65,80,3,1,50,12,20
+youtube,youtube-fiction-3,2026-10-01T12:00:00Z,20,surprise,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-3,24h,1000,600,2000,45,80,3,1,50,0,20
+youtube,youtube-fiction-3,2026-10-01T12:00:00Z,20,surprise,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-3,7j,2000,1200,4000,45,80,3,1,50,0,20
+youtube,youtube-fiction-4,2026-10-01T12:00:00Z,20,transformation,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-4,24h,900,540,1800,65,50,3,1,50,0,20
+youtube,youtube-fiction-4,2026-10-01T12:00:00Z,20,transformation,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-4,7j,1800,1080,3600,65,50,3,1,50,1,20
+youtube,youtube-fiction-5,2026-10-01T12:00:00Z,20,surprise,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-5,24h,600,360,1200,65,80,3,1,50,0,20
+youtube,youtube-fiction-5,2026-10-01T12:00:00Z,20,surprise,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-5,7j,1200,720,2400,65,80,3,1,50,0,20
+youtube,youtube-fiction-6,2026-10-01T12:00:00Z,20,transformation,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-6,24h,100,60,200,65,80,3,1,,,20
+youtube,youtube-fiction-6,2026-10-01T12:00:00Z,20,transformation,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-youtube-6,7j,200,120,400,65,80,3,1,,,20
+tiktok,tiktok-fiction-1,2026-10-01T12:00:00Z,20,defi,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-1,24h,1000,600,,,80,3,1,50,4,20
+tiktok,tiktok-fiction-1,2026-10-01T12:00:00Z,20,defi,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-1,7j,2000,1200,,,80,3,1,50,8,20
+tiktok,tiktok-fiction-2,2026-10-01T12:00:00Z,20,defi,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-2,24h,1500,900,,,80,3,1,50,6,20
+tiktok,tiktok-fiction-2,2026-10-01T12:00:00Z,20,defi,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-2,7j,3000,1800,,,80,3,1,50,12,20
+tiktok,tiktok-fiction-3,2026-10-01T12:00:00Z,20,surprise,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-3,24h,1000,600,,,80,3,1,50,0,20
+tiktok,tiktok-fiction-3,2026-10-01T12:00:00Z,20,surprise,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-3,7j,2000,1200,,,80,3,1,50,0,20
+tiktok,tiktok-fiction-4,2026-10-01T12:00:00Z,20,transformation,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-4,24h,900,540,,,50,3,1,50,0,20
+tiktok,tiktok-fiction-4,2026-10-01T12:00:00Z,20,transformation,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-4,7j,1800,1080,,,50,3,1,50,1,20
+tiktok,tiktok-fiction-5,2026-10-01T12:00:00Z,20,surprise,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-5,24h,600,360,,,80,3,1,50,0,20
+tiktok,tiktok-fiction-5,2026-10-01T12:00:00Z,20,surprise,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-5,7j,1200,720,,,80,3,1,50,0,20
+tiktok,tiktok-fiction-6,2026-10-01T12:00:00Z,20,transformation,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-6,24h,100,60,,,80,3,1,,,20
+tiktok,tiktok-fiction-6,2026-10-01T12:00:00Z,20,transformation,Peux-tu atteindre cette ile ?,"Joue a Ilot Demo, lien du profil",fiction-tiktok-6,7j,200,120,,,80,3,1,,,20

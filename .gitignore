@@ -1,0 +1,30 @@
+# Etat local des agents
+VERROUS/
+JOURNAUX/
+STOP
+
+# Captures et binaires lourds (disque C: presque plein)
+**/captures/
+**/08-distribution/videos/sorties/
+**/08-distribution/videos/sources/
+*.rbxl
+*.rbxlx
+*.rbxm
+*.rbxmx
+*.zip
+*.exe
+OUTILS/bin/
+
+# Python
+__pycache__/
+*.pyc
+
+# Secrets : ne doivent jamais exister ici
+.env
+.env.*
+*.key
+*.pem
+storageState*.json
+
+# Donnees personnelles des retours joueurs
+**/10-retours/brut/

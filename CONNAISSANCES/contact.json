@@ -1,0 +1,8 @@
+{
+  "_note": "Le propriétaire seul active ses canaux privés. Aucun secret dans ce fichier.",
+  "journal": {"actif": true, "niveau_min": "info", "_note": "Toujours actif, non désactivable ; JOURNAUX hors git."},
+  "windows": {"actif": false, "niveau_min": "important", "_note": "Notification locale Windows sans focus ; session ouverte."},
+  "discord": {"actif": false, "niveau_min": "important", "_note": "Identifiant générique usine-roblox:contact:discord-webhook ; URL privée dans le mot de passe."},
+  "ntfy": {"actif": false, "niveau_min": "important", "serveur": "https://ntfy.sh", "_note": "Identifiant générique usine-roblox:contact:ntfy-sujet ; sujet imprévisible dans le mot de passe."},
+  "courriel": {"actif": false, "niveau_min": "important", "hote": "", "port": 587, "destinataire": "", "_note": "Identifiant générique usine-roblox:contact:smtp ; utilisateur = adresse d'envoi ; secret = mot de passe d'application. TLS obligatoire ; 465 implicite, sinon STARTTLS."}
+}

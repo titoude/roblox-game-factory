@@ -1,0 +1,217 @@
+{
+  "jeu": "lave-la-tour",
+  "competitif": false,
+  "monnaie": "pièces",
+  "depart": {
+    "cash": 0
+  },
+  "action": {
+    "nom": "Laver une vitre",
+    "gain": 1,
+    "par_minute": 30
+  },
+  "generateurs": [
+    {
+      "id": "r1",
+      "nom": "Robot ventouse",
+      "cout": 10,
+      "revenu_s": 0.25,
+      "croissance_cout": 1.2,
+      "max": 10,
+      "chantier_s": 0,
+      "debloque": ""
+    },
+    {
+      "id": "r2",
+      "nom": "Raclette automatique",
+      "cout": 90,
+      "revenu_s": 2,
+      "croissance_cout": 1.2,
+      "max": 10,
+      "chantier_s": 0,
+      "debloque": "r1>=3"
+    },
+    {
+      "id": "r3",
+      "nom": "Bras articulé",
+      "cout": 800,
+      "revenu_s": 12,
+      "croissance_cout": 1.2,
+      "max": 10,
+      "chantier_s": 10,
+      "debloque": "r2>=3"
+    },
+    {
+      "id": "r4",
+      "nom": "Nacelle robot",
+      "cout": 7000,
+      "revenu_s": 80,
+      "croissance_cout": 1.199,
+      "max": 10,
+      "chantier_s": 20,
+      "debloque": "r3>=3"
+    },
+    {
+      "id": "r5",
+      "nom": "Drone laveur",
+      "cout": 60000,
+      "revenu_s": 500,
+      "croissance_cout": 1.158,
+      "max": 10,
+      "chantier_s": 40,
+      "debloque": "r4>=3"
+    },
+    {
+      "id": "r6",
+      "nom": "Essaim de drones",
+      "cout": 520000,
+      "revenu_s": 3200,
+      "croissance_cout": 1.119,
+      "max": 10,
+      "chantier_s": 60,
+      "debloque": "r5>=3"
+    },
+    {
+      "id": "r7",
+      "nom": "Canon à mousse",
+      "cout": 4600000,
+      "revenu_s": 22000,
+      "croissance_cout": 1.088,
+      "max": 10,
+      "chantier_s": 90,
+      "debloque": "r6>=3"
+    },
+    {
+      "id": "r8",
+      "nom": "Dirigeable laveur",
+      "cout": 42000000,
+      "revenu_s": 165000,
+      "croissance_cout": 1.065,
+      "max": 10,
+      "chantier_s": 120,
+      "debloque": "r7>=3"
+    },
+    {
+      "id": "r9",
+      "nom": "Hélico-brosse",
+      "cout": 390000000,
+      "revenu_s": 1350000,
+      "croissance_cout": 1.076,
+      "max": 10,
+      "chantier_s": 150,
+      "debloque": "r8>=3"
+    },
+    {
+      "id": "r10",
+      "nom": "Station de lavage orbitale",
+      "cout": 19250000000,
+      "revenu_s": 66000000,
+      "croissance_cout": 1.075,
+      "max": 10,
+      "chantier_s": 180,
+      "debloque": "r9>=3"
+    }
+  ],
+  "ameliorations": [
+    {
+      "id": "a1",
+      "nom": "Raclette large",
+      "cout": 40,
+      "cible": "action",
+      "multiplicateur": 2,
+      "debloque": "r1>=2"
+    },
+    {
+      "id": "a2",
+      "nom": "Savon moussant",
+      "cout": 700,
+      "cible": "action",
+      "multiplicateur": 3,
+      "debloque": "r2>=3"
+    },
+    {
+      "id": "a3",
+      "nom": "Ventouses renforcées",
+      "cout": 2400,
+      "cible": "r2",
+      "multiplicateur": 2,
+      "debloque": "r3>=1"
+    },
+    {
+      "id": "a4",
+      "nom": "Double équipe",
+      "cout": 110000,
+      "cible": "tout",
+      "multiplicateur": 1.5,
+      "debloque": "r5>=1"
+    },
+    {
+      "id": "a5",
+      "nom": "Contrat d'immeuble",
+      "cout": 60000000,
+      "cible": "tout",
+      "multiplicateur": 1.25,
+      "debloque": "r8>=1"
+    }
+  ],
+  "jalons": [
+    {
+      "id": "tranche2",
+      "condition": "r3>=1"
+    },
+    {
+      "id": "tour2",
+      "condition": "r5>=1"
+    },
+    {
+      "id": "tour3",
+      "condition": "r8>=1"
+    }
+  ],
+  "fin_contenu": "r10>=10",
+  "offres": [
+    {
+      "id": "raclette_automatique",
+      "nom": "Raclette automatique",
+      "type": "confort",
+      "prix_robux": 149,
+      "effet": "Lave à 30 vitres par minute dans la nacelle ; aucun changement du gain par vitre ; ni hors ligne ni hors de la nacelle."
+    },
+    {
+      "id": "chantiers_express",
+      "nom": "Chantiers express",
+      "type": "temps",
+      "prix_robux": 99,
+      "effet": "Divise par deux la durée des chantiers ; mêmes déblocages, coûts et revenus."
+    },
+    {
+      "id": "peintures_nacelle",
+      "nom": "Peintures de nacelle",
+      "type": "expression",
+      "prix_robux": 49,
+      "effet": "Douze couleurs et motifs de nacelle ; aucun effet de jeu."
+    },
+    {
+      "id": "mousse_coloree",
+      "nom": "Mousse colorée",
+      "type": "expression",
+      "prix_robux": 29,
+      "effet": "Couleur de la mousse et de la traînée de raclette ; aucun effet de jeu."
+    },
+    {
+      "id": "styles_tour",
+      "nom": "Styles de tour",
+      "type": "expression",
+      "prix_robux": 79,
+      "effet": "Verre teinté, néons, enseigne au sommet ; aucun effet de jeu."
+    }
+  ],
+  "profils": {
+    "actif": {
+      "actions_facteur": 1
+    },
+    "lent": {
+      "actions_facteur": 0.5
+    }
+  }
+}

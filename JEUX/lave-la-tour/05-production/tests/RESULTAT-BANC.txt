@@ -1,0 +1,3595 @@
+PASSE : annexe-a.test.luau
+[PASSE2 Monde 0.000] construction 14
+PASSE : compteur monotone 1
+PASSE : compteur monotone 2
+PASSE : compteur monotone 3
+PASSE : compteur monotone 4
+PASSE : compteur monotone 5
+PASSE : vitre attribuée 6
+PASSE : compteur monotone 6
+PASSE : compteur monotone 7
+PASSE : vitre attribuée 8
+PASSE : compteur monotone 8
+PASSE : compteur monotone 9
+PASSE : vitre attribuée 10
+PASSE : compteur monotone 10
+PASSE : compteur monotone 11
+PASSE : vitre attribuée 12
+PASSE : compteur monotone 12
+PASSE : compteur monotone 13
+PASSE : vitre attribuée 14
+PASSE : compteur monotone 14
+PASSE : compteur monotone 15
+PASSE : vitre attribuée 16
+PASSE : compteur monotone 16
+PASSE : compteur monotone 17
+PASSE : vitre attribuée 18
+PASSE : compteur monotone 18
+PASSE : compteur monotone 19
+PASSE : vitre attribuée 20
+PASSE : compteur monotone 20
+PASSE : compteur monotone 21
+PASSE : vitre attribuée 22
+PASSE : compteur monotone 22
+PASSE : compteur monotone 23
+PASSE : vitre attribuée 24
+PASSE : compteur monotone 24
+PASSE : solde avant achat 25
+PASSE : compteur monotone 25
+PASSE : vitre attribuée 26
+PASSE : compteur monotone 26
+PASSE : compteur monotone 27
+PASSE : vitre attribuée 28
+PASSE : compteur monotone 28
+PASSE : compteur monotone 29
+PASSE : vitre attribuée 30
+PASSE : compteur monotone 30
+PASSE : compteur monotone 31
+PASSE : vitre attribuée 32
+PASSE : compteur monotone 32
+PASSE : compteur monotone 33
+PASSE : vitre attribuée 34
+PASSE : compteur monotone 34
+PASSE : compteur monotone 35
+PASSE : vitre attribuée 36
+PASSE : compteur monotone 36
+PASSE : compteur monotone 37
+PASSE : vitre attribuée 38
+PASSE : compteur monotone 38
+PASSE : compteur monotone 39
+PASSE : vitre attribuée 40
+PASSE : compteur monotone 40
+PASSE : solde avant achat 41
+PASSE : compteur monotone 41
+PASSE : vitre attribuée 42
+PASSE : compteur monotone 42
+PASSE : compteur monotone 43
+PASSE : vitre attribuée 44
+PASSE : compteur monotone 44
+PASSE : compteur monotone 45
+PASSE : vitre attribuée 46
+PASSE : compteur monotone 46
+PASSE : compteur monotone 47
+PASSE : vitre attribuée 48
+PASSE : compteur monotone 48
+PASSE : compteur monotone 49
+PASSE : vitre attribuée 50
+PASSE : compteur monotone 50
+PASSE : compteur monotone 51
+PASSE : vitre attribuée 52
+PASSE : compteur monotone 52
+PASSE : compteur monotone 53
+PASSE : vitre attribuée 54
+PASSE : compteur monotone 54
+PASSE : compteur monotone 55
+PASSE : vitre attribuée 56
+PASSE : solde avant achat 56
+PASSE : compteur monotone 56
+PASSE : compteur monotone 57
+PASSE : vitre attribuée 58
+PASSE : compteur monotone 58
+PASSE : compteur monotone 59
+PASSE : vitre attribuée 60
+PASSE : compteur monotone 60
+PASSE : 28 vitres à 60 s (28 / 28)
+PASSE : 5 rangées à 60 s (5 / 5)
+PASSE : compteur monotone 61
+PASSE : vitre attribuée 62
+PASSE : compteur monotone 62
+PASSE : compteur monotone 63
+PASSE : vitre attribuée 64
+PASSE : compteur monotone 64
+PASSE : compteur monotone 65
+PASSE : vitre attribuée 66
+PASSE : compteur monotone 66
+PASSE : compteur monotone 67
+PASSE : vitre attribuée 68
+PASSE : compteur monotone 68
+PASSE : compteur monotone 69
+PASSE : vitre attribuée 70
+PASSE : compteur monotone 70
+PASSE : compteur monotone 71
+PASSE : vitre attribuée 72
+PASSE : compteur monotone 72
+PASSE : compteur monotone 73
+PASSE : vitre attribuée 74
+PASSE : compteur monotone 74
+PASSE : compteur monotone 75
+PASSE : vitre attribuée 76
+PASSE : compteur monotone 76
+PASSE : compteur monotone 77
+PASSE : vitre attribuée 78
+PASSE : compteur monotone 78
+PASSE : compteur monotone 79
+PASSE : vitre attribuée 80
+PASSE : compteur monotone 80
+PASSE : compteur monotone 81
+PASSE : vitre attribuée 82
+PASSE : compteur monotone 82
+PASSE : compteur monotone 83
+PASSE : vitre attribuée 84
+PASSE : compteur monotone 84
+PASSE : compteur monotone 85
+PASSE : vitre attribuée 86
+PASSE : compteur monotone 86
+PASSE : compteur monotone 87
+PASSE : vitre attribuée 88
+PASSE : compteur monotone 88
+PASSE : compteur monotone 89
+PASSE : vitre attribuée 90
+PASSE : compteur monotone 90
+PASSE : compteur monotone 91
+PASSE : vitre attribuée 92
+PASSE : compteur monotone 92
+PASSE : compteur monotone 93
+PASSE : vitre attribuée 94
+PASSE : compteur monotone 94
+PASSE : compteur monotone 95
+PASSE : vitre attribuée 96
+PASSE : compteur monotone 96
+PASSE : compteur monotone 97
+PASSE : vitre attribuée 98
+PASSE : compteur monotone 98
+PASSE : compteur monotone 99
+PASSE : vitre attribuée 100
+PASSE : compteur monotone 100
+PASSE : compteur monotone 101
+PASSE : vitre attribuée 102
+PASSE : compteur monotone 102
+PASSE : compteur monotone 103
+PASSE : vitre attribuée 104
+PASSE : compteur monotone 104
+PASSE : compteur monotone 105
+PASSE : vitre attribuée 106
+PASSE : compteur monotone 106
+PASSE : compteur monotone 107
+PASSE : vitre attribuée 108
+PASSE : compteur monotone 108
+PASSE : compteur monotone 109
+PASSE : vitre attribuée 110
+PASSE : compteur monotone 110
+PASSE : compteur monotone 111
+PASSE : vitre attribuée 112
+PASSE : compteur monotone 112
+PASSE : compteur monotone 113
+PASSE : vitre attribuée 114
+PASSE : compteur monotone 114
+PASSE : compteur monotone 115
+PASSE : vitre attribuée 116
+PASSE : compteur monotone 116
+PASSE : compteur monotone 117
+PASSE : vitre attribuée 118
+PASSE : compteur monotone 118
+PASSE : compteur monotone 119
+PASSE : vitre attribuée 120
+PASSE : compteur monotone 120
+PASSE : compteur monotone 121
+PASSE : vitre attribuée 122
+PASSE : compteur monotone 122
+PASSE : compteur monotone 123
+PASSE : vitre attribuée 124
+PASSE : compteur monotone 124
+PASSE : compteur monotone 125
+PASSE : vitre attribuée 126
+PASSE : compteur monotone 126
+PASSE : compteur monotone 127
+PASSE : vitre attribuée 128
+PASSE : compteur monotone 128
+PASSE : compteur monotone 129
+PASSE : vitre attribuée 130
+PASSE : compteur monotone 130
+PASSE : compteur monotone 131
+PASSE : vitre attribuée 132
+PASSE : compteur monotone 132
+PASSE : compteur monotone 133
+PASSE : vitre attribuée 134
+PASSE : compteur monotone 134
+PASSE : compteur monotone 135
+PASSE : vitre attribuée 136
+PASSE : compteur monotone 136
+PASSE : compteur monotone 137
+PASSE : vitre attribuée 138
+PASSE : compteur monotone 138
+PASSE : compteur monotone 139
+PASSE : vitre attribuée 140
+PASSE : compteur monotone 140
+PASSE : compteur monotone 141
+PASSE : vitre attribuée 142
+PASSE : compteur monotone 142
+PASSE : compteur monotone 143
+PASSE : vitre attribuée 144
+PASSE : compteur monotone 144
+PASSE : compteur monotone 145
+PASSE : vitre attribuée 146
+PASSE : compteur monotone 146
+PASSE : compteur monotone 147
+PASSE : vitre attribuée 148
+PASSE : compteur monotone 148
+PASSE : compteur monotone 149
+PASSE : vitre attribuée 150
+PASSE : compteur monotone 150
+PASSE : compteur monotone 151
+PASSE : vitre attribuée 152
+PASSE : compteur monotone 152
+PASSE : compteur monotone 153
+PASSE : vitre attribuée 154
+PASSE : compteur monotone 154
+PASSE : compteur monotone 155
+PASSE : vitre attribuée 156
+PASSE : compteur monotone 156
+PASSE : compteur monotone 157
+PASSE : vitre attribuée 158
+PASSE : compteur monotone 158
+PASSE : compteur monotone 159
+PASSE : vitre attribuée 160
+PASSE : compteur monotone 160
+PASSE : compteur monotone 161
+PASSE : vitre attribuée 162
+PASSE : compteur monotone 162
+PASSE : compteur monotone 163
+PASSE : vitre attribuée 164
+PASSE : compteur monotone 164
+PASSE : compteur monotone 165
+PASSE : vitre attribuée 166
+PASSE : compteur monotone 166
+PASSE : compteur monotone 167
+PASSE : vitre attribuée 168
+PASSE : compteur monotone 168
+PASSE : compteur monotone 169
+PASSE : vitre attribuée 170
+PASSE : compteur monotone 170
+PASSE : compteur monotone 171
+PASSE : vitre attribuée 172
+PASSE : compteur monotone 172
+PASSE : compteur monotone 173
+PASSE : vitre attribuée 174
+PASSE : compteur monotone 174
+PASSE : compteur monotone 175
+PASSE : vitre attribuée 176
+PASSE : compteur monotone 176
+PASSE : compteur monotone 177
+PASSE : vitre attribuée 178
+PASSE : compteur monotone 178
+PASSE : compteur monotone 179
+PASSE : vitre attribuée 180
+PASSE : compteur monotone 180
+PASSE : 88 vitres à 180 s (88 / 88)
+PASSE : 12 étages nouveaux (12 / 12)
+PASSE : scénario terminé
+PASSE : commerce.test.luau
+PASSE : possession relue sans passe
+PASSE : achat relit possession
+PASSE : zero masque
+PASSE : recu inconnu non accorde (Enum.ProductPurchaseDecision.NotProcessedYet / Enum.ProductPurchaseDecision.NotProcessedYet)
+PASSE : avant deux secondes
+PASSE : deux secondes
+PASSE : cadence suivante
+PASSE : visiteur sans passe inactif
+PASSE : hors nacelle inactif
+PASSE : Q05 titulaire chez autre
+PASSE : auto quarantieme
+PASSE : manuel 41 refuse
+PASSE : auto 41 refuse
+PASSE : auto contrat
+PASSE : contrat une vitre (1 / 1)
+PASSE : chantier avant achat (10 / 10)
+PASSE : chantier existant conserve (10 / 10)
+PASSE : nouveau chantier divise (5 / 5)
+PASSE : express respecte verrou
+PASSE : avant borne express (0 / 0)
+PASSE : apres borne express (1 / 1)
+PASSE : reconnexion relit
+PASSE : cache non autoritaire
+PASSE : cinq offres zero absentes (nil / nil)
+PASSE : scénario terminé
+PASSE : config.test.luau
+PASSE : monnaie type (string / string)
+PASSE : monnaie (pièces / pièces)
+PASSE : jeu type (string / string)
+PASSE : jeu (lave-la-tour / lave-la-tour)
+PASSE : action type (table / table)
+PASSE : action.gain type (number / number)
+PASSE : action.gain (1 / 1)
+PASSE : action.par_minute type (number / number)
+PASSE : action.par_minute (30 / 30)
+PASSE : action.part_revenu_s type (number / number)
+PASSE : action.part_revenu_s (0.2 / 0.2)
+PASSE : action champ attendu gain
+PASSE : action champ attendu par_minute
+PASSE : action champ attendu part_revenu_s
+PASSE : competitif type (boolean / boolean)
+PASSE : competitif (false / false)
+PASSE : generateurs type (table / table)
+PASSE : generateurs.1 type (table / table)
+PASSE : generateurs.1.croissance_cout type (number / number)
+PASSE : generateurs.1.croissance_cout (1.2 / 1.2)
+PASSE : generateurs.1.revenu_s type (number / number)
+PASSE : generateurs.1.revenu_s (0.25 / 0.25)
+PASSE : generateurs.1.chantier_s type (number / number)
+PASSE : generateurs.1.chantier_s (0 / 0)
+PASSE : generateurs.1.max type (number / number)
+PASSE : generateurs.1.max (10 / 10)
+PASSE : generateurs.1.id type (string / string)
+PASSE : generateurs.1.id (r1 / r1)
+PASSE : generateurs.1.nom type (string / string)
+PASSE : generateurs.1.nom (Robot ventouse / Robot ventouse)
+PASSE : generateurs.1.debloque type (string / string)
+PASSE : generateurs.1.debloque ( / )
+PASSE : generateurs.1.cout type (number / number)
+PASSE : generateurs.1.cout (10 / 10)
+PASSE : generateurs.1 champ attendu croissance_cout
+PASSE : generateurs.1 champ attendu revenu_s
+PASSE : generateurs.1 champ attendu chantier_s
+PASSE : generateurs.1 champ attendu max
+PASSE : generateurs.1 champ attendu id
+PASSE : generateurs.1 champ attendu nom
+PASSE : generateurs.1 champ attendu debloque
+PASSE : generateurs.1 champ attendu cout
+PASSE : generateurs.2 type (table / table)
+PASSE : generateurs.2.croissance_cout type (number / number)
+PASSE : generateurs.2.croissance_cout (1.2 / 1.2)
+PASSE : generateurs.2.revenu_s type (number / number)
+PASSE : generateurs.2.revenu_s (2 / 2)
+PASSE : generateurs.2.chantier_s type (number / number)
+PASSE : generateurs.2.chantier_s (0 / 0)
+PASSE : generateurs.2.max type (number / number)
+PASSE : generateurs.2.max (10 / 10)
+PASSE : generateurs.2.id type (string / string)
+PASSE : generateurs.2.id (r2 / r2)
+PASSE : generateurs.2.nom type (string / string)
+PASSE : generateurs.2.nom (Raclette automatique / Raclette automatique)
+PASSE : generateurs.2.debloque type (string / string)
+PASSE : generateurs.2.debloque (r1>=3 / r1>=3)
+PASSE : generateurs.2.cout type (number / number)
+PASSE : generateurs.2.cout (90 / 90)
+PASSE : generateurs.2 champ attendu croissance_cout
+PASSE : generateurs.2 champ attendu revenu_s
+PASSE : generateurs.2 champ attendu chantier_s
+PASSE : generateurs.2 champ attendu max
+PASSE : generateurs.2 champ attendu id
+PASSE : generateurs.2 champ attendu nom
+PASSE : generateurs.2 champ attendu debloque
+PASSE : generateurs.2 champ attendu cout
+PASSE : generateurs.3 type (table / table)
+PASSE : generateurs.3.croissance_cout type (number / number)
+PASSE : generateurs.3.croissance_cout (1.17 / 1.17)
+PASSE : generateurs.3.revenu_s type (number / number)
+PASSE : generateurs.3.revenu_s (12 / 12)
+PASSE : generateurs.3.chantier_s type (number / number)
+PASSE : generateurs.3.chantier_s (10 / 10)
+PASSE : generateurs.3.max type (number / number)
+PASSE : generateurs.3.max (10 / 10)
+PASSE : generateurs.3.id type (string / string)
+PASSE : generateurs.3.id (r3 / r3)
+PASSE : generateurs.3.nom type (string / string)
+PASSE : generateurs.3.nom (Bras articulé / Bras articulé)
+PASSE : generateurs.3.debloque type (string / string)
+PASSE : generateurs.3.debloque (r2>=3 / r2>=3)
+PASSE : generateurs.3.cout type (number / number)
+PASSE : generateurs.3.cout (800 / 800)
+PASSE : generateurs.3 champ attendu croissance_cout
+PASSE : generateurs.3 champ attendu revenu_s
+PASSE : generateurs.3 champ attendu chantier_s
+PASSE : generateurs.3 champ attendu max
+PASSE : generateurs.3 champ attendu id
+PASSE : generateurs.3 champ attendu nom
+PASSE : generateurs.3 champ attendu debloque
+PASSE : generateurs.3 champ attendu cout
+PASSE : generateurs.4 type (table / table)
+PASSE : generateurs.4.croissance_cout type (number / number)
+PASSE : generateurs.4.croissance_cout (1.14 / 1.14)
+PASSE : generateurs.4.revenu_s type (number / number)
+PASSE : generateurs.4.revenu_s (80 / 80)
+PASSE : generateurs.4.chantier_s type (number / number)
+PASSE : generateurs.4.chantier_s (20 / 20)
+PASSE : generateurs.4.max type (number / number)
+PASSE : generateurs.4.max (10 / 10)
+PASSE : generateurs.4.id type (string / string)
+PASSE : generateurs.4.id (r4 / r4)
+PASSE : generateurs.4.nom type (string / string)
+PASSE : generateurs.4.nom (Nacelle robot / Nacelle robot)
+PASSE : generateurs.4.debloque type (string / string)
+PASSE : generateurs.4.debloque (r3>=3 / r3>=3)
+PASSE : generateurs.4.cout type (number / number)
+PASSE : generateurs.4.cout (7000 / 7000)
+PASSE : generateurs.4 champ attendu croissance_cout
+PASSE : generateurs.4 champ attendu revenu_s
+PASSE : generateurs.4 champ attendu chantier_s
+PASSE : generateurs.4 champ attendu max
+PASSE : generateurs.4 champ attendu id
+PASSE : generateurs.4 champ attendu nom
+PASSE : generateurs.4 champ attendu debloque
+PASSE : generateurs.4 champ attendu cout
+PASSE : generateurs.5 type (table / table)
+PASSE : generateurs.5.croissance_cout type (number / number)
+PASSE : generateurs.5.croissance_cout (1.13 / 1.13)
+PASSE : generateurs.5.revenu_s type (number / number)
+PASSE : generateurs.5.revenu_s (1650 / 1650)
+PASSE : generateurs.5.chantier_s type (number / number)
+PASSE : generateurs.5.chantier_s (40 / 40)
+PASSE : generateurs.5.max type (number / number)
+PASSE : generateurs.5.max (10 / 10)
+PASSE : generateurs.5.id type (string / string)
+PASSE : generateurs.5.id (r5 / r5)
+PASSE : generateurs.5.nom type (string / string)
+PASSE : generateurs.5.nom (Drone laveur / Drone laveur)
+PASSE : generateurs.5.debloque type (string / string)
+PASSE : generateurs.5.debloque (r4>=3 / r4>=3)
+PASSE : generateurs.5.cout type (number / number)
+PASSE : generateurs.5.cout (200000 / 200000)
+PASSE : generateurs.5 champ attendu croissance_cout
+PASSE : generateurs.5 champ attendu revenu_s
+PASSE : generateurs.5 champ attendu chantier_s
+PASSE : generateurs.5 champ attendu max
+PASSE : generateurs.5 champ attendu id
+PASSE : generateurs.5 champ attendu nom
+PASSE : generateurs.5 champ attendu debloque
+PASSE : generateurs.5 champ attendu cout
+PASSE : generateurs.6 type (table / table)
+PASSE : generateurs.6.croissance_cout type (number / number)
+PASSE : generateurs.6.croissance_cout (1.1 / 1.1)
+PASSE : generateurs.6.revenu_s type (number / number)
+PASSE : generateurs.6.revenu_s (34500 / 34500)
+PASSE : generateurs.6.chantier_s type (number / number)
+PASSE : generateurs.6.chantier_s (60 / 60)
+PASSE : generateurs.6.max type (number / number)
+PASSE : generateurs.6.max (10 / 10)
+PASSE : generateurs.6.id type (string / string)
+PASSE : generateurs.6.id (r6 / r6)
+PASSE : generateurs.6.nom type (string / string)
+PASSE : generateurs.6.nom (Essaim de drones / Essaim de drones)
+PASSE : generateurs.6.debloque type (string / string)
+PASSE : generateurs.6.debloque (r5>=3 / r5>=3)
+PASSE : generateurs.6.cout type (number / number)
+PASSE : generateurs.6.cout (5600000 / 5600000)
+PASSE : generateurs.6 champ attendu croissance_cout
+PASSE : generateurs.6 champ attendu revenu_s
+PASSE : generateurs.6 champ attendu chantier_s
+PASSE : generateurs.6 champ attendu max
+PASSE : generateurs.6 champ attendu id
+PASSE : generateurs.6 champ attendu nom
+PASSE : generateurs.6 champ attendu debloque
+PASSE : generateurs.6 champ attendu cout
+PASSE : generateurs.7 type (table / table)
+PASSE : generateurs.7.croissance_cout type (number / number)
+PASSE : generateurs.7.croissance_cout (1.075 / 1.075)
+PASSE : generateurs.7.revenu_s type (number / number)
+PASSE : generateurs.7.revenu_s (790000 / 790000)
+PASSE : generateurs.7.chantier_s type (number / number)
+PASSE : generateurs.7.chantier_s (90 / 90)
+PASSE : generateurs.7.max type (number / number)
+PASSE : generateurs.7.max (10 / 10)
+PASSE : generateurs.7.id type (string / string)
+PASSE : generateurs.7.id (r7 / r7)
+PASSE : generateurs.7.nom type (string / string)
+PASSE : generateurs.7.nom (Canon à mousse / Canon à mousse)
+PASSE : generateurs.7.debloque type (string / string)
+PASSE : generateurs.7.debloque (r6>=3 / r6>=3)
+PASSE : generateurs.7.cout type (number / number)
+PASSE : generateurs.7.cout (165000000 / 165000000)
+PASSE : generateurs.7 champ attendu croissance_cout
+PASSE : generateurs.7 champ attendu revenu_s
+PASSE : generateurs.7 champ attendu chantier_s
+PASSE : generateurs.7 champ attendu max
+PASSE : generateurs.7 champ attendu id
+PASSE : generateurs.7 champ attendu nom
+PASSE : generateurs.7 champ attendu debloque
+PASSE : generateurs.7 champ attendu cout
+PASSE : generateurs.8 type (table / table)
+PASSE : generateurs.8.croissance_cout type (number / number)
+PASSE : generateurs.8.croissance_cout (1.06 / 1.06)
+PASSE : generateurs.8.revenu_s type (number / number)
+PASSE : generateurs.8.revenu_s (19600000 / 19600000)
+PASSE : generateurs.8.chantier_s type (number / number)
+PASSE : generateurs.8.chantier_s (120 / 120)
+PASSE : generateurs.8.max type (number / number)
+PASSE : generateurs.8.max (10 / 10)
+PASSE : generateurs.8.id type (string / string)
+PASSE : generateurs.8.id (r8 / r8)
+PASSE : generateurs.8.nom type (string / string)
+PASSE : generateurs.8.nom (Dirigeable laveur / Dirigeable laveur)
+PASSE : generateurs.8.debloque type (string / string)
+PASSE : generateurs.8.debloque (r7>=3 / r7>=3)
+PASSE : generateurs.8.cout type (number / number)
+PASSE : generateurs.8.cout (5000000000 / 5000000000)
+PASSE : generateurs.8 champ attendu croissance_cout
+PASSE : generateurs.8 champ attendu revenu_s
+PASSE : generateurs.8 champ attendu chantier_s
+PASSE : generateurs.8 champ attendu max
+PASSE : generateurs.8 champ attendu id
+PASSE : generateurs.8 champ attendu nom
+PASSE : generateurs.8 champ attendu debloque
+PASSE : generateurs.8 champ attendu cout
+PASSE : generateurs.9 type (table / table)
+PASSE : generateurs.9.croissance_cout type (number / number)
+PASSE : generateurs.9.croissance_cout (1.065 / 1.065)
+PASSE : generateurs.9.revenu_s type (number / number)
+PASSE : generateurs.9.revenu_s (520000000 / 520000000)
+PASSE : generateurs.9.chantier_s type (number / number)
+PASSE : generateurs.9.chantier_s (150 / 150)
+PASSE : generateurs.9.max type (number / number)
+PASSE : generateurs.9.max (10 / 10)
+PASSE : generateurs.9.id type (string / string)
+PASSE : generateurs.9.id (r9 / r9)
+PASSE : generateurs.9.nom type (string / string)
+PASSE : generateurs.9.nom (Hélico-brosse / Hélico-brosse)
+PASSE : generateurs.9.debloque type (string / string)
+PASSE : generateurs.9.debloque (r8>=3 / r8>=3)
+PASSE : generateurs.9.cout type (number / number)
+PASSE : generateurs.9.cout (150000000000 / 150000000000)
+PASSE : generateurs.9 champ attendu croissance_cout
+PASSE : generateurs.9 champ attendu revenu_s
+PASSE : generateurs.9 champ attendu chantier_s
+PASSE : generateurs.9 champ attendu max
+PASSE : generateurs.9 champ attendu id
+PASSE : generateurs.9 champ attendu nom
+PASSE : generateurs.9 champ attendu debloque
+PASSE : generateurs.9 champ attendu cout
+PASSE : generateurs.10 type (table / table)
+PASSE : generateurs.10.croissance_cout type (number / number)
+PASSE : generateurs.10.croissance_cout (1.065 / 1.065)
+PASSE : generateurs.10.revenu_s type (number / number)
+PASSE : generateurs.10.revenu_s (15500000000 / 15500000000)
+PASSE : generateurs.10.chantier_s type (number / number)
+PASSE : generateurs.10.chantier_s (180 / 180)
+PASSE : generateurs.10.max type (number / number)
+PASSE : generateurs.10.max (10 / 10)
+PASSE : generateurs.10.id type (string / string)
+PASSE : generateurs.10.id (r10 / r10)
+PASSE : generateurs.10.nom type (string / string)
+PASSE : generateurs.10.nom (Station de lavage orbitale / Station de lavage orbitale)
+PASSE : generateurs.10.debloque type (string / string)
+PASSE : generateurs.10.debloque (r9>=3 / r9>=3)
+PASSE : generateurs.10.cout type (number / number)
+PASSE : generateurs.10.cout (4500000000000 / 4500000000000)
+PASSE : generateurs.10 champ attendu croissance_cout
+PASSE : generateurs.10 champ attendu revenu_s
+PASSE : generateurs.10 champ attendu chantier_s
+PASSE : generateurs.10 champ attendu max
+PASSE : generateurs.10 champ attendu id
+PASSE : generateurs.10 champ attendu nom
+PASSE : generateurs.10 champ attendu debloque
+PASSE : generateurs.10 champ attendu cout
+PASSE : generateurs champ attendu 1
+PASSE : generateurs champ attendu 2
+PASSE : generateurs champ attendu 3
+PASSE : generateurs champ attendu 4
+PASSE : generateurs champ attendu 5
+PASSE : generateurs champ attendu 6
+PASSE : generateurs champ attendu 7
+PASSE : generateurs champ attendu 8
+PASSE : generateurs champ attendu 9
+PASSE : generateurs champ attendu 10
+PASSE : depart type (table / table)
+PASSE : depart.cash type (number / number)
+PASSE : depart.cash (0 / 0)
+PASSE : depart champ attendu cash
+PASSE : stock_vitres type (table / table)
+PASSE : stock_vitres.pigeons type (table / table)
+PASSE : stock_vitres.pigeons.etages type (number / number)
+PASSE : stock_vitres.pigeons.etages (20 / 20)
+PASSE : stock_vitres.pigeons.vitres type (number / number)
+PASSE : stock_vitres.pigeons.vitres (100 / 100)
+PASSE : stock_vitres.pigeons.delai_stock_vide_s type (number / number)
+PASSE : stock_vitres.pigeons.delai_stock_vide_s (10 / 10)
+PASSE : stock_vitres.pigeons champ attendu etages
+PASSE : stock_vitres.pigeons champ attendu vitres
+PASSE : stock_vitres.pigeons champ attendu delai_stock_vide_s
+PASSE : stock_vitres.note type (string / string)
+PASSE : stock_vitres.note (Non lu par le simulateur. Fiche v5 § 3 bis et M07. / Non lu par le simulateur. Fiche v5 § 3 bis et M07.)
+PASSE : stock_vitres.vitre_duree_min_s type (number / number)
+PASSE : stock_vitres.vitre_duree_min_s (1.5 / 1.5)
+PASSE : stock_vitres.passes_par_vitre type (number / number)
+PASSE : stock_vitres.passes_par_vitre (3 / 3)
+PASSE : stock_vitres.facades_lavees_par_le_joueur type (number / number)
+PASSE : stock_vitres.facades_lavees_par_le_joueur (1 / 1)
+PASSE : stock_vitres.laveurs_max_par_tour type (number / number)
+PASSE : stock_vitres.laveurs_max_par_tour (2 / 2)
+PASSE : stock_vitres.budget_vitres_par_minute type (number / number)
+PASSE : stock_vitres.budget_vitres_par_minute (40 / 40)
+PASSE : stock_vitres.tours type (table / table)
+PASSE : stock_vitres.tours.1 type (table / table)
+PASSE : stock_vitres.tours.1.id type (string / string)
+PASSE : stock_vitres.tours.1.id (tour1 / tour1)
+PASSE : stock_vitres.tours.1.etages type (number / number)
+PASSE : stock_vitres.tours.1.etages (120 / 120)
+PASSE : stock_vitres.tours.1.vitres type (number / number)
+PASSE : stock_vitres.tours.1.vitres (600 / 600)
+PASSE : stock_vitres.tours.1 champ attendu id
+PASSE : stock_vitres.tours.1 champ attendu etages
+PASSE : stock_vitres.tours.1 champ attendu vitres
+PASSE : stock_vitres.tours.2 type (table / table)
+PASSE : stock_vitres.tours.2.id type (string / string)
+PASSE : stock_vitres.tours.2.id (tour2 / tour2)
+PASSE : stock_vitres.tours.2.etages type (number / number)
+PASSE : stock_vitres.tours.2.etages (280 / 280)
+PASSE : stock_vitres.tours.2.vitres type (number / number)
+PASSE : stock_vitres.tours.2.vitres (1400 / 1400)
+PASSE : stock_vitres.tours.2 champ attendu id
+PASSE : stock_vitres.tours.2 champ attendu etages
+PASSE : stock_vitres.tours.2 champ attendu vitres
+PASSE : stock_vitres.tours.3 type (table / table)
+PASSE : stock_vitres.tours.3.id type (string / string)
+PASSE : stock_vitres.tours.3.id (tour3 / tour3)
+PASSE : stock_vitres.tours.3.etages type (number / number)
+PASSE : stock_vitres.tours.3.etages (400 / 400)
+PASSE : stock_vitres.tours.3.vitres type (number / number)
+PASSE : stock_vitres.tours.3.vitres (2000 / 2000)
+PASSE : stock_vitres.tours.3 champ attendu id
+PASSE : stock_vitres.tours.3 champ attendu etages
+PASSE : stock_vitres.tours.3 champ attendu vitres
+PASSE : stock_vitres.tours champ attendu 1
+PASSE : stock_vitres.tours champ attendu 2
+PASSE : stock_vitres.tours champ attendu 3
+PASSE : stock_vitres.vitres_par_rangee type (number / number)
+PASSE : stock_vitres.vitres_par_rangee (5 / 5)
+PASSE : stock_vitres.rangees_par_etage type (number / number)
+PASSE : stock_vitres.rangees_par_etage (1 / 1)
+PASSE : stock_vitres champ attendu pigeons
+PASSE : stock_vitres champ attendu note
+PASSE : stock_vitres champ attendu vitre_duree_min_s
+PASSE : stock_vitres champ attendu passes_par_vitre
+PASSE : stock_vitres champ attendu facades_lavees_par_le_joueur
+PASSE : stock_vitres champ attendu laveurs_max_par_tour
+PASSE : stock_vitres champ attendu budget_vitres_par_minute
+PASSE : stock_vitres champ attendu tours
+PASSE : stock_vitres champ attendu vitres_par_rangee
+PASSE : stock_vitres champ attendu rangees_par_etage
+PASSE : jalons type (table / table)
+PASSE : jalons.1 type (table / table)
+PASSE : jalons.1.id type (string / string)
+PASSE : jalons.1.id (contrats / contrats)
+PASSE : jalons.1.condition type (string / string)
+PASSE : jalons.1.condition (r3>=1 / r3>=1)
+PASSE : jalons.1 champ attendu id
+PASSE : jalons.1 champ attendu condition
+PASSE : jalons.2 type (table / table)
+PASSE : jalons.2.id type (string / string)
+PASSE : jalons.2.id (tour2 / tour2)
+PASSE : jalons.2.condition type (string / string)
+PASSE : jalons.2.condition (r5>=1 / r5>=1)
+PASSE : jalons.2 champ attendu id
+PASSE : jalons.2 champ attendu condition
+PASSE : jalons.3 type (table / table)
+PASSE : jalons.3.id type (string / string)
+PASSE : jalons.3.id (tour3 / tour3)
+PASSE : jalons.3.condition type (string / string)
+PASSE : jalons.3.condition (r8>=1 / r8>=1)
+PASSE : jalons.3 champ attendu id
+PASSE : jalons.3 champ attendu condition
+PASSE : jalons champ attendu 1
+PASSE : jalons champ attendu 2
+PASSE : jalons champ attendu 3
+PASSE : apres_contenu type (table / table)
+PASSE : apres_contenu.segment type (table / table)
+PASSE : apres_contenu.segment.prix_minutes_de_revenu type (string / string)
+PASSE : apres_contenu.segment.prix_minutes_de_revenu (min(4+n, 9) / min(4+n, 9))
+PASSE : apres_contenu.segment.non_finis_max type (number / number)
+PASSE : apres_contenu.segment.non_finis_max (2 / 2)
+PASSE : apres_contenu.segment.vitres type (number / number)
+PASSE : apres_contenu.segment.vitres (200 / 200)
+PASSE : apres_contenu.segment.etages type (number / number)
+PASSE : apres_contenu.segment.etages (40 / 40)
+PASSE : apres_contenu.segment.prix_formule type (string / string)
+PASSE : apres_contenu.segment.prix_formule (ceil(60 * min(4+n,9) * revenu_reference_final_s) / ceil(60 * min(4+n,9) * revenu_reference_final_s))
+PASSE : apres_contenu.segment champ attendu prix_minutes_de_revenu
+PASSE : apres_contenu.segment champ attendu non_finis_max
+PASSE : apres_contenu.segment champ attendu vitres
+PASSE : apres_contenu.segment champ attendu etages
+PASSE : apres_contenu.segment champ attendu prix_formule
+PASSE : apres_contenu.note type (string / string)
+PASSE : apres_contenu.note (Non lu par le simulateur. La Fleche, fiche v5 § 3 bis. / Non lu par le simulateur. La Fleche, fiche v5 § 3 bis.)
+PASSE : apres_contenu.condition type (string / string)
+PASSE : apres_contenu.condition (100 robots en service (r1 a r10 = 10 chacun) et les 5 ameliorations / 100 robots en service (r1 a r10 = 10 chacun) et les 5 ameliorations)
+PASSE : apres_contenu.revenu_reference_final_s type (number / number)
+PASSE : apres_contenu.revenu_reference_final_s (300757992117 / 300757992117)
+PASSE : apres_contenu champ attendu segment
+PASSE : apres_contenu champ attendu note
+PASSE : apres_contenu champ attendu condition
+PASSE : apres_contenu champ attendu revenu_reference_final_s
+PASSE : fin_contenu type (string / string)
+PASSE : fin_contenu (r10>=10 / r10>=10)
+PASSE : offres type (table / table)
+PASSE : offres.1 type (table / table)
+PASSE : offres.1.id type (string / string)
+PASSE : offres.1.id (raclette_motorisee / raclette_motorisee)
+PASSE : offres.1.nom type (string / string)
+PASSE : offres.1.nom (Raclette motorisée / Raclette motorisée)
+PASSE : offres.1.type type (string / string)
+PASSE : offres.1.type (confort / confort)
+PASSE : offres.1.prix_robux type (number / number)
+PASSE : offres.1.prix_robux (149 / 149)
+PASSE : offres.1 champ attendu id
+PASSE : offres.1 champ attendu nom
+PASSE : offres.1 champ attendu type
+PASSE : offres.1 champ attendu prix_robux
+PASSE : offres.2 type (table / table)
+PASSE : offres.2.id type (string / string)
+PASSE : offres.2.id (chantiers_express / chantiers_express)
+PASSE : offres.2.nom type (string / string)
+PASSE : offres.2.nom (Chantiers express / Chantiers express)
+PASSE : offres.2.type type (string / string)
+PASSE : offres.2.type (temps / temps)
+PASSE : offres.2.prix_robux type (number / number)
+PASSE : offres.2.prix_robux (99 / 99)
+PASSE : offres.2 champ attendu id
+PASSE : offres.2 champ attendu nom
+PASSE : offres.2 champ attendu type
+PASSE : offres.2 champ attendu prix_robux
+PASSE : offres.3 type (table / table)
+PASSE : offres.3.id type (string / string)
+PASSE : offres.3.id (peintures_nacelle / peintures_nacelle)
+PASSE : offres.3.nom type (string / string)
+PASSE : offres.3.nom (Peintures de nacelle / Peintures de nacelle)
+PASSE : offres.3.type type (string / string)
+PASSE : offres.3.type (expression / expression)
+PASSE : offres.3.prix_robux type (number / number)
+PASSE : offres.3.prix_robux (49 / 49)
+PASSE : offres.3 champ attendu id
+PASSE : offres.3 champ attendu nom
+PASSE : offres.3 champ attendu type
+PASSE : offres.3 champ attendu prix_robux
+PASSE : offres.4 type (table / table)
+PASSE : offres.4.id type (string / string)
+PASSE : offres.4.id (mousse_coloree / mousse_coloree)
+PASSE : offres.4.nom type (string / string)
+PASSE : offres.4.nom (Mousse colorée / Mousse colorée)
+PASSE : offres.4.type type (string / string)
+PASSE : offres.4.type (expression / expression)
+PASSE : offres.4.prix_robux type (number / number)
+PASSE : offres.4.prix_robux (29 / 29)
+PASSE : offres.4 champ attendu id
+PASSE : offres.4 champ attendu nom
+PASSE : offres.4 champ attendu type
+PASSE : offres.4 champ attendu prix_robux
+PASSE : offres.5 type (table / table)
+PASSE : offres.5.id type (string / string)
+PASSE : offres.5.id (styles_tour / styles_tour)
+PASSE : offres.5.nom type (string / string)
+PASSE : offres.5.nom (Styles de tour / Styles de tour)
+PASSE : offres.5.type type (string / string)
+PASSE : offres.5.type (expression / expression)
+PASSE : offres.5.prix_robux type (number / number)
+PASSE : offres.5.prix_robux (79 / 79)
+PASSE : offres.5 champ attendu id
+PASSE : offres.5 champ attendu nom
+PASSE : offres.5 champ attendu type
+PASSE : offres.5 champ attendu prix_robux
+PASSE : offres champ attendu 1
+PASSE : offres champ attendu 2
+PASSE : offres champ attendu 3
+PASSE : offres champ attendu 4
+PASSE : offres champ attendu 5
+PASSE : prix_entiers type (boolean / boolean)
+PASSE : prix_entiers (true / true)
+PASSE : ameliorations type (table / table)
+PASSE : ameliorations.1 type (table / table)
+PASSE : ameliorations.1.multiplicateur type (number / number)
+PASSE : ameliorations.1.multiplicateur (2 / 2)
+PASSE : ameliorations.1.debloque type (string / string)
+PASSE : ameliorations.1.debloque (r1>=2 / r1>=2)
+PASSE : ameliorations.1.id type (string / string)
+PASSE : ameliorations.1.id (a1 / a1)
+PASSE : ameliorations.1.nom type (string / string)
+PASSE : ameliorations.1.nom (Raclette large / Raclette large)
+PASSE : ameliorations.1.cible type (string / string)
+PASSE : ameliorations.1.cible (action / action)
+PASSE : ameliorations.1.cout type (number / number)
+PASSE : ameliorations.1.cout (40 / 40)
+PASSE : ameliorations.1 champ attendu multiplicateur
+PASSE : ameliorations.1 champ attendu debloque
+PASSE : ameliorations.1 champ attendu id
+PASSE : ameliorations.1 champ attendu nom
+PASSE : ameliorations.1 champ attendu cible
+PASSE : ameliorations.1 champ attendu cout
+PASSE : ameliorations.2 type (table / table)
+PASSE : ameliorations.2.multiplicateur type (number / number)
+PASSE : ameliorations.2.multiplicateur (1.5 / 1.5)
+PASSE : ameliorations.2.debloque type (string / string)
+PASSE : ameliorations.2.debloque (r2>=3 / r2>=3)
+PASSE : ameliorations.2.id type (string / string)
+PASSE : ameliorations.2.id (a2 / a2)
+PASSE : ameliorations.2.nom type (string / string)
+PASSE : ameliorations.2.nom (Savon moussant / Savon moussant)
+PASSE : ameliorations.2.cible type (string / string)
+PASSE : ameliorations.2.cible (action / action)
+PASSE : ameliorations.2.cout type (number / number)
+PASSE : ameliorations.2.cout (700 / 700)
+PASSE : ameliorations.2 champ attendu multiplicateur
+PASSE : ameliorations.2 champ attendu debloque
+PASSE : ameliorations.2 champ attendu id
+PASSE : ameliorations.2 champ attendu nom
+PASSE : ameliorations.2 champ attendu cible
+PASSE : ameliorations.2 champ attendu cout
+PASSE : ameliorations.3 type (table / table)
+PASSE : ameliorations.3.multiplicateur type (number / number)
+PASSE : ameliorations.3.multiplicateur (2 / 2)
+PASSE : ameliorations.3.debloque type (string / string)
+PASSE : ameliorations.3.debloque (r3>=1 / r3>=1)
+PASSE : ameliorations.3.id type (string / string)
+PASSE : ameliorations.3.id (a3 / a3)
+PASSE : ameliorations.3.nom type (string / string)
+PASSE : ameliorations.3.nom (Ventouses renforcées / Ventouses renforcées)
+PASSE : ameliorations.3.cible type (string / string)
+PASSE : ameliorations.3.cible (r2 / r2)
+PASSE : ameliorations.3.cout type (number / number)
+PASSE : ameliorations.3.cout (2400 / 2400)
+PASSE : ameliorations.3 champ attendu multiplicateur
+PASSE : ameliorations.3 champ attendu debloque
+PASSE : ameliorations.3 champ attendu id
+PASSE : ameliorations.3 champ attendu nom
+PASSE : ameliorations.3 champ attendu cible
+PASSE : ameliorations.3 champ attendu cout
+PASSE : ameliorations.4 type (table / table)
+PASSE : ameliorations.4.multiplicateur type (number / number)
+PASSE : ameliorations.4.multiplicateur (1.5 / 1.5)
+PASSE : ameliorations.4.debloque type (string / string)
+PASSE : ameliorations.4.debloque (r5>=1 / r5>=1)
+PASSE : ameliorations.4.id type (string / string)
+PASSE : ameliorations.4.id (a4 / a4)
+PASSE : ameliorations.4.nom type (string / string)
+PASSE : ameliorations.4.nom (Double équipe / Double équipe)
+PASSE : ameliorations.4.cible type (string / string)
+PASSE : ameliorations.4.cible (tout / tout)
+PASSE : ameliorations.4.cout type (number / number)
+PASSE : ameliorations.4.cout (350000 / 350000)
+PASSE : ameliorations.4 champ attendu multiplicateur
+PASSE : ameliorations.4 champ attendu debloque
+PASSE : ameliorations.4 champ attendu id
+PASSE : ameliorations.4 champ attendu nom
+PASSE : ameliorations.4 champ attendu cible
+PASSE : ameliorations.4 champ attendu cout
+PASSE : ameliorations.5 type (table / table)
+PASSE : ameliorations.5.multiplicateur type (number / number)
+PASSE : ameliorations.5.multiplicateur (1.25 / 1.25)
+PASSE : ameliorations.5.debloque type (string / string)
+PASSE : ameliorations.5.debloque (r8>=1 / r8>=1)
+PASSE : ameliorations.5.id type (string / string)
+PASSE : ameliorations.5.id (a5 / a5)
+PASSE : ameliorations.5.nom type (string / string)
+PASSE : ameliorations.5.nom (Contrat d'immeuble / Contrat d'immeuble)
+PASSE : ameliorations.5.cible type (string / string)
+PASSE : ameliorations.5.cible (tout / tout)
+PASSE : ameliorations.5.cout type (number / number)
+PASSE : ameliorations.5.cout (7000000000 / 7000000000)
+PASSE : ameliorations.5 champ attendu multiplicateur
+PASSE : ameliorations.5 champ attendu debloque
+PASSE : ameliorations.5 champ attendu id
+PASSE : ameliorations.5 champ attendu nom
+PASSE : ameliorations.5 champ attendu cible
+PASSE : ameliorations.5 champ attendu cout
+PASSE : ameliorations champ attendu 1
+PASSE : ameliorations champ attendu 2
+PASSE : ameliorations champ attendu 3
+PASSE : ameliorations champ attendu 4
+PASSE : ameliorations champ attendu 5
+PASSE : profils type (table / table)
+PASSE : profils.actif type (table / table)
+PASSE : profils.actif.actions_facteur type (number / number)
+PASSE : profils.actif.actions_facteur (1 / 1)
+PASSE : profils.actif champ attendu actions_facteur
+PASSE : profils.lent type (table / table)
+PASSE : profils.lent.actions_facteur type (number / number)
+PASSE : profils.lent.actions_facteur (0.5 / 0.5)
+PASSE : profils.lent champ attendu actions_facteur
+PASSE : profils champ attendu actif
+PASSE : profils champ attendu lent
+PASSE : note type (string / string)
+PASSE : note (Fiche v5 (2026-11-16) : aucune constante de cout ou de revenu ne change depuis la transcription independante de la v3 (commit 225cb3a). Hors modele du simulateur : stock de vitres (tours de 600, 1400, 2000 vitres, pigeons), La Fleche (bloc apres_contenu, non simule), contrat du jour, hors ligne, mousse, pourboires, effets des passes. delai_achat_s et duree_max_s absents de la fiche : le moteur applique 3 s et 14400 s. / Fiche v5 (2026-11-16) : aucune constante de cout ou de revenu ne change depuis la transcription independante de la v3 (commit 225cb3a). Hors modele du simulateur : stock de vitres (tours de 600, 1400, 2000 vitres, pigeons), La Fleche (bloc apres_contenu, non simule), contrat du jour, hors ligne, mousse, pourboires, effets des passes. delai_achat_s et duree_max_s absents de la fiche : le moteur applique 3 s et 14400 s.)
+PASSE : REVENU_FINAL (300757992117 / 300757992117)
+PASSE : NOM_COURT (LaveLaTour / LaveLaTour)
+PASSE : VITRE_DUREE_MIN_S (1.5 / 1.5)
+PASSE : PLAFOND_SOLDE (9000000000000000 / 9000000000000000)
+PASSE : BUDGET_VITRES (40 / 40)
+PASSE : VITRES_PAR_RANGEE (5 / 5)
+PASSE : BUDGET_FENETRE_S (60 / 60)
+PASSE : PASSES_PAR_VITRE (3 / 3)
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : largeur fixe
+PASSE : décimale française (1,5k / 1,5k)
+PASSE : décimale anglaise (1.5k / 1.5k)
+PASSE : lettres après Bn (1.0a / 1.0a)
+PASSE : scénario terminé
+PASSE : contrat.test.luau
+PASSE : verrou sans r3
+PASSE : chantier ne debloque pas
+PASSE : r3 en service ouvre
+PASSE : trop tot 1
+PASSE : vitre 1
+PASSE : Q08 R derniere vitre 1
+PASSE : rejeu refuse 1
+PASSE : trop tot 2
+PASSE : vitre 2
+PASSE : Q08 R derniere vitre 2
+PASSE : rejeu refuse 2
+PASSE : trop tot 3
+PASSE : vitre 3
+PASSE : Q08 R derniere vitre 3
+PASSE : rejeu refuse 3
+PASSE : trop tot 4
+PASSE : vitre 4
+PASSE : Q08 R derniere vitre 4
+PASSE : rejeu refuse 4
+PASSE : trop tot 5
+PASSE : vitre 5
+PASSE : Q08 R derniere vitre 5
+PASSE : rejeu refuse 5
+PASSE : trop tot 6
+PASSE : vitre 6
+PASSE : Q08 R derniere vitre 6
+PASSE : rejeu refuse 6
+PASSE : trop tot 7
+PASSE : vitre 7
+PASSE : Q08 R derniere vitre 7
+PASSE : rejeu refuse 7
+PASSE : trop tot 8
+PASSE : vitre 8
+PASSE : Q08 R derniere vitre 8
+PASSE : rejeu refuse 8
+PASSE : trop tot 9
+PASSE : vitre 9
+PASSE : Q08 R derniere vitre 9
+PASSE : rejeu refuse 9
+PASSE : trop tot 10
+PASSE : vitre 10
+PASSE : Q08 R derniere vitre 10
+PASSE : rejeu refuse 10
+PASSE : trop tot 11
+PASSE : vitre 11
+PASSE : Q08 R derniere vitre 11
+PASSE : rejeu refuse 11
+PASSE : trop tot 12
+PASSE : vitre 12
+PASSE : Q08 R derniere vitre 12
+PASSE : rejeu refuse 12
+PASSE : trop tot 13
+PASSE : vitre 13
+PASSE : Q08 R derniere vitre 13
+PASSE : rejeu refuse 13
+PASSE : trop tot 14
+PASSE : vitre 14
+PASSE : Q08 R derniere vitre 14
+PASSE : rejeu refuse 14
+PASSE : trop tot 15
+PASSE : vitre 15
+PASSE : Q08 R derniere vitre 15
+PASSE : rejeu refuse 15
+PASSE : trop tot 16
+PASSE : vitre 16
+PASSE : Q08 R derniere vitre 16
+PASSE : rejeu refuse 16
+PASSE : trop tot 17
+PASSE : vitre 17
+PASSE : Q08 R derniere vitre 17
+PASSE : rejeu refuse 17
+PASSE : trop tot 18
+PASSE : vitre 18
+PASSE : Q08 R derniere vitre 18
+PASSE : rejeu refuse 18
+PASSE : trop tot 19
+PASSE : vitre 19
+PASSE : Q08 R derniere vitre 19
+PASSE : rejeu refuse 19
+PASSE : trop tot 20
+PASSE : vitre 20
+PASSE : Q08 R derniere vitre 20
+PASSE : rejeu refuse 20
+PASSE : trop tot 21
+PASSE : vitre 21
+PASSE : Q08 R derniere vitre 21
+PASSE : rejeu refuse 21
+PASSE : trop tot 22
+PASSE : vitre 22
+PASSE : Q08 R derniere vitre 22
+PASSE : rejeu refuse 22
+PASSE : trop tot 23
+PASSE : vitre 23
+PASSE : Q08 R derniere vitre 23
+PASSE : rejeu refuse 23
+PASSE : trop tot 24
+PASSE : vitre 24
+PASSE : Q08 R derniere vitre 24
+PASSE : rejeu refuse 24
+PASSE : trop tot 25
+PASSE : vitre 25
+PASSE : Q08 R derniere vitre 25
+PASSE : rejeu refuse 25
+PASSE : trop tot 26
+PASSE : vitre 26
+PASSE : Q08 R derniere vitre 26
+PASSE : rejeu refuse 26
+PASSE : trop tot 27
+PASSE : vitre 27
+PASSE : Q08 R derniere vitre 27
+PASSE : rejeu refuse 27
+PASSE : trop tot 28
+PASSE : vitre 28
+PASSE : Q08 R derniere vitre 28
+PASSE : rejeu refuse 28
+PASSE : trop tot 29
+PASSE : vitre 29
+PASSE : Q08 R derniere vitre 29
+PASSE : rejeu refuse 29
+PASSE : trop tot 30
+PASSE : vitre 30
+PASSE : Q08 R derniere vitre 30
+PASSE : rejeu refuse 30
+PASSE : trop tot 31
+PASSE : vitre 31
+PASSE : Q08 R derniere vitre 31
+PASSE : rejeu refuse 31
+PASSE : trop tot 32
+PASSE : vitre 32
+PASSE : Q08 R derniere vitre 32
+PASSE : rejeu refuse 32
+PASSE : trop tot 33
+PASSE : vitre 33
+PASSE : Q08 R derniere vitre 33
+PASSE : rejeu refuse 33
+PASSE : trop tot 34
+PASSE : vitre 34
+PASSE : Q08 R derniere vitre 34
+PASSE : rejeu refuse 34
+PASSE : trop tot 35
+PASSE : vitre 35
+PASSE : Q08 R derniere vitre 35
+PASSE : rejeu refuse 35
+PASSE : trop tot 36
+PASSE : vitre 36
+PASSE : Q08 R derniere vitre 36
+PASSE : rejeu refuse 36
+PASSE : trop tot 37
+PASSE : vitre 37
+PASSE : Q08 R derniere vitre 37
+PASSE : rejeu refuse 37
+PASSE : trop tot 38
+PASSE : vitre 38
+PASSE : Q08 R derniere vitre 38
+PASSE : rejeu refuse 38
+PASSE : trop tot 39
+PASSE : vitre 39
+PASSE : Q08 R derniere vitre 39
+PASSE : rejeu refuse 39
+PASSE : trop tot 40
+PASSE : vitre 40
+PASSE : Q08 R derniere vitre 40
+PASSE : rejeu refuse 40
+PASSE : minuit jour de fin (2024-01-02 / 2024-01-02)
+PASSE : une prime par jour
+PASSE : aucun geste double sur tour (0 / 0)
+PASSE : jour suivant
+PASSE : masque contrat restaure (2 / 2)
+PASSE : quarantieme acceptee
+PASSE : 41e refusee
+PASSE : scénario terminé
+PASSE : donnees.test.luau
+PASSE : sortie sûre
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré (voyage / voyage)
+PASSE : type restauré (string / string)
+PASSE : champ restauré (segment / segment)
+PASSE : type restauré (string / string)
+PASSE : champ restauré (absence:100000 / absence:100000)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (1 / 1)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (21 / 21)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (12 / 12)
+PASSE : aucun ajout
+PASSE : type restauré (number / number)
+PASSE : champ restauré (1 / 1)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (1 / 1)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : Q01 masque désordonné intact (21 / 21)
+PASSE : chantier conservé (12 / 12)
+PASSE : deux serveurs refusés (nil / nil)
+PASSE : renvoi avec clé (donnees_indisponibles / donnees_indisponibles)
+PASSE : verrou exactement 600 vivant (nil / nil)
+PASSE : verrou mort repris
+PASSE : ancien serveur ne réécrit pas
+PASSE : réserve bornée 0
+PASSE : intervalle consommé (0 / 0)
+PASSE : Q02 réserve jamais doublée (0 / 0)
+PASSE : réserve bornée 1
+PASSE : intervalle consommé (0 / 0)
+PASSE : Q02 réserve jamais doublée (0.125 / 0.125)
+PASSE : réserve bornée 7199
+PASSE : intervalle consommé (0 / 0)
+PASSE : Q02 réserve jamais doublée (899.875 / 899.875)
+PASSE : réserve bornée 7200
+PASSE : intervalle consommé (0 / 0)
+PASSE : Q02 réserve jamais doublée (900 / 900)
+PASSE : réserve bornée 7201
+PASSE : intervalle consommé (0 / 0)
+PASSE : Q02 réserve jamais doublée (900 / 900)
+PASSE : panne chargement sans profil (nil / nil)
+PASSE : échec non sauvegardable
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (1 / 1)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (42 / 42)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (122202 / 122202)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (1 / 1)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : troisième essai réussit (42 / 42)
+PASSE : reprise écriture
+PASSE : métadonnée userId (500 / 500)
+PASSE : migration ancienne version (17 / 17)
+PASSE : corruption réparée (0 / 0)
+PASSE : non fini refusé
+PASSE : non fini refusé
+PASSE : non fini refusé
+PASSE : tableau creux refusé
+PASSE : crédit non confirmé non exposé (nil / nil)
+PASSE : intervalle rejoué intégralement (12.5 / 12.5)
+[PASSE2 Monde 0.000] construction 14
+PASSE : sauvegarde périodique
+PASSE : fermeture libère verrou (nil / nil)
+PASSE : réponse perdue : crédit unique (12.5 / 12.5)
+PASSE : crédit et consommation atomiques (0 / 0)
+PASSE : concurrence refuse sans écriture (nil / nil)
+PASSE : zéro écriture sur verrou vivant (4 / 4)
+PASSE : Q01 seconde attribution finie d'abord
+PASSE : Q01 sauvegarde visiteur
+PASSE : Q01 sauvegarde propriétaire
+PASSE : Q01 masque sans vitre sautée (2 / 2)
+PASSE : Q01 gain restauré (1 / 1)
+PASSE : Q01 réservation abandonnée libérée (1 / 1)
+PASSE : Q01 vitre propre non repayée
+PASSE : Q01 seconde attribution finie d'abord
+PASSE : Q01 sauvegarde visiteur
+PASSE : Q01 sauvegarde propriétaire
+PASSE : Q01 masque sans vitre sautée (2 / 2)
+PASSE : Q01 gain restauré (1 / 1)
+PASSE : Q01 réservation abandonnée libérée (1 / 1)
+PASSE : Q01 vitre propre non repayée
+PASSE : D5 migration illisible refusee (nil / nil)
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré (absence:122202 / absence:122202)
+PASSE : aucun ajout
+PASSE : type restauré (number / number)
+PASSE : champ restauré (1 / 1)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (42 / 42)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (122202 / 122202)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (1 / 1)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (table / table)
+PASSE : type restauré (table / table)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : type restauré (table / table)
+PASSE : type restauré (string / string)
+PASSE : champ restauré ( / )
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : type restauré (boolean / boolean)
+PASSE : champ restauré (false / false)
+PASSE : type restauré (number / number)
+PASSE : champ restauré (0 / 0)
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : aucun ajout
+PASSE : Q02 borne Flèche 99/5 (false / false)
+PASSE : Q02 borne Flèche 100/4 (false / false)
+PASSE : Q02 borne Flèche 100/5 (true / true)
+PASSE : Q02 déménagement identifié
+PASSE : Q02 déménagement rejoué avec prochaine tour ouverte
+PASSE : Q02 segment identifié
+PASSE : Q02 segment rejoué avec place disponible
+PASSE : Q02 aucun second débit (8909772602364900 / 8909772602364900)
+PASSE : scénario terminé
+PASSE : economie.test.luau
+PASSE : r10 exemplaire 1 (4500000000000 / 4500000000000)
+PASSE : r10 exemplaire 2 (4792500000000 / 4792500000000)
+PASSE : r10 exemplaire 3 (5104012500000 / 5104012500000)
+PASSE : r10 exemplaire 4 (5435773312500 / 5435773312500)
+PASSE : r10 exemplaire 5 (5789098577813 / 5789098577813)
+PASSE : r10 exemplaire 6 (6165389985371 / 6165389985371)
+PASSE : r10 exemplaire 7 (6566140334420 / 6566140334420)
+PASSE : r10 exemplaire 8 (6992939456157 / 6992939456157)
+PASSE : r10 exemplaire 9 (7447480520807 / 7447480520807)
+PASSE : r10 exemplaire 10 (7931566754660 / 7931566754660)
+PASSE : r9 exemplaire 1 (150000000000 / 150000000000)
+PASSE : r9 exemplaire 2 (159750000000 / 159750000000)
+PASSE : r9 exemplaire 3 (170133750000 / 170133750000)
+PASSE : r9 exemplaire 4 (181192443750 / 181192443750)
+PASSE : r9 exemplaire 5 (192969952594 / 192969952594)
+PASSE : r9 exemplaire 6 (205512999513 / 205512999513)
+PASSE : r9 exemplaire 7 (218871344481 / 218871344481)
+PASSE : r9 exemplaire 8 (233097981872 / 233097981872)
+PASSE : r9 exemplaire 9 (248249350694 / 248249350694)
+PASSE : r9 exemplaire 10 (264385558489 / 264385558489)
+PASSE : r5 exemplaire 1 (200000 / 200000)
+PASSE : r5 exemplaire 2 (226000 / 226000)
+PASSE : r5 exemplaire 3 (255380 / 255380)
+PASSE : r5 exemplaire 4 (288580 / 288580)
+PASSE : r5 exemplaire 5 (326095 / 326095)
+PASSE : r5 exemplaire 6 (368488 / 368488)
+PASSE : r5 exemplaire 7 (416391 / 416391)
+PASSE : r5 exemplaire 8 (470522 / 470522)
+PASSE : r5 exemplaire 9 (531689 / 531689)
+PASSE : r5 exemplaire 10 (600809 / 600809)
+PASSE : r4 exemplaire 1 (7000 / 7000)
+PASSE : r4 exemplaire 2 (7980 / 7980)
+PASSE : r4 exemplaire 3 (9098 / 9098)
+PASSE : r4 exemplaire 4 (10371 / 10371)
+PASSE : r4 exemplaire 5 (11823 / 11823)
+PASSE : r4 exemplaire 6 (13478 / 13478)
+PASSE : r4 exemplaire 7 (15365 / 15365)
+PASSE : r4 exemplaire 8 (17516 / 17516)
+PASSE : r4 exemplaire 9 (19969 / 19969)
+PASSE : r4 exemplaire 10 (22764 / 22764)
+PASSE : r7 exemplaire 1 (165000000 / 165000000)
+PASSE : r7 exemplaire 2 (177375000 / 177375000)
+PASSE : r7 exemplaire 3 (190678125 / 190678125)
+PASSE : r7 exemplaire 4 (204978985 / 204978985)
+PASSE : r7 exemplaire 5 (220352409 / 220352409)
+PASSE : r7 exemplaire 6 (236878839 / 236878839)
+PASSE : r7 exemplaire 7 (254644752 / 254644752)
+PASSE : r7 exemplaire 8 (273743109 / 273743109)
+PASSE : r7 exemplaire 9 (294273842 / 294273842)
+PASSE : r7 exemplaire 10 (316344380 / 316344380)
+PASSE : r6 exemplaire 1 (5600000 / 5600000)
+PASSE : r6 exemplaire 2 (6160000 / 6160000)
+PASSE : r6 exemplaire 3 (6776000 / 6776000)
+PASSE : r6 exemplaire 4 (7453600 / 7453600)
+PASSE : r6 exemplaire 5 (8198960 / 8198960)
+PASSE : r6 exemplaire 6 (9018856 / 9018856)
+PASSE : r6 exemplaire 7 (9920742 / 9920742)
+PASSE : r6 exemplaire 8 (10912816 / 10912816)
+PASSE : r6 exemplaire 9 (12004098 / 12004098)
+PASSE : r6 exemplaire 10 (13204508 / 13204508)
+PASSE : r8 exemplaire 1 (5000000000 / 5000000000)
+PASSE : r8 exemplaire 2 (5300000000 / 5300000000)
+PASSE : r8 exemplaire 3 (5618000000 / 5618000000)
+PASSE : r8 exemplaire 4 (5955080000 / 5955080000)
+PASSE : r8 exemplaire 5 (6312384800 / 6312384800)
+PASSE : r8 exemplaire 6 (6691127888 / 6691127888)
+PASSE : r8 exemplaire 7 (7092595562 / 7092595562)
+PASSE : r8 exemplaire 8 (7518151295 / 7518151295)
+PASSE : r8 exemplaire 9 (7969240373 / 7969240373)
+PASSE : r8 exemplaire 10 (8447394796 / 8447394796)
+PASSE : r1 exemplaire 1 (10 / 10)
+PASSE : r1 exemplaire 2 (12 / 12)
+PASSE : r1 exemplaire 3 (15 / 15)
+PASSE : r1 exemplaire 4 (18 / 18)
+PASSE : r1 exemplaire 5 (21 / 21)
+PASSE : r1 exemplaire 6 (25 / 25)
+PASSE : r1 exemplaire 7 (30 / 30)
+PASSE : r1 exemplaire 8 (36 / 36)
+PASSE : r1 exemplaire 9 (43 / 43)
+PASSE : r1 exemplaire 10 (52 / 52)
+PASSE : r2 exemplaire 1 (90 / 90)
+PASSE : r2 exemplaire 2 (108 / 108)
+PASSE : r2 exemplaire 3 (130 / 130)
+PASSE : r2 exemplaire 4 (156 / 156)
+PASSE : r2 exemplaire 5 (187 / 187)
+PASSE : r2 exemplaire 6 (224 / 224)
+PASSE : r2 exemplaire 7 (269 / 269)
+PASSE : r2 exemplaire 8 (323 / 323)
+PASSE : r2 exemplaire 9 (387 / 387)
+PASSE : r2 exemplaire 10 (465 / 465)
+PASSE : r3 exemplaire 1 (800 / 800)
+PASSE : r3 exemplaire 2 (936 / 936)
+PASSE : r3 exemplaire 3 (1096 / 1096)
+PASSE : r3 exemplaire 4 (1282 / 1282)
+PASSE : r3 exemplaire 5 (1500 / 1500)
+PASSE : r3 exemplaire 6 (1754 / 1754)
+PASSE : r3 exemplaire 7 (2053 / 2053)
+PASSE : r3 exemplaire 8 (2401 / 2401)
+PASSE : r3 exemplaire 9 (2810 / 2810)
+PASSE : r3 exemplaire 10 (3287 / 3287)
+PASSE : dixième r10 (7931566754660 / 7931566754660)
+PASSE : verrou r2
+PASSE : achat r1
+PASSE : achat r1
+PASSE : achat r1
+PASSE : chantier nul immédiat (3 / 3)
+PASSE : jalon refuse chantier
+PASSE : avant échéance (0 / 0)
+PASSE : mise en service à la demi-seconde
+PASSE : jalon en service
+PASSE : pas de double service (1 / 1)
+PASSE : R composé une fois
+PASSE : gain indexé
+PASSE : équipement complet
+PASSE : double au-delà de int32 (2147483748 / 2147483748)
+PASSE : plafond (9000000000000000 / 9000000000000000)
+PASSE : hors ligne 0
+PASSE : chantiers pendant absence (1 / 1)
+PASSE : hors ligne 1
+PASSE : chantiers pendant absence (2 / 2)
+PASSE : hors ligne 7199
+PASSE : chantiers pendant absence (2 / 2)
+PASSE : hors ligne 7200
+PASSE : chantiers pendant absence (2 / 2)
+PASSE : hors ligne 7201
+PASSE : chantiers pendant absence (2 / 2)
+PASSE : profil réparable (1 / 1)
+PASSE : profil borné
+PASSE : profil réparable (1 / 1)
+PASSE : profil borné
+PASSE : profil réparable (1 / 1)
+PASSE : profil borné
+PASSE : profil réparable (1 / 1)
+PASSE : profil borné
+PASSE : toujours un objectif
+PASSE : passes typées conservées avant relecture (true / true)
+PASSE : mesures conservées (true / true)
+PASSE : masque conservé (21 / 21)
+PASSE : opérations conservées (op1 / op1)
+PASSE : amélioration verrouillée a1
+PASSE : amélioration déverrouillée a1
+PASSE : amélioration unique a1
+PASSE : amélioration verrouillée a2
+PASSE : amélioration déverrouillée a2
+PASSE : amélioration unique a2
+PASSE : amélioration verrouillée a3
+PASSE : amélioration déverrouillée a3
+PASSE : amélioration unique a3
+PASSE : amélioration verrouillée a4
+PASSE : amélioration déverrouillée a4
+PASSE : amélioration unique a4
+PASSE : amélioration verrouillée a5
+PASSE : amélioration déverrouillée a5
+PASSE : amélioration unique a5
+PASSE : scénario terminé
+PASSE : gabarit-mesures.test.luau
+PASSE : magasin Studio
+PASSE : magasin production
+PASSE : étape unique
+PASSE : nouveau, actif, session uniques
+PASSE : borne 60
+PASSE : bornes 61 et 180
+PASSE : bornes 181 et 600
+PASSE : bornes 601 et 1800
+PASSE : borne 1801
+PASSE : J1 une fois et actif unique
+PASSE : J7 une fois
+PASSE : minuit : activité et J1
+PASSE : session rattachée au jour de fin
+PASSE : deux serveurs additionnent
+PASSE : panne conservée
+PASSE : attente croissante
+PASSE : reprise sans perte ni doublon
+PASSE : réponse perdue
+PASSE : écriture acceptée puis erreur sans doublon
+PASSE : ajouts pendant envoi conservés
+PASSE : aucun envoi vide
+PASSE : boucle et fermeture enregistrées
+PASSE : fermeture compte les sessions ouvertes
+PASSE : aucune donnée personnelle, entiers seulement
+PASSE : boucle attend 300 secondes
+PASSE : cycle sans nouveau sans écriture
+PASSE : cycle avec nouveau écrit
+PASSE : boucle arrêtée à la fermeture
+28/28 contrôles passés
+PASSE : scénario terminé
+PASSE : gabarit-retours.test.luau
+PASSE : magasin Studio isolé
+ok     magasin Studio isolé
+PASSE : type texte
+ok     type texte
+PASSE : texte court
+ok     texte court
+PASSE : UTF8 invalide
+ok     UTF8 invalide
+PASSE : texte long
+ok     texte long
+PASSE : catégorie
+ok     catégorie
+PASSE : aucune écriture invalide
+ok     aucune écriture invalide
+PASSE : envoi UTF8
+ok     envoi UTF8
+PASSE : clé exacte
+ok     clé exacte
+PASSE : métadonnée effacement
+ok     métadonnée effacement
+PASSE : valeur exacte avant JSONEncode
+ok     valeur exacte avant JSONEncode
+PASSE : cadence immédiate
+ok     cadence immédiate
+PASSE : cadence 59 secondes
+ok     cadence 59 secondes
+PASSE : deux reprises
+ok     deux reprises
+PASSE : limite quotidienne
+ok     limite quotidienne
+PASSE : quota quotidien entre serveurs
+ok     quota quotidien entre serveurs
+PASSE : jour suivant
+ok     jour suivant
+PASSE : cadence entre serveurs
+ok     cadence entre serveurs
+PASSE : échec après trois essais
+ok     échec après trois essais
+PASSE : magasin production
+ok     magasin production
+20/20 contrôles passés
+PASSE : scénario terminé
+PASSE : geste.test.luau
+PASSE : tapotement immobile
+PASSE : tapotement tremblé
+PASSE : appui long refusé
+PASSE : glissé court refusé
+PASSE : glissé vertical refusé
+PASSE : moitié exacte acceptée
+PASSE : plus de moitié acceptée
+PASSE : sens inverse accepté
+PASSE : suite vide refusée
+PASSE : compte des passes (1 / 1)
+PASSE : compte des passes (2 / 2)
+PASSE : compte des passes (3 / 3)
+PASSE : pas de quatrième passe (3 / 3)
+PASSE : invalide sans progression (1 / 1)
+PASSE : cran 1 (1 / 1)
+PASSE : cran 2 (2 / 2)
+PASSE : cran 3 (3 / 3)
+PASSE : cran 4 (4 / 4)
+PASSE : cran 5 (5 / 5)
+PASSE : cran 6 (6 / 6)
+PASSE : cran 7 (7 / 7)
+PASSE : cran 8 (8 / 8)
+PASSE : cran 9 (1 / 1)
+PASSE : trois secondes continues (5 / 5)
+PASSE : pause supérieure à trois secondes (1 / 1)
+PASSE : huitième (fiente / fiente)
+PASSE : dix-septième (buee / buee)
+PASSE : ordinaire (sale / sale)
+PASSE : une sur dix 20
+PASSE : une sur dix 30
+PASSE : une sur dix 40
+PASSE : une sur dix 50
+PASSE : une sur dix 60
+PASSE : une sur dix 70
+PASSE : une sur dix 80
+PASSE : une sur dix 90
+PASSE : une sur dix 100
+PASSE : priorité demenager (demenager / demenager)
+PASSE : priorité chez_visiteur (chez_visiteur / chez_visiteur)
+PASSE : priorité rejoindre (rejoindre / rejoindre)
+PASSE : priorité contrat (contrat / contrat)
+PASSE : aucun contexte (nil / nil)
+PASSE : largeur projetée >= 40 %
+PASSE : projection indépendante couvre quarante pour cent
+PASSE : fraction annoncée exacte
+PASSE : au-dessus et devant
+PASSE : biais 35 degrés
+PASSE : largeur projetée >= 40 %
+PASSE : projection indépendante couvre quarante pour cent
+PASSE : fraction annoncée exacte
+PASSE : au-dessus et devant
+PASSE : biais 35 degrés
+PASSE : scénario terminé
+PASSE : monde-raccorde.test.luau
+PASSE : construction défaillante isolée au démarrage
+[PASSE2 Monde 0.000] construction 14
+[PASSE2 Monde 0.000] montee 1
+PASSE : arrivée attribue une parcelle (801 / 801)
+PASSE : tour construite à l'arrivée (600 / 600)
+PASSE : nacelle à la première rangée (0.5 / 0.5)
+PASSE : attribution 1
+PASSE : attribution 2
+PASSE : attribution 3
+PASSE : attribution 4
+PASSE : attribution 5
+[PASSE2 Monde 10.000] montee 2
+PASSE : attribution 6
+PASSE : attribution 7
+PASSE : attribution 8
+PASSE : attribution 9
+PASSE : attribution 10
+[PASSE2 Monde 20.000] montee 3
+PASSE : dix vitres donnent deux rangées (2 / 2)
+PASSE : façade suit le profil (10 / 10)
+PASSE : nacelle suit la troisième rangée (10.5 / 10.5)
+[PASSE2 Monde 20.400] montee 1
+[PASSE2 Monde 21.000] montee 2
+PASSE : proposition sociale envoyée
+PASSE : cible sociale envoyée (801 / 801)
+PASSE : nom social envoyé (Laveur / Laveur)
+PASSE : identifiant de la tour visitée (801 / 801)
+PASSE : erreurs monde effectivement injectées
+PASSE : revenu continue malgré le monde
+PASSE : Etat continue malgré le monde
+PASSE : joueur conservé malgré le monde (table: 0x0000012f714a2d70 / table: 0x0000012f714a2d70)
+PASSE : parcelle libérée au départ (nil / nil)
+PASSE : tour libérée au départ (nil / nil)
+PASSE : scénario terminé
+PASSE : monde.test.luau
+[PASSE2 Monde 0.000] construction 14
+PASSE : construction
+PASSE : construction idempotente (table: 0x00000163f58a76c0 / table: 0x00000163f58a76c0)
+[PASSE2 Monde 0.000] montee 1
+PASSE : parcelle 1
+[PASSE2 Monde 0.000] montee 1
+PASSE : parcelle 2
+[PASSE2 Monde 0.000] montee 1
+PASSE : parcelle 3
+[PASSE2 Monde 0.000] montee 1
+PASSE : parcelle 4
+[PASSE2 Monde 0.000] montee 1
+PASSE : parcelle 5
+[PASSE2 Monde 0.000] montee 1
+PASSE : parcelle 6
+PASSE : deux sièges par tour construits (12 / 12)
+PASSE : septième refusé (nil / nil)
+PASSE : borne calculée exacte à six joueurs (152 / 152)
+PASSE : sous la borne de la fiche
+PASSE : tour 1 hauteur 600 (600 / 600)
+PASSE : somme panneaux 0:1 (600 / 600)
+PASSE : somme panneaux 0:2 (600 / 600)
+PASSE : somme panneaux 0:3 (600 / 600)
+PASSE : somme panneaux 0:4 (600 / 600)
+PASSE : hauteur nacelle 0 (0.5 / 0.5)
+[PASSE2 Monde 0.400] montee 2
+PASSE : somme panneaux 1:1 (600 / 600)
+PASSE : somme panneaux 1:2 (600 / 600)
+PASSE : somme panneaux 1:3 (600 / 600)
+PASSE : somme panneaux 1:4 (600 / 600)
+PASSE : hauteur nacelle 1 (5.5 / 5.5)
+[PASSE2 Monde 0.800] montee 38
+PASSE : somme panneaux 37:1 (600 / 600)
+PASSE : somme panneaux 37:2 (600 / 600)
+PASSE : somme panneaux 37:3 (600 / 600)
+PASSE : somme panneaux 37:4 (600 / 600)
+PASSE : hauteur nacelle 37 (185.5 / 185.5)
+[PASSE2 Monde 1.200] montee 120
+PASSE : somme panneaux 119:1 (600 / 600)
+PASSE : somme panneaux 119:2 (600 / 600)
+PASSE : somme panneaux 119:3 (600 / 600)
+PASSE : somme panneaux 119:4 (600 / 600)
+PASSE : hauteur nacelle 119 (595.5 / 595.5)
+PASSE : somme panneaux 120:1 (600 / 600)
+PASSE : somme panneaux 120:2 (600 / 600)
+PASSE : somme panneaux 120:3 (600 / 600)
+PASSE : somme panneaux 120:4 (600 / 600)
+PASSE : hauteur nacelle 120 (595.5 / 595.5)
+[PASSE2 Monde 2.000] montee 11
+[PASSE2 Monde 2.000] montee 11
+[PASSE2 Monde 2.000] montee 11
+[PASSE2 Monde 2.000] montee 11
+[PASSE2 Monde 2.000] montee 11
+[PASSE2 Monde 2.000] montee 11
+PASSE : hauteur tour 1 (600 / 600)
+PASSE : compte indépendant des étages (152 / 152)
+PASSE : hauteur tour 2 (1400 / 1400)
+PASSE : compte indépendant des étages (152 / 152)
+PASSE : hauteur tour 3 (2000 / 2000)
+PASSE : compte indépendant des étages (152 / 152)
+PASSE : libération (129 / 129)
+[PASSE2 Monde 3.200] montee 1
+PASSE : réattribution
+PASSE : scénario terminé
+PASSE : rejeu-simulateur.test.luau
+PASSE : actif achat prématuré refusé 1
+PASSE : refus sans débit (9.5 / 9.5)
+PASSE : actif achat 1
+PASSE : actif solde après achat 1 différence 0
+PASSE : actif achat prématuré refusé 2
+PASSE : refus sans débit (11.625000000000004 / 11.625000000000004)
+PASSE : actif achat 2
+PASSE : actif solde après achat 2 différence 0
+PASSE : actif achat prématuré refusé 3
+PASSE : refus sans débit (14.050000000000008 / 14.050000000000008)
+PASSE : actif achat 3
+PASSE : actif solde après achat 3 différence 0
+PASSE : actif achat prématuré refusé 4
+PASSE : refus sans débit (17.325000000000003 / 17.325000000000003)
+PASSE : actif achat 4
+PASSE : actif solde après achat 4 différence 0
+PASSE : actif achat prématuré refusé 5
+PASSE : refus sans débit (19.85 / 19.85)
+PASSE : actif achat 5
+PASSE : actif solde après achat 5 différence 3.552713678800501e-15
+PASSE : actif achat prématuré refusé 6
+PASSE : refus sans débit (39.825 / 39.825)
+PASSE : actif achat 6
+PASSE : actif solde après achat 6 différence 0
+PASSE : actif achat prématuré refusé 7
+PASSE : refus sans débit (89.2 / 89.2)
+PASSE : actif achat 7
+PASSE : actif solde après achat 7 différence 0
+PASSE : actif achat prématuré refusé 8
+PASSE : refus sans débit (104.60000000000004 / 104.60000000000004)
+PASSE : actif achat 8
+PASSE : actif solde après achat 8 différence 0
+PASSE : actif achat prématuré refusé 9
+PASSE : refus sans débit (125.60000000000001 / 125.60000000000001)
+PASSE : actif achat 9
+PASSE : actif solde après achat 9 différence 0
+PASSE : actif achat prématuré refusé 10
+PASSE : refus sans débit (148.4 / 148.4)
+PASSE : actif achat 10
+PASSE : actif solde après achat 10 différence 0
+PASSE : actif achat 11
+PASSE : actif solde après achat 11 différence 0
+PASSE : actif achat prématuré refusé 12
+PASSE : refus sans débit (174.60000000000005 / 174.60000000000005)
+PASSE : actif achat 12
+PASSE : actif solde après achat 12 différence 2.842170943040401e-14
+PASSE : actif achat prématuré refusé 13
+PASSE : refus sans débit (29.60000000000006 / 29.60000000000006)
+PASSE : actif achat 13
+PASSE : actif solde après achat 13 différence 2.1316282072803006e-14
+PASSE : actif achat prématuré refusé 14
+PASSE : refus sans débit (210.70000000000002 / 210.70000000000002)
+PASSE : actif achat 14
+PASSE : actif solde après achat 14 différence 2.842170943040401e-14
+PASSE : actif achat prématuré refusé 15
+PASSE : refus sans débit (789.3 / 789.3)
+PASSE : actif achat 15
+PASSE : actif solde après achat 15 différence 0
+PASSE : actif jalon contrats
+PASSE : actif achat prématuré refusé 16
+PASSE : refus sans débit (915.4999999999995 / 915.4999999999995)
+PASSE : actif achat 16
+PASSE : actif solde après achat 16 différence 0
+PASSE : actif achat prématuré refusé 17
+PASSE : refus sans débit (1071.1999999999991 / 1071.1999999999991)
+PASSE : actif achat 17
+PASSE : actif solde après achat 17 différence 2.2737367544323206e-13
+PASSE : actif achat prématuré refusé 18
+PASSE : refus sans débit (1273.5999999999997 / 1273.5999999999997)
+PASSE : actif achat 18
+PASSE : actif solde après achat 18 différence 2.2737367544323206e-13
+PASSE : actif achat prématuré refusé 19
+PASSE : refus sans débit (234.39999999999972 / 234.39999999999972)
+PASSE : actif achat 19
+PASSE : actif solde après achat 19 différence 1.7053025658242404e-13
+PASSE : actif achat 20
+PASSE : actif solde après achat 20 différence 1.7053025658242404e-13
+PASSE : actif achat prématuré refusé 21
+PASSE : refus sans débit (680.7999999999996 / 680.7999999999996)
+PASSE : actif achat 21
+PASSE : actif solde après achat 21 différence 2.2737367544323206e-13
+PASSE : actif achat prématuré refusé 22
+PASSE : refus sans débit (1498.5 / 1498.5)
+PASSE : actif achat 22
+PASSE : actif solde après achat 22 différence 2.2737367544323206e-13
+PASSE : actif achat prématuré refusé 23
+PASSE : refus sans débit (252.60000000000002 / 252.60000000000002)
+PASSE : actif achat 23
+PASSE : actif solde après achat 23 différence 2.2737367544323206e-13
+PASSE : actif achat prématuré refusé 24
+PASSE : refus sans débit (1654.4000000000005 / 1654.4000000000005)
+PASSE : actif achat 24
+PASSE : actif solde après achat 24 différence 2.2737367544323206e-13
+PASSE : actif achat prématuré refusé 25
+PASSE : refus sans débit (6957.300000000001 / 6957.300000000001)
+PASSE : actif achat 25
+PASSE : actif solde après achat 25 différence 9.094947017729282e-13
+PASSE : actif achat prématuré refusé 26
+PASSE : refus sans débit (7785.800000000001 / 7785.800000000001)
+PASSE : actif achat 26
+PASSE : actif solde après achat 26 différence 9.094947017729282e-13
+PASSE : actif achat prématuré refusé 27
+PASSE : refus sans débit (2253.300000000001 / 2253.300000000001)
+PASSE : actif achat 27
+PASSE : actif solde après achat 27 différence 9.094947017729282e-13
+PASSE : actif achat 28
+PASSE : actif solde après achat 28 différence 7.958078640513122e-13
+PASSE : actif achat 29
+PASSE : actif solde après achat 29 différence 9.094947017729282e-13
+PASSE : actif achat prématuré refusé 30
+PASSE : refus sans débit (8972 / 8972)
+PASSE : actif achat 30
+PASSE : actif solde après achat 30 différence 0
+PASSE : actif achat prématuré refusé 31
+PASSE : refus sans débit (10155.900000000001 / 10155.900000000001)
+PASSE : actif achat 31
+PASSE : actif solde après achat 31 différence 0
+PASSE : actif achat 32
+PASSE : actif solde après achat 32 différence 0
+PASSE : actif achat 33
+PASSE : actif solde après achat 33 différence 0
+PASSE : actif achat prématuré refusé 34
+PASSE : refus sans débit (11523.900000000001 / 11523.900000000001)
+PASSE : actif achat 34
+PASSE : actif solde après achat 34 différence 0
+PASSE : actif achat prématuré refusé 35
+PASSE : refus sans débit (13286.275000000001 / 13286.275000000001)
+PASSE : actif achat 35
+PASSE : actif solde après achat 35 différence 0
+PASSE : actif achat prématuré refusé 36
+PASSE : refus sans débit (1865.1500000000015 / 1865.1500000000015)
+PASSE : actif achat 36
+PASSE : actif solde après achat 36 différence 0
+PASSE : actif achat 37
+PASSE : actif solde après achat 37 différence 0
+PASSE : actif achat prématuré refusé 38
+PASSE : refus sans débit (15089.349999999995 / 15089.349999999995)
+PASSE : actif achat 38
+PASSE : actif solde après achat 38 différence 1.8189894035458565e-12
+PASSE : actif achat prématuré refusé 39
+PASSE : refus sans débit (2140.999999999994 / 2140.999999999994)
+PASSE : actif achat 39
+PASSE : actif solde après achat 39 différence 2.2737367544323206e-12
+PASSE : actif achat prématuré refusé 40
+PASSE : refus sans débit (16715.549999999992 / 16715.549999999992)
+PASSE : actif achat 40
+PASSE : actif solde après achat 40 différence 3.637978807091713e-12
+PASSE : actif achat prématuré refusé 41
+PASSE : refus sans débit (19656.84999999999 / 19656.84999999999)
+PASSE : actif achat 41
+PASSE : actif solde après achat 41 différence 0
+PASSE : actif achat prématuré refusé 42
+PASSE : refus sans débit (2775.299999999993 / 2775.299999999993)
+PASSE : actif achat 42
+PASSE : actif solde après achat 42 différence 0
+PASSE : actif achat prématuré refusé 43
+PASSE : refus sans débit (22717.19999999999 / 22717.19999999999)
+PASSE : actif achat 43
+PASSE : actif solde après achat 43 différence 0
+PASSE : actif achat prématuré refusé 44
+PASSE : refus sans débit (199461.94999999998 / 199461.94999999998)
+PASSE : actif achat 44
+PASSE : actif solde après achat 44 différence 0
+PASSE : actif jalon tour2
+PASSE : actif achat prématuré refusé 45
+PASSE : refus sans débit (224109.94999999998 / 224109.94999999998)
+PASSE : actif achat 45
+PASSE : actif solde après achat 45 différence 0
+PASSE : actif achat prématuré refusé 46
+PASSE : refus sans débit (253815.44999999998 / 253815.44999999998)
+PASSE : actif achat 46
+PASSE : actif solde après achat 46 différence 0
+PASSE : actif achat prématuré refusé 47
+PASSE : refus sans débit (348692.19999999995 / 348692.19999999995)
+PASSE : actif achat 47
+PASSE : actif solde après achat 47 différence 0
+PASSE : actif achat prématuré refusé 48
+PASSE : refus sans débit (283138.94999999995 / 283138.94999999995)
+PASSE : actif achat 48
+PASSE : actif solde après achat 48 différence 0
+PASSE : actif achat prématuré refusé 49
+PASSE : refus sans débit (317444.44999999995 / 317444.44999999995)
+PASSE : actif achat 49
+PASSE : actif solde après achat 49 différence 0
+PASSE : actif achat prématuré refusé 50
+PASSE : refus sans débit (362497.44999999995 / 362497.44999999995)
+PASSE : actif achat 50
+PASSE : actif solde après achat 50 différence 0
+PASSE : actif achat prématuré refusé 51
+PASSE : refus sans débit (401347.57499999995 / 401347.57499999995)
+PASSE : actif achat 51
+PASSE : actif solde après achat 51 différence 0
+PASSE : actif achat prématuré refusé 52
+PASSE : refus sans débit (463079.69999999995 / 463079.69999999995)
+PASSE : actif achat 52
+PASSE : actif solde après achat 52 différence 0
+PASSE : actif achat prématuré refusé 53
+PASSE : refus sans débit (526716.7 / 526716.7)
+PASSE : actif achat 53
+PASSE : actif solde après achat 53 différence 0
+PASSE : actif achat prématuré refusé 54
+PASSE : refus sans débit (575570.075 / 575570.075)
+PASSE : actif achat 54
+PASSE : actif solde après achat 54 différence 0
+PASSE : actif achat prématuré refusé 55
+PASSE : refus sans débit (5574129.825 / 5574129.825)
+PASSE : actif achat 55
+PASSE : actif solde après achat 55 différence 0
+PASSE : actif achat prématuré refusé 56
+PASSE : refus sans débit (6104596.45 / 6104596.45)
+PASSE : actif achat 56
+PASSE : actif solde après achat 56 différence 0
+PASSE : actif achat prématuré refusé 57
+PASSE : refus sans débit (6631485.45 / 6631485.45)
+PASSE : actif achat 57
+PASSE : actif solde après achat 57 différence 0
+PASSE : actif achat prématuré refusé 58
+PASSE : refus sans débit (7442671.075 / 7442671.075)
+PASSE : actif achat 58
+PASSE : actif solde après achat 58 différence 0
+PASSE : actif achat prématuré refusé 59
+PASSE : refus sans débit (8111956.95 / 8111956.95)
+PASSE : actif achat 59
+PASSE : actif solde après achat 59 différence 0
+PASSE : actif achat prématuré refusé 60
+PASSE : refus sans débit (8740187.2 / 8740187.2)
+PASSE : actif achat 60
+PASSE : actif solde après achat 60 différence 0
+PASSE : actif achat prématuré refusé 61
+PASSE : refus sans débit (9758638.2 / 9758638.2)
+PASSE : actif achat 61
+PASSE : actif solde après achat 61 différence 0
+PASSE : actif achat prématuré refusé 62
+PASSE : refus sans débit (10580340.825 / 10580340.825)
+PASSE : actif achat 62
+PASSE : actif solde après achat 62 différence 0
+PASSE : actif achat prématuré refusé 63
+PASSE : refus sans débit (11923240.325 / 11923240.325)
+PASSE : actif achat 63
+PASSE : actif solde après achat 63 différence 0
+PASSE : actif achat prématuré refusé 64
+PASSE : refus sans débit (12779499.575 / 12779499.575)
+PASSE : actif achat 64
+PASSE : actif solde après achat 64 différence 0
+PASSE : actif achat prématuré refusé 65
+PASSE : refus sans débit (164399068.95 / 164399068.95)
+PASSE : actif achat 65
+PASSE : actif solde après achat 65 différence 0
+PASSE : actif achat prématuré refusé 66
+PASSE : refus sans débit (176083450.575 / 176083450.575)
+PASSE : actif achat 66
+PASSE : actif solde après achat 66 différence 0
+PASSE : actif achat prématuré refusé 67
+PASSE : refus sans débit (189729301.2 / 189729301.2)
+PASSE : actif achat 67
+PASSE : actif solde après achat 67 différence 0
+PASSE : actif achat prématuré refusé 68
+PASSE : refus sans débit (201925207.2 / 201925207.2)
+PASSE : actif achat 68
+PASSE : actif solde après achat 68 différence 0
+PASSE : actif achat prématuré refusé 69
+PASSE : refus sans débit (220100536.7 / 220100536.7)
+PASSE : actif achat 69
+PASSE : actif solde après achat 69 différence 0
+PASSE : actif achat prématuré refusé 70
+PASSE : refus sans débit (235027205.075 / 235027205.075)
+PASSE : actif achat 70
+PASSE : actif solde après achat 70 différence 0
+PASSE : actif achat prématuré refusé 71
+PASSE : refus sans débit (252294118.7 / 252294118.7)
+PASSE : actif achat 71
+PASSE : actif solde après achat 71 différence 0
+PASSE : actif achat prématuré refusé 72
+PASSE : refus sans débit (266620206.95 / 266620206.95)
+PASSE : actif achat 72
+PASSE : actif solde après achat 72 différence 0
+PASSE : actif achat prématuré refusé 73
+PASSE : refus sans débit (290410634.075 / 290410634.075)
+PASSE : actif achat 73
+PASSE : actif solde après achat 73 différence 0
+PASSE : actif achat prématuré refusé 74
+PASSE : refus sans débit (315364219.95 / 315364219.95)
+PASSE : actif achat 74
+PASSE : actif solde après achat 74 différence 0
+PASSE : actif achat prématuré refusé 75
+PASSE : refus sans débit (4993370788.825 / 4993370788.825)
+PASSE : actif achat 75
+PASSE : actif solde après achat 75 différence 0
+PASSE : actif jalon tour3
+PASSE : actif achat prématuré refusé 76
+PASSE : refus sans débit (5257139139.575 / 5257139139.575)
+PASSE : actif achat 76
+PASSE : actif solde après achat 76 différence 0
+PASSE : actif achat prématuré refusé 77
+PASSE : refus sans débit (5607646768.575 / 5607646768.575)
+PASSE : actif achat 77
+PASSE : actif solde après achat 77 différence 0
+PASSE : actif achat prématuré refusé 78
+PASSE : refus sans débit (5911084861.45 / 5911084861.45)
+PASSE : actif achat 78
+PASSE : actif solde après achat 78 différence 0
+PASSE : actif achat prématuré refusé 79
+PASSE : refus sans débit (6283628521.325 / 6283628521.325)
+PASSE : actif achat 79
+PASSE : actif solde après achat 79 différence 0
+PASSE : actif achat prématuré refusé 80
+PASSE : refus sans débit (6640605731.7 / 6640605731.7)
+PASSE : actif achat 80
+PASSE : actif solde après achat 80 différence 0
+PASSE : actif achat prématuré refusé 81
+PASSE : refus sans débit (6948585421.075 / 6948585421.075)
+PASSE : actif achat 81
+PASSE : actif solde après achat 81 différence 0
+PASSE : actif achat prématuré refusé 82
+PASSE : refus sans débit (6904884635.04375 / 6904884635.04375)
+PASSE : actif achat 82
+PASSE : actif solde après achat 82 différence 0
+PASSE : actif achat prématuré refusé 83
+PASSE : refus sans débit (7323716972.575 / 7323716972.575)
+PASSE : actif achat 83
+PASSE : actif solde après achat 83 différence 0
+PASSE : actif achat prématuré refusé 84
+PASSE : refus sans débit (7890293577.10625 / 7890293577.10625)
+PASSE : actif achat 84
+PASSE : actif solde après achat 84 différence 0
+PASSE : actif achat prématuré refusé 85
+PASSE : refus sans débit (8204376593.325 / 8204376593.325)
+PASSE : actif achat 85
+PASSE : actif solde après achat 85 différence 0
+PASSE : actif achat prématuré refusé 86
+PASSE : refus sans débit (149959480509.2 / 149959480509.2)
+PASSE : actif achat 86
+PASSE : actif solde après achat 86 différence 0
+PASSE : actif achat prématuré refusé 87
+PASSE : refus sans débit (158114152030.1375 / 158114152030.1375)
+PASSE : actif achat 87
+PASSE : actif solde après achat 87 différence 0
+PASSE : actif achat prématuré refusé 88
+PASSE : refus sans débit (169606958280.29376 / 169606958280.29376)
+PASSE : actif achat 88
+PASSE : actif solde après achat 88 différence 0
+PASSE : actif achat prématuré refusé 89
+PASSE : refus sans débit (179725168203.10626 / 179725168203.10626)
+PASSE : actif achat 89
+PASSE : actif solde après achat 89 différence 0
+PASSE : actif achat prématuré refusé 90
+PASSE : refus sans débit (192637668783.10626 / 192637668783.10626)
+PASSE : actif achat 90
+PASSE : actif solde après achat 90 différence 0
+PASSE : actif achat prématuré refusé 91
+PASSE : refus sans débit (204049314191.7625 / 204049314191.7625)
+PASSE : actif achat 91
+PASSE : actif solde après achat 91 différence 0
+PASSE : actif achat prématuré refusé 92
+PASSE : refus sans débit (217630022926.2625 / 217630022926.2625)
+PASSE : actif achat 92
+PASSE : actif solde après achat 92 différence 0
+PASSE : actif achat prématuré refusé 93
+PASSE : refus sans débit (232610048161.825 / 232610048161.825)
+PASSE : actif achat 93
+PASSE : actif solde après achat 93 différence 0
+PASSE : actif achat prématuré refusé 94
+PASSE : refus sans débit (244046876985.7625 / 244046876985.7625)
+PASSE : actif achat 94
+PASSE : actif solde après achat 94 différence 0
+PASSE : actif achat prématuré refusé 95
+PASSE : refus sans débit (258349057477.3875 / 258349057477.3875)
+PASSE : actif achat 95
+PASSE : actif solde après achat 95 différence 0
+PASSE : actif achat prématuré refusé 96
+PASSE : refus sans débit (4494200826437.45 / 4494200826437.45)
+PASSE : actif achat 96
+PASSE : actif solde après achat 96 différence 0
+PASSE : actif achat prématuré refusé 97
+PASSE : refus sans débit (4773338440613.075 / 4773338440613.075)
+PASSE : actif achat 97
+PASSE : actif solde après achat 97 différence 0
+PASSE : actif achat prématuré refusé 98
+PASSE : refus sans débit (5076252416128.7 / 5076252416128.7)
+PASSE : actif achat 98
+PASSE : actif solde après achat 98 différence 0
+PASSE : actif achat prématuré refusé 99
+PASSE : refus sans débit (5430556082623.7 / 5430556082623.7)
+PASSE : actif achat 99
+PASSE : actif solde après achat 99 différence 0
+PASSE : actif achat prématuré refusé 100
+PASSE : refus sans débit (5762583104208.856 / 5762583104208.856)
+PASSE : actif achat 100
+PASSE : actif solde après achat 100 différence 0
+PASSE : actif achat prématuré refusé 101
+PASSE : refus sans débit (6049758073174.294 / 6049758073174.294)
+PASSE : actif achat 101
+PASSE : actif solde après achat 101 différence 0
+PASSE : actif achat prématuré refusé 102
+PASSE : refus sans débit (6463233355071.419 / 6463233355071.419)
+PASSE : actif achat 102
+PASSE : actif solde après achat 102 différence 0
+PASSE : actif achat prématuré refusé 103
+PASSE : refus sans débit (6912685559633.45 / 6912685559633.45)
+PASSE : actif achat 103
+PASSE : actif solde après achat 103 différence 0
+PASSE : actif achat prématuré refusé 104
+PASSE : refus sans débit (7273632473193.013 / 7273632473193.013)
+PASSE : actif achat 104
+PASSE : actif solde après achat 104 différence 0
+PASSE : actif achat prématuré refusé 105
+PASSE : refus sans débit (7909317542592.263 / 7909317542592.263)
+PASSE : actif achat 105
+PASSE : actif solde après achat 105 différence 0
+PASSE : actif première fin de contenu comparée au simulateur (5829 / 5829)
+PASSE : actif tous les achats (105 / 105)
+PASSE : lent achat prématuré refusé 1
+PASSE : refus sans débit (9.75 / 9.75)
+PASSE : lent achat 1
+PASSE : lent solde après achat 1 différence 0
+PASSE : lent achat prématuré refusé 2
+PASSE : refus sans débit (11.787499999999998 / 11.787499999999998)
+PASSE : lent achat 2
+PASSE : lent solde après achat 2 différence 1.7763568394002505e-15
+PASSE : lent achat prématuré refusé 3
+PASSE : refus sans débit (14.250000000000002 / 14.250000000000002)
+PASSE : lent achat 3
+PASSE : lent solde après achat 3 différence 1.7763568394002505e-15
+PASSE : lent achat prématuré refusé 4
+PASSE : refus sans débit (17.6625 / 17.6625)
+PASSE : lent achat 4
+PASSE : lent solde après achat 4 différence 3.552713678800501e-15
+PASSE : lent achat prématuré refusé 5
+PASSE : refus sans débit (20.200000000000006 / 20.200000000000006)
+PASSE : lent achat 5
+PASSE : lent solde après achat 5 différence 0
+PASSE : lent achat prématuré refusé 6
+PASSE : refus sans débit (89.5625 / 89.5625)
+PASSE : lent achat 6
+PASSE : lent solde après achat 6 différence 0
+PASSE : lent achat prématuré refusé 7
+PASSE : refus sans débit (107.33749999999995 / 107.33749999999995)
+PASSE : lent achat 7
+PASSE : lent solde après achat 7 différence 0
+PASSE : lent achat prématuré refusé 8
+PASSE : refus sans débit (129.77499999999998 / 129.77499999999998)
+PASSE : lent achat 8
+PASSE : lent solde après achat 8 différence 0
+PASSE : lent achat prématuré refusé 9
+PASSE : refus sans débit (36.98749999999997 / 36.98749999999997)
+PASSE : lent achat 9
+PASSE : lent solde après achat 9 différence 0
+PASSE : lent achat prématuré refusé 10
+PASSE : refus sans débit (148.92499999999993 / 148.92499999999993)
+PASSE : lent achat 10
+PASSE : lent solde après achat 10 différence 0
+PASSE : lent achat prématuré refusé 11
+PASSE : refus sans débit (22.749999999999922 / 22.749999999999922)
+PASSE : lent achat 11
+PASSE : lent solde après achat 11 différence 0
+PASSE : lent achat prématuré refusé 12
+PASSE : refus sans débit (183.6249999999999 / 183.6249999999999)
+PASSE : lent achat 12
+PASSE : lent solde après achat 12 différence 0
+PASSE : lent achat 13
+PASSE : lent solde après achat 13 différence 0
+PASSE : lent achat prématuré refusé 14
+PASSE : refus sans débit (218.39999999999992 / 218.39999999999992)
+PASSE : lent achat 14
+PASSE : lent solde après achat 14 différence 0
+PASSE : lent achat prématuré refusé 15
+PASSE : refus sans débit (789.0749999999999 / 789.0749999999999)
+PASSE : lent achat 15
+PASSE : lent solde après achat 15 différence 0
+PASSE : lent jalon contrats
+PASSE : lent achat prématuré refusé 16
+PASSE : refus sans débit (910.4000000000003 / 910.4000000000003)
+PASSE : lent achat 16
+PASSE : lent solde après achat 16 différence 1.1368683772161603e-13
+PASSE : lent achat prématuré refusé 17
+PASSE : refus sans débit (1089.95 / 1089.95)
+PASSE : lent achat 17
+PASSE : lent solde après achat 17 différence 2.2737367544323206e-13
+PASSE : lent achat prématuré refusé 18
+PASSE : refus sans débit (1229.375 / 1229.375)
+PASSE : lent achat 18
+PASSE : lent solde après achat 18 différence 2.2737367544323206e-13
+PASSE : lent achat prématuré refusé 19
+PASSE : refus sans débit (223.49999999999991 / 223.49999999999991)
+PASSE : lent achat 19
+PASSE : lent solde après achat 19 différence 2.2737367544323206e-13
+PASSE : lent achat 20
+PASSE : lent solde après achat 20 différence 1.9895196601282805e-13
+PASSE : lent achat prématuré refusé 21
+PASSE : refus sans débit (1466.7000000000003 / 1466.7000000000003)
+PASSE : lent achat 21
+PASSE : lent solde après achat 21 différence 2.2737367544323206e-13
+PASSE : lent achat prématuré refusé 22
+PASSE : refus sans débit (321.2000000000004 / 321.2000000000004)
+PASSE : lent achat 22
+PASSE : lent solde après achat 22 différence 2.2737367544323206e-13
+PASSE : lent achat prématuré refusé 23
+PASSE : refus sans débit (1729.0999999999997 / 1729.0999999999997)
+PASSE : lent achat 23
+PASSE : lent solde après achat 23 différence 2.2737367544323206e-13
+PASSE : lent achat 24
+PASSE : lent solde après achat 24 différence 2.2737367544323206e-13
+PASSE : lent achat prématuré refusé 25
+PASSE : refus sans débit (6969.599999999993 / 6969.599999999993)
+PASSE : lent achat 25
+PASSE : lent solde après achat 25 différence 9.094947017729282e-13
+PASSE : lent achat prématuré refusé 26
+PASSE : refus sans débit (668.0249999999927 / 668.0249999999927)
+PASSE : lent achat 26
+PASSE : lent solde après achat 26 différence 9.094947017729282e-13
+PASSE : lent achat prématuré refusé 27
+PASSE : refus sans débit (7912.524999999998 / 7912.524999999998)
+PASSE : lent achat 27
+PASSE : lent solde après achat 27 différence 0
+PASSE : lent achat prématuré refusé 28
+PASSE : refus sans débit (2290.9749999999976 / 2290.9749999999976)
+PASSE : lent achat 28
+PASSE : lent solde après achat 28 différence 0
+PASSE : lent achat 29
+PASSE : lent solde après achat 29 différence 0
+PASSE : lent achat 30
+PASSE : lent solde après achat 30 différence 0
+PASSE : lent achat prématuré refusé 31
+PASSE : refus sans débit (8890.649999999996 / 8890.649999999996)
+PASSE : lent achat 31
+PASSE : lent solde après achat 31 différence 0
+PASSE : lent achat prématuré refusé 32
+PASSE : refus sans débit (10104.774999999996 / 10104.774999999996)
+PASSE : lent achat 32
+PASSE : lent solde après achat 32 différence 1.8189894035458565e-12
+PASSE : lent achat prématuré refusé 33
+PASSE : refus sans débit (1774.462499999997 / 1774.462499999997)
+PASSE : lent achat 33
+PASSE : lent solde après achat 33 différence 1.8189894035458565e-12
+PASSE : lent achat prématuré refusé 34
+PASSE : refus sans débit (11460.037499999995 / 11460.037499999995)
+PASSE : lent achat 34
+PASSE : lent solde après achat 34 différence 3.637978807091713e-12
+PASSE : lent achat prématuré refusé 35
+PASSE : refus sans débit (13459.412499999995 / 13459.412499999995)
+PASSE : lent achat 35
+PASSE : lent solde après achat 35 différence 3.637978807091713e-12
+PASSE : lent achat prématuré refusé 36
+PASSE : refus sans débit (1799.224999999995 / 1799.224999999995)
+PASSE : lent achat 36
+PASSE : lent solde après achat 36 différence 3.637978807091713e-12
+PASSE : lent achat 37
+PASSE : lent solde après achat 37 différence 3.637978807091713e-12
+PASSE : lent achat prématuré refusé 38
+PASSE : refus sans débit (15337.89999999999 / 15337.89999999999)
+PASSE : lent achat 38
+PASSE : lent solde après achat 38 différence 3.637978807091713e-12
+PASSE : lent achat prématuré refusé 39
+PASSE : refus sans débit (2108.9749999999904 / 2108.9749999999904)
+PASSE : lent achat 39
+PASSE : lent solde après achat 39 différence 3.637978807091713e-12
+PASSE : lent achat prématuré refusé 40
+PASSE : refus sans débit (17118.974999999995 / 17118.974999999995)
+PASSE : lent achat 40
+PASSE : lent solde après achat 40 différence 3.637978807091713e-12
+PASSE : lent achat prématuré refusé 41
+PASSE : refus sans débit (19506.775000000005 / 19506.775000000005)
+PASSE : lent achat 41
+PASSE : lent solde après achat 41 différence 3.637978807091713e-12
+PASSE : lent achat prématuré refusé 42
+PASSE : refus sans débit (3177.0750000000057 / 3177.0750000000057)
+PASSE : lent achat 42
+PASSE : lent solde après achat 42 différence 4.092726157978177e-12
+PASSE : lent achat prématuré refusé 43
+PASSE : refus sans débit (22549.275000000005 / 22549.275000000005)
+PASSE : lent achat 43
+PASSE : lent solde après achat 43 différence 3.637978807091713e-12
+PASSE : lent achat prématuré refusé 44
+PASSE : refus sans débit (199441.02500000002 / 199441.02500000002)
+PASSE : lent achat 44
+PASSE : lent solde après achat 44 différence 0
+PASSE : lent jalon tour2
+PASSE : lent achat prématuré refusé 45
+PASSE : refus sans débit (225161.15000000002 / 225161.15000000002)
+PASSE : lent achat 45
+PASSE : lent solde après achat 45 différence 0
+PASSE : lent achat prématuré refusé 46
+PASSE : refus sans débit (254742.15000000002 / 254742.15000000002)
+PASSE : lent achat 46
+PASSE : lent solde après achat 46 différence 0
+PASSE : lent achat prématuré refusé 47
+PASSE : refus sans débit (349972.525 / 349972.525)
+PASSE : lent achat 47
+PASSE : lent solde après achat 47 différence 0
+PASSE : lent achat prématuré refusé 48
+PASSE : refus sans débit (282177.7125 / 282177.7125)
+PASSE : lent achat 48
+PASSE : lent solde après achat 48 différence 0
+PASSE : lent achat prématuré refusé 49
+PASSE : refus sans débit (320003.7125 / 320003.7125)
+PASSE : lent achat 49
+PASSE : lent solde après achat 49 différence 0
+PASSE : lent achat prématuré refusé 50
+PASSE : refus sans débit (359685.5875 / 359685.5875)
+PASSE : lent achat 50
+PASSE : lent solde après achat 50 différence 0
+PASSE : lent achat prématuré refusé 51
+PASSE : refus sans débit (404884.0875 / 404884.0875)
+PASSE : lent achat 51
+PASSE : lent solde après achat 51 différence 0
+PASSE : lent achat prématuré refusé 52
+PASSE : refus sans débit (457443.15 / 457443.15)
+PASSE : lent achat 52
+PASSE : lent solde après achat 52 différence 0
+PASSE : lent achat prématuré refusé 53
+PASSE : refus sans débit (529873.7125 / 529873.7125)
+PASSE : lent achat 53
+PASSE : lent solde après achat 53 différence 0
+PASSE : lent achat prématuré refusé 54
+PASSE : refus sans débit (593554.5875 / 593554.5875)
+PASSE : lent achat 54
+PASSE : lent solde après achat 54 différence 0
+PASSE : lent achat prématuré refusé 55
+PASSE : refus sans débit (5587027.65 / 5587027.65)
+PASSE : lent achat 55
+PASSE : lent solde après achat 55 différence 0
+PASSE : lent achat prématuré refusé 56
+PASSE : refus sans débit (6127136.8375 / 6127136.8375)
+PASSE : lent achat 56
+PASSE : lent solde après achat 56 différence 0
+PASSE : lent achat prématuré refusé 57
+PASSE : refus sans débit (6628151.025 / 6628151.025)
+PASSE : lent achat 57
+PASSE : lent solde après achat 57 différence 0
+PASSE : lent achat prématuré refusé 58
+PASSE : refus sans débit (7309597.9 / 7309597.9)
+PASSE : lent achat 58
+PASSE : lent solde après achat 58 différence 0
+PASSE : lent achat prématuré refusé 59
+PASSE : refus sans débit (8173802.2125 / 8173802.2125)
+PASSE : lent achat 59
+PASSE : lent solde après achat 59 différence 0
+PASSE : lent achat prématuré refusé 60
+PASSE : refus sans débit (8826052.9 / 8826052.9)
+PASSE : lent achat 60
+PASSE : lent solde après achat 60 différence 0
+PASSE : lent achat prématuré refusé 61
+PASSE : refus sans débit (9847922.2125 / 9847922.2125)
+PASSE : lent achat 61
+PASSE : lent solde après achat 61 différence 0
+PASSE : lent achat prématuré refusé 62
+PASSE : refus sans débit (10770221.2125 / 10770221.2125)
+PASSE : lent achat 62
+PASSE : lent solde après achat 62 différence 0
+PASSE : lent achat prématuré refusé 63
+PASSE : refus sans débit (11979597.275 / 11979597.275)
+PASSE : lent achat 63
+PASSE : lent solde après achat 63 différence 0
+PASSE : lent achat prématuré refusé 64
+PASSE : refus sans débit (12930130.9625 / 12930130.9625)
+PASSE : lent achat 64
+PASSE : lent solde après achat 64 différence 0
+PASSE : lent achat prématuré refusé 65
+PASSE : refus sans débit (164824407.9 / 164824407.9)
+PASSE : lent achat 65
+PASSE : lent solde après achat 65 différence 0
+PASSE : lent achat prématuré refusé 66
+PASSE : refus sans débit (176001997.4625 / 176001997.4625)
+PASSE : lent achat 66
+PASSE : lent solde après achat 66 différence 0
+PASSE : lent achat prématuré refusé 67
+PASSE : refus sans débit (189587147.5875 / 189587147.5875)
+PASSE : lent achat 67
+PASSE : lent solde après achat 67 différence 0
+PASSE : lent achat prématuré refusé 68
+PASSE : refus sans débit (203304707.775 / 203304707.775)
+PASSE : lent achat 68
+PASSE : lent solde après achat 68 différence 0
+PASSE : lent achat prématuré refusé 69
+PASSE : refus sans débit (216685664.3375 / 216685664.3375)
+PASSE : lent achat 69
+PASSE : lent solde après achat 69 différence 0
+PASSE : lent achat prématuré refusé 70
+PASSE : refus sans débit (232857955.4 / 232857955.4)
+PASSE : lent achat 70
+PASSE : lent solde après achat 70 différence 0
+PASSE : lent achat prématuré refusé 71
+PASSE : refus sans débit (251181571.775 / 251181571.775)
+PASSE : lent achat 71
+PASSE : lent solde après achat 71 différence 0
+PASSE : lent achat prématuré refusé 72
+PASSE : refus sans débit (269054280.4625 / 269054280.4625)
+PASSE : lent achat 72
+PASSE : lent solde après achat 72 différence 0
+PASSE : lent achat prématuré refusé 73
+PASSE : refus sans débit (287019384.275 / 287019384.275)
+PASSE : lent achat 73
+PASSE : lent solde après achat 73 différence 0
+PASSE : lent achat prématuré refusé 74
+PASSE : refus sans débit (312446256.15 / 312446256.15)
+PASSE : lent achat 74
+PASSE : lent solde après achat 74 différence 0
+PASSE : lent achat prématuré refusé 75
+PASSE : refus sans débit (4995193236.2125 / 4995193236.2125)
+PASSE : lent achat 75
+PASSE : lent solde après achat 75 différence 0
+PASSE : lent jalon tour3
+PASSE : lent achat prématuré refusé 76
+PASSE : refus sans débit (5276419279.025 / 5276419279.025)
+PASSE : lent achat 76
+PASSE : lent solde après achat 76 différence 0
+PASSE : lent achat prématuré refusé 77
+PASSE : refus sans débit (5599760904.7125 / 5599760904.7125)
+PASSE : lent achat 77
+PASSE : lent solde après achat 77 différence 0
+PASSE : lent achat prématuré refusé 78
+PASSE : refus sans débit (5905104326.0875 / 5905104326.0875)
+PASSE : lent achat 78
+PASSE : lent solde après achat 78 différence 0
+PASSE : lent achat prématuré refusé 79
+PASSE : refus sans débit (6227381253.8375 / 6227381253.8375)
+PASSE : lent achat 79
+PASSE : lent solde après achat 79 différence 0
+PASSE : lent achat prématuré refusé 80
+PASSE : refus sans débit (6943138641.15 / 6943138641.15)
+PASSE : lent achat 80
+PASSE : lent solde après achat 80 différence 0
+PASSE : lent achat prématuré refusé 81
+PASSE : refus sans débit (6632939156.103125 / 6632939156.103125)
+PASSE : lent achat 81
+PASSE : lent solde après achat 81 différence 0
+PASSE : lent achat prématuré refusé 82
+PASSE : refus sans débit (7091609970.290625 / 7091609970.290625)
+PASSE : lent achat 82
+PASSE : lent solde après achat 82 différence 0
+PASSE : lent achat prématuré refusé 83
+PASSE : refus sans débit (7331124365.790625 / 7331124365.790625)
+PASSE : lent achat 83
+PASSE : lent solde après achat 83 différence 0
+PASSE : lent achat prématuré refusé 84
+PASSE : refus sans débit (7832468336.80625 / 7832468336.80625)
+PASSE : lent achat 84
+PASSE : lent solde après achat 84 différence 0
+PASSE : lent achat prématuré refusé 85
+PASSE : refus sans débit (8329794793.65 / 8329794793.65)
+PASSE : lent achat 85
+PASSE : lent solde après achat 85 différence 0
+PASSE : lent achat prématuré refusé 86
+PASSE : refus sans débit (149690723572.72812 / 149690723572.72812)
+PASSE : lent achat 86
+PASSE : lent solde après achat 86 différence 0
+PASSE : lent achat prématuré refusé 87
+PASSE : refus sans débit (158337070168.82187 / 158337070168.82187)
+PASSE : lent achat 87
+PASSE : lent solde après achat 87 différence 0
+PASSE : lent achat prématuré refusé 88
+PASSE : refus sans débit (168811382211.55624 / 168811382211.55624)
+PASSE : lent achat 88
+PASSE : lent solde après achat 88 différence 0
+PASSE : lent achat prématuré refusé 89
+PASSE : refus sans débit (179635111786.16562 / 179635111786.16562)
+PASSE : lent achat 89
+PASSE : lent solde après achat 89 différence 0
+PASSE : lent achat prématuré refusé 90
+PASSE : refus sans débit (190733533568.19687 / 190733533568.19687)
+PASSE : lent achat 90
+PASSE : lent solde après achat 90 différence 0
+PASSE : lent achat prématuré refusé 91
+PASSE : refus sans débit (203189891527.47812 / 203189891527.47812)
+PASSE : lent achat 91
+PASSE : lent solde après achat 91 différence 0
+PASSE : lent achat prématuré refusé 92
+PASSE : refus sans débit (218600629759.24374 / 218600629759.24374)
+PASSE : lent achat 92
+PASSE : lent solde après achat 92 différence 0
+PASSE : lent achat prématuré refusé 93
+PASSE : refus sans débit (232346259278.32187 / 232346259278.32187)
+PASSE : lent achat 93
+PASSE : lent solde après achat 93 différence 0
+PASSE : lent achat prématuré refusé 94
+PASSE : refus sans débit (247162605789.36874 / 247162605789.36874)
+PASSE : lent achat 94
+PASSE : lent solde après achat 94 différence 0
+PASSE : lent achat prématuré refusé 95
+PASSE : refus sans débit (257840010669.9 / 257840010669.9)
+PASSE : lent achat 95
+PASSE : lent solde après achat 95 différence 0
+PASSE : lent achat prématuré refusé 96
+PASSE : refus sans débit (4494571336309.26 / 4494571336309.26)
+PASSE : lent achat 96
+PASSE : lent solde après achat 96 différence 0
+PASSE : lent achat prématuré refusé 97
+PASSE : refus sans débit (4763167785990.51 / 4763167785990.51)
+PASSE : lent achat 97
+PASSE : lent solde après achat 97 différence 0
+PASSE : lent achat prématuré refusé 98
+PASSE : refus sans débit (5064121986777.932 / 5064121986777.932)
+PASSE : lent achat 98
+PASSE : lent solde après achat 98 différence 0
+PASSE : lent achat prématuré refusé 99
+PASSE : refus sans débit (5380097698522.775 / 5380097698522.775)
+PASSE : lent achat 99
+PASSE : lent solde après achat 99 différence 0
+PASSE : lent achat prématuré refusé 100
+PASSE : refus sans débit (5753079515299.494 / 5753079515299.494)
+PASSE : lent achat 100
+PASSE : lent solde après achat 100 différence 0
+PASSE : lent achat prématuré refusé 101
+PASSE : refus sans débit (6154460886784.463 / 6154460886784.463)
+PASSE : lent achat 101
+PASSE : lent solde après achat 101 différence 0
+PASSE : lent achat prématuré refusé 102
+PASSE : refus sans débit (6490463718839.088 / 6490463718839.088)
+PASSE : lent achat 102
+PASSE : lent solde après achat 102 différence 0
+PASSE : lent achat prématuré refusé 103
+PASSE : refus sans débit (6900664549355.338 / 6900664549355.338)
+PASSE : lent achat 103
+PASSE : lent solde après achat 103 différence 0
+PASSE : lent achat prématuré refusé 104
+PASSE : refus sans débit (7317013685326.072 / 7317013685326.072)
+PASSE : lent achat 104
+PASSE : lent solde après achat 104 différence 0
+PASSE : lent achat prématuré refusé 105
+PASSE : refus sans débit (7923953374774.463 / 7923953374774.463)
+PASSE : lent achat 105
+PASSE : lent solde après achat 105 différence 0
+PASSE : lent première fin de contenu comparée au simulateur (6421 / 6421)
+PASSE : lent tous les achats (105 / 105)
+PASSE : scénario terminé
+PASSE : remotes.test.luau
+[PASSE2 Monde 0.000] construction 14
+PASSE : VitreFinie mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : VitreFinie mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : VitreFinie mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : VitreFinie mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : VitreFinie mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : VitreFinie mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Acheter mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Acheter mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Acheter mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Acheter mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Acheter mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Acheter mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Action mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Action mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Action mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Action mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Action mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Action mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Etat mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Etat mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Etat mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Etat mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Etat mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Etat mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Effet mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Effet mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Effet mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Effet mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Effet mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : Effet mauvais arguments sans crédit (0 / 0)
+PASSE : tour intacte (0 / 0)
+PASSE : cinq achats par seconde (5 / 5)
+PASSE : hors nacelle refusé (9925.25 / 9925.25)
+PASSE : troisième action refusée malgré montée possible (place / place)
+PASSE : montée acceptée après expiration de la cadence (tour / tour)
+PASSE : action de test inerte (false / false)
+PASSE : action de test inerte (false / false)
+PASSE : action de test inerte (false / false)
+PASSE : action de test inerte (false / false)
+PASSE : action de test inerte (false / false)
+PASSE : action de test inerte (false / false)
+PASSE : action de test inerte (false / false)
+PASSE : action de test inerte (false / false)
+PASSE : joueur fictif inerte (nil / nil)
+PASSE : profil de test inaccessible (nil / nil)
+PASSE : solde intact hors Studio (9926.5 / 9926.5)
+PASSE : horloge intacte hors Studio (3 / 3)
+PASSE : scénario terminé
+PASSE : revue-d1.test.luau
+PASSE : D1 attribution protegee a dix secondes (nil / nil)
+PASSE : D1 reservation abandonnee recuperee
+PASSE : D1 ancienne attribution refusee
+PASSE : scénario terminé
+PASSE : revue-d2.test.luau
+PASSE : D2 premier visiteur
+PASSE : D2 deuxieme visiteur refuse
+PASSE : D2 retour proprietaire garanti
+PASSE : scénario terminé
+PASSE : revue-d3.test.luau
+PASSE : D3 debut attente
+PASSE : D3 avant dix secondes
+PASSE : D3 stock disponible a dix secondes
+PASSE : D3 stock cent vitres (100 / 100)
+PASSE : D3 etages deja laves du toit (381 / 381)
+PASSE : D3 zone conservee au retour (381 / 381)
+PASSE : scénario terminé
+PASSE : revue-d4.test.luau
+[PASSE2 Monde 0.000] construction 14
+PASSE : D4 profil incoherent isole (donnees_indisponibles / donnees_indisponibles)
+PASSE : D4 boucle des autres joueurs continue
+PASSE : scénario terminé
+PASSE : social.test.luau
+PASSE : premiere rangee requise
+PASSE : dernier arrive rejoint
+PASSE : premier appui reserve la place
+PASSE : vitres distinctes
+PASSE : proprietaire lave
+PASSE : visiteur lave
+PASSE : mousse 25 pourcent
+PASSE : pourboire sans mousse
+PASSE : temps effectif sans double compte
+PASSE : borne partenaire (300 / 300)
+PASSE : mousse visible au quota
+PASSE : aucun bonus apres quota (26.25 / 26.25)
+PASSE : M10 prorata sous borne
+PASSE : au dessus borne aucun pourboire
+PASSE : retour propre tour
+PASSE : ancien arrive sans bouton
+PASSE : troisieme partenaire
+PASSE : M11 voyage duo
+PASSE : proprietaire devient visiteur (table: 0x00000198e98e6420 / table: 0x00000198e98e6420)
+PASSE : rejeu voyage refuse sur tour sale
+PASSE : M13 visiteur ramene (table: 0x00000198e98e7080 / table: 0x00000198e98e7080)
+PASSE : proprietaire quitte (table: 0x00000198e98e6420 / table: 0x00000198e98e6420)
+PASSE : nouveau jour UTC (0 / 0)
+PASSE : borne mousse mousse_s599.999
+PASSE : borne mousse mousse_s600.001
+PASSE : borne mousse partenaire299.999
+PASSE : borne mousse partenaire300.001
+PASSE : borne pourboire 9.999:0
+PASSE : borne pourboire 10.001:0
+PASSE : borne pourboire 0:4.999
+PASSE : borne pourboire 0:5.001
+PASSE : hausse R ne restaure aucun quota
+PASSE : quotas persistables
+PASSE : borne distante refusee
+PASSE : borne proche attestee
+PASSE : scénario terminé
+PASSE : suivi.test.luau
+[PASSE2 Monde 0.000] construction 14
+PASSE : arrivee compte
+PASSE : action compte
+PASSE : achat compte
+PASSE : durees comptees
+PASSE : persistance arrivee
+PASSE : persistance premiere_action
+PASSE : persistance premier_achat
+PASSE : persistance min_3
+PASSE : persistance min_10
+PASSE : invalide refuse
+PASSE : retour ecrit
+PASSE : magasin retours
+PASSE : unique arrivee (1 / 1)
+PASSE : unique premiere_action (1 / 1)
+PASSE : unique premier_achat (1 / 1)
+PASSE : unique min_3 (1 / 1)
+PASSE : unique min_10 (1 / 1)
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : compteurs anonymes
+PASSE : scénario terminé
+PASSE : textes.test.luau
+PASSE : anglais non vide donnees_indisponibles
+PASSE : français non vide donnees_indisponibles
+PASSE : anglais non vide objectif_amelioration
+PASSE : français non vide objectif_amelioration
+PASSE : anglais non vide achat_impossible
+PASSE : français non vide achat_impossible
+PASSE : anglais non vide a4
+PASSE : français non vide a4
+PASSE : anglais non vide palier
+PASSE : français non vide palier
+PASSE : anglais non vide hors_ligne
+PASSE : français non vide hors_ligne
+PASSE : anglais non vide a2
+PASSE : français non vide a2
+PASSE : anglais non vide descendre
+PASSE : français non vide descendre
+PASSE : anglais non vide achat_verrouille
+PASSE : français non vide achat_verrouille
+PASSE : anglais non vide achat_amelioration
+PASSE : français non vide achat_amelioration
+PASSE : anglais non vide pieces
+PASSE : français non vide pieces
+PASSE : anglais non vide r5
+PASSE : français non vide r5
+PASSE : anglais non vide chez_visiteur
+PASSE : français non vide chez_visiteur
+PASSE : anglais non vide frotte
+PASSE : français non vide frotte
+PASSE : anglais non vide r1
+PASSE : français non vide r1
+PASSE : anglais non vide r3
+PASSE : français non vide r3
+PASSE : anglais non vide mousse
+PASSE : français non vide mousse
+PASSE : anglais non vide objectif_demenager
+PASSE : français non vide objectif_demenager
+PASSE : anglais non vide achat_segment
+PASSE : français non vide achat_segment
+PASSE : anglais non vide contrat
+PASSE : français non vide contrat
+PASSE : anglais non vide a3
+PASSE : français non vide a3
+PASSE : anglais non vide a5
+PASSE : français non vide a5
+PASSE : anglais non vide r8
+PASSE : français non vide r8
+PASSE : anglais non vide demenager
+PASSE : français non vide demenager
+PASSE : anglais non vide etage
+PASSE : français non vide etage
+PASSE : anglais non vide etincelante
+PASSE : français non vide etincelante
+PASSE : anglais non vide a1
+PASSE : français non vide a1
+PASSE : anglais non vide objectif_robot
+PASSE : français non vide objectif_robot
+PASSE : anglais non vide r10
+PASSE : français non vide r10
+PASSE : anglais non vide r9
+PASSE : français non vide r9
+PASSE : anglais non vide r7
+PASSE : français non vide r7
+PASSE : anglais non vide r6
+PASSE : français non vide r6
+PASSE : anglais non vide achat_robot
+PASSE : français non vide achat_robot
+PASSE : anglais non vide mousse_quota
+PASSE : français non vide mousse_quota
+PASSE : anglais non vide rejoindre
+PASSE : français non vide rejoindre
+PASSE : anglais non vide mousse_quota_atteint
+PASSE : français non vide mousse_quota_atteint
+PASSE : anglais non vide pigeons
+PASSE : français non vide pigeons
+PASSE : anglais non vide r4
+PASSE : français non vide r4
+PASSE : anglais non vide main
+PASSE : français non vide main
+PASSE : anglais non vide monter
+PASSE : français non vide monter
+PASSE : anglais non vide objectif_chantier
+PASSE : français non vide objectif_chantier
+PASSE : anglais non vide objectif_segment
+PASSE : français non vide objectif_segment
+PASSE : anglais non vide r2
+PASSE : français non vide r2
+PASSE : anglais non vide revenu
+PASSE : français non vide revenu
+PASSE : source anglaise donnees_indisponibles
+PASSE : source anglaise objectif_amelioration
+PASSE : source anglaise achat_impossible
+PASSE : source anglaise a4
+PASSE : source anglaise palier
+PASSE : source anglaise hors_ligne
+PASSE : source anglaise a2
+PASSE : source anglaise descendre
+PASSE : source anglaise achat_verrouille
+PASSE : source anglaise achat_amelioration
+PASSE : source anglaise pieces
+PASSE : source anglaise r5
+PASSE : source anglaise chez_visiteur
+PASSE : source anglaise frotte
+PASSE : source anglaise r1
+PASSE : source anglaise r3
+PASSE : source anglaise mousse
+PASSE : source anglaise objectif_demenager
+PASSE : source anglaise achat_segment
+PASSE : source anglaise contrat
+PASSE : source anglaise a3
+PASSE : source anglaise a5
+PASSE : source anglaise r8
+PASSE : source anglaise demenager
+PASSE : source anglaise etage
+PASSE : source anglaise etincelante
+PASSE : source anglaise a1
+PASSE : source anglaise objectif_robot
+PASSE : source anglaise r10
+PASSE : source anglaise r9
+PASSE : source anglaise r7
+PASSE : source anglaise r6
+PASSE : source anglaise achat_robot
+PASSE : source anglaise mousse_quota
+PASSE : source anglaise rejoindre
+PASSE : source anglaise mousse_quota_atteint
+PASSE : source anglaise pigeons
+PASSE : source anglaise r4
+PASSE : source anglaise main
+PASSE : source anglaise monter
+PASSE : source anglaise objectif_chantier
+PASSE : source anglaise objectif_segment
+PASSE : source anglaise r2
+PASSE : source anglaise revenu
+PASSE : clé serveur objectif_demenager
+PASSE : traduction serveur en:objectif_demenager
+PASSE : traduction serveur fr:objectif_demenager
+PASSE : clé serveur objectif_robot
+PASSE : traduction serveur en:objectif_robot
+PASSE : traduction serveur fr:objectif_robot
+PASSE : clé serveur objectif_amelioration
+PASSE : traduction serveur en:objectif_amelioration
+PASSE : traduction serveur fr:objectif_amelioration
+PASSE : clé serveur objectif_segment
+PASSE : traduction serveur en:objectif_segment
+PASSE : traduction serveur fr:objectif_segment
+PASSE : clé serveur objectif_chantier
+PASSE : traduction serveur en:objectif_chantier
+PASSE : traduction serveur fr:objectif_chantier
+PASSE : clé serveur mousse_quota_atteint
+PASSE : traduction serveur en:mousse_quota_atteint
+PASSE : traduction serveur fr:mousse_quota_atteint
+PASSE : clé serveur donnees_indisponibles
+PASSE : traduction serveur en:donnees_indisponibles
+PASSE : traduction serveur fr:donnees_indisponibles
+PASSE : clé serveur achat_verrouille
+PASSE : traduction serveur en:achat_verrouille
+PASSE : traduction serveur fr:achat_verrouille
+PASSE : clé serveur achat_impossible
+PASSE : traduction serveur en:achat_impossible
+PASSE : traduction serveur fr:achat_impossible
+PASSE : avant action <= huit mots en:frotte
+PASSE : avant action <= huit mots en:main
+PASSE : avant action <= huit mots en:pieces
+PASSE : avant action <= huit mots en:revenu
+PASSE : avant action <= huit mots en:etage
+PASSE : avant action <= huit mots en:descendre
+PASSE : avant action <= huit mots en:objectif_robot
+PASSE : avant action <= huit mots en:achat_robot
+PASSE : avant action <= huit mots en:r1
+PASSE : avant action <= huit mots fr:frotte
+PASSE : avant action <= huit mots fr:main
+PASSE : avant action <= huit mots fr:pieces
+PASSE : avant action <= huit mots fr:revenu
+PASSE : avant action <= huit mots fr:etage
+PASSE : avant action <= huit mots fr:descendre
+PASSE : avant action <= huit mots fr:objectif_robot
+PASSE : avant action <= huit mots fr:achat_robot
+PASSE : avant action <= huit mots fr:r1
+PASSE : repli anglais (Rub! / Rub!)
+PASSE : repli clé (inconnue / inconnue)
+PASSE : français et accent (12 pièces / 12 pièces)
+PASSE : scénario terminé
+PASSE : vitres.test.luau
+PASSE : deux laveurs distincts
+PASSE : trop tôt refusé
+PASSE : visiteur finit en premier
+PASSE : masque désordonné exact (2 / 2)
+PASSE : gain au laveur (1 / 1)
+PASSE : aucun gain propriétaire dans ce lot (0 / 0)
+PASSE : propriétaire finit
+PASSE : masque composé (3 / 3)
+PASSE : déjà propre refusée
+PASSE : rejeu sans gain (1 / 1)
+PASSE : reprise en rangée (3 / 3)
+PASSE : reprise vitre sale suivante (3 / 3)
+PASSE : budget contrat 1
+PASSE : budget contrat 2
+PASSE : budget contrat 3
+PASSE : budget contrat 4
+PASSE : budget contrat 5
+PASSE : budget contrat 6
+PASSE : budget contrat 7
+PASSE : budget contrat 8
+PASSE : budget contrat 9
+PASSE : budget contrat 10
+PASSE : budget contrat 11
+PASSE : budget contrat 12
+PASSE : budget contrat 13
+PASSE : budget contrat 14
+PASSE : budget contrat 15
+PASSE : budget contrat 16
+PASSE : budget contrat 17
+PASSE : budget contrat 18
+PASSE : budget contrat 19
+PASSE : budget contrat 20
+PASSE : budget contrat 21
+PASSE : budget contrat 22
+PASSE : budget contrat 23
+PASSE : budget contrat 24
+PASSE : budget contrat 25
+PASSE : budget contrat 26
+PASSE : budget contrat 27
+PASSE : budget contrat 28
+PASSE : budget contrat 29
+PASSE : budget contrat 30
+PASSE : budget contrat 31
+PASSE : budget contrat 32
+PASSE : budget contrat 33
+PASSE : budget contrat 34
+PASSE : budget contrat 35
+PASSE : budget contrat 36
+PASSE : budget contrat 37
+PASSE : budget contrat 38
+PASSE : budget contrat 39
+PASSE : quarantième vitre acceptée
+PASSE : 41e vitre refusée malgré durée valide sur autre tour
+PASSE : budget refusé sans gain (1 / 1)
+PASSE : budget refusé sans masque (0 / 0)
+PASSE : reconnexion ne restaure pas le budget du compte
+PASSE : fenêtre glissante expirée
+PASSE : place début
+PASSE : place annulation
+PASSE : place neuf secondes
+PASSE : place dix secondes
+PASSE : zone de 100 vitres (100 / 100)
+PASSE : hauteur conservée (120 / 120)
+PASSE : vingt étages du haut (101 / 101)
+PASSE : contrat début
+PASSE : contrat annulation
+PASSE : contrat neuf secondes
+PASSE : contrat dix secondes
+PASSE : zone de 100 vitres (100 / 100)
+PASSE : hauteur conservée (120 / 120)
+PASSE : vingt étages du haut (101 / 101)
+PASSE : deconnexion début
+PASSE : deconnexion annulation
+PASSE : deconnexion neuf secondes
+PASSE : deconnexion dix secondes
+PASSE : zone de 100 vitres (100 / 100)
+PASSE : hauteur conservée (120 / 120)
+PASSE : vingt étages du haut (101 / 101)
+PASSE : demenagement début
+PASSE : demenagement annulation
+PASSE : demenagement neuf secondes
+PASSE : demenagement dix secondes
+PASSE : zone de 100 vitres (100 / 100)
+PASSE : hauteur conservée (120 / 120)
+PASSE : vingt étages du haut (101 / 101)
+PASSE : segment début
+PASSE : segment annulation
+PASSE : segment neuf secondes
+PASSE : segment dix secondes
+PASSE : zone de 100 vitres (100 / 100)
+PASSE : hauteur conservée (120 / 120)
+PASSE : vingt étages du haut (101 / 101)
+PASSE : Flèche sans équipement refusée
+PASSE : tour suivante non prête
+PASSE : déménagement
+PASSE : nouvelle tour (2 / 2)
+PASSE : nouvelle tour entièrement sale (1400 / 1400)
+PASSE : rejeu déménagement
+PASSE : compteur sans doublon (1 / 1)
+PASSE : même transition possible avec un nouvel identifiant
+PASSE : tour suivante effectivement ouverte (3 / 3)
+PASSE : prix premier segment (90227397635100 / 90227397635100)
+PASSE : prix segment plafonné (162409315743180 / 162409315743180)
+PASSE : segment un
+PASSE : segment rejoué
+PASSE : segment sans double débit (8909772602364900 / 8909772602364900)
+PASSE : segment deux
+PASSE : troisième non fini refusé
+PASSE : pigeons Flèche
+PASSE : M12 achat conserve pigeons
+PASSE : M12 stock pigeons plus segment (300 / 300)
+PASSE : M12 pigeons prioritaires au-dessus du toit (461 / 461)
+PASSE : record première fois seulement (480 / 480)
+PASSE : M12 lavage pigeons 1
+PASSE : M12 lavage pigeons 2
+PASSE : M12 lavage pigeons 3
+PASSE : M12 lavage pigeons 4
+PASSE : M12 lavage pigeons 5
+PASSE : M12 lavage pigeons 6
+PASSE : M12 lavage pigeons 7
+PASSE : M12 lavage pigeons 8
+PASSE : M12 lavage pigeons 9
+PASSE : M12 lavage pigeons 10
+PASSE : M12 lavage pigeons 11
+PASSE : M12 lavage pigeons 12
+PASSE : M12 lavage pigeons 13
+PASSE : M12 lavage pigeons 14
+PASSE : M12 lavage pigeons 15
+PASSE : M12 lavage pigeons 16
+PASSE : M12 lavage pigeons 17
+PASSE : M12 lavage pigeons 18
+PASSE : M12 lavage pigeons 19
+PASSE : M12 lavage pigeons 20
+PASSE : M12 lavage pigeons 21
+PASSE : M12 lavage pigeons 22
+PASSE : M12 lavage pigeons 23
+PASSE : M12 lavage pigeons 24
+PASSE : M12 lavage pigeons 25
+PASSE : M12 lavage pigeons 26
+PASSE : M12 lavage pigeons 27
+PASSE : M12 lavage pigeons 28
+PASSE : M12 lavage pigeons 29
+PASSE : M12 lavage pigeons 30
+PASSE : M12 lavage pigeons 31
+PASSE : M12 lavage pigeons 32
+PASSE : M12 lavage pigeons 33
+PASSE : M12 lavage pigeons 34
+PASSE : M12 lavage pigeons 35
+PASSE : M12 lavage pigeons 36
+PASSE : M12 lavage pigeons 37
+PASSE : M12 lavage pigeons 38
+PASSE : M12 lavage pigeons 39
+PASSE : M12 lavage pigeons 40
+PASSE : M12 lavage pigeons 41
+PASSE : M12 lavage pigeons 42
+PASSE : M12 lavage pigeons 43
+PASSE : M12 lavage pigeons 44
+PASSE : M12 lavage pigeons 45
+PASSE : M12 lavage pigeons 46
+PASSE : M12 lavage pigeons 47
+PASSE : M12 lavage pigeons 48
+PASSE : M12 lavage pigeons 49
+PASSE : M12 lavage pigeons 50
+PASSE : M12 lavage pigeons 51
+PASSE : M12 lavage pigeons 52
+PASSE : M12 lavage pigeons 53
+PASSE : M12 lavage pigeons 54
+PASSE : M12 lavage pigeons 55
+PASSE : M12 lavage pigeons 56
+PASSE : M12 lavage pigeons 57
+PASSE : M12 lavage pigeons 58
+PASSE : M12 lavage pigeons 59
+PASSE : M12 lavage pigeons 60
+PASSE : M12 lavage pigeons 61
+PASSE : M12 lavage pigeons 62
+PASSE : M12 lavage pigeons 63
+PASSE : M12 lavage pigeons 64
+PASSE : M12 lavage pigeons 65
+PASSE : M12 lavage pigeons 66
+PASSE : M12 lavage pigeons 67
+PASSE : M12 lavage pigeons 68
+PASSE : M12 lavage pigeons 69
+PASSE : M12 lavage pigeons 70
+PASSE : M12 lavage pigeons 71
+PASSE : M12 lavage pigeons 72
+PASSE : M12 lavage pigeons 73
+PASSE : M12 lavage pigeons 74
+PASSE : M12 lavage pigeons 75
+PASSE : M12 lavage pigeons 76
+PASSE : M12 lavage pigeons 77
+PASSE : M12 lavage pigeons 78
+PASSE : M12 lavage pigeons 79
+PASSE : M12 lavage pigeons 80
+PASSE : M12 lavage pigeons 81
+PASSE : M12 lavage pigeons 82
+PASSE : M12 lavage pigeons 83
+PASSE : M12 lavage pigeons 84
+PASSE : M12 lavage pigeons 85
+PASSE : M12 lavage pigeons 86
+PASSE : M12 lavage pigeons 87
+PASSE : M12 lavage pigeons 88
+PASSE : M12 lavage pigeons 89
+PASSE : M12 lavage pigeons 90
+PASSE : M12 lavage pigeons 91
+PASSE : M12 lavage pigeons 92
+PASSE : M12 lavage pigeons 93
+PASSE : M12 lavage pigeons 94
+PASSE : M12 lavage pigeons 95
+PASSE : M12 lavage pigeons 96
+PASSE : M12 lavage pigeons 97
+PASSE : M12 lavage pigeons 98
+PASSE : M12 lavage pigeons 99
+PASSE : M12 lavage pigeons 100
+PASSE : pigeons ne changent pas record (480 / 480)
+PASSE : M12 segment neuf ensuite (481 / 481)
+PASSE : déménagement pendant compte à rebours
+PASSE : pas de pigeons après déménagement
+PASSE : nouvelle tour sans pigeons (nil / nil)
+PASSE : achat pendant compte à rebours
+PASSE : pas de pigeons après achat segment
+PASSE : segment neuf sans pigeons (nil / nil)
+PASSE : scénario terminé
+
+Code de sortie : 0

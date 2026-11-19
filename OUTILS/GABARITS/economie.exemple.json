@@ -1,0 +1,40 @@
+{
+  "jeu": "<slug>",
+  "note": "Exemple fictif a remplacer par les valeurs de la fiche concept. Champs : voir OUTILS/sim-economie.py. Conditions : 't>=600', 'revenu_s>=50', '<id generateur>>=3', 'achete:<id>', 'jalon:<id>', reliees par ' et '. Une valeur absente de la fiche s'omet (elle ne s'invente pas) et se signale dans le rapport. action.part_revenu_s : secondes du revenu des generateurs ajoutees a chaque action, pour que le geste garde une valeur (regle E14). croissance_cout : au-dela du deuxieme palier, 1,2 ne tient pas le remboursement de chaque exemplaire (regle E3) ; compter 1,04 a 1,17.",
+  "competitif": false,
+  "monnaie": "pieces",
+  "depart": {"cash": 0},
+  "action": {"nom": "ramasser", "gain": 1, "par_minute": 40, "part_revenu_s": 0.2},
+  "generateurs": [
+    {"id": "g1", "nom": "Etal", "cout": 18, "revenu_s": 0.5, "croissance_cout": 1.2, "max": 10, "chantier_s": 0, "debloque": ""},
+    {"id": "g2", "nom": "Charrette", "cout": 120, "revenu_s": 3, "croissance_cout": 1.2, "max": 10, "chantier_s": 0, "debloque": "g1>=3"},
+    {"id": "g3", "nom": "Boutique", "cout": 1000, "revenu_s": 16, "croissance_cout": 1.17, "max": 10, "chantier_s": 15, "debloque": "g2>=3"},
+    {"id": "g4", "nom": "Entrepot", "cout": 9000, "revenu_s": 100, "croissance_cout": 1.14, "max": 10, "chantier_s": 30, "debloque": "g3>=3"},
+    {"id": "g5", "nom": "Atelier", "cout": 240000, "revenu_s": 1800, "croissance_cout": 1.12, "max": 10, "chantier_s": 60, "debloque": "g4>=3"},
+    {"id": "g6", "nom": "Usine", "cout": 6300000, "revenu_s": 36000, "croissance_cout": 1.1, "max": 10, "chantier_s": 90, "debloque": "g5>=3"},
+    {"id": "g7", "nom": "Port", "cout": 175000000, "revenu_s": 750000, "croissance_cout": 1.06, "max": 10, "chantier_s": 120, "debloque": "g6>=3"},
+    {"id": "g8", "nom": "Tour", "cout": 4800000000, "revenu_s": 17600000, "croissance_cout": 1.04, "max": 10, "chantier_s": 150, "debloque": "g7>=3"},
+    {"id": "g9", "nom": "Chantier naval", "cout": 136000000000, "revenu_s": 460000000, "croissance_cout": 1.04, "max": 10, "chantier_s": 165, "debloque": "g8>=3"},
+    {"id": "g10", "nom": "Citadelle", "cout": 3800000000000, "revenu_s": 12800000000, "croissance_cout": 1.04, "max": 10, "chantier_s": 180, "debloque": "g9>=3"}
+  ],
+  "ameliorations": [
+    {"id": "a1", "nom": "Meilleur panier", "cout": 60, "cible": "action", "multiplicateur": 2, "debloque": "g1>=2"},
+    {"id": "a2", "nom": "Enseigne", "cout": 2500, "cible": "g2", "multiplicateur": 2, "debloque": "g3>=1"},
+    {"id": "a3", "nom": "Livraisons", "cout": 400000, "cible": "tout", "multiplicateur": 1.5, "debloque": "g5>=1"}
+  ],
+  "jalons": [
+    {"id": "zone2", "condition": "g3>=1"},
+    {"id": "zone3", "condition": "g6>=1"}
+  ],
+  "fin_contenu": "g10>=10",
+  "offres": [
+    {"id": "collecte_auto", "nom": "Collecte automatique", "type": "confort", "prix_robux": 149, "effet": "ramasse a la place du joueur, au meme tarif"},
+    {"id": "chantier_rapide", "nom": "Chantiers deux fois plus courts", "type": "temps", "prix_robux": 99, "effet": "divise par deux la duree des chantiers"},
+    {"id": "couleurs", "nom": "Palette de couleurs", "type": "expression", "prix_robux": 49, "effet": "apparence seulement"}
+  ],
+  "profils": {
+    "actif": {"actions_facteur": 1.0, "delai_achat_s": 3},
+    "lent": {"actions_facteur": 0.5, "delai_achat_s": 3}
+  },
+  "duree_max_s": 14400
+}

@@ -1,0 +1,67 @@
+Reproductions avant correction, executees hors Studio sur sources figees par git show.
+Runtime actuel du banc, tests finaux du present lot.
+
+Commit 63e858e : echec attendu, code 1, filtre revue-63
+ECHEC : revue-63-chargement-fermeture.test.luau
+[PASSE2 Monde 0.000] construction 14
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:454: fermeture pendant chargement sans profil expose (table: 0x0000019233fc8c30 / nil)
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:454 function verifier
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:455 function egal
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\JEUX\lave-la-tour\05-production\tests\revue-63-chargement-fermeture.test.luau:9 function scenario
+C:/Users/USER/AppData/Local/Temp/banc-luau-piv___6s/programme.luau:4949
+
+stacktrace:
+[C] function error
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:62 function avancer
+C:/Users/USER/AppData/Local/Temp/banc-luau-piv___6s/programme.luau:4950
+ECHEC : revue-63-depart.test.luau
+[PASSE2 Monde 0.000] construction 14
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:454: depart pendant chargement sans profil fantome (table: 0x0000024203f848f0 / nil)
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:454 function verifier
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:455 function egal
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\JEUX\lave-la-tour\05-production\tests\revue-63-depart.test.luau:9 function scenario
+C:/Users/USER/AppData/Local/Temp/banc-luau-piv___6s/programme.luau:4949
+
+stacktrace:
+[C] function error
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:62 function avancer
+C:/Users/USER/AppData/Local/Temp/banc-luau-piv___6s/programme.luau:4950
+ECHEC : revue-63-fermeture.test.luau
+[PASSE2 Monde 0.000] construction 14
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:452: BindToClose : délai fictif de 30 secondes dépassé
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:452 function fermer_serveur
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\JEUX\lave-la-tour\05-production\tests\revue-63-fermeture.test.luau:22 function scenario
+C:/Users/USER/AppData/Local/Temp/banc-luau-piv___6s/programme.luau:4962
+
+stacktrace:
+[C] function error
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:62 function avancer
+C:/Users/USER/AppData/Local/Temp/banc-luau-piv___6s/programme.luau:4963
+ECHEC : revue-63-session.test.luau
+PASSE : ancienne sortie terminee
+PASSE : retour attend la sortie precedente
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:454: retour sur meme serveur conserve le dernier gain (0 / 42)
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:454 function verifier
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:455 function egal
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\JEUX\lave-la-tour\05-production\tests\revue-63-session.test.luau:22 function scenario
+C:/Users/USER/AppData/Local/Temp/banc-luau-piv___6s/programme.luau:4975
+
+stacktrace:
+[C] function error
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:62 function avancer
+C:/Users/USER/AppData/Local/Temp/banc-luau-piv___6s/programme.luau:4976
+
+Commit 8702805 : echec attendu, code 1, filtre sauvegarde-budget
+ECHEC : sauvegarde-budget.test.luau
+PASSE : chargement reellement suspendu (nil / nil)
+PASSE : S1 six laveurs dans la meme image 1 (1 / 1)
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:454: S1 six laveurs dans la meme image 1 (0 / 1)
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:454 function verifier
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:455 function egal
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\JEUX\lave-la-tour\05-production\tests\sauvegarde-budget.test.luau:19 function scenario
+C:/Users/USER/AppData/Local/Temp/banc-luau-zzmsb29t/programme.luau:4270
+
+stacktrace:
+[C] function error
+%USERPROFILE%\Documents\Projets\USINE-ROBLOX\OUTILS\luau\faux-roblox.luau:62 function avancer
+C:/Users/USER/AppData/Local/Temp/banc-luau-zzmsb29t/programme.luau:4271

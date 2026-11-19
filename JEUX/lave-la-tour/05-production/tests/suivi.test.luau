@@ -1,0 +1,22 @@
+banc.demarrer_serveur()
+local A = banc.require("ServerScriptService.Jeu.ActionsDeTest")
+local j = banc.joueur(800,"Prive")
+local R = banc.instance("ReplicatedStorage.JeuRemotes")
+local p = A.profil(j)
+banc.verifier(p.mesures.etapes.arrivee,"arrivee compte")
+banc.avancer(2);banc.client(j):envoyer(R.VitreFinie,1,1)
+banc.verifier(p.mesures.etapes.premiere_action,"action compte")
+p.pieces=100;banc.client(j):envoyer(R.Acheter,"robot","r1")
+banc.verifier(p.mesures.etapes.premier_achat,"achat compte")
+banc.avancer(600)
+banc.verifier(p.mesures.etapes.min_3 and p.mesures.etapes.min_10,"durees comptees")
+banc.quitter(j);j=banc.joueur(800,"Prive");p=A.profil(j)
+for _,etape in {"arrivee","premiere_action","premier_achat","min_3","min_10"} do banc.verifier(p.mesures.etapes[etape],"persistance "..etape) end
+local retours=banc.require("ServerScriptService.Jeu.RetoursService").nouveau({NOM_COURT="LaveLaTour"})
+banc.verifier(not retours.envoyer(j,"admin","texte valide"),"invalide refuse")
+banc.verifier(retours.envoyer(j,"bug","une vitre bloque"),"retour ecrit")
+banc.verifier(banc.datastore("LaveLaTourRetours_v1_studio"):lire("r_"..os.time().."_800") ~= nil,"magasin retours")
+banc.fermer_serveur()
+local v=banc.datastore("LaveLaTourMesures_v1_studio"):lire("j_"..os.date("!%Y-%m-%d"))
+for _,etape in {"arrivee","premiere_action","premier_achat","min_3","min_10"} do banc.egal(v["e_"..etape],1,"unique "..etape) end
+for k,n in v do banc.verifier(type(n)=="number" and k~="userId" and k~="Name" and k~="texte","compteurs anonymes") end

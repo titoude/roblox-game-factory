@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PROJECT_DIR}/OUTILS/historique.py\" crochet-compaction",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+Validation finale du 2026-11-17 : executee hors Studio.
+
+Banc complet
+Commande : python OUTILS/banc-luau.py JEUX/lave-la-tour/05-production/src --tests JEUX/lave-la-tour/05-production/tests --verbeux
+PASSE : annexe-a.test.luau
+PASSE : banc-datastore.test.luau
+PASSE : commerce.test.luau
+PASSE : config-comportement.test.luau
+PASSE : config.test.luau
+PASSE : contrat.test.luau
+PASSE : donnees.test.luau
+PASSE : economie.test.luau
+PASSE : gabarit-mesures.test.luau
+PASSE : gabarit-retours.test.luau
+PASSE : geste.test.luau
+PASSE : monde-raccorde.test.luau
+PASSE : monde.test.luau
+PASSE : rejeu-simulateur.test.luau
+PASSE : remotes.test.luau
+PASSE : revue-63-chargement-fermeture.test.luau
+PASSE : revue-63-depart.test.luau
+PASSE : revue-63-fermeture.test.luau
+PASSE : revue-63-session.test.luau
+PASSE : revue-d1.test.luau
+PASSE : revue-d2.test.luau
+PASSE : revue-d3.test.luau
+PASSE : revue-d4.test.luau
+PASSE : revue-m19-m21-d5.test.luau
+PASSE : revue-m22.test.luau
+PASSE : revue-m6.test.luau
+PASSE : sauvegarde-budget.test.luau
+PASSE : sauvegarde-cadence.test.luau
+PASSE : social.test.luau
+PASSE : suivi.test.luau
+PASSE : textes.test.luau
+PASSE : vitres.test.luau
+32 suites ; 4200 assertions ; code 0
+Code : 0
+
+Mutations
+Commande : python JEUX/lave-la-tour/05-production/tests/verifier-mutations.py
+M6 : DETECTEE (revue-m6)
+M19 : DETECTEE (revue-m19-m21-d5)
+M21 : DETECTEE (revue-m19-m21-d5)
+M22-marque : DETECTEE (revue-m22)
+D5 : DETECTEE (revue-m19-m21-d5)
+S1-S2-ecriture-action : DETECTEE (sauvegarde-budget)
+D8-mousse : DETECTEE (config-comportement)
+D8-validation : DETECTEE (config-comportement)
+P14-gain-double : DETECTEE (rejeu-simulateur)
+P14-revenu : DETECTEE (rejeu-simulateur)
+P14-validation-remote : DETECTEE (vitres)
+Code : 0
+
+Analyse Luau
+Commande : powershell -NoProfile -File OUTILS/luau-verif.ps1 JEUX/lave-la-tour/05-production/src
+controle complet : 21 fichiers, 0 defaut(s)
+Code : 0
+
+Verification usine
+Commande : powershell -NoProfile -File OUTILS/verifier-usine.ps1
+AVIS   : 2 alerte(s) ouverte(s) dans ALERTES.md
+AVIS   : verrou present : bureau (verrou.ps1 liste)
+AVIS   : 3 proposition(s) en attente dans CONNAISSANCES\PROPOSITIONS
+verification : 0 erreur(s), 3 avis, 263 fichiers controles
+Code : 0

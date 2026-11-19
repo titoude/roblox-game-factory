@@ -1,0 +1,6 @@
+# Univers suivis pour les instantanes (50 au plus). Valides par l'orchestrateur, tour 1 du 2026-11-15.
+# Identifiants lus sur rostats.io (pages de classement et fiches) ou dans les resultats de recherche des veilleurs.
+10766972131  # Throw Food For Animals
+10765288803  # Break and Steal an Egg
+10769671316  # Survive Your Ideas
+1686885941   # Brookhaven RP (repere)

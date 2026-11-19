@@ -1,0 +1,15 @@
+{
+  "jeu": "Îlot Démo",
+  "duree_cible_s": 20,
+  "accroche": "Peux-tu atteindre cette île ?",
+  "clips": [
+    {"source": "sources/depart.mp4", "debut_s": 2, "fin_s": 12, "centre_x": 0.5, "son": false},
+    {"source": "sources/arrivee.mp4", "debut_s": 0, "fin_s": 10, "centre_x": 0.65, "son": false}
+  ],
+  "sous_titres": [
+    {"debut_s": 3, "fin_s": 7.5, "texte": "Un saut pour rejoindre la passerelle"},
+    {"debut_s": 10, "fin_s": 16.5, "texte": "Voici le résultat du parcours"}
+  ],
+  "cta": "Joue à Îlot Démo, lien du profil",
+  "musique": null
+}

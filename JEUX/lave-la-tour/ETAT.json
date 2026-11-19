@@ -1,0 +1,126 @@
+{
+    "slug":  "lave-la-tour",
+    "nom":  "Lave la tour",
+    "cree_le":  "2026-11-15",
+    "place":  {
+                  "universeId_test":  "",
+                  "placeId_test":  "",
+                  "universeId_prod":  "",
+                  "placeId_prod":  ""
+              },
+    "portes":  {
+                   "P0":  {
+                              "resultat":  "derogation",
+                              "date":  "2026-11-15",
+                              "preuve":  "VEILLE\\RELEVES\\2026-11-15\\b1-theme-un-geste.md",
+                              "note":  "Corpus 10 gagnants et 10 faibles ou retombes atteint, chiffres sources (RoStats). Mais Roblox Charts illisible sans navigateur (couverture 0 pour cent sur la source prevue, remplacee par le classement mensuel RoStats lu a 100 pour cent), fenetres de mesure melees, prix et cadence pour 2 jeux sur 20. A rejouer avec un navigateur avant P4.",
+                              "iterations":  0
+                          },
+                   "P1":  {
+                              "resultat":  "passe",
+                              "date":  "2026-11-15",
+                              "preuve":  "JEUX\\lave-la-tour\\02-concept\\FICHE-CONCEPT.md",
+                              "note":  "Completude verifiee contre la liste de la procedure 02 (7 elements, 60 secondes, perimetre, previsions, criteres d\u0027arret). Controle fait par l\u0027auteur lui-meme : aucun relecteur independant, la porte P1 ne juge que la completude.",
+                              "iterations":  0
+                          },
+                   "P2":  {
+                              "resultat":  "derogation",
+                              "date":  "2026-11-16",
+                              "preuve":  "JEUX\\lave-la-tour\\03-economie\\RAPPORT-ECONOMIE-contre-verification-4.md",
+                              "note":  "Contre-verification 3 (fiche v4) : echec papier, 1 P1 certain F01 (acces a la Fleche, specification, aucune constante). Contre-verification 4 (fiche v5, agent independant) : cadence PASSE, 0 P0, 0 P1, 13 decisions fermees, avis OUI pour L0 et L1. Derogation a la regle A5 maintenue (trois passages en echec avant celui-ci) : les echecs 2 et 3 portent sur des defauts de specification corriges sans toucher aux couts ni aux revenus. Passe 2 (code) a faire au commit du lot L1.",
+                              "iterations":  2
+                          },
+                   "P3":  {
+                              "resultat":  "derogation",
+                              "date":  "2026-11-16",
+                              "preuve":  "JEUX\\lave-la-tour\\04-fun\\RAPPORT-FUN-V5.md",
+                              "note":  "Revue independante Opus 5.5 de la fiche v5 : ITERER 6,4 ; aucun axe sous 5 ; moyenne des 5 axes verifiables sur papier 7,0 ; axes 2 (boucle courte) et 6 (retour) plafonnes a 5 faute de preuve possible sur papier. Derogation : plafond structurel de la passe papier, le relecteur ecrit qu\u0027une fiche de plus ne peut pas ouvrir P3 et recommande d\u0027engager le prototype L0 apres ses corrections A a D (ecrites en v5.1). Troisieme derogation sur ce jeu (P0, P2, P3). Arret ferme et mesure ecrit d\u0027avance (fiche, annexe D 2 bis) : la passe 2 sur le prototype (porte P4) abandonne l\u0027idee sans nouvelle iteration si une mesure echoue.",
+                              "iterations":  2
+                          }
+               },
+    "mode_degrade":  [
+                         "03-economie : poursuite apres 2 echecs de P2, par derogation a la regle A5 (statut a calibrer). Raison : au 2e passage la cadence passe et les 5 defauts P1 d\u0027origine sont fermes ; des 2 nouveaux P1, N01 est un defaut du simulateur introduit par la correction de l\u0027usine, N02 se ferme par une decision de specification sans toucher aux constantes. Une seule contre-verification de plus (n. 2) ; un defaut P0 ou P1 certain de plus arrete le jeu.",
+                         "04-fun : revue jouee par l\u0027orchestrateur Fable 5.2, auteur de la fiche (A2 non tenue) ; 02-concept : fiche ecrite par l\u0027orchestrateur ; 01-veille : lecture sans navigateur"
+                     ],
+    "etape":  "05-production",
+    "statut":  "en_cours",
+    "blocage":  "",
+    "historique":  [
+                       {
+                           "date":  "2026-11-15 22:27",
+                           "evenement":  "jeu cree"
+                       },
+                       {
+                           "date":  "2026-11-15 22:27",
+                           "evenement":  "porte P0 : derogation - Corpus 10 gagnants et 10 faibles ou retombes atteint, chiffres sources (RoStats). Mais Roblox Charts illisible sans navigateur (couverture 0 pour cent sur la source prevue, remplacee par le classement mensuel RoStats lu a 100 pour cent), fenetres de mesure melees, prix et cadence pour 2 jeux sur 20. A rejouer avec un navigateur avant P4."
+                       },
+                       {
+                           "date":  "2026-11-15 22:30",
+                           "evenement":  "porte P1 : passe - Completude verifiee contre la liste de la procedure 02 (7 elements, 60 secondes, perimetre, previsions, criteres d\u0027arret). Controle fait par l\u0027auteur lui-meme : aucun relecteur independant, la porte P1 ne juge que la completude."
+                       },
+                       {
+                           "date":  "2026-11-15 22:48",
+                           "evenement":  "porte P2 : echec - Contenu actif 87 min 27 s sous 90 min ; 29 remboursements marginaux sur 100 au-dela de 5 min ; geste sans valeur en fin de jeu ; mousse sans quota. 0 P0, 3 P1 distincts. Retour au concept."
+                       },
+                       {
+                           "date":  "2026-11-15 23:13",
+                           "evenement":  "porte P2 : echec - Contre-verification 1 de la fiche v2 : cadence PASSE (97 min), A01 A02 A03 D1 D2 fermes, mais 2 nouveaux P1 certains : N01 (defaut du simulateur, pas du jeu) et N02 (stock de vitres dispute entre joueurs)."
+                       },
+                       {
+                           "date":  "2026-11-15 23:14",
+                           "evenement":  "mode degrade : 03-economie : poursuite apres 2 echecs de P2, par derogation a la regle A5 (statut a calibrer). Raison : au 2e passage la cadence passe et les 5 defauts P1 d\u0027origine sont fermes ; des 2 nouveaux P1, N01 est un defaut du simulateur introduit par la correction de l\u0027usine, N02 se ferme par une decision de specification sans toucher aux constantes. Une seule contre-verification de plus (n. 2) ; un defaut P0 ou P1 certain de plus arrete le jeu."
+                       },
+                       {
+                           "date":  "2026-11-15 23:27",
+                           "evenement":  "porte P2 : derogation - Passe au 3e passage (fiche v3) : cadence PASSE, 0 P0 et 0 P1 certain d\u0027apres la contre-verification 2 (agent independant). Derogation a la regle A5 : deux echecs avaient precede. Passe 2 (code) a faire au lot L1."
+                       },
+                       {
+                           "date":  "2026-11-15 23:27",
+                           "evenement":  "porte P3 : echec - Revue en mode degrade (relecteur = auteur, Opus interdit cette nuit) : ITERER, moyenne 6,1, axe retour a 4. Ne vaut ni validation ni arret (regle A8) : a rejouer par Opus 5.5 apres la fiche v4."
+                       },
+                       {
+                           "date":  "2026-11-15 23:27",
+                           "evenement":  "mode degrade : 04-fun : revue jouee par l\u0027orchestrateur Fable 5.2, auteur de la fiche (A2 non tenue) ; 02-concept : fiche ecrite par l\u0027orchestrateur ; 01-veille : lecture sans navigateur"
+                       },
+                       {
+                           "date":  "2026-11-15 23:27",
+                           "evenement":  "statut : bloque - Attend : fiche v4 (corrections de la revue du fun), revue du fun par Opus 5.5, univers TEST du proprietaire, sortie d\u0027Archipel de la QA. Plan de production provisoire ecrit."
+                       },
+                       {
+                           "date":  "2026-11-15 23:28",
+                           "evenement":  "porte P3 : compteur d\u0027iterations remis a zero - L\u0027echec enregistre venait d\u0027une revue en mode degrade (relecteur = auteur) : regle A8, il ne compte pas comme une iteration."
+                       },
+                       {
+                           "date":  "2026-11-15 23:28",
+                           "evenement":  "porte P3 : a_confirmer - Revue en mode degrade (relecteur = auteur, sous-agents Opus interdits cette nuit) : ITERER, moyenne 6,1, axe retour a 4. A rejouer par Opus 5.5 apres la fiche v4."
+                       },
+                       {
+                           "date":  "2026-11-16 00:14",
+                           "evenement":  "porte P3 : echec - Revue independante Opus 5.5 : ITERER, moyenne 5,7, axes boucle courte et retour a 4. Iteration 1 sur 2 : fiche v4 (vitre qui reste propre et montee par le geste, geste glisse et varie, seconde place utile, objectif J7), puis contre-verification de l\u0027economie."
+                       },
+                       {
+                           "date":  "2026-11-16 21:29",
+                           "evenement":  "porte P2 : derogation - Contre-verification 3 (fiche v4) : echec papier, 1 P1 certain F01 (acces a la Fleche, specification, aucune constante). Contre-verification 4 (fiche v5, agent independant) : cadence PASSE, 0 P0, 0 P1, 13 decisions fermees, avis OUI pour L0 et L1. Derogation a la regle A5 maintenue (trois passages en echec avant celui-ci) : les echecs 2 et 3 portent sur des defauts de specification corriges sans toucher aux couts ni aux revenus. Passe 2 (code) a faire au commit du lot L1."
+                       },
+                       {
+                           "date":  "2026-11-16 21:29",
+                           "evenement":  "porte P3 : echec - Revue independante Opus 5.5 de la fiche v4 : ITERER 6,1 (axes verifiables 6,6) ; defaut reel : la nacelle redescendait. Retour 2 sur 2 au concepteur : fiche v5."
+                       },
+                       {
+                           "date":  "2026-11-16 21:29",
+                           "evenement":  "porte P3 : derogation - Revue independante Opus 5.5 de la fiche v5 : ITERER 6,4 ; aucun axe sous 5 ; moyenne des 5 axes verifiables sur papier 7,0 ; axes 2 (boucle courte) et 6 (retour) plafonnes a 5 faute de preuve possible sur papier. Derogation : plafond structurel de la passe papier, le relecteur ecrit qu\u0027une fiche de plus ne peut pas ouvrir P3 et recommande d\u0027engager le prototype L0 apres ses corrections A a D (ecrites en v5.1). Troisieme derogation sur ce jeu (P0, P2, P3). Arret ferme et mesure ecrit d\u0027avance (fiche, annexe D 2 bis) : la passe 2 sur le prototype (porte P4) abandonne l\u0027idee sans nouvelle iteration si une mesure echoue."
+                       },
+                       {
+                           "date":  "2026-11-16 21:29",
+                           "evenement":  "statut : en_cours "
+                       },
+                       {
+                           "date":  "2026-11-16 22:35",
+                           "evenement":  "statut : bloque - Tout ce qui se fait sans Studio est fait (code serveur et clients, 22 fichiers de test au banc). Attend : Studio libre (verrou tenu par archipel-finition), puis JEUX\\lave-la-tour\\05-production\\PASSE-2-PROTOTYPE.md : prototype en Play, passe 2 de la revue du fun, arret ferme si une mesure echoue (porte P4). A faire aussi : contre-verification de la correction de sauvegarde S1 a S5."
+                       },
+                       {
+                           "date":  "2026-11-17 16:07",
+                           "evenement":  "statut : en_cours - 17/11 : Studio libere ; premier Play reel fait (PASSE-2-PROTOTYPE.md, section 17 novembre) ; sauvegarde contre-verifiee (REVUE-CODE-63e858e.md, d3338f1). Reste : passe 2 de la revue du fun (telephone, deux clients, plaisir), porte P4, leaderstats, camera."
+                       }
+                   ]
+}

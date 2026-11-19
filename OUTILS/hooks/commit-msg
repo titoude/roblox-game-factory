@@ -1,0 +1,31 @@
+#!/bin/sh
+# Crochet git de l'usine : qui a le droit d'ecrire ou (G14).
+#  - GARDE-FOUS.md et CONNAISSANCES/PLAFONDS.md : message commencant par [proprietaire]
+#    (decision ecrite par le proprietaire, ou recopiee mot pour mot de son message).
+#  - Le reste de CONNAISSANCES/, hors depot direct dans PROPOSITIONS/ : [orchestrateur] ou [proprietaire].
+# C'est un fil de detente, pas un controle d'identite : il oblige a declarer son role.
+# Activation (une fois par clone) : git config core.hooksPath OUTILS/hooks
+
+msg=$(head -n 1 "$1")
+fichiers=$(git diff --cached --name-only)
+
+if printf '%s\n' "$fichiers" | grep -Eq '^(GARDE-FOUS\.md|CONNAISSANCES/PLAFONDS\.md)$'; then
+  case "$msg" in
+    "[proprietaire]"*) ;;
+    *)
+      echo "REFUS : GARDE-FOUS.md et PLAFONDS.md n'appartiennent qu'au proprietaire. Message attendu : [proprietaire] ..." >&2
+      exit 1 ;;
+  esac
+fi
+
+memoire=$(printf '%s\n' "$fichiers" | grep -E '^CONNAISSANCES/' | grep -vE '^CONNAISSANCES/PROPOSITIONS/[^/]+$')
+if [ -n "$memoire" ]; then
+  case "$msg" in
+    "[orchestrateur]"*|"[proprietaire]"*) ;;
+    *)
+      echo "REFUS : seul l'orchestrateur modifie CONNAISSANCES/ (garde-fou G14). Message attendu : [orchestrateur] ..." >&2
+      echo "Un autre agent depose une proposition dans CONNAISSANCES/PROPOSITIONS/." >&2
+      exit 1 ;;
+  esac
+fi
+exit 0

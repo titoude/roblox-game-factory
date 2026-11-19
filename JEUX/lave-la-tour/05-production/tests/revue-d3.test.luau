@@ -1,0 +1,11 @@
+local S=banc.require("ServerScriptService.Jeu.EtatJoueur")
+local V=banc.require("ServerScriptService.Jeu.VitresService")
+local t=0;V.horloge(function() return t end)
+local p=S.nouveau();p.tour.numero=4
+local a={UserId=1};V.inscrire(a,p)
+banc.verifier(not V.pigeons(p),"D3 debut attente")
+t=9.999;banc.verifier(not V.pigeons(p),"D3 avant dix secondes")
+t=10;banc.verifier(V.pigeons(p),"D3 stock disponible a dix secondes")
+banc.egal(V.stock(p),100,"D3 stock cent vitres")
+banc.egal(V.attribuer(p,a),381,"D3 etages deja laves du toit")
+local retour=S.valider(p);banc.egal(retour.tour.pigeons.premiere_rangee,381,"D3 zone conservee au retour")
