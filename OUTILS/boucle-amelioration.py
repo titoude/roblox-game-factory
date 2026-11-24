@@ -484,6 +484,9 @@ def appliquer(racine, slug, simuler=False, juge=None, commit=False, aujourdhui=N
                                                    "preuve": "CONNAISSANCES\\BILANS\\%s-%s.md" % (date, slug)}
             etat.setdefault("historique", []).append({"date": dt.datetime.now().strftime("%Y-%m-%d %H:%M"),
                                                       "evenement": "porte P9 : passe - " + note})
+            if bilan.get("type") != "suivi30":
+                # Comme etat.ps1 : P9 termine le jeu ; un bilan de suivi à 30 jours laisse le jeu en ligne tel quel.
+                etat["statut"] = "termine"
             ecrire(f_etat, json.dumps(etat, ensure_ascii=True, indent=4) + "\n")
     r["message"] = resume + ("" if complet else " ; %d proposition(s) sans décision : P9 non passée" % len(r["en_attente"]))
     r["rapport"] = f_rapport

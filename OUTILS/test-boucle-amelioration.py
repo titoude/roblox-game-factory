@@ -69,7 +69,7 @@ def analyste_simule(racine, slug, date, fiche, mesures, **extra):
     chemin.parent.mkdir(parents=True, exist_ok=True)
     chemin.write_text(json.dumps(bilan, ensure_ascii=False, indent=2), encoding="utf-8")
     (Path(racine) / "JEUX" / slug / "ETAT.json").write_text(json.dumps(
-        {"slug": slug, "statut": "termine", "etape": "09-bilan", "portes": {}, "historique": []}), encoding="utf-8")
+        {"slug": slug, "statut": "en_cours", "etape": "09-bilan", "portes": {}, "historique": []}), encoding="utf-8")
 
 
 appels_juge = []
@@ -195,8 +195,8 @@ with tempfile.TemporaryDirectory(prefix="tests-boucle-") as tmp, \
     verifier("skill revue économie : règle du faux positif de P2",
              any(i in (racine / "skills/usine-revue-economie/SKILL.md").read_text(encoding="utf-8") for i in ajoutees_a if i.startswith("E")))
     etat_a = json.loads((racine / "JEUX/jeu-a/ETAT.json").read_text(encoding="utf-8"))
-    verifier("porte P9 passe avec le rapport en preuve",
-             etat_a["portes"]["P9"]["resultat"] == "passe" and (racine / "CONNAISSANCES/BILANS/2026-11-20-jeu-a.md").exists())
+    verifier("porte P9 passe avec le rapport en preuve, jeu terminé",
+             etat_a["portes"]["P9"]["resultat"] == "passe" and etat_a["statut"] == "termine" and (racine / "CONNAISSANCES/BILANS/2026-11-20-jeu-a.md").exists())
     verifier("rapport : skills à réinstaller signalés au propriétaire",
              "installer-skills.ps1 -Confirmer" in (racine / "CONNAISSANCES/BILANS/2026-11-20-jeu-a.md").read_text(encoding="utf-8"))
     code, _ = appliquer(racine, "jeu-a")
