@@ -21,7 +21,7 @@ python usine.py "fais un jeu"      # "make a game": resume the current game, or 
 python usine.py etat               # games, locks, open alerts (no model call)
 python usine.py verifier           # self-check: structure, secrets, test suites, Luau syntax + tests
 python usine.py roles              # which model plays which role, fallbacks, free slots
-python usine.py tableau            # local read-only dashboard at http://127.0.0.1:8765/
+python usine.py tableau            # local dashboard at http://127.0.0.1:8765/ (--lecture-seule: no controls)
 ```
 
 - `usine.py` starts the orchestrator through the `claude` CLI. The orchestrator delegates each role through `OUTILS/deleguer.py`, which picks the provider (`codex` or `claude`), model and effort from `CONNAISSANCES/routage.json`, enforces the agent cap and fallbacks, and logs every delegation.
@@ -39,7 +39,7 @@ python usine.py tableau            # local read-only dashboard at http://127.0.0
 | Studio push | `OUTILS/pousser-studio.py` | Pushes the game's scripts into Studio over MCP, under a lock, with a check that it is writing into the right place |
 | Player feedback loop | `OUTILS/retours-joueurs.py`, `PROCEDURES/11` | Collects in-game feedback through Open Cloud (read-only key), clusters it, judges it, turns it into patch batches |
 | Self-improvement | `CONNAISSANCES/BILANS/`, `PROPOSITIONS/` | Every game ends with a post-mortem; agents propose rule changes, the orchestrator merges them |
-| Dashboard | `OUTILS/tableau-de-bord.py` | Local read-only web interface over the real files: games with stages and gates P0–P11, ETAT.json history, orchestrator cycles and heartbeat decisions, live agents (G2 count), delegations, routing, logs, alerts, locks, STOP. Binds to 127.0.0.1, refuses foreign Host headers, masks secret patterns, stdlib only |
+| Dashboard | `OUTILS/tableau-de-bord.py` | Local web interface over the real files: games with stages and gates P0–P11, ETAT.json history, orchestrator cycles and heartbeat decisions, live agents (G2 count), delegations, routing, logs, alerts, locks, STOP. A Pilotage screen sets/removes STOP and runs verifier, heartbeat, cycle and player-feedback loop by calling `usine.py` (so STOP, G2 and locks apply); a cycle needs an explicit owner consent box, reserves its slot in `battement-etat.json` like `battement --lancer`, and logs to `JOURNAUX/tableau/`. POSTs need a per-launch token and a local Origin. Binds to 127.0.0.1, refuses foreign Host headers, masks secret patterns, stdlib only |
 | Games | `JEUX/<slug>/` | One folder per game: state, journal, concept, economy model, reviews, source, tests |
 
 ## What the first Play session broke

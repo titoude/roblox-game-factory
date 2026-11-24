@@ -9,6 +9,7 @@ import shutil
 import sys
 import tempfile
 import threading
+import time
 import urllib.error
 import urllib.request
 
@@ -18,6 +19,19 @@ t = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(t)
 
 echecs = 0
+FAUX_USINE = """import os, sys, time
+R = os.path.dirname(os.path.abspath(__file__))
+a = sys.argv[1:]
+print("FAUX", a)
+sys.stdout.flush()
+if a == ["stop"]:
+    open(os.path.join(R, "STOP"), "a").close()
+elif a == ["reprendre"] and os.path.exists(os.path.join(R, "STOP")):
+    os.remove(os.path.join(R, "STOP"))
+elif a and "dormir" in a[0]:
+    time.sleep(30)
+sys.exit(3 if "--simuler" in a else 0)
+"""
 
 
 def controle(nom, condition, detail=""):
@@ -117,8 +131,99 @@ with tempfile.TemporaryDirectory() as tmp:
         controle("refusé : " + mauvais, code == 404)
     code, _ = get("/api/etat", hote="evil.example:%d" % port)
     controle("hôte étranger refusé (rebond DNS)", code == 403)
-    code, _ = get("/api/etat", methode="POST")
-    controle("écriture refusée (POST)", code == 405)
+    s.shutdown()
+    s.server_close()
+
+    # Lecture seule : aucun pilotage, aucun jeton dans la page.
+    s = t.serveur(r, 0, pilotage=False)
+    port = s.server_address[1]
+    threading.Thread(target=s.serve_forever, daemon=True).start()
+    code, corps = get("/")
+    controle("lecture seule : page sans jeton", code == 200 and "{{JETON}}" not in corps and 'name="jeton" content=""' in corps)
+    controle("lecture seule : pas de pilotage dans l'état", json.loads(get("/api/etat")[1])["pilotage"] is None)
+    code, _ = get("/api/action", methode="POST")
+    controle("lecture seule : POST refusé", code == 405)
+    s.shutdown()
+    s.server_close()
+
+    # Pilotage, avec un faux usine.py : aucun modèle n'est lancé.
+    ecrire(r, "usine.py", FAUX_USINE)
+    ecrire(r, "JOURNAUX/battement-etat.json", '{"evenements": ["e1"]}')
+    s = t.serveur(r, 0)
+    port = s.server_address[1]
+    threading.Thread(target=s.serve_forever, daemon=True).start()
+    page = get("/")[1]
+    jeton = page.split('name="jeton" content="', 1)[1].split('"', 1)[0]
+    controle("pilotage : jeton propre au lancement dans la page", len(jeton) >= 24 and jeton in page)
+
+    def post(chemin, corps, jeton=jeton, origine=None, type_="application/json"):
+        q = urllib.request.Request("http://127.0.0.1:%d%s" % (port, chemin), method="POST",
+                                   data=json.dumps(corps).encode("utf-8"))
+        q.add_header("Content-Type", type_)
+        if jeton:
+            q.add_header("X-Jeton", jeton)
+        if origine:
+            q.add_header("Origin", origine)
+        try:
+            with urllib.request.urlopen(q, timeout=10) as rep:
+                return rep.status, json.loads(rep.read().decode("utf-8"))
+        except urllib.error.HTTPError as x:
+            return x.code, json.loads(x.read().decode("utf-8"))
+
+    def attendre_fin(ident, limite=20):
+        for _ in range(limite * 10):
+            for x in json.loads(get("/api/etat")[1])["pilotage"]["taches"]:
+                if x["id"] == ident and x["code"] is not None:
+                    return x
+            time.sleep(0.1)
+        return None
+
+    def reservation():
+        return json.loads(io.open(os.path.join(r, "JOURNAUX", "battement-etat.json"), encoding="utf-8").read())
+
+    controle("pilotage : sans jeton refusé", post("/api/action", {"action": "stop"}, jeton=None)[0] == 403)
+    controle("pilotage : faux jeton refusé", post("/api/action", {"action": "stop"}, jeton="x" * 32)[0] == 403)
+    controle("pilotage : origine étrangère refusée", post("/api/action", {"action": "stop"}, origine="http://evil.example")[0] == 403)
+    controle("pilotage : corps non JSON refusé", post("/api/action", {"action": "stop"}, type_="text/plain")[0] == 415)
+    controle("pilotage : action inconnue refusée", post("/api/action", {"action": "rm"})[0] == 400)
+    code, d = post("/api/action", {"action": "verifier"})
+    controle("pilotage : STOP présent, vérifier refusé (G0)", code == 409 and "STOP" in d["erreur"], d)
+    code, d = post("/api/action", {"action": "reprendre"})
+    fin = attendre_fin(d.get("id"))
+    controle("pilotage : reprendre passe par usine.py et retire STOP",
+             code == 202 and fin and fin["code"] == 0 and not os.path.exists(os.path.join(r, "STOP")), (code, d, fin))
+    texte = io.open(os.path.join(r, *d["journal"].split("/")), encoding="utf-8").read()
+    controle("pilotage : sortie journalisée dans JOURNAUX/tableau/", d["journal"].startswith("JOURNAUX/tableau/") and "FAUX ['reprendre']" in texte, texte)
+    controle("pilotage : cycle sans accord du propriétaire refusé", post("/api/action", {"action": "cycle", "demande": "fais un jeu"})[0] == 400)
+    controle("pilotage : retours sans accord refusé", post("/api/action", {"action": "retours", "slug": "essai"})[0] == 400)
+    for mauvais in ({"action": "cycle", "accord_modeles": True, "demande": "--simuler"},
+                    {"action": "cycle", "accord_modeles": True, "demande": "x", "tours": 99},
+                    {"action": "cycle", "accord_modeles": "oui", "demande": "x"},
+                    {"action": "retours", "accord_modeles": True, "slug": "../essai"}):
+        controle("pilotage : demande invalide refusée %s" % json.dumps(mauvais, ensure_ascii=False), post("/api/action", mauvais)[0] == 400)
+    code, d = post("/api/action", {"action": "cycle_simuler", "demande": "fais un jeu", "tours": 2})
+    fin = attendre_fin(d.get("id"))
+    controle("pilotage : cycle simulé lancé avec --simuler", code == 202 and fin and fin["code"] == 3 and "--simuler" in fin["commande"], (d, fin))
+    code, d = post("/api/action", {"action": "cycle", "demande": "fais un jeu dormir", "tours": 2, "accord_modeles": True})
+    res = reservation()
+    controle("pilotage : cycle accordé lancé et réservé comme battement --lancer",
+             code == 202 and res.get("lancement", {}).get("id") == d.get("id") and res.get("evenements") == ["e1"], (code, d, res))
+    controle("pilotage : un seul cycle à la fois", post("/api/action", {"action": "cycle", "demande": "x", "accord_modeles": True})[0] == 409)
+    controle("pilotage : retours refusés pendant un cycle", post("/api/action", {"action": "retours", "slug": "essai", "accord_modeles": True})[0] == 409)
+    code2, _ = post("/api/interrompre", {"id": d.get("id")})
+    fin = attendre_fin(d.get("id"))
+    res = reservation()
+    controle("pilotage : interruption, réservation libérée, le reste conservé",
+             code2 == 200 and fin and fin["code"] != 0 and "lancement" not in res and res.get("evenements") == ["e1"], (fin, res))
+    ecrire(r, "JOURNAUX/battement-etat.json", '{"lancement": {"date": "x", "demande": "veille", "tours": 2}}')
+    controle("pilotage : cycle refusé si battement --lancer a réservé", post("/api/action", {"action": "cycle", "demande": "x", "accord_modeles": True})[0] == 409)
+    controle("pilotage : réservation d'un autre gardée", reservation()["lancement"]["demande"] == "veille")
+    code, d = post("/api/action", {"action": "stop"})
+    fin = attendre_fin(d.get("id"))
+    controle("pilotage : STOP posé par usine.py", code == 202 and fin and os.path.exists(os.path.join(r, "STOP")))
+    controle("pilotage : actions tracées dans actions.log",
+             io.open(os.path.join(r, "JOURNAUX", "tableau", "actions.log"), encoding="utf-8").read().count("lancée") >= 4)
+    controle("pilotage : interrompre un identifiant inconnu", post("/api/interrompre", {"id": "nul"})[0] == 404)
     s.shutdown()
     s.server_close()
 

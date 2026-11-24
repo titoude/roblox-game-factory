@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""tableau-de-bord.py - interface locale de l'usine, en lecture seule.
+"""tableau-de-bord.py - interface locale de l'usine : consultation et pilotage.
 
 Lit les vrais fichiers de l'usine (JEUX\\*\\ETAT.json, JOURNAUX\\, ALERTES.md, VERROUS\\, routage.json,
 seuils.json) et les sert sur http://127.0.0.1:<port>/ : vue d'ensemble, jeux (étapes et portes),
 cycles (tours d'orchestrateur et battements), agents (en cours, routage, délégations), journaux,
-alertes et verrous. Rien n'est écrit, aucun modèle n'est lancé, aucun réseau extérieur.
+alertes et verrous. La lecture n'écrit rien. Le pilotage (STOP, reprendre, vérifier, battement, cycle,
+retours) ne fait qu'appeler `python usine.py ...`, donc derrière STOP (G0), le plafond G2 et les verrous ;
+un cycle (modèles) exige l'accord explicite du propriétaire et réserve sa place dans battement-etat.json.
+Le tableau n'écrit lui-même que JOURNAUX/tableau/ et cette réservation. Aucun réseau extérieur.
 
   python usine.py tableau                       lance le serveur et ouvre le navigateur
-  python OUTILS\\tableau-de-bord.py [--port 8765] [--sans-navigateur] [--racine <dossier>]
+  python OUTILS\\tableau-de-bord.py [--port 8765] [--sans-navigateur] [--lecture-seule] [--racine <dossier>]
   python OUTILS\\tableau-de-bord.py --instantane    imprime l'état en JSON et rend la main
 
 Codes de sortie : 0 arrêt normal | 2 usage | 5 port occupé.
@@ -22,6 +25,8 @@ import io
 import json
 import os
 import re
+import secrets
+import subprocess
 import sys
 import threading
 import webbrowser
@@ -401,9 +406,205 @@ def lire_fichier(racine, demande, queue=False):
             "maj": mtime(absolu), "texte": masquer(texte)}
 
 
+
+# ---------- Pilotage ----------
+# Chaque action passe par usine.py, donc par ses règles : STOP (G0), plafond G2 et verrous appliqués par
+# deleguer.py et l'orchestrateur. Le tableau n'écrit lui-même que JOURNAUX/tableau/ (sortie des actions)
+# et, pour un cycle, la réservation « lancement » de battement-etat.json (celle de battement.py --lancer).
+
+ACTIONS = {
+    # nom : (libellé, arguments usine.py, lance des modèles, autorisée sous STOP)
+    "stop": ("Poser STOP (tout geler)", ["stop"], False, True),
+    "reprendre": ("Retirer STOP (reprendre)", ["reprendre"], False, True),
+    "verifier": ("Auto-contrôle de l'usine", ["verifier"], False, False),
+    "battement_simuler": ("Battement simulé (rien n'est écrit)", ["battement", "--simuler"], False, False),
+    "battement": ("Battement (mesures, messages, décision ; aucun modèle)", ["battement"], False, False),
+    "cycle_simuler": ("Cycle simulé (montre ce qui serait lancé)", None, False, False),
+    "cycle": ("Lancer un cycle d'orchestrateur", None, True, False),
+    "retours": ("Boucle des retours joueurs d'un jeu", None, True, False),
+}
+DEMANDE_OK = re.compile(r"^[^\x00-\x1f\"]{1,200}$")
+SLUG_OK = re.compile(r"^[a-z0-9][a-z0-9-]{0,63}$")
+
+
+def arreter_arbre(proc):
+    """Arrête usine.py et ses enfants (CLI de l'orchestrateur, agents délégués)."""
+    try:
+        if os.name == "nt":
+            subprocess.run(["taskkill", "/PID", str(proc.pid), "/T", "/F"], capture_output=True, check=False)
+        else:
+            import signal
+            os.killpg(proc.pid, signal.SIGTERM)
+    except OSError:
+        proc.terminate()
+
+
+class Pilote:
+    def __init__(self, racine):
+        self.racine = racine
+        self.jeton = secrets.token_urlsafe(24)
+        self.taches = []
+        self.verrou = threading.Lock()
+
+    def en_cours(self):
+        return [t for t in self.taches if t["code"] is None]
+
+    def chemin_reservation(self):
+        return os.path.join(self.racine, "JOURNAUX", "battement-etat.json")
+
+    def lire_reservation(self):
+        try:
+            e = lire_json(self.chemin_reservation())
+            return e if isinstance(e, dict) else {}
+        except FileNotFoundError:
+            return {}
+
+    def cycle_externe(self):
+        """Un cycle lancé hors du tableau (battement --lancer) réserve sa place dans battement-etat.json."""
+        try:
+            return bool(self.lire_reservation().get("lancement"))
+        except Exception:
+            return True  # illisible : prudence, comme battement.py
+
+    def ecrire_reservation(self, etat):
+        chemin = self.chemin_reservation()
+        os.makedirs(os.path.dirname(chemin), exist_ok=True)
+        provisoire = chemin + ".tableau.tmp"
+        with io.open(provisoire, "w", encoding="utf-8", newline="\n") as f:
+            f.write(json.dumps(etat, ensure_ascii=False, indent=2) + "\n")
+        os.replace(provisoire, chemin)
+
+    def reserver(self, t, args):
+        # Même réservation durable que battement.py --lancer : tant qu'elle existe, le battement ne lance rien.
+        e = self.lire_reservation()
+        e["lancement"] = {"date": t["debut"], "demande": args[1] if args[0] == "retours" else args[0], "tours": int(args[2]) if len(args) > 2 else 2,
+                          "origine": "tableau de bord", "id": t["id"]}
+        self.ecrire_reservation(e)
+
+    def liberer(self, t):
+        try:
+            e = self.lire_reservation()
+            if (e.get("lancement") or {}).get("id") == t["id"]:
+                del e["lancement"]
+                self.ecrire_reservation(e)
+        except Exception as x:
+            self.tracer(t, "réservation non libérée (%s) : voir battement-etat.json" % type(x).__name__)
+
+    def commande(self, nom, corps):
+        libelle, args, modeles, sous_stop = ACTIONS[nom]
+        if args is not None:
+            return list(args), libelle
+        if nom == "retours":
+            slug = str(corps.get("slug") or "")
+            if not SLUG_OK.match(slug) or not os.path.isfile(os.path.join(self.racine, "JEUX", slug, "ETAT.json")):
+                raise ValueError("jeu inconnu")
+            return ["retours", slug], "%s : %s" % (libelle, slug)
+        demande = str(corps.get("demande") or "fais un jeu").strip()
+        if not DEMANDE_OK.match(demande) or demande.startswith("-"):
+            raise ValueError("demande refusée")
+        try:
+            tours = int(corps.get("tours") or 8)
+        except (TypeError, ValueError):
+            raise ValueError("tours invalide")
+        if not 1 <= tours <= 20:
+            raise ValueError("tours entre 1 et 20")
+        args = [demande, "--tours", str(tours)] + (["--simuler"] if nom == "cycle_simuler" else [])
+        return args, "%s : « %s », %d tour(s)" % (libelle, demande, tours)
+
+    def lancer(self, corps):
+        nom = corps.get("action")
+        if nom not in ACTIONS:
+            return 400, {"erreur": "action inconnue"}
+        libelle, _, modeles, sous_stop = ACTIONS[nom]
+        if os.path.exists(os.path.join(self.racine, "STOP")) and not sous_stop:
+            return 409, {"erreur": "STOP présent (G0) : retirer STOP avant d'agir"}
+        if modeles and corps.get("accord_modeles") is not True:
+            return 400, {"erreur": "accord du propriétaire sur les modèles requis (Opus 5.5 et Astra 6.2 compris)"}
+        try:
+            args, titre = self.commande(nom, corps)
+        except ValueError as x:
+            return 400, {"erreur": str(x)}
+        with self.verrou:
+            occupe = [t for t in self.en_cours() if t["action"] not in ("stop", "reprendre")]
+            if nom not in ("stop", "reprendre"):
+                if modeles and (any(ACTIONS[t["action"]][2] for t in occupe) or self.cycle_externe()):
+                    return 409, {"erreur": "un cycle tourne déjà : une seule usine à la fois"}
+                if any(t["action"] == nom for t in occupe):
+                    return 409, {"erreur": "cette action tourne déjà"}
+            maintenant = dt.datetime.now(dt.timezone.utc)
+            ident = "%s-%s-%d" % (maintenant.strftime("%Y%m%dT%H%M%SZ"), nom, len(self.taches) + 1)
+            dossier = os.path.join(self.racine, "JOURNAUX", "tableau")
+            os.makedirs(dossier, exist_ok=True)
+            journal = os.path.join(dossier, ident + ".log")
+            commande = [sys.executable, os.path.join(self.racine, "usine.py")] + args
+            t = {"id": ident, "action": nom, "titre": titre, "commande": "python usine.py " + " ".join(
+                 ('"%s"' % x if " " in x else x) for x in args), "debut": maintenant.strftime("%Y-%m-%dT%H:%M:%SZ"),
+                 "fin": None, "code": None, "journal": rel(self.racine, journal), "modeles": modeles, "pid": None}
+            sortie = io.open(journal, "w", encoding="utf-8")
+            sortie.write("# %s\n# %s\n# lancé depuis le tableau de bord le %s\n\n" % (titre, t["commande"], t["debut"]))
+            sortie.flush()
+            env = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
+            if modeles:
+                self.reserver(t, args)
+            groupe = ({"creationflags": subprocess.CREATE_NEW_PROCESS_GROUP} if os.name == "nt"
+                      else {"start_new_session": True})
+            try:
+                proc = subprocess.Popen(commande, cwd=self.racine, stdout=sortie, stderr=subprocess.STDOUT,
+                                        stdin=subprocess.DEVNULL, env=env, **groupe)
+            except OSError as x:
+                sortie.close()
+                if modeles:
+                    self.liberer(t)
+                return 500, {"erreur": "lancement impossible : %s" % x}
+            t["pid"] = proc.pid
+            t["_proc"] = proc
+            self.taches.append(t)
+            threading.Thread(target=self.attendre, args=(t, proc, sortie), daemon=True).start()
+            self.tracer(t, "lancée")
+        return 202, self.public(t)
+
+    def attendre(self, t, proc, sortie):
+        code = proc.wait()
+        sortie.write("\n# fin : code %d\n" % code)
+        sortie.close()
+        if t["modeles"]:
+            self.liberer(t)
+        t["fin"] = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        t["code"] = code
+        self.tracer(t, "finie, code %d" % code)
+
+    def interrompre(self, ident):
+        for t in self.en_cours():
+            if t["id"] == ident:
+                arreter_arbre(t["_proc"])
+                self.tracer(t, "interrompue depuis le tableau")
+                return 200, self.public(t)
+        return 404, {"erreur": "aucune action en cours avec cet identifiant"}
+
+    def tracer(self, t, quoi):
+        with io.open(os.path.join(self.racine, "JOURNAUX", "tableau", "actions.log"), "a", encoding="utf-8") as f:
+            f.write("%s | %s | %s | %s\n" % (dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                                             t["action"], quoi, t["commande"]))
+
+    @staticmethod
+    def public(t):
+        return {k: v for k, v in t.items() if not k.startswith("_")}
+
+    def etat(self):
+        orchestrateur = []
+        try:
+            r = lire_json(os.path.join(self.racine, "CONNAISSANCES", "routage.json"))
+            role = (r.get("roles") or {}).get("00.orchestrateur") or {}
+            orchestrateur = ["%s %s" % (c.get("fournisseur", ""), c.get("modele", "")) for c in role.get("candidats", [])]
+        except Exception:
+            pass
+        return {"actions": [{"id": k, "libelle": v[0], "modeles": v[2], "sous_stop": v[3]} for k, v in ACTIONS.items()],
+                "taches": [self.public(t) for t in reversed(self.taches)],
+                "cycle_externe": self.cycle_externe(), "orchestrateur": orchestrateur}
+
 # ---------- Serveur ----------
 
-def fabrique(racine):
+def fabrique(racine, pilote=None):
     class Gestionnaire(BaseHTTPRequestHandler):
         server_version = "UsineTableau/1"
 
@@ -427,30 +628,69 @@ def fabrique(racine):
 
         def do_GET(self):
             # Refuse un nom d'hôte étranger : une page web ne peut pas lire l'usine par rebond DNS.
-            hote = (self.headers.get("Host") or "").rsplit(":", 1)[0].strip("[]")
-            if hote not in ("127.0.0.1", "localhost", "::1"):
+            if not self.hote_local():
                 return self.json(403, {"erreur": "hôte refusé"})
             u = urlsplit(self.path)
             q = parse_qs(u.query)
             if u.path in ("/", "/index.html"):
-                return self.envoyer(200, lire_texte(PAGE), "text/html; charset=utf-8")
+                page = lire_texte(PAGE).replace("{{JETON}}", pilote.jeton if pilote else "")
+                return self.envoyer(200, page, "text/html; charset=utf-8")
             if u.path == "/api/etat":
-                return self.json(200, instantane(racine))
+                e = instantane(racine)
+                e["pilotage"] = pilote.etat() if pilote else None
+                return self.json(200, e)
             if u.path == "/api/fichier":
                 r = lire_fichier(racine, (q.get("chemin") or [""])[0], queue=(q.get("queue") or ["0"])[0] == "1")
                 return self.json(200, r) if r else self.json(404, {"erreur": "fichier introuvable ou non lisible ici"})
             return self.json(404, {"erreur": "inconnu"})
 
-        def do_POST(self):
-            self.json(405, {"erreur": "lecture seule"})
+        def hote_local(self):
+            # Refuse un nom d'hôte étranger : une page web ne peut pas lire l'usine par rebond DNS.
+            hote = (self.headers.get("Host") or "").rsplit(":", 1)[0].strip("[]")
+            return hote in ("127.0.0.1", "localhost", "::1")
 
-        do_PUT = do_DELETE = do_PATCH = do_POST
+        def do_POST(self):
+            if pilote is None:
+                return self.json(405, {"erreur": "lecture seule"})
+            if not self.hote_local():
+                return self.json(403, {"erreur": "hôte refusé"})
+            # Jeton propre à ce lancement, présent seulement dans la page servie : une autre page web
+            # ne peut ni le lire ni envoyer cet en-tête sans requête préalable que le serveur refuse.
+            origine = self.headers.get("Origin")
+            if origine and urlsplit(origine).hostname not in ("127.0.0.1", "localhost", "::1"):
+                return self.json(403, {"erreur": "origine refusée"})
+            if not secrets.compare_digest(self.headers.get("X-Jeton") or "", pilote.jeton):
+                return self.json(403, {"erreur": "jeton absent ou faux"})
+            if (self.headers.get("Content-Type") or "").split(";")[0].strip() != "application/json":
+                return self.json(415, {"erreur": "JSON attendu"})
+            try:
+                taille = int(self.headers.get("Content-Length") or 0)
+                corps = json.loads(self.rfile.read(min(taille, 16384)).decode("utf-8") or "{}")
+                if not isinstance(corps, dict):
+                    raise ValueError
+            except (ValueError, UnicodeDecodeError):
+                return self.json(400, {"erreur": "JSON illisible"})
+            u = urlsplit(self.path)
+            if u.path == "/api/action":
+                code, r = pilote.lancer(corps)
+                return self.json(code, r)
+            if u.path == "/api/interrompre":
+                code, r = pilote.interrompre(str(corps.get("id") or ""))
+                return self.json(code, r)
+            return self.json(404, {"erreur": "inconnu"})
+
+        def do_PUT(self):
+            self.json(405, {"erreur": "méthode refusée"})
+
+        do_DELETE = do_PATCH = do_PUT
 
     return Gestionnaire
 
 
-def serveur(racine=RACINE, port=8765, hote="127.0.0.1"):
-    return ThreadingHTTPServer((hote, port), fabrique(racine))
+def serveur(racine=RACINE, port=8765, hote="127.0.0.1", pilotage=True):
+    s = ThreadingHTTPServer((hote, port), fabrique(racine, Pilote(racine) if pilotage else None))
+    s.daemon_threads = True
+    return s
 
 
 def main(argv=None):
@@ -461,6 +701,7 @@ def main(argv=None):
     p.add_argument("--racine", default=RACINE)
     p.add_argument("--sans-navigateur", action="store_true")
     p.add_argument("--instantane", action="store_true", help="imprime l'état en JSON et rend la main")
+    p.add_argument("--lecture-seule", action="store_true", help="consultation seule : aucune action possible")
     a = p.parse_args(argv)
     racine = os.path.abspath(a.racine)
     if not os.path.isdir(os.path.join(racine, "JEUX")):
@@ -470,12 +711,12 @@ def main(argv=None):
         print(json.dumps(instantane(racine), ensure_ascii=False, indent=1))
         return 0
     try:
-        s = serveur(racine, a.port)
+        s = serveur(racine, a.port, pilotage=not a.lecture_seule)
     except OSError as x:
         print("PORT: %d occupé (%s). Essayer --port %d." % (a.port, x, a.port + 1))
         return 5
     url = "http://127.0.0.1:%d/" % s.server_address[1]
-    print("TABLEAU: %s (lecture seule ; Ctrl+C pour arrêter)" % url)
+    print("TABLEAU: %s (%s ; Ctrl+C pour arrêter)" % (url, "lecture seule" if a.lecture_seule else "pilotage par usine.py"))
     sys.stdout.flush()
     if not a.sans_navigateur:
         threading.Timer(0.5, webbrowser.open, (url,)).start()

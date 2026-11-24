@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="jeton" content="{{JETON}}">
 <title>Usine Roblox — tableau de bord</title>
 <style>
 :root{--fond:#0f1218;--carte:#171b23;--carte2:#1e2430;--bord:#2a3140;--texte:#e6e9ef;--doux:#9aa3b2;--vert:#3fb950;--ambre:#d29922;--rouge:#f85149;--bleu:#58a6ff;--gris:#5c6573;--violet:#a371f7}
@@ -44,20 +45,29 @@ pre.journal{background:#0b0e13;border:1px solid var(--bord);border-radius:8px;pa
 label.chk{color:var(--doux);font-size:12px}
 .note{max-width:620px}
 .defile{max-height:460px;overflow:auto}
+button{background:var(--carte2);border:1px solid var(--bord);color:var(--texte);border-radius:6px;padding:7px 12px;font:inherit;cursor:pointer}button:hover:not(:disabled){border-color:var(--bleu)}button:disabled{opacity:.45;cursor:not-allowed}
+button.danger{border-color:var(--rouge);color:#ffb3ad}button.principal{border-color:var(--vert);color:#7ee2a0}
+#btn-stop{white-space:nowrap}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.form{display:grid;gap:8px;max-width:640px}
+.form input[type=text],.form input[type=number],.form select{background:var(--carte2);border:1px solid var(--bord);color:var(--texte);border-radius:6px;padding:6px 10px;font:inherit}
+.retour{padding:8px 12px;border-radius:8px;margin-bottom:14px;border:1px solid var(--bord);background:var(--carte2)}.retour.erreur{border-color:var(--rouge);color:#ffb3ad}
 </style>
 </head>
 <body>
 <header>
   <h1>Usine Roblox</h1>
   <nav id="nav">
-    <a href="#vue">Vue d'ensemble</a><a href="#jeux">Jeux et portes</a><a href="#cycles">Cycles</a><a href="#agents">Agents</a><a href="#journaux">Journaux</a><a href="#alertes">Alertes et verrous</a>
+    <a href="#vue">Vue d'ensemble</a><a href="#jeux">Jeux et portes</a><a href="#cycles">Cycles</a><a href="#agents">Agents</a><a href="#journaux">Journaux</a><a href="#alertes">Alertes et verrous</a><a href="#pilotage">Pilotage</a>
   </nav>
   <div class="meta" id="meta">chargement…</div>
+  <button id="btn-stop" hidden></button>
 </header>
 <main id="app"></main>
 <script>
 "use strict";
 let E = null, ongletJeu = null, fichierCourant = null, suivre = true, filtre = "", defilement = 0;
+const JETON = document.querySelector('meta[name="jeton"]').content;
+const P = {demande: "fais un jeu", tours: 8, slug: "", accord: false, accordRetours: false, retour: null};
 const $ = s => document.querySelector(s);
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pill = (v, cls) => `<span class="pill ${esc(cls || v)}">${esc(String(v).replace(/_/g, " "))}</span>`;
@@ -73,6 +83,12 @@ async function charger() {
     $("#meta").innerHTML = `${esc(E.git.branche)} @ ${esc(E.git.commit)} · lu ${date(E.genere)} UTC · <span class="mono">${esc(E.racine)}</span>`;
     const n = E.alertes_ouvertes;
     document.querySelector('#nav a[href="#alertes"]').innerHTML = `Alertes et verrous${n ? `<span class="badge-n">${n}</span>` : ""}`;
+    const b = $("#btn-stop"), en = E.pilotage ? E.pilotage.taches.filter(t => t.code === null).length : 0;
+    b.hidden = !E.pilotage;
+    b.className = E.stop ? "principal" : "danger";
+    b.textContent = E.stop ? "Reprendre (retirer STOP)" : "STOP";
+    b.dataset.action = E.stop ? "reprendre" : "stop";
+    document.querySelector('#nav a[href="#pilotage"]').innerHTML = `Pilotage${en ? `<span class="badge-n" style="background:var(--bleu)">${en}</span>` : ""}`;
     rendre();
   } catch (x) { $("#meta").textContent = "serveur injoignable : " + x; }
 }
@@ -82,17 +98,18 @@ function rendre() {
   const page = (location.hash || "#vue").slice(1).split("/");
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("actif", a.getAttribute("href") === "#" + page[0]));
   const stop = E.stop ? `<div class="bandeau stop">Fichier STOP présent (G0) : aucun agent n'agit. <span class="mono">python usine.py reprendre</span> pour le retirer.</div>` : "";
-  const vues = {vue, jeux, cycles, agents, journaux, alertes};
+  const vues = {vue, jeux, cycles, agents, journaux, alertes, pilotage};
   const garde = window.scrollY, pre = $("#j-texte"), actif = document.activeElement,
-        saisie = actif && actif.id === "j-filtre";
+        saisie = actif && actif.id && $("#app").contains(actif) ? actif.id : null,
+        sel = saisie && /^(text|search)$/.test(actif.type) ? [actif.selectionStart, actif.selectionEnd] : null;
   // L'actualisation redessine l'écran : garder le focus clavier sur le même lien de fichier.
   const focusLien = actif && $("#app").contains(actif) && actif.matches("a[data-f],a[data-j],a[href^='#']")
     ? `a[href="${CSS.escape(actif.getAttribute("href"))}"]` : null;
   if (pre && fichierCourant) defilement = pre.scrollTop;
   $("#app").innerHTML = stop + (vues[page[0]] || vue)(page.slice(1));
   window.scrollTo(0, garde);
-  const champ = $("#j-filtre");
-  if (champ && filtre && saisie) { champ.focus(); champ.setSelectionRange(filtre.length, filtre.length); }
+  const champ = saisie && document.getElementById(saisie);
+  if (champ) { champ.focus({preventScroll: true}); if (sel) champ.setSelectionRange(sel[0], sel[1]); }
   if (focusLien) { const l = $("#app").querySelector(focusLien); if (l) l.focus({preventScroll: true}); }
   if (page[0] === "journaux" && fichierCourant) ouvrir(fichierCourant, false);
 }
@@ -231,6 +248,86 @@ function alertes() {
   <div class="carte"><h3 style="margin-top:0">Alertes · ${lien("ALERTES.md")} (${E.alertes_ouvertes} ouverte(s))</h3>${table(["Date", "Type", "Agent", "Jeu", "Étape", "Constat", "Statut"], al, "Aucune alerte.")}</div>`;
 }
 
+function pilotage() {
+  const pl = E.pilotage;
+  if (!pl) return `<h2>Pilotage</h2><div class="carte">Tableau lancé en <b>lecture seule</b> (<span class="mono">--lecture-seule</span>) : aucune action possible ici.</div>`;
+  const A = Object.fromEntries(pl.actions.map(a => [a.id, a]));
+  const occupe = pl.cycle_externe || pl.taches.some(t => t.code === null && t.modeles);
+  const bouton = (id, cls, extra) => { const a = A[id]; const off = (E.stop && !a.sous_stop) || (a.modeles && occupe) || (extra === false);
+    return `<button data-action="${id}" class="${cls || ""}" ${off ? "disabled" : ""}>${esc(a.libelle)}</button>`; };
+  const retour = P.retour ? `<div class="retour ${P.retour.ok ? "" : "erreur"}">${esc(P.retour.texte)}</div>` : "";
+  const orch = pl.orchestrateur.length ? pl.orchestrateur.map(esc).join(" → ") : "routage illisible";
+  const taches = pl.taches.map(t => `<tr><td class="mono">${date(t.debut)}</td><td>${esc(t.titre)}<div class="mono doux">${esc(t.commande)}</div></td>
+    <td>${t.code === null ? pill("en cours", "en_cours") : pill("code " + t.code, t.code === 0 ? "ok" : t.code === 3 ? "a_confirmer" : "echec")}</td>
+    <td class="mono">${date(t.fin)}</td><td>${lien(t.journal)}</td>
+    <td>${t.code === null ? `<button data-interrompre="${esc(t.id)}" class="danger">Interrompre</button>` : ""}</td></tr>`);
+  const jeuxOpt = E.jeux.filter(j => !j.illisible).map(j => `<option value="${esc(j.slug)}" ${j.slug === P.slug ? "selected" : ""}>${esc(j.slug)}</option>`).join("");
+  return `<h2>Pilotage</h2>${retour}
+  <div class="carte petit doux" style="margin-bottom:14px">Chaque bouton lance <span class="mono">python usine.py …</span> : STOP (G0), plafond Claude fort (G2) et verrous s'appliquent comme en ligne de commande. Sortie dans <span class="mono">JOURNAUX/tableau/</span>.
+    ${E.stop ? "<br><b>STOP est présent : seules les actions STOP et Reprendre sont possibles.</b>" : ""}
+    ${pl.cycle_externe ? "<br><b>Un cycle a réservé sa place dans battement-etat.json : aucun autre cycle avant sa fin.</b>" : ""}</div>
+  <div class="deux">
+  <div class="carte"><h3 style="margin-top:0">Usine</h3><div class="actions">${bouton("stop", "danger", !E.stop)}${bouton("reprendre", "principal", E.stop)}${bouton("verifier")}</div>
+    <h3>Battement (sans modèle)</h3><div class="actions">${bouton("battement_simuler")}${bouton("battement")}</div></div>
+  <div class="carte"><h3 style="margin-top:0">Cycle d'orchestrateur</h3><div class="form">
+    <label class="petit doux">Demande <input type="text" id="p-demande" maxlength="200" value="${esc(P.demande)}"></label>
+    <label class="petit doux">Tours au plus <input type="number" id="p-tours" min="1" max="20" value="${esc(P.tours)}"></label>
+    <div class="petit doux">Orchestrateur selon le routage : <span class="mono">${orch}</span></div>
+    <label class="chk"><input type="checkbox" id="p-accord" ${P.accord ? "checked" : ""}> J'accorde, en tant que propriétaire, l'usage des modèles du routage pour ce cycle (Claude Opus compris).</label>
+    <div class="actions">${bouton("cycle_simuler")}${bouton("cycle", "principal", P.accord)}</div></div>
+    <h3>Retours joueurs (procédure 11)</h3><div class="form">
+    <label class="petit doux">Jeu <select id="p-slug"><option value="">—</option>${jeuxOpt}</select></label>
+    <label class="chk"><input type="checkbox" id="p-accord-retours" ${P.accordRetours ? "checked" : ""}> J'accorde l'usage des modèles du routage (2 tours d'orchestrateur).</label>
+    <div class="actions">${bouton("retours", "", P.accordRetours && !!P.slug)}</div></div></div>
+  </div>
+  <div class="carte" style="margin-top:16px"><h3 style="margin-top:0">Actions lancées depuis ce tableau</h3>${table(["Début", "Action", "État", "Fin", "Journal", ""], taches, "Aucune action lancée depuis ce lancement du tableau.")}</div>`;
+}
+
+const CONFIRMER = {
+  stop: "Poser STOP ? Plus aucun agent n'agit (G0).",
+  reprendre: "Retirer STOP ? L'usine pourra de nouveau agir.",
+  battement: "Lancer un battement réel ? Il écrit battement-etat.json et peut envoyer des messages au propriétaire. Aucun modèle.",
+  cycle: () => `Lancer un cycle d'orchestrateur avec les modèles du routage ?\n« ${P.demande} », ${P.tours} tour(s) au plus.`,
+  retours: () => `Lancer la boucle des retours joueurs de ${P.slug} avec les modèles du routage ?`,
+};
+
+async function poster(chemin, corps) {
+  try {
+    const r = await fetch(chemin, {method: "POST", headers: {"Content-Type": "application/json", "X-Jeton": JETON}, body: JSON.stringify(corps)});
+    const d = await r.json();
+    P.retour = r.ok ? {ok: true, texte: `${d.titre} : lancé (${d.journal}).`} : {ok: false, texte: `Refusé : ${d.erreur}`};
+  } catch (x) { P.retour = {ok: false, texte: "Serveur injoignable : " + x}; }
+  await charger();
+}
+
+function agir(id) {
+  const c = CONFIRMER[id];
+  if (c && !confirm(typeof c === "function" ? c() : c)) return;
+  const corps = {action: id};
+  if (id === "cycle" || id === "cycle_simuler") Object.assign(corps, {demande: P.demande, tours: +P.tours, accord_modeles: id === "cycle" && P.accord});
+  if (id === "retours") Object.assign(corps, {slug: P.slug, accord_modeles: P.accordRetours});
+  poster("/api/action", corps);
+  if (id === "cycle") P.accord = false;
+  if (id === "retours") P.accordRetours = false;
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button[data-action]");
+  if (b) return agir(b.dataset.action);
+  const i = e.target.closest("button[data-interrompre]");
+  if (i) { if (confirm("Interrompre cette action et ses agents ?")) poster("/api/interrompre", {id: i.dataset.interrompre}); return; }
+});
+document.addEventListener("input", e => {
+  const v = e.target;
+  if (v.id === "p-demande") P.demande = v.value;
+  if (v.id === "p-tours") P.tours = v.value;
+});
+document.addEventListener("change", e => {
+  const v = e.target;
+  if (v.id === "p-accord") { P.accord = v.checked; rendre(); }
+  if (v.id === "p-accord-retours") { P.accordRetours = v.checked; rendre(); }
+  if (v.id === "p-slug") { P.slug = v.value; rendre(); }
+});
 document.addEventListener("click", e => {
   const a = e.target.closest("[data-f],[data-j]");
   if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
