@@ -7,6 +7,7 @@ import argparse
 import csv
 from datetime import datetime, timedelta, timezone
 import hashlib
+import importlib.util
 from pathlib import Path
 import re
 from statistics import median
@@ -20,6 +21,14 @@ DEFAUTS = dict(tours_max_par_jour=6, tours_par_battement=2,
                heures_actives='00-24', sans_progres_heures=48,
                incident_refus_min=20, incident_facteur_mediane=5,
                chute_sessions_pct=30, chute_mediane_min=20)
+
+
+def bilans_prets(racine, jour):
+    """Jeux dont le BILAN.json attend la boucle d'amélioration (procédure 09) ; aucun modèle lancé ici."""
+    spec = importlib.util.spec_from_file_location('boucle_amelioration', str(Path(__file__).resolve().parent / 'boucle-amelioration.py'))
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m.bilans_prets(str(racine), jour)
 
 
 def lire(chemin, defaut):
@@ -255,6 +264,8 @@ def battement(racine=RACINE, simuler=False, maintenant=None, lancer=False, *,
         raison = 'hors heures actives'
     elif quota >= permanence['tours_max_par_jour']:
         raison = 'plafond quotidien de tours atteint'
+    elif bilans := [s for s in bilans_prets(racine, jour) if not any(a[3] in ('-', s) for a in ouverts)]:
+        decision, demande, raison = 'lancer', 'bilan ' + bilans[0], "bilan prêt pour la boucle d'amélioration"
     elif libres:
         decision, demande, raison = 'lancer', 'reprendre ' + libres[0][0].name, 'jeu en cours disponible'
     elif ouverts and any(a[3] == '-' for a in ouverts):

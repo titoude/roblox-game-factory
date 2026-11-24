@@ -37,7 +37,7 @@ python usine.py roles              # which model plays which role, fallbacks, fr
 | Luau test bench | `OUTILS/banc-luau.py`, `OUTILS/luau/` | Runs the game's server logic outside Studio against a fake Roblox runtime (`faux-roblox.luau`), one process per suite, deterministic; static analysis + compile on every script |
 | Studio push | `OUTILS/pousser-studio.py` | Pushes the game's scripts into Studio over MCP, under a lock, with a check that it is writing into the right place |
 | Player feedback loop | `OUTILS/retours-joueurs.py`, `PROCEDURES/11` | Collects in-game feedback through Open Cloud (read-only key), clusters it, judges it, turns it into patch batches |
-| Self-improvement | `CONNAISSANCES/BILANS/`, `PROPOSITIONS/` | Every game ends with a post-mortem; agents propose rule changes, the orchestrator merges them |
+| Self-improvement | `OUTILS/boucle-amelioration.py`, `CONNAISSANCES/BILANS/`, `PROPOSITIONS/` | Every game ends with a post-mortem (`09-bilan/BILAN.json`). The loop writes the measured lessons back with no manual step: forecast calibration factors, new rules (`to calibrate`, promoted when another game confirms them), thresholds changed on two games' data, agent proposals judged by an independent model, and a "lessons" block in each skill the next game reads. `CONNAISSANCES/PROGRES.json` tracks the forecast error game after game. The heartbeat runs it on its own |
 | Games | `JEUX/<slug>/` | One folder per game: state, journal, concept, economy model, reviews, source, tests |
 
 ## What the first Play session broke

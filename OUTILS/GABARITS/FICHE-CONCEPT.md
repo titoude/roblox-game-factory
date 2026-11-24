@@ -99,17 +99,17 @@ Aucun menu, aucun texte de plus de 8 mots avant la première action.
 
 ## Annexe C — Prévisions chiffrées
 
-Le bilan les comparera au mesuré.
+Le bilan les comparera au mesuré. Estimation brute, puis valeur corrigée par le facteur mesuré/prévu du bloc « Leçons des bilans » du skill (`CONNAISSANCES\CALIBRATION.json`) ; sans facteur, les deux sont égales.
 
-| Prévision | Valeur | D'où vient-elle |
-|---|---|---|
-| Temps jusqu'à la première action | s | |
-| Premier achat | s | |
-| Écart maximal entre achats, 0 à 10 min | s | |
-| Durée de contenu actif | min | |
-| J1 attendu | % | |
-| Durée de session attendue | min | |
-| Nombre de lots de production | | |
+| Prévision | Estimation brute | Facteur appliqué | Valeur | D'où vient-elle |
+|---|---|---|---|---|
+| Temps jusqu'à la première action | s | | s | |
+| Premier achat | s | | s | |
+| Écart maximal entre achats, 0 à 10 min | s | | s | |
+| Durée de contenu actif | min | | min | |
+| J1 attendu | % | | % | |
+| Durée de session attendue | min | | min | |
+| Nombre de lots de production | | | | |
 
 ## Annexe D — Critères d'arrêt
 

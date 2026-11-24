@@ -1,6 +1,6 @@
 {
-  "version": 3,
-  "maj": "2026-11-16",
+  "version": 4,
+  "maj": "2026-11-24",
   "statut": "initial, a calibrer apres les deux premiers jeux",
   "veille": {
     "pages_max_par_session": 40,
@@ -107,6 +107,10 @@
     "piste_vues_min": 1000,
     "travail_max_heures": 8,
     "cohortes_insuffisantes_max": 2
+  },
+  "bilan": {
+    "ecart_tolere_pct": 25,
+    "note": "Ecart prevu/mesure au-dela duquel OUTILS/boucle-amelioration.py ecrit une regle de calibration (procedure 09). Valeur de depart, a calibrer."
   },
   "permanence": {
     "statut": "valeurs de depart, a calibrer",

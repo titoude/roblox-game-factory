@@ -23,7 +23,7 @@
 | « veille » | Procédure 01 seule, mise à jour de `VEILLE\TENDANCES.md` |
 | « nouveau jeu » | Vérifier que la veille a moins de 7 jours, puis `OUTILS\nouveau-jeu.ps1` et procédure 02 |
 | « reprendre `<slug>` » | Lire `JEUX\<slug>\ETAT.json`, continuer |
-| « bilan `<slug>` » | Procédure 09 |
+| « bilan `<slug>` » | Procédure 09 ; `python usine.py bilan <slug>` applique `09-bilan\BILAN.json` (boucle d'amélioration) |
 | « état » | `etat.ps1 -Liste`, alertes ouvertes, rien d'autre |
 
 Un seul jeu en production à la fois. Une veille peut tourner pendant qu'un jeu est en QA.
