@@ -55,6 +55,8 @@ if ($analyze) {
   $connues = 'game|workspace|script|plugin|shared|Instance|Enum|Color3|ColorSequence|ColorSequenceKeypoint|NumberSequence|NumberSequenceKeypoint|NumberRange|UDim|UDim2|Vector2|Vector3|Vector3int16|CFrame|Rect|Region3|Ray|Random|TweenInfo|BrickColor|PhysicalProperties|Font|DateTime|task|tick|time|wait|spawn|delay|warn|typeof|settings|UserSettings|utf8|bit32|buffer|debug|os|RaycastParams|OverlapParams|PathWaypoint|Faces|Axes|DockWidgetPluginGuiInfo|SharedTable|elapsedTime|version|stats'
   foreach ($f in $fichiers | Where-Object { $_.Length -gt 0 }) {
     $execution = Executer-Natif $analyze @($f.FullName)
+    # 0 = rien, 1 = diagnostics ; tout autre code est un plantage (0xC0000005 avec un MSVCP140 trop ancien) : non verifie.
+    if ($execution.Code -notin 0, 1) { "ANALYSE  : $($f.Name) : luau-analyze a plante (code $($execution.Code)) ; runtime VC++ 2015-2022 x64 a jour ?"; $defauts++; continue }
     $lignes = $execution.Lignes | Where-Object { "$_" -match "Unknown global '([^']+)'" -and ($Matches[1] -notmatch "^($connues)$") }
     foreach ($l in $lignes) { "GLOBALE  : $l"; $defauts++ }
   }

@@ -110,6 +110,7 @@ else {
     } finally { $ErrorActionPreference = $preferenceAvant }
     if ($codeSuite -ne 0) {
       $rates = @($sortie | Where-Object { "$_" -match '^(ECHEC|echec|KO|ko)\b' } | Select-Object -First 5)
+      if ($rates.Count -eq 0) { $rates = @($sortie | ForEach-Object { "$_".Trim() } | Where-Object { $_ } | Select-Object -Last 1) }
       Err ("suite '$($su.nom)' en echec (code $codeSuite) : " + ($rates -join ' ; '))
     }
   }
