@@ -3,9 +3,12 @@
 import importlib.util
 import io
 import os
+import queue
+import time
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 spec = importlib.util.spec_from_file_location("pousser_studio", Path(__file__).with_name("pousser-studio.py"))
@@ -38,6 +41,54 @@ class EnvoiStudio(unittest.TestCase):
                 self.assertEqual(pousser.main(["lave-la-tour", "--place-attendue", attendu]), 4)
                 self.assertEqual(client.luau.call_count, 1)
                 client.fermer.assert_called_once()
+
+
+class TransportMCP:
+    def __init__(self, *messages):
+        self.lignes = queue.Queue()
+        for ligne in messages:
+            self.lignes.put(ligne)
+        self.stdin = io.BytesIO()
+        self.stdout = SimpleNamespace(readline=self.lignes.get)
+        self.arrets = 0
+
+    def terminate(self):
+        self.arrets += 1
+        self.lignes.put(b"")
+
+
+class ClientMCP(unittest.TestCase):
+    def client(self, transport, delai_s):
+        mcp = pousser.studio_mcp
+        with patch.object(mcp, "BAT", __file__), patch.object(mcp.subprocess, "Popen", return_value=transport):
+            return mcp.Client(delai_s=delai_s)
+
+    def test_initialisation_bornee_sans_reponse(self):
+        transport = TransportMCP()
+        with self.assertRaisesRegex(pousser.studio_mcp.ErreurStudio, "délai.*initialize"):
+            self.client(transport, 0.05)
+        self.assertEqual(transport.arrets, 1)
+
+    def test_liste_studios_respecte_son_delai(self):
+        transport = TransportMCP(b'{"id":1,"result":{}}\n')
+        client = self.client(transport, 5)
+        debut = time.monotonic()
+        try:
+            with self.assertRaisesRegex(pousser.studio_mcp.ErreurStudio, "délai.*tools/call"):
+                client.studios(attente_s=0.05)
+            self.assertLess(time.monotonic() - debut, 2)
+        finally:
+            client.fermer()
+        self.assertEqual(transport.arrets, 1)
+
+    def test_reponse_recue_apres_une_notification(self):
+        transport = TransportMCP(b'{"id":1,"result":{}}\n', b'{"method":"notifications/progress"}\n',
+                                 b'{"id":2,"result":{"ok":true}}\n')
+        client = self.client(transport, 1)
+        try:
+            self.assertEqual(client.req("tools/list"), {"ok": True})
+        finally:
+            client.fermer()
 
 
 if __name__ == "__main__":
