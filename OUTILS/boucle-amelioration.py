@@ -488,11 +488,39 @@ def appliquer(racine, slug, simuler=False, juge=None, commit=False, aujourdhui=N
                 # Comme etat.ps1 : P9 termine le jeu ; un bilan de suivi à 30 jours laisse le jeu en ligne tel quel.
                 etat["statut"] = "termine"
             ecrire(f_etat, json.dumps(etat, ensure_ascii=True, indent=4) + "\n")
+            maj_journal(connaissances, slug, etat, "BILANS\\%s-%s.md" % (date, slug))
     r["message"] = resume + ("" if complet else " ; %d proposition(s) sans décision : P9 non passée" % len(r["en_attente"]))
     r["rapport"] = f_rapport
     if commit:
-        r["commit"] = commiter(racine, "[orchestrateur] Bilan %s : %d règles, %d seuils" % (slug, len(r["ajoutees"]), len(r["seuils"])))
+        ok, sortie = commiter(racine, "[orchestrateur] Bilan %s : %d règles, %d seuils" % (slug, len(r["ajoutees"]), len(r["seuils"])))
+        r["commit"] = ok
+        if not ok:
+            # Les fichiers sont écrits et cohérents : seul le commit reste à faire (le tour suivant de l'orchestrateur le fait).
+            r["message"] += " ; COMMIT REFUSÉ, fichiers écrits non commités : " + " ".join(sortie.split())[:300]
+            return 1, r
     return (0 if complet else 1), r
+
+
+def maj_journal(connaissances, slug, etat, rapport):
+    """Ligne du jeu dans JOURNAL-DES-JEUX.md : colonne Bilan complétée, ligne créée si absente."""
+    chemin = os.path.join(connaissances, "JOURNAL-DES-JEUX.md")
+    if not os.path.isfile(chemin):
+        return
+    lignes = lire(chemin).split("\n")
+    for i, l in enumerate(lignes):
+        if l.startswith("| %s |" % slug):
+            cellules = l.rstrip().rstrip("|").split(" | ")
+            if rapport not in cellules[-1]:
+                cellules[-1] = cellules[-1].rstrip() + ", `%s`" % rapport
+            lignes[i] = " | ".join(cellules) + " |"
+            break
+    else:
+        fin = max(i for i, l in enumerate(lignes) if l.startswith("| ") and "Slug" not in l and i < next(
+            (j for j, x in enumerate(lignes) if x.startswith("## ")), len(lignes)))
+        portes = ", ".join("%s %s" % (k, v.get("resultat")) for k, v in sorted(etat.get("portes", {}).items(), key=lambda kv: int(kv[0][1:])))
+        lignes.insert(fin + 1, "| %s | %s | %s | 09 Bilan | %s | %s (bilan appliqué par la boucle) | `%s` |" % (
+            slug, etat.get("nom", slug), etat.get("cree_le", "NP"), portes, etat.get("statut", "NP"), rapport))
+    ecrire(chemin, "\n".join(lignes))
 
 
 def maj_skills(racine, regles, cal):
@@ -551,6 +579,7 @@ def rapport_md(slug, date, bilan, r, tolerance, juge_modele):
     out += ["", "## À dire au propriétaire", ""]
     out += (["- Skills modifiés (%s) : relancer `OUTILS\\installer-skills.ps1 -Confirmer` (G17)." % ", ".join(r["skills"])] if r["skills"] else [])
     out += ["- " + x for x in bilan.get("a_dire_au_proprietaire", [])] or (["- rien"] if not r["skills"] else [])
+    out += ["", "Reste à l'orchestrateur : compteurs de `JOURNAL-DES-JEUX.md` (la ligne du jeu est complétée par la boucle)."]
     return "\n".join(out) + "\n"
 
 
@@ -558,7 +587,7 @@ def commiter(racine, message):
     chemins = ["CONNAISSANCES", "skills", "JEUX"]
     subprocess.run(["git", "add", "--"] + chemins, cwd=racine, capture_output=True)
     c = subprocess.run(["git", "commit", "-m", message], cwd=racine, capture_output=True, text=True)
-    return c.returncode == 0
+    return c.returncode == 0, c.stdout + c.stderr
 
 
 def bilans_prets(racine, jour):

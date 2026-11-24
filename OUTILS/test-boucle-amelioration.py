@@ -197,6 +197,10 @@ with tempfile.TemporaryDirectory(prefix="tests-boucle-") as tmp, \
     etat_a = json.loads((racine / "JEUX/jeu-a/ETAT.json").read_text(encoding="utf-8"))
     verifier("porte P9 passe avec le rapport en preuve, jeu terminé",
              etat_a["portes"]["P9"]["resultat"] == "passe" and etat_a["statut"] == "termine" and (racine / "CONNAISSANCES/BILANS/2026-11-20-jeu-a.md").exists())
+    journal = (racine / "CONNAISSANCES/JOURNAL-DES-JEUX.md").read_text(encoding="utf-8")
+    ligne_a = next(l for l in journal.split("\n") if l.startswith("| jeu-a |"))
+    verifier("journal des jeux : ligne du jeu créée dans le tableau, avant les compteurs",
+             "`BILANS\\2026-11-20-jeu-a.md`" in ligne_a and journal.index(ligne_a) < journal.index("## Compteurs"))
     verifier("rapport : skills à réinstaller signalés au propriétaire",
              "installer-skills.ps1 -Confirmer" in (racine / "CONNAISSANCES/BILANS/2026-11-20-jeu-a.md").read_text(encoding="utf-8"))
     code, _ = appliquer(racine, "jeu-a")
@@ -308,15 +312,21 @@ with tempfile.TemporaryDirectory(prefix="tests-boucle-git-") as tmp2:
         subprocess.run(["git", "add", "-A"], cwd=depot, check=True)
         subprocess.run(["git", "commit", "-q", "-m", "[proprietaire] depart"], cwd=depot, check=True)
         analyste_simule(depot, "jeu-a", "2026-11-20", concepteur_simule(depot), jeu_simule(1.0))
-        code, r = appliquer(depot, "jeu-a", commit=True)
+        code, r_ok = appliquer(depot, "jeu-a", commit=True)
         dernier = subprocess.run(["git", "log", "-1", "--format=%s"], cwd=depot, capture_output=True, text=True).stdout.strip()
         propre = subprocess.run(["git", "status", "--porcelain"], cwd=depot, capture_output=True, text=True).stdout.strip()
         (depot / "CONNAISSANCES/REGLES.md").write_text("modifié hors bilan\n", encoding="utf-8")
         subprocess.run(["git", "add", "-A"], cwd=depot, check=True)
         refus = subprocess.run(["git", "commit", "-q", "-m", "retouche"], cwd=depot, capture_output=True, text=True)
     verifier("témoin des crochets : commit sans [orchestrateur] sur CONNAISSANCES refusé", refus.returncode != 0 and "G14" in refus.stderr)
+    subprocess.run(["git", "reset", "-q", "--hard", "HEAD"], cwd=depot, check=True)
+    analyste_simule(depot, "jeu-b", "2026-11-23", concepteur_simule(depot), jeu_simule(1.05))
+    (depot / "JEUX/jeu-b/09-bilan/vide.txt").write_text("", encoding="utf-8")
+    with patch.dict(os.environ, env):
+        code, r = appliquer(depot, "jeu-b", commit=True)
+    verifier("commit refusé par un crochet : code 1 et refus annoncé", code == 1 and r["commit"] is False and "COMMIT REFUSÉ" in r["message"])
     verifier("commit de la boucle accepté par les crochets : « %s »" % dernier,
-             r.get("commit") is True and dernier.startswith("[orchestrateur] Bilan jeu-a : 5 règles") and propre == "")
+             r_ok.get("commit") is True and dernier.startswith("[orchestrateur] Bilan jeu-a : 5 règles") and propre == "")
 
 
 # ----- Gabarit : BILAN.exemple.json est un bilan valide -----
