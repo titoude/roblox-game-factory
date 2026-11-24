@@ -61,7 +61,7 @@ let E = null, ongletJeu = null, fichierCourant = null, suivre = true, filtre = "
 const $ = s => document.querySelector(s);
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pill = (v, cls) => `<span class="pill ${esc(cls || v)}">${esc(String(v).replace(/_/g, " "))}</span>`;
-const lien = f => f ? `<a href="#journaux" data-f="${esc(f)}">${esc(f)}</a>` : "";
+const lien = f => f ? `<a href="#journaux/${esc(encodeURIComponent(f))}" data-f="${esc(f)}">${esc(f)}</a>` : "";
 const date = d => d ? esc(String(d).replace("T", " ").replace("Z", "")) : "";
 const duree = s => { s = +s || 0; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); return h ? `${h} h ${m} min` : m ? `${m} min ${s % 60} s` : `${s} s`; };
 const table = (cols, lignes, vide) => lignes.length ? `<table><thead><tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr></thead><tbody>${lignes.join("")}</tbody></table>` : `<div class="vide">${vide}</div>`;
@@ -189,12 +189,13 @@ function agents() {
   <div class="carte"><h3 style="margin-top:0">Routage des rôles · ${lien("CONNAISSANCES/routage.json")}</h3>${table(["Rôle", "Candidats dans l'ordre (replis)"], roles, "")}</div>`;
 }
 
-function journaux() {
+function journaux(args) {
+  if (args && args[0]) fichierCourant = decodeURIComponent(args.join("/"));
   const groupes = {};
   E.journaux.forEach(f => (groupes[f.groupe] = groupes[f.groupe] || []).push(f));
   if (!fichierCourant && E.journaux.length) fichierCourant = E.journaux[0].fichier;
   return `<h2>Journaux</h2><div class="journaux">
-  <div class="carte fichiers">${Object.entries(groupes).map(([g, l]) => `<h3 style="margin-top:4px">${esc(g)}</h3>${l.map(f => `<a href="#journaux" data-j="${esc(f.fichier)}" class="${f.fichier === fichierCourant ? "actif" : ""}">${esc(f.fichier)}<span class="doux">${date(f.maj)} · ${(f.taille / 1024).toFixed(1)} Ko</span></a>`).join("")}`).join("") || `<div class="vide">Aucun journal.</div>`}</div>
+  <div class="carte fichiers">${Object.entries(groupes).map(([g, l]) => `<h3 style="margin-top:4px">${esc(g)}</h3>${l.map(f => `<a href="#journaux/${esc(encodeURIComponent(f.fichier))}" data-j="${esc(f.fichier)}" class="${f.fichier === fichierCourant ? "actif" : ""}">${esc(f.fichier)}<span class="doux">${date(f.maj)} · ${(f.taille / 1024).toFixed(1)} Ko</span></a>`).join("")}`).join("") || `<div class="vide">Aucun journal.</div>`}</div>
   <div class="carte"><div class="outils"><b id="j-nom" class="mono"></b><span id="j-info" class="doux petit"></span><span style="margin-left:auto"></span><input type="search" id="j-filtre" placeholder="filtrer les lignes…" value="${esc(filtre)}"><label class="chk"><input type="checkbox" id="j-suivre" ${suivre ? "checked" : ""}> suivre la fin</label></div><pre class="journal" id="j-texte"></pre></div></div>`;
 }
 
@@ -226,9 +227,12 @@ function alertes() {
 }
 
 document.addEventListener("click", e => {
-  const f = e.target.closest("[data-f]"), j = e.target.closest("[data-j]");
-  if (f) { e.preventDefault(); fichierCourant = f.dataset.f; if (location.hash.startsWith("#journaux")) ouvrir(fichierCourant); else location.hash = "#journaux"; }
-  if (j) { e.preventDefault(); ouvrir(j.dataset.j); }
+  const a = e.target.closest("[data-f],[data-j]");
+  if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
+  e.preventDefault();
+  const f = a.dataset.f || a.dataset.j, cible = "#journaux/" + encodeURIComponent(f);
+  fichierCourant = f; defilement = 0;
+  if (location.hash === cible) ouvrir(f); else location.hash = cible;
 });
 document.addEventListener("input", e => { if (e.target.id === "j-filtre") { filtre = e.target.value; filtrer(); } });
 document.addEventListener("change", e => { if (e.target.id === "j-suivre") suivre = e.target.checked; });
