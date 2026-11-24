@@ -11,7 +11,7 @@
    ServerStorage.Tests.* seulement avec --avec-tests.
 4. Chaque fichier passe par OUTILS\\pousser-script.ps1 (même Luau que l'envoi à la main), puis
    execute_luau en mode Edit ; arrêt au premier échec.
-Codes : 0 ok | 1 échec d'envoi | 2 usage | 4 place inattendue ou verrou absent.
+Codes : 0 ok | 1 échec d'envoi | 2 usage | 3 STOP | 4 place inattendue ou verrou absent.
 """
 import argparse
 import os
@@ -64,6 +64,13 @@ def luau_de(fichier):
             return f.read()
 
 
+def arret_demande():
+    if os.path.exists(os.path.join(RACINE, "STOP")):
+        print("ARRET : fichier STOP présent (G0).")
+        return True
+    return False
+
+
 def main(argv=None):
     for flux in (sys.stdout, sys.stderr):
         try:
@@ -76,6 +83,8 @@ def main(argv=None):
     p.add_argument("--simuler", action="store_true")
     p.add_argument("--avec-tests", action="store_true")
     a = p.parse_args(argv)
+    if arret_demande():
+        return 3
     src = os.path.join(RACINE, "JEUX", a.slug, "05-production", "src")
     if not os.path.isdir(src):
         print("INTROUVABLE : %s" % src)
@@ -115,8 +124,13 @@ def main(argv=None):
             print("REFUS : place %d ouverte, %s attendue." % (place, a.place_attendue))
             return 4
         for n in liste:
+            if arret_demande():
+                return 3
             try:
-                r = c.luau(luau_de(os.path.join(src, n)))
+                code = luau_de(os.path.join(src, n))
+                if arret_demande():
+                    return 3
+                r = c.luau(code)
             except Exception as e:
                 print("ECHEC %s : %s" % (n, str(e)[:400]))
                 return 1

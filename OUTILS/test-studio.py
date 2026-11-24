@@ -4,6 +4,7 @@ import importlib.util
 import io
 import os
 import queue
+import tempfile
 import time
 import unittest
 from contextlib import redirect_stdout
@@ -17,6 +18,34 @@ spec.loader.exec_module(pousser)
 
 
 class EnvoiStudio(unittest.TestCase):
+    def test_stop_refuse_meme_si_le_verrou_est_detenu(self):
+        with tempfile.TemporaryDirectory() as dossier, patch.object(pousser, "RACINE", dossier), \
+                patch.object(pousser, "verrou_tenu", return_value=True) as verrou, \
+                patch.object(pousser.studio_mcp, "Client") as studio, redirect_stdout(io.StringIO()):
+            (Path(dossier) / "STOP").touch()
+            self.assertEqual(pousser.main(["lave-la-tour"]), 3)
+        verrou.assert_not_called()
+        studio.assert_not_called()
+
+    def test_stop_pendant_preparation_interdit_ecriture(self):
+        with tempfile.TemporaryDirectory() as dossier, patch.object(pousser, "RACINE", dossier), \
+                patch.object(pousser, "verrou_tenu", return_value=True), \
+                patch.object(pousser.studio_mcp, "Client") as studio, redirect_stdout(io.StringIO()):
+            src = Path(dossier) / "JEUX/lave-la-tour/05-production/src"
+            src.mkdir(parents=True)
+            (src / "ReplicatedStorage.Test.lua").write_text("return true\n", encoding="utf-8")
+            client = studio.return_value
+            client.luau.return_value = "0|0|Place locale"
+
+            def preparer(_):
+                (Path(dossier) / "STOP").touch()
+                return "return true"
+
+            with patch.object(pousser, "luau_de", side_effect=preparer):
+                self.assertEqual(pousser.main(["lave-la-tour"]), 3)
+            self.assertEqual(client.luau.call_count, 1)
+            client.fermer.assert_called_once()
+
     def test_simulation_n_ouvre_pas_studio(self):
         sortie = io.StringIO()
         with patch.object(pousser.studio_mcp, "Client") as studio, redirect_stdout(sortie):
