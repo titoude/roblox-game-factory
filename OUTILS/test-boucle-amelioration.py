@@ -267,8 +267,11 @@ with tempfile.TemporaryDirectory(prefix="tests-boucle-") as tmp, \
     verifier("SEUILS-PORTES.md : ligne d'historique avant/après/preuve",
              "| 2026-11-23 | `qa.fps_min_telephone` | 30 | 34 |" in historique and "jeu-a : 40 fps" in historique)
     skill = (racine / "skills/usine-fiche-concept/SKILL.md").read_text(encoding="utf-8")
-    verifier("skill concept : un seul bloc, facteurs recalculés sur deux jeux",
-             skill.count(B.DEBUT_BLOC) == 1 and "médiane de 2 jeu(x)" in skill)
+    verifier("skill concept : un seul bloc, facteurs recalculés sur deux jeux contre l'estimation brute (×2.05 = médiane de 2,0 et 2,1)",
+             skill.count(B.DEBUT_BLOC) == 1 and "médiane de 2 jeu(x)" in skill and "**×2.05**" in skill)
+    fiche_c = concepteur_simule(racine)
+    ecart_c = sum(B.ecart_pct(fiche_c[c]["prevu"], jeu_simule(1.05)[c]) for c in BRUT) / 3
+    verifier("jeu 3 : les facteurs du jeu 2 gardent l'écart faible (%.1f %%)" % ecart_c, ecart_c < 5)
     verifier("C4 retirée disparaît du bloc du skill", "`C4`" not in skill)
     verifier("GARDE-FOUS.md et PLAFONDS.md jamais modifiés",
              all((racine / f).read_bytes() == b for f, b in protege.items()))

@@ -283,8 +283,12 @@ def appliquer(racine, slug, simuler=False, juge=None, commit=False, aujourdhui=N
         ecarts.append(e)
         entree = cal["previsions"].setdefault(p["cle"], {"libelle": p.get("libelle", p["cle"]),
                                                           "domaine": domaine(p.get("domaine")) or "concept", "mesures": []})
-        entree["mesures"].append({"jeu": slug, "date": date, "prevu": p["prevu"], "mesure": p["mesure"],
-                                  "ratio": round(p["mesure"] / p["prevu"], 4), "ecart_pct": round(e, 1),
+        # Le facteur se calcule contre l'estimation brute : une prévision déjà corrigée est ramenée au brut.
+        facteur = p.get("facteur_applique")
+        brut = p["prevu"] / facteur if nombre(facteur) and facteur > 0 else p["prevu"]
+        entree["mesures"] = [m for m in entree["mesures"] if (m["jeu"], m["date"]) != (slug, date)]
+        entree["mesures"].append({"jeu": slug, "date": date, "prevu": p["prevu"], "brut": round(brut, 4), "mesure": p["mesure"],
+                                  "ratio": round(p["mesure"] / brut, 4), "ecart_pct": round(e, 1),
                                   "facteur_applique": p.get("facteur_applique"), "source": p["source"]})
         entree["facteur"] = round(statistics.median(m["ratio"] for m in entree["mesures"]), 3)
         entree["jeux"] = len({m["jeu"] for m in entree["mesures"]})
