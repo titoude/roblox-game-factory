@@ -53,6 +53,11 @@ import threading
 import time
 import uuid
 
+if os.name == "nt":
+    import msvcrt
+else:
+    import fcntl
+
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROUTAGE = os.path.join(RACINE, "CONNAISSANCES", "routage.json")
 DOS_AGENTS = os.path.join(RACINE, "JOURNAUX", "agents")
@@ -160,32 +165,31 @@ def ecrire_json_local(chemin, donnees):
 
 
 @contextlib.contextmanager
-def verrou(chemin, delai_s=30, perime_s=120):
-    """Verrou inter-processus (fichier .lock créé en exclusif) autour d'un lire-modifier-écrire."""
+def verrou(chemin, delai_s=30):
+    """Verrou inter-processus du système (libéré même si le processus meurt) autour d'un lire-modifier-écrire."""
     os.makedirs(os.path.dirname(chemin), exist_ok=True)
-    nom = chemin + ".lock"
-    fin = time.time() + delai_s
-    while True:
-        try:
-            os.close(os.open(nom, os.O_CREAT | os.O_EXCL | os.O_WRONLY))
-            break
-        except FileExistsError:
+    with io.open(chemin + ".lock", "a+b") as f:
+        fin = time.time() + delai_s
+        while True:
             try:
-                if time.time() - os.path.getmtime(nom) > perime_s:
-                    os.remove(nom)
-                    continue
+                if os.name == "nt":
+                    f.seek(0)
+                    msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+                else:
+                    fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                break
             except OSError:
-                continue
-            if time.time() > fin:
-                raise TimeoutError("verrou occupé : %s" % nom)
-            time.sleep(0.02)
-    try:
-        yield
-    finally:
+                if time.time() > fin:
+                    raise TimeoutError("verrou occupé : %s.lock" % chemin)
+                time.sleep(0.02)
         try:
-            os.remove(nom)
-        except OSError:
-            pass
+            yield
+        finally:
+            if os.name == "nt":
+                f.seek(0)
+                msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(f.fileno(), fcntl.LOCK_UN)
 
 
 def accords_valides(routage, horloge=time.time):
@@ -230,15 +234,16 @@ def accorder(routage, modele, nombre, heures, horloge=time.time):
         raise ValueError("--nombre doit être ≥ 1 et --heures > 0.")
     chemin = chemin_sur_accord(routage, "fichier_accords", "JOURNAUX/accords-quota.json")
     expire = dt.datetime.fromtimestamp(horloge() + heures * 3600, dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    with verrou(chemin):
-        accords = lire_json_local(chemin)
-        accords[modele] = {"restant": int(nombre), "expire_utc": expire, "accorde_utc": maintenant()}
-        ecrire_json_local(chemin, accords)
+    # La demande est close avant l'écriture de l'accord : un échec entre les deux rouvre une demande, jamais l'inverse.
     demandes_chemin = chemin_sur_accord(routage, "fichier_demandes", "JOURNAUX/demandes-quota.json")
     with verrou(demandes_chemin):
         demandes = lire_json_local(demandes_chemin)
         if demandes.pop(modele, None) is not None:
             ecrire_json_local(demandes_chemin, demandes)
+    with verrou(chemin):
+        accords = lire_json_local(chemin)
+        accords[modele] = {"restant": int(nombre), "expire_utc": expire, "accorde_utc": maintenant()}
+        ecrire_json_local(chemin, accords)
     return accords[modele]
 
 

@@ -220,6 +220,13 @@ with tempfile.TemporaryDirectory() as tmp, patch.object(d, "RACINE", tmp), \
     controle("T3 en simulation : l'accord n'est pas consommé",
              code == 3 and d.accords_valides(routage)["gpt-6.2-astra"]["restant"] == 1, sortie)
 
+    restes = os.path.join(tmp, "JOURNAUX", "accords-quota.json.lock")
+    with io.open(restes, "w", encoding="utf-8") as h:
+        h.write("laissé par un processus mort")
+    with d.verrou(os.path.join(tmp, "JOURNAUX", "accords-quota.json"), delai_s=1):
+        pris = True
+    controle("fichier de verrou laissé par un processus mort : verrou repris sans attente", pris)
+
     permis = []
     fils = [threading.Thread(target=lambda: permis.append(d.consommer_accord(routage, "gpt-6.2-astra"))) for _ in range(8)]
     for t in fils:
