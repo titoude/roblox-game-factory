@@ -96,7 +96,8 @@
       "candidats": [
         {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.2-astra", "effort": "xhigh"},
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "P3 a_confirmer ; verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"}
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "P3 a_confirmer ; verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"},
+        {"fournisseur": "claude", "modele": "claude-sonnet-5-5", "effort": "high", "degrade": "P3 a_confirmer ; seul relecteur restant quand la fiche vient de Codex gpt-6.1-sol (A2, --auteur)"}
       ],
       "interdit_si_auteur": "02.concepteur",
       "verification": true

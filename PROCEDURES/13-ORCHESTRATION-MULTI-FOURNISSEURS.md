@@ -37,7 +37,7 @@ Les deux modes lisent le même routage, les mêmes procédures et le même état
 ## 3. Lancer un enfant
 
 1. Écrire le prompt (prompt type de la procédure de l'étape, complété) dans `JOURNAUX\prompts\<jeu>-<étape>-<rôle>.md`. Prompt autonome (A1) : racine, rôle, fichiers à lire, entrées avec leur commit, sortie exacte, interdits, dernière ligne `RESULTAT: <ok|echec|arret> | <fichier> | <phrase>`. Aucun secret (l'outil refuse un prompt qui y ressemble, code 7).
-2. T3 Code : `python OUTILS\deleguer.py --role <rôle> --format t3 --prompt-fichier <f> --titre "<titre>"`, puis passer le JSON imprimé à `delegate_task` tel quel. Sans T3 Code : la même commande sans `--format t3`.
+2. T3 Code : `python OUTILS\deleguer.py --role <rôle> --format t3 --prompt-fichier <f> --titre "<titre>"`, puis passer le JSON imprimé à `delegate_task` tel quel. Sans T3 Code : la même commande sans `--format t3`. Pour un rôle de relecture (`interdit_si_auteur`), toujours ajouter `--auteur <fournisseur:modele>` du modèle qui a produit ce qui est relu (ligne `journal` de sa délégation) : sans lui, le repli Codex peut relire son propre travail (A2).
 3. Noter la délégation dans `JEUX\<slug>\JOURNAL.md` (modèle, effort, durée, résultat).
 4. Ne rien modifier de ce que l'enfant lit pendant qu'il tourne (E10).
 
