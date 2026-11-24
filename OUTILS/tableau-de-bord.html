@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Usine Roblox — tableau de bord</title>
+<style>
+:root{--fond:#0f1218;--carte:#171b23;--carte2:#1e2430;--bord:#2a3140;--texte:#e6e9ef;--doux:#9aa3b2;--vert:#3fb950;--ambre:#d29922;--rouge:#f85149;--bleu:#58a6ff;--gris:#5c6573;--violet:#a371f7}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;background:var(--fond);color:var(--texte)}
+a{color:var(--bleu);text-decoration:none;cursor:pointer}a:hover{text-decoration:underline}
+header{display:flex;align-items:center;gap:16px;padding:12px 20px;border-bottom:1px solid var(--bord);background:#12161d;position:sticky;top:0;z-index:5}
+header h1{font-size:16px;margin:0;white-space:nowrap}header .meta{color:var(--doux);font-size:12px;margin-left:auto;text-align:right}
+nav{display:flex;gap:4px;flex-wrap:wrap}nav a{padding:6px 12px;border-radius:6px;color:var(--doux)}nav a.actif{background:var(--carte2);color:var(--texte)}nav a:hover{text-decoration:none;color:var(--texte)}
+.badge-n{display:inline-block;min-width:18px;padding:0 5px;border-radius:9px;background:var(--rouge);color:#fff;font-size:11px;text-align:center;margin-left:4px}
+main{padding:20px;max-width:1500px;margin:0 auto}
+.bandeau{padding:10px 14px;border-radius:8px;margin-bottom:16px;font-weight:600}.bandeau.stop{background:#3d1214;border:1px solid var(--rouge);color:#ffb3ad}
+h2{font-size:18px;margin:0 0 12px}h3{font-size:14px;margin:18px 0 8px;color:var(--doux);text-transform:uppercase;letter-spacing:.04em}
+.grille{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.carte{background:var(--carte);border:1px solid var(--bord);border-radius:10px;padding:14px}
+.kpi .v{font-size:26px;font-weight:700}.kpi .l{color:var(--doux);font-size:12px}
+.deux{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:1000px){.deux{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--bord);vertical-align:top}th{color:var(--doux);font-weight:600;position:sticky;top:0;background:var(--carte)}
+tr:hover td{background:#1b202a}
+.pill{display:inline-block;padding:1px 8px;border-radius:10px;font-size:12px;font-weight:600;white-space:nowrap;border:1px solid transparent}
+.passe,.ok,.faite,.termine,.continuer{background:#12301b;color:#7ee2a0;border-color:#1f5f33}
+.derogation,.bloque,.bloquee,.a_confirmer_ambre{background:#3a2c0b;color:#f0c35a;border-color:#6b5114}
+.echec,.arret,.arretee,.arrete,.ouverte,.expire{background:#3d1416;color:#ff9a93;border-color:#7a2427}
+.a_confirmer,.en_cours,.vivant{background:#0f2a4a;color:#8cc4ff;border-color:#1f4f85}
+.non_jugee,.a_venir,.inconnue,.inconnu,.mort,.close{background:#20252f;color:#8b94a3;border-color:#323a48}
+.chaine{display:flex;gap:6px;overflow-x:auto;padding:4px 0 8px}
+.etape{flex:1 0 118px;border:1px solid var(--bord);border-radius:8px;padding:8px;background:var(--carte2);position:relative}
+.etape .n{font-size:11px;color:var(--doux)}.etape .t{font-weight:600}.etape.en_cours{border-color:var(--bleu);box-shadow:0 0 0 1px var(--bleu) inset}.etape.bloquee{border-color:var(--ambre)}.etape.faite{opacity:.85}.etape.a_venir{opacity:.55}
+.etape .ps{margin-top:6px;display:flex;gap:4px;flex-wrap:wrap}
+.porte{font-size:11px;padding:1px 6px;border-radius:5px;cursor:pointer}
+.doux{color:var(--doux)}.petit{font-size:12px}.mono{font-family:ui-monospace,Consolas,monospace;font-size:12px}
+.liste-jeux{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.liste-jeux a{padding:6px 12px;border:1px solid var(--bord);border-radius:8px;color:var(--texte)}.liste-jeux a.actif{border-color:var(--bleu);background:#0f2a4a}
+.chrono{border-left:2px solid var(--bord);margin-left:6px;padding-left:14px}.chrono div{margin-bottom:10px;position:relative}.chrono div:before{content:"";position:absolute;left:-20px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--gris)}
+.chrono .porte-ev:before{background:var(--violet)}.chrono .statut-ev:before{background:var(--ambre)}
+pre.journal{background:#0b0e13;border:1px solid var(--bord);border-radius:8px;padding:12px;max-height:70vh;overflow:auto;white-space:pre-wrap;word-break:break-word;font:12px/1.5 ui-monospace,Consolas,monospace;margin:0}
+.journaux{display:grid;grid-template-columns:320px 1fr;gap:16px}@media(max-width:900px){.journaux{grid-template-columns:1fr}}
+.fichiers{max-height:72vh;overflow:auto}.fichiers a{display:block;padding:6px 8px;border-radius:6px;color:var(--texte)}.fichiers a.actif{background:var(--carte2)}.fichiers a .doux{font-size:11px;display:block}
+.vide{color:var(--doux);font-style:italic;padding:8px 0}
+.outils{display:flex;gap:8px;align-items:center;margin-bottom:8px;flex-wrap:wrap}input[type=search]{background:var(--carte2);border:1px solid var(--bord);color:var(--texte);border-radius:6px;padding:6px 10px;min-width:240px}
+label.chk{color:var(--doux);font-size:12px}
+.note{max-width:620px}
+.defile{max-height:460px;overflow:auto}
+</style>
+</head>
+<body>
+<header>
+  <h1>Usine Roblox</h1>
+  <nav id="nav">
+    <a href="#vue">Vue d'ensemble</a><a href="#jeux">Jeux et portes</a><a href="#cycles">Cycles</a><a href="#agents">Agents</a><a href="#journaux">Journaux</a><a href="#alertes">Alertes et verrous</a>
+  </nav>
+  <div class="meta" id="meta">chargement…</div>
+</header>
+<main id="app"></main>
+<script>
+"use strict";
+let E = null, ongletJeu = null, fichierCourant = null, suivre = true, filtre = "", defilement = 0;
+const $ = s => document.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const pill = (v, cls) => `<span class="pill ${esc(cls || v)}">${esc(String(v).replace(/_/g, " "))}</span>`;
+const lien = f => f ? `<a href="#journaux/${esc(encodeURIComponent(f))}" data-f="${esc(f)}">${esc(f)}</a>` : "";
+const date = d => d ? esc(String(d).replace("T", " ").replace("Z", "")) : "";
+const duree = s => { s = +s || 0; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); return h ? `${h} h ${m} min` : m ? `${m} min ${s % 60} s` : `${s} s`; };
+const table = (cols, lignes, vide) => lignes.length ? `<table><thead><tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr></thead><tbody>${lignes.join("")}</tbody></table>` : `<div class="vide">${vide}</div>`;
+
+async function charger() {
+  try {
+    const r = await fetch("/api/etat", {cache: "no-store"});
+    E = await r.json();
+    $("#meta").innerHTML = `${esc(E.git.branche)} @ ${esc(E.git.commit)} · lu ${date(E.genere)} UTC · <span class="mono">${esc(E.racine)}</span>`;
+    const n = E.alertes_ouvertes;
+    document.querySelector('#nav a[href="#alertes"]').innerHTML = `Alertes et verrous${n ? `<span class="badge-n">${n}</span>` : ""}`;
+    rendre();
+  } catch (x) { $("#meta").textContent = "serveur injoignable : " + x; }
+}
+
+function rendre() {
+  if (!E) return;
+  const page = (location.hash || "#vue").slice(1).split("/");
+  document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("actif", a.getAttribute("href") === "#" + page[0]));
+  const stop = E.stop ? `<div class="bandeau stop">Fichier STOP présent (G0) : aucun agent n'agit. <span class="mono">python usine.py reprendre</span> pour le retirer.</div>` : "";
+  const vues = {vue, jeux, cycles, agents, journaux, alertes};
+  const garde = window.scrollY, pre = $("#j-texte"), actif = document.activeElement,
+        saisie = actif && actif.id === "j-filtre";
+  // L'actualisation redessine l'écran : garder le focus clavier sur le même lien de fichier.
+  const focusLien = actif && $("#app").contains(actif) && actif.matches("a[data-f],a[data-j],a[href^='#']")
+    ? `a[href="${CSS.escape(actif.getAttribute("href"))}"]` : null;
+  if (pre && fichierCourant) defilement = pre.scrollTop;
+  $("#app").innerHTML = stop + (vues[page[0]] || vue)(page.slice(1));
+  window.scrollTo(0, garde);
+  const champ = $("#j-filtre");
+  if (champ && filtre && saisie) { champ.focus(); champ.setSelectionRange(filtre.length, filtre.length); }
+  if (focusLien) { const l = $("#app").querySelector(focusLien); if (l) l.focus({preventScroll: true}); }
+  if (page[0] === "journaux" && fichierCourant) ouvrir(fichierCourant, false);
+}
+
+function chaineJeu(j) {
+  return `<div class="chaine">${j.etapes.map(e => `<div class="etape ${e.statut}"><div class="n">${esc(e.id.slice(0, 2))} · ${pill(e.statut)}</div><div class="t">${esc(e.nom)}</div>
+    <div class="ps">${e.portes.map(p => { const g = j.portes.find(x => x.porte === p); return `<a class="porte pill ${g.resultat}" href="#jeux/${esc(j.slug)}/${p}" title="${esc(g.but)} : ${esc(g.resultat)}">${p}</a>`; }).join("")}</div></div>`).join("")}</div>`;
+}
+
+function vue() {
+  const vivants = E.agents.vivants, ouvertes = E.alertes.filter(a => a.ouverte);
+  const dernierCycle = E.cycles.cycles[0], dernierBat = E.battement.decisions[0];
+  const kpi = (v, l, cls) => `<div class="carte kpi"><div class="v" style="color:var(--${cls || "texte"})">${v}</div><div class="l">${l}</div></div>`;
+  return `<h2>Vue d'ensemble</h2>
+  <div class="grille">
+    ${kpi(E.jeux.length, "jeux suivis")}
+    ${kpi(E.jeux.filter(j => j.statut === "en_cours").length, "jeux en cours", "bleu")}
+    ${kpi(E.jeux.filter(j => j.statut === "bloque").length, "jeux bloqués", "ambre")}
+    ${kpi(`${vivants}`, `agents en cours · Claude forts ${E.agents.claude_forts_vivants}/${E.agents.plafond_claude_forts ?? "?"} (G2)`, vivants ? "bleu" : "")}
+    ${kpi(E.alertes_ouvertes, "alertes ouvertes (frontière humaine)", E.alertes_ouvertes ? "rouge" : "vert")}
+    ${kpi(E.verrous.length, "verrous tenus")}
+    ${kpi(E.cycles.cycles.length, "cycles d'orchestrateur journalisés")}
+    ${kpi(E.agents.delegations.length, "délégations journalisées")}
+  </div>
+  <h3>Jeux</h3>
+  ${E.jeux.map(j => j.illisible ? `<div class="carte">${esc(j.slug)} : ETAT.json illisible (${esc(j.illisible)})</div>` : `<div class="carte" style="margin-bottom:12px">
+    <div style="display:flex;gap:10px;align-items:center;margin-bottom:6px"><a href="#jeux/${esc(j.slug)}"><b>${esc(j.nom)}</b></a> <span class="doux mono">${esc(j.slug)}</span> ${pill(j.statut)} <span class="doux">étape ${esc(j.etape)}</span>
+    <span class="doux petit" style="margin-left:auto">ETAT.json modifié ${date(j.maj)}</span></div>
+    ${chaineJeu(j)}
+    ${j.blocage ? `<div class="petit"><b>Blocage :</b> ${esc(j.blocage)}</div>` : ""}
+    ${j.historique.length ? `<div class="petit doux">Dernier événement (${esc(j.historique[j.historique.length - 1].date)}) : ${esc(j.historique[j.historique.length - 1].evenement)}</div>` : ""}
+  </div>`).join("") || `<div class="vide">Aucun jeu dans JEUX\\.</div>`}
+  <div class="deux">
+    <div class="carte"><h3 style="margin-top:0">Dernier cycle</h3>${dernierCycle ? `${pill(dernierCycle.etat)} ${date(dernierCycle.debut)} · ${dernierCycle.tours.length} tour(s) · ${duree(dernierCycle.duree_s)}<div class="petit doux">${esc(dernierCycle.tours[dernierCycle.tours.length - 1].raison)}</div>` : `<div class="vide">Aucun tour dans JOURNAUX/cycles.log : <span class="mono">python usine.py "fais un jeu"</span> n'a pas encore tourné sur ce poste.</div>`}
+      <h3>Dernier battement</h3>${dernierBat ? `${pill(dernierBat.decision)} ${date(dernierBat.date)} · ${esc(dernierBat.raison)}` : `<div class="vide">Aucune décision dans JOURNAUX/battement.log.</div>`}</div>
+    <div class="carte"><h3 style="margin-top:0">Alertes ouvertes</h3>${ouvertes.length ? ouvertes.map(a => `<div style="margin-bottom:8px">${pill(a.type, "ouverte")} <b>${esc(a.jeu)}</b> <span class="doux">${esc(a.date)} · ${esc(a.etape)}</span><div class="petit">${esc(a.constat)}</div></div>`).join("") : `<div class="vide">Aucune.</div>`}</div>
+  </div>
+  <h3>Mémoire de l'usine</h3>
+  <div class="grille">
+    <div class="carte"><b>Propositions en attente</b> (${E.connaissances.propositions.length}, ${E.connaissances.propositions_traitees} traitées)${E.connaissances.propositions.map(p => `<div class="petit">${lien(p.fichier)}</div>`).join("")}</div>
+    <div class="carte"><b>Bilans</b>${E.connaissances.bilans.map(p => `<div class="petit">${lien(p.fichier)}</div>`).join("")}</div>
+    <div class="carte"><b>Relevés de veille</b><div class="petit doux">${E.connaissances.releves.map(esc).join(" · ") || "aucun"}</div></div>
+  </div>`;
+}
+
+function jeux(args) {
+  if (!E.jeux.length) return `<h2>Jeux et portes</h2><div class="vide">Aucun jeu.</div>`;
+  const slug = args[0] || ongletJeu || E.jeux[0].slug; ongletJeu = slug;
+  const j = E.jeux.find(x => x.slug === slug) || E.jeux[0];
+  const choix = `<div class="liste-jeux">${E.jeux.map(x => `<a href="#jeux/${esc(x.slug)}" class="${x.slug === j.slug ? "actif" : ""}">${esc(x.nom || x.slug)} ${pill(x.statut || "illisible", x.statut || "echec")}</a>`).join("")}</div>`;
+  if (j.illisible) return `<h2>Jeux et portes</h2>${choix}<div class="carte">ETAT.json illisible : ${esc(j.illisible)} · ${lien(j.fichier)}</div>`;
+  const focus = args[1];
+  const portes = j.portes.map(p => `<tr id="porte-${p.porte}" style="${focus === p.porte ? "outline:1px solid var(--bleu)" : ""}"><td><b>${p.porte}</b></td><td>${esc(p.but)}<div class="doux petit">${esc(p.etape)}${p.seuils ? ` · seuils.${esc(p.seuils)}` : ""}</div></td><td>${pill(p.resultat)}</td><td>${p.iterations || ""}</td><td>${esc(p.date)}</td><td class="note petit">${esc(p.note)}${p.preuve ? `<div>${lien(p.preuve)}</div>` : ""}</td></tr>`);
+  const hist = j.historique.slice().reverse().map(h => `<div class="${/^porte/.test(h.evenement) ? "porte-ev" : /^statut|^mode/.test(h.evenement) ? "statut-ev" : ""}"><span class="doux mono">${esc(h.date)}</span><div class="petit">${esc(h.evenement)}</div></div>`).join("");
+  const place = Object.entries(j.place || {}).map(([k, v]) => `<tr><td class="doux">${esc(k)}</td><td class="mono">${esc(v) || "—"}</td></tr>`).join("");
+  setTimeout(() => { if (focus) { const t = document.getElementById("porte-" + focus); t && t.scrollIntoView({block: "center"}); } }, 0);
+  return `<h2>Jeux et portes</h2>${choix}
+  <div class="carte" style="margin-bottom:14px"><div style="display:flex;gap:10px;align-items:center"><b style="font-size:16px">${esc(j.nom)}</b> ${pill(j.statut)} <span class="doux">étape ${esc(j.etape)} · créé le ${esc(j.cree_le)}</span><span style="margin-left:auto" class="petit">${lien(j.fichier)}</span></div>
+  ${chaineJeu(j)}${j.blocage ? `<div><b>Blocage :</b> ${esc(j.blocage)}</div>` : ""}
+  ${j.mode_degrade.length ? `<h3>Modes dégradés</h3>${j.mode_degrade.map(m => `<div class="petit" style="margin-bottom:4px">${pill("dégradé", "derogation")} ${esc(m)}</div>`).join("")}` : ""}</div>
+  <div class="carte" style="margin-bottom:14px"><h3 style="margin-top:0">Portes P0–P11</h3>${table(["Porte", "Ce qu'elle juge", "Résultat", "Itérations", "Date", "Note et preuve"], portes, "")}</div>
+  <div class="deux">
+    <div class="carte"><h3 style="margin-top:0">Historique ETAT.json (${j.historique.length})</h3><div class="defile chrono">${hist || `<div class="vide">vide</div>`}</div></div>
+    <div class="carte"><h3 style="margin-top:0">Place</h3><table>${place}</table>
+      <h3>Journal du jeu (${j.journal.length})</h3><div class="defile">${table(["Date", "Étape", "Agent", "Résultat"], j.journal.slice().reverse().map(l => `<tr><td class="mono">${esc(l.date)}</td><td>${esc(l.etape)}</td><td class="petit">${esc(l.agent)}</td><td class="petit">${esc(l.resultat)}</td></tr>`), "JOURNAL.md vide ou absent.")}</div>
+      <h3>Livrables par étape (${j.fichiers.length})</h3><div class="defile petit">${j.fichiers.map(f => `<div>${lien(f)}</div>`).join("") || `<div class="vide">aucun</div>`}</div></div>
+  </div>`;
+}
+
+function cycles() {
+  const c = E.cycles.cycles;
+  const lignes = c.map((g, i) => `<tr><td class="mono">${date(g.debut)}</td><td>${pill(g.etat)}</td><td>${g.tours.length}</td><td>${duree(g.duree_s)}</td><td class="petit">${g.tours.map(t => `<div>tour ${t.tour}/${t.tours} · ${esc(t.fournisseur)} ${esc(t.modele)} · ${duree(t.duree_s)} · ${pill(t.etat)} ${esc(t.raison)}</div>`).join("")}</td></tr>`);
+  const dec = E.battement.decisions.map(d => `<tr><td class="mono">${date(d.date)}</td><td>${pill(d.decision, {lancer: "en_cours", attendre: "non_jugee"}[d.decision] || d.decision)}</td><td class="petit">${esc(d.demande)}</td><td class="petit">${esc(d.raison)}</td></tr>`);
+  const ev = E.battement.evenements.map(d => `<tr><td class="mono">${date(d.date)}</td><td class="petit">${esc(d.texte)}</td></tr>`);
+  return `<h2>Cycles</h2>
+  <div class="carte" style="margin-bottom:14px"><h3 style="margin-top:0">Cycles d'orchestrateur · ${lien(E.cycles.fichier)}</h3>
+  <div class="doux petit" style="margin-bottom:8px">Un cycle = une commande <span class="mono">python usine.py "…"</span> ; chaque tour finit par une ligne ETAT_CYCLE (continuer, bloque, termine).</div>
+  ${table(["Début (UTC)", "État final", "Tours", "Durée", "Tours"], lignes, E.cycles.existe ? "Fichier présent, aucun tour lisible." : "JOURNAUX/cycles.log absent : aucun cycle n'a tourné sur ce poste.")}</div>
+  <div class="deux">
+    <div class="carte"><h3 style="margin-top:0">Décisions du battement · ${lien(E.battement.fichier)}</h3><div class="defile">${table(["Date", "Décision", "Demande", "Raison"], dec, "Aucune décision journalisée.")}</div></div>
+    <div class="carte"><h3 style="margin-top:0">Événements du battement (${E.battement.notifications_vues} notification(s) déjà envoyée(s))</h3><div class="defile">${table(["Date", "Événement"], ev, "Aucun événement.")}</div></div>
+  </div>`;
+}
+
+function agents() {
+  const A = E.agents;
+  const cours = A.en_cours.map(a => `<tr><td>${pill(a.vivant ? "vivant" : "mort")}</td><td><b>${esc(a.role)}</b><div class="doux petit">${esc(a.titre)}</div></td><td>${esc(a.fournisseur)} ${esc(a.modele)} <span class="doux">(${esc(a.effort)})</span>${a.claude_fort ? ` ${pill("G2", "derogation")}` : ""}</td><td>${esc(a.jeu)}</td><td class="mono">${date(a.debut_utc)}</td><td class="mono">${a.pid}</td><td class="petit">${a.journal ? `${lien(a.journal)}<div class="doux">écrit ${date(a.derniere_ecriture)}</div>` : ""}</td></tr>`);
+  const dels = A.delegations.map(d => `<tr><td class="mono">${date(d.debut_utc)}</td><td>${esc(d.jeu)}</td><td>${esc(d.role)}</td><td>${esc(d.fournisseur)} ${esc(d.modele)} <span class="doux">${esc(d.effort)}</span>${+d.rang ? ` ${pill("repli " + d.rang, "derogation")}` : ""}</td><td>${duree(d.duree_s)}</td><td>${pill(d.resultat || ("code " + d.code), d.resultat || "inconnu")}</td><td class="petit">${esc(d.titre)}</td></tr>`);
+  const roles = A.roles.map(r => `<tr><td><b class="mono">${esc(r.role)}</b><div class="doux petit">${esc(r.but)}</div></td><td class="petit">${r.candidats.map((c, i) => `<div>${i + 1}. ${esc(c.fournisseur)} <b>${esc(c.modele)}</b> <span class="doux">${esc(c.effort)}</span>${c.claude_fort ? ` ${pill("G2", "derogation")}` : ""}${c.degrade ? `<div class="doux">↳ ${esc(c.degrade)}</div>` : ""}</div>`).join("")}</td></tr>`);
+  return `<h2>Agents</h2>
+  <div class="grille" style="margin-bottom:14px">
+    <div class="carte kpi"><div class="v">${A.vivants}</div><div class="l">agents vivants (fiches JOURNAUX/agents)</div></div>
+    <div class="carte kpi"><div class="v">${A.claude_forts_vivants} / ${A.plafond_claude_forts ?? "?"}</div><div class="l">Claude Opus, Fable, Sonnet en même temps (G2)</div></div>
+    <div class="carte kpi"><div class="v">${A.delegations.length}</div><div class="l">délégations dans JOURNAUX/delegations.csv</div></div>
+    <div class="carte kpi"><div class="v">${A.roles.length}</div><div class="l">rôles dans routage.json</div></div>
+  </div>
+  <div class="carte" style="margin-bottom:14px"><h3 style="margin-top:0">En cours</h3>${table(["État", "Rôle", "Modèle", "Jeu", "Début (UTC)", "PID", "Sortie"], cours, "Aucun agent en cours.")}</div>
+  <div class="carte" style="margin-bottom:14px"><h3 style="margin-top:0">Délégations · ${lien("JOURNAUX/delegations.csv")}</h3><div class="defile">${table(["Début (UTC)", "Jeu", "Rôle", "Modèle", "Durée", "Résultat", "Titre"], dels, "Aucune délégation journalisée sur ce poste.")}</div></div>
+  <div class="carte"><h3 style="margin-top:0">Routage des rôles · ${lien("CONNAISSANCES/routage.json")}</h3>${table(["Rôle", "Candidats dans l'ordre (replis)"], roles, "")}</div>`;
+}
+
+function journaux(args) {
+  if (args && args[0]) fichierCourant = decodeURIComponent(args.join("/"));
+  const groupes = {};
+  E.journaux.forEach(f => (groupes[f.groupe] = groupes[f.groupe] || []).push(f));
+  if (!fichierCourant && E.journaux.length) fichierCourant = E.journaux[0].fichier;
+  return `<h2>Journaux</h2><div class="journaux">
+  <div class="carte fichiers">${Object.entries(groupes).map(([g, l]) => `<h3 style="margin-top:4px">${esc(g)}</h3>${l.map(f => `<a href="#journaux/${esc(encodeURIComponent(f.fichier))}" data-j="${esc(f.fichier)}" class="${f.fichier === fichierCourant ? "actif" : ""}">${esc(f.fichier)}<span class="doux">${date(f.maj)} · ${(f.taille / 1024).toFixed(1)} Ko</span></a>`).join("")}`).join("") || `<div class="vide">Aucun journal.</div>`}</div>
+  <div class="carte"><div class="outils"><b id="j-nom" class="mono"></b><span id="j-info" class="doux petit"></span><span style="margin-left:auto"></span><input type="search" id="j-filtre" placeholder="filtrer les lignes…" value="${esc(filtre)}"><label class="chk"><input type="checkbox" id="j-suivre" ${suivre ? "checked" : ""}> suivre la fin</label></div><pre class="journal" id="j-texte"></pre></div></div>`;
+}
+
+async function ouvrir(f, haut = true) {
+  fichierCourant = f;
+  document.querySelectorAll("[data-j]").forEach(a => a.classList.toggle("actif", a.dataset.j === f));
+  const r = await fetch("/api/fichier?queue=1&chemin=" + encodeURIComponent(f), {cache: "no-store"});
+  const d = await r.json(), pre = $("#j-texte");
+  if (!pre) return;
+  $("#j-nom").textContent = f;
+  if (!r.ok) { pre.textContent = d.erreur; return; }
+  $("#j-info").textContent = `${(d.taille / 1024).toFixed(1)} Ko · modifié ${d.maj.replace("T", " ").replace("Z", "")} UTC${d.tronque ? " · fin du fichier seulement" : ""}`;
+  pre.dataset.texte = d.texte; filtrer();
+  if (suivre) pre.scrollTop = pre.scrollHeight; else pre.scrollTop = haut ? 0 : defilement;
+}
+function filtrer() {
+  const pre = $("#j-texte"), q = filtre.toLowerCase();
+  if (!pre) return;
+  pre.textContent = q ? pre.dataset.texte.split("\n").filter(l => l.toLowerCase().includes(q)).join("\n") : pre.dataset.texte;
+}
+
+function alertes() {
+  const al = E.alertes.slice().sort((a, b) => b.ouverte - a.ouverte).map(a => `<tr><td class="mono">${esc(a.date)}</td><td>${pill(a.type, a.ouverte ? "ouverte" : "close")}</td><td>${esc(a.agent)}</td><td>${esc(a.jeu)}</td><td>${esc(a.etape)}</td><td class="note petit">${esc(a.constat)}</td><td class="petit">${a.ouverte ? pill("ouverte") : esc(a.statut)}</td></tr>`);
+  const v = E.verrous.map(x => `<tr><td class="mono">${esc(x.ressource)}</td><td>${esc(x.agent)}</td><td class="petit">${esc(x.objet)}</td><td class="mono">${date(x.depuis)}</td><td class="mono">${date(x.expire)}</td><td>${x.illisible ? pill("illisible", "echec") : x.expire_deja ? pill("expiré", "expire") : pill("tenu", "en_cours")}</td></tr>`);
+  return `<h2>Alertes et verrous</h2>
+  <div class="carte" style="margin-bottom:14px"><h3 style="margin-top:0">Fichier STOP (G0)</h3>${E.stop ? pill("présent : tout est gelé", "echec") : pill("absent", "ok")}</div>
+  <div class="carte" style="margin-bottom:14px"><h3 style="margin-top:0">Verrous (G1, G3) · VERROUS\\</h3>${table(["Ressource", "Agent", "Objet", "Depuis", "Expire", "État"], v, "Aucun verrou tenu.")}</div>
+  <div class="carte"><h3 style="margin-top:0">Alertes · ${lien("ALERTES.md")} (${E.alertes_ouvertes} ouverte(s))</h3>${table(["Date", "Type", "Agent", "Jeu", "Étape", "Constat", "Statut"], al, "Aucune alerte.")}</div>`;
+}
+
+document.addEventListener("click", e => {
+  const a = e.target.closest("[data-f],[data-j]");
+  if (!a || e.ctrlKey || e.metaKey || e.shiftKey || e.button) return;
+  e.preventDefault();
+  const f = a.dataset.f || a.dataset.j, cible = "#journaux/" + encodeURIComponent(f);
+  fichierCourant = f; defilement = 0;
+  if (location.hash === cible) ouvrir(f); else location.hash = cible;
+});
+document.addEventListener("input", e => { if (e.target.id === "j-filtre") { filtre = e.target.value; filtrer(); } });
+document.addEventListener("change", e => { if (e.target.id === "j-suivre") suivre = e.target.checked; });
+window.addEventListener("hashchange", () => { window.scrollTo(0, 0); rendre(); });
+charger();
+setInterval(() => { if (!document.hidden) charger(); }, 5000);
+</script>
+</body>
+</html>
