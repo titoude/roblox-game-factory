@@ -2,6 +2,7 @@
   "slug": "exemple-jeu",
   "date": "2026-12-01",
   "type": "fin",
+  "pret": false,
   "previsions": [
     {
       "cle": "premiere_action_s",

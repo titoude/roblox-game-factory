@@ -59,7 +59,7 @@ def jeu_simule(bruit):
 
 
 def analyste_simule(racine, slug, date, fiche, mesures, **extra):
-    bilan = {"slug": slug, "date": date, "type": "fin",
+    bilan = {"slug": slug, "date": date, "type": "fin", "pret": True,
              "previsions": [{"cle": c, "libelle": LIBELLES[c], "domaine": "concept", "prevu": fiche[c]["prevu"],
                              "mesure": mesures[c], "facteur_applique": fiche[c]["facteur_applique"],
                              "source": "JEUX/%s/06-qa/RAPPORT-QA-1.md (chronométrage simulé)" % slug} for c in BRUT],
@@ -151,6 +151,14 @@ with tempfile.TemporaryDirectory(prefix="tests-boucle-") as tmp, \
                             {"cle": "economie.premier_achat_max_s", "mesure": 75, "propose": 75, "preuve": "jeu-a QA"},
                             {"cle": "inconnu.cle", "propose": 1, "preuve": "x"}])
 
+    chemin_a = racine / "JEUX/jeu-a/09-bilan/BILAN.json"
+    complet_a = chemin_a.read_text(encoding="utf-8")
+    chemin_a.write_text(json.dumps(dict(json.loads(complet_a), pret=False)), encoding="utf-8")
+    avant_pret = empreinte(racine)
+    code, _ = appliquer(racine, "jeu-a")
+    verifier("tableaux de l'analyste seuls (pret absent) : code 2, rien d'écrit, battement n'y touche pas",
+             code == 2 and empreinte(racine) == avant_pret and "jeu-a" not in B.bilans_prets(str(racine), "2026-11-24"))
+    chemin_a.write_text(complet_a, encoding="utf-8")
     simu_avant = empreinte(racine)
     code, r = appliquer(racine, "jeu-a", simuler=True)
     verifier("simulation : code 3 et aucun fichier écrit", code == 3 and empreinte(racine) == simu_avant)
@@ -364,7 +372,7 @@ with tempfile.TemporaryDirectory(prefix="tests-boucle-battement-") as tmp3:
     (racine / "CONNAISSANCES/seuils.json").write_text("{}", encoding="utf-8")
     (racine / "JEUX/jeu-a/09-bilan").mkdir(parents=True)
     (racine / "JEUX/jeu-a/ETAT.json").write_text(json.dumps({"statut": "termine", "etape": "09-bilan", "portes": {}}), encoding="utf-8")
-    (racine / "JEUX/jeu-a/09-bilan/BILAN.json").write_text(json.dumps({"slug": "jeu-a", "date": "2026-11-20"}), encoding="utf-8")
+    (racine / "JEUX/jeu-a/09-bilan/BILAN.json").write_text(json.dumps({"slug": "jeu-a", "date": "2026-11-20", "pret": True}), encoding="utf-8")
     date = datetime(2026, 11, 24, 12, tzinfo=timezone.utc)
     with contextlib.redirect_stdout(io.StringIO()):
         ligne = bt.battement(racine, simuler=True, maintenant=date, _prevenir=lambda *a, **k: 0, _commit=date.timestamp())

@@ -24,7 +24,7 @@ Lis `GARDE-FOUS.md`, `PROCEDURES\09-BILAN.md` (elle fait foi) et `CONNAISSANCES\
 3. **Coût** : délégations, durée, itérations, attentes d'un humain.
 4. **Causes** des trois plus gros écarts : règle manquante, fausse ou non appliquée.
 5. **Propositions** : fusionner, refuser ou reporter chaque fichier ; écrire la décision ; déplacer dans `traitees\`.
-6. **Mémoire, sans étape manuelle** : écrire `JEUX\<slug>\09-bilan\BILAN.json` (gabarit `OUTILS\GABARITS\BILAN.exemple.json`), puis `python usine.py bilan <slug>`. La boucle (`OUTILS\boucle-amelioration.py`) écrit règles, seuils, facteurs de calibration, décisions des propositions, bloc « Leçons des bilans » des skills et `PROGRES.json`, aux conditions ci-dessous. Procédures et gabarits restent à corriger à la main.
+6. **Mémoire, sans étape manuelle** : écrire `JEUX\<slug>\09-bilan\BILAN.json` (gabarit `OUTILS\GABARITS\BILAN.exemple.json`), poser `"pret": true` en dernier, puis `python usine.py bilan <slug>`. La boucle (`OUTILS\boucle-amelioration.py`) écrit règles, seuils, facteurs de calibration, décisions des propositions, bloc « Leçons des bilans » des skills et `PROGRES.json`, aux conditions ci-dessous. Procédures et gabarits restent à corriger à la main.
 7. **Clore** : la boucle écrit `CONNAISSANCES\BILANS\`, la porte P9 et le commit `[orchestrateur] Bilan <slug> : …` ; compléter `JOURNAL-DES-JEUX.md` et ses compteurs.
 
 ## Conditions d'un changement

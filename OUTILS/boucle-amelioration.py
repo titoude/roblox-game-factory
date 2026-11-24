@@ -3,7 +3,7 @@
 """boucle-amelioration.py - écrit les leçons mesurées d'un bilan dans la mémoire de l'usine (procédure 09, étape 6).
 
 Entrée : JEUX\\<slug>\\09-bilan\\BILAN.json (gabarit OUTILS\\GABARITS\\BILAN.exemple.json), écrit par
-l'orchestrateur au bilan. Aucun modèle n'est lancé, sauf le juge des propositions (rôle
+l'orchestrateur au bilan ; appliqué seulement quand il porte "pret": true (posé par l'orchestrateur en dernier). Aucun modèle n'est lancé, sauf le juge des propositions (rôle
 09.juge-propositions de routage.json) quand une proposition attend dans CONNAISSANCES\\PROPOSITIONS\\.
 
   python OUTILS\\boucle-amelioration.py appliquer --jeu <slug> [--simuler] [--commit] [--sans-juge]
@@ -251,6 +251,8 @@ def appliquer(racine, slug, simuler=False, juge=None, commit=False, aujourdhui=N
         valider(bilan, slug)
     except (ValueError, Refus) as e:
         return 2, {"message": str(e)}
+    if bilan.get("pret") is not True:
+        return 2, {"message": "BILAN.json pas encore marqué « pret »: true par l'orchestrateur (tableaux de l'analyste seuls)"}
     date = bilan["date"]
     date_fr = dt.date.fromisoformat(date).strftime("%d/%m/%Y")
     cle_bilan = "%s|%s" % (slug, date)
@@ -560,9 +562,12 @@ def bilans_prets(racine, jour):
         if not os.path.isfile(f):
             continue
         try:
-            cle = "%s|%s" % (s, lire_json(f).get("date"))
+            bilan = lire_json(f)
         except ValueError:
             continue
+        if bilan.get("pret") is not True:
+            continue
+        cle = "%s|%s" % (s, bilan.get("date"))
         if cle not in cal["bilans_appliques"] and cal.get("tentatives", {}).get(cle) != jour:
             prets.append(s)
     return prets
