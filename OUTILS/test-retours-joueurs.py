@@ -7,6 +7,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import tempfile
 import threading
@@ -161,7 +162,7 @@ with tempfile.TemporaryDirectory(prefix='retours-tests-') as temp:
         fil.join()
 
 for script in ('ServerScriptService.Jeu.RetoursService.lua', 'StarterPlayer.StarterPlayerScripts.RetoursClient.client.lua'):
-    compilation = subprocess.run([str(OUTILS / 'bin/luau-compile.exe'), '--null',
+    compilation = subprocess.run([str(OUTILS / 'bin' / ('luau-compile' + ('.exe' if os.name == 'nt' else ''))), '--null',
                                   str(OUTILS / 'GABARITS/luau' / script)], capture_output=True)
     verifier('compilation ' + script, compilation.returncode == 0)
 

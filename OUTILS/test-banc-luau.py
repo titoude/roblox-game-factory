@@ -269,13 +269,13 @@ def main():
             else:
                 ecrire_sur(donnees, SCRIPTS[donnees.name])
                 ecrire_sur(economie, SCRIPTS[economie.name])
-            compilation = [subprocess.run([str(OUTILS / "bin" / "luau-compile.exe"), "--null", str(f)],
+            compilation = [subprocess.run([str(OUTILS / "bin" / ("luau-compile" + module["EXE"])), "--null", str(f)],
                                          capture_output=True, encoding="utf-8", errors="replace", timeout=10)
                            for f in [*src.glob("*.lua"), test]]
             programme = racine / "programme.luau"
             texte, _ = module["assembler"](module["sources"](src), test)
             ecrire_sur(programme, texte)
-            compilation.append(subprocess.run([str(OUTILS / "bin" / "luau-compile.exe"), "--null", str(programme)],
+            compilation.append(subprocess.run([str(OUTILS / "bin" / ("luau-compile" + module["EXE"])), "--null", str(programme)],
                                               capture_output=True, encoding="utf-8", errors="replace", timeout=10))
             debut = time.perf_counter()
             resultat = subprocess.run([sys.executable, str(OUTILS / "banc-luau.py"), str(src),

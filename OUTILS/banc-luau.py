@@ -16,6 +16,7 @@ import tempfile
 from pathlib import Path
 
 OUTILS = Path(__file__).resolve().parent
+EXE = ".exe" if os.name == "nt" else ""
 SERVICES = {
     "ServerScriptService", "ServerStorage", "ReplicatedStorage", "ReplicatedFirst",
     "StarterPlayer", "StarterGui", "StarterPack", "Workspace", "Lighting", "SoundService",
@@ -165,9 +166,9 @@ def main(argv=None):
     if not args.src.is_dir() or not args.tests.is_dir():
         print("ECHEC : dossier introuvable")
         return 5
-    executable = OUTILS / "bin" / "luau.exe"
+    executable = OUTILS / "bin" / ("luau" + EXE)
     if not executable.is_file():
-        print("ECHEC : OUTILS/bin/luau.exe absent")
+        print(f"ECHEC : OUTILS/bin/{executable.name} absent")
         return 2
     try:
         scripts = sources(args.src)
