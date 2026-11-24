@@ -13,7 +13,7 @@ Codex (CLI `codex`) du propriétaire. Le modèle de chaque rôle vient de CONNAI
   python usine.py retours <slug>       boucle des retours joueurs d'un jeu (procédure 11)
   python usine.py battement [--simuler]  un battement sans modèle : mesures, retours, incidents, messages, décision
   python usine.py canaux              par où le propriétaire est prévenu (aucun secret affiché)
-  python usine.py tableau [--port N]   tableau de bord local en lecture seule : jeux, portes, cycles, agents, journaux
+  python usine.py tableau [--port N] [--lecture-seule]   tableau de bord local : jeux, portes, cycles, agents, journaux, pilotage
   python usine.py stop | reprendre     pose ou retire le fichier STOP (G0)
 
 Options de « fais un jeu » :
@@ -205,6 +205,7 @@ def main(argv=None):
     p.add_argument("--simuler", action="store_true")
     p.add_argument("--port", type=int, default=8765, help="port du tableau de bord")
     p.add_argument("--sans-navigateur", action="store_true", help="tableau de bord sans ouvrir le navigateur")
+    p.add_argument("--lecture-seule", action="store_true", help="tableau de bord sans pilotage")
     a = p.parse_args(argv)
     mot = a.demande[0].lower()
     if len(a.demande) == 1 and mot in ("etat", "état"):
@@ -223,9 +224,10 @@ def main(argv=None):
         print(sortie.strip())
         return code
     if len(a.demande) == 1 and mot == "tableau":
-        # Tableau de bord local, en lecture seule : tourne jusqu'à Ctrl+C.
+        # Tableau de bord local (ses actions rappellent usine.py) : tourne jusqu'à Ctrl+C.
         return subprocess.call([sys.executable, os.path.join(OUTILS, "tableau-de-bord.py"), "--port", str(a.port)]
-                               + (["--sans-navigateur"] if a.sans_navigateur else []), cwd=RACINE)
+                               + (["--sans-navigateur"] if a.sans_navigateur else [])
+                               + (["--lecture-seule"] if a.lecture_seule else []), cwd=RACINE)
     if len(a.demande) == 1 and mot == "stop":
         io.open(os.path.join(RACINE, "STOP"), "a").close()
         print("STOP posé : aucun agent n'agit plus (G0).")
