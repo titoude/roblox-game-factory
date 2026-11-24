@@ -31,7 +31,7 @@ $attendus = @(
   'OUTILS\sim-economie.py', 'OUTILS\pousser-script.ps1', 'OUTILS\luau-verif.ps1',
   'usine.py', 'usine.cmd', 'CONNAISSANCES\routage.json', 'OUTILS\deleguer.py', 'OUTILS\usine_opencloud.py',
   'OUTILS\retours-joueurs.py', 'OUTILS\mesures-joueurs.py', 'OUTILS\banc-luau.py', 'OUTILS\luau\faux-roblox.luau',
-  'OUTILS\monter-video.py', 'OUTILS\decision-promo.py', 'OUTILS\poser-luau.ps1',
+  'OUTILS\monter-video.py', 'OUTILS\tableau-de-bord.py', 'OUTILS\tableau-de-bord.html', 'OUTILS\decision-promo.py', 'OUTILS\poser-luau.ps1',
   'OUTILS\GABARITS\luau\ServerScriptService.Jeu.RetoursService.lua',
   'OUTILS\GABARITS\luau\ServerScriptService.Jeu.MesuresService.lua',
   'OUTILS\GABARITS\luau\StarterPlayer.StarterPlayerScripts.RetoursClient.client.lua'
@@ -92,7 +92,8 @@ $suites = @(
   @{ nom = 'interrupteurs a distance'; fichier = 'OUTILS\test-interrupteurs.py' },
   @{ nom = 'historique des sessions'; fichier = 'OUTILS\test-historique.py' },
   @{ nom = 'jeton longue duree claude'; fichier = 'OUTILS\test-jeton-claude.py' },
-  @{ nom = 'chien de garde des agents'; fichier = 'OUTILS\test-chien-de-garde.py' }
+  @{ nom = 'chien de garde des agents'; fichier = 'OUTILS\test-chien-de-garde.py' },
+  @{ nom = 'tableau de bord'; fichier = 'OUTILS\test-tableau-de-bord.py' }
 )
 $py = Get-Command python -ErrorAction SilentlyContinue
 if (-not $py) { Avis 'python absent : suites de controles des outils non lancees' }
