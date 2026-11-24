@@ -216,13 +216,22 @@ def juge_reel(racine, propositions, slug, _deleguer=None):
     ) % (slug, racine, pieces)
     r = d.lancer(routage, ROLE_JUGE, candidat, rang, prompt, slug, "juge propositions " + slug,
                  int(routage["roles"][ROLE_JUGE].get("duree_max_min", 30)))
+    # Sans dernier message ni RESULTAT: ok, `final` peut être la transcription, qui recopie le texte des
+    # propositions : un verdict écrit dans une proposition ne doit jamais passer pour celui du juge.
+    if r.get("sans_message") or r.get("verdict") != "ok":
+        return None
+    noms = {nom for nom, _ in propositions}
     for ligne in reversed(r["final"].splitlines()):
         ligne = ligne.strip()
         if ligne.startswith("{"):
             try:
-                return {"modele": "%s:%s" % (candidat["fournisseur"], candidat["modele"]), "decisions": json.loads(ligne)}
+                decisions = json.loads(ligne)
             except ValueError:
                 return None
+            if not isinstance(decisions, dict):
+                return None
+            return {"modele": "%s:%s" % (candidat["fournisseur"], candidat["modele"]),
+                    "decisions": {k: v for k, v in decisions.items() if k in noms and isinstance(v, dict)}}
     return None
 
 
