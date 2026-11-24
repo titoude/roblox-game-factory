@@ -1,0 +1,115 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  LUAU_VERSION: "0.748"
+  PYTHONIOENCODING: utf-8
+
+jobs:
+  luau:
+    name: Luau compile, analyze et banc des jeux
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Poser les binaires Luau
+        run: |
+          curl -fsSL -o luau.zip "https://github.com/luau-lang/luau/releases/download/${LUAU_VERSION}/luau-ubuntu.zip"
+          mkdir -p OUTILS/bin
+          unzip -o -q luau.zip luau luau-compile luau-analyze -d OUTILS/bin
+          rm luau.zip
+          echo "$PWD/OUTILS/bin" >> "$GITHUB_PATH"
+      - name: Compiler chaque script Luau
+        run: |
+          echecs=0; total=0
+          while IFS= read -r f; do
+            total=$((total + 1))
+            luau-compile --null "$f" > /dev/null || { echo "::error file=$f::syntaxe Luau"; echecs=$((echecs + 1)); }
+          done < <(find OUTILS JEUX -path OUTILS/bin -prune -o \( -name '*.lua' -o -name '*.luau' \) -print \
+                   | grep -E '^OUTILS/|/05-production/' | sort)
+          echo "compilation : $total fichier(s), $echecs echec(s)"
+          [ "$total" -gt 0 ] && [ "$echecs" -eq 0 ]
+      - name: Analyser les sources (luau-verif.ps1)
+        shell: pwsh
+        run: |
+          $dossiers = @('OUTILS/GABARITS/luau') + @(Get-ChildItem JEUX -Directory | ForEach-Object { Join-Path $_.FullName '05-production/src' } | Where-Object { Test-Path $_ })
+          $echec = $false
+          foreach ($d in $dossiers) {
+            "== $d"
+            & ./OUTILS/luau-verif.ps1 $d
+            if ($LASTEXITCODE -ne 0) { $echec = $true }
+          }
+          if ($echec) { exit 1 }
+      - name: Tests Luau des gabarits
+        run: |
+          for t in OUTILS/GABARITS/luau/test-*.luau; do echo "== $t"; luau "$t"; done
+      - name: Banc hors Studio des jeux
+        run: |
+          echecs=0
+          for jeu in JEUX/*/; do
+            tests="${jeu}05-production/tests"
+            ls "$tests"/*.test.luau > /dev/null 2>&1 || continue
+            echo "== $jeu"
+            python OUTILS/banc-luau.py "${jeu}05-production/src" --tests "$tests" || echecs=$((echecs + 1))
+          done
+          [ "$echecs" -eq 0 ]
+
+  python:
+    name: Tests Python (Linux)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Poser les binaires Luau
+        run: |
+          curl -fsSL -o luau.zip "https://github.com/luau-lang/luau/releases/download/${LUAU_VERSION}/luau-ubuntu.zip"
+          mkdir -p OUTILS/bin
+          unzip -o -q luau.zip luau luau-compile luau-analyze -d OUTILS/bin
+          rm luau.zip
+      - name: Syntaxe Python
+        run: python OUTILS/verifier-python.py
+      - name: Suites de controles des outils
+        # test-luau-verif.py exige Windows PowerShell 5.1 : il tourne dans le job Windows.
+        run: |
+          echecs=""
+          for t in OUTILS/test-*.py; do
+            [ "$t" = OUTILS/test-luau-verif.py ] && continue
+            echo "::group::$t"
+            python "$t" || echecs="$echecs $t"
+            echo "::endgroup::"
+          done
+          if [ -n "$echecs" ]; then echo "::error::suites en echec :$echecs"; exit 1; fi
+
+  windows:
+    name: Verificateur PowerShell (Windows)
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Poser les binaires Luau (poser-luau.ps1)
+        shell: powershell
+        run: .\OUTILS\poser-luau.ps1 -Confirmer
+      - name: verifier-usine.ps1
+        shell: powershell
+        run: .\OUTILS\verifier-usine.ps1
