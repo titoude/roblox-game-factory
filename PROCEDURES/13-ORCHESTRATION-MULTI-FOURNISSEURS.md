@@ -19,7 +19,9 @@ Les deux modes lisent le même routage, les mêmes procédures et le même état
 
 ## 2. Qui fait quoi (premier choix, puis replis dans l'ordre)
 
-`python OUTILS\deleguer.py --liste` imprime le tableau à jour. Principes, d'après les consignes du propriétaire du 16/11/2026 (`PLAFONDS.md` § 4) :
+`python OUTILS\deleguer.py --liste` imprime le tableau à jour.
+
+**Depuis le 24/11/2026 (consigne du propriétaire)** : SWE 2.1 (fournisseur `devin`) est l'agent principal de chaque rôle de production et de l'orchestration, Codex `gpt-6.1-sol` en premier repli ; les rôles de vérification (`"verification": true` : économie, contre-vérification, revue du fun, relecture de code, qualification, revue du diff) passent par Astra 6.2 (`gpt-6.2-astra`) ou Opus 5.5, **sur accord du propriétaire** (§ 4 bis), avec Codex `gpt-6.1-sol` en repli marqué `degrade`. Le tableau ci-dessous est celui du 16/11/2026 (`PLAFONDS.md` § 4), gardé pour les replis :
 
 | Famille de tâches | Modèle | Pourquoi |
 |---|---|---|
@@ -35,11 +37,11 @@ Les deux modes lisent le même routage, les mêmes procédures et le même état
 ## 3. Lancer un enfant
 
 1. Écrire le prompt (prompt type de la procédure de l'étape, complété) dans `JOURNAUX\prompts\<jeu>-<étape>-<rôle>.md`. Prompt autonome (A1) : racine, rôle, fichiers à lire, entrées avec leur commit, sortie exacte, interdits, dernière ligne `RESULTAT: <ok|echec|arret> | <fichier> | <phrase>`. Aucun secret (l'outil refuse un prompt qui y ressemble, code 7).
-2. T3 Code : `python OUTILS\deleguer.py --role <rôle> --format t3 --prompt-fichier <f> --titre "<titre>"`, puis passer le JSON imprimé à `delegate_task` tel quel. Sans T3 Code : la même commande sans `--format t3`.
+2. T3 Code : `python OUTILS\deleguer.py --role <rôle> --format t3 --prompt-fichier <f> --titre "<titre>"`, puis passer le JSON imprimé à `delegate_task` tel quel. Sans T3 Code : la même commande sans `--format t3`. Pour un rôle de relecture (`interdit_si_auteur`), toujours ajouter `--auteur <fournisseur:modele>` du modèle qui a produit ce qui est relu (ligne `journal` de sa délégation) : sans lui, le repli Codex peut relire son propre travail (A2).
 3. Noter la délégation dans `JEUX\<slug>\JOURNAL.md` (modèle, effort, durée, résultat).
 4. Ne rien modifier de ce que l'enfant lit pendant qu'il tourne (E10).
 
-Codes de sortie de `deleguer.py` : 0 `RESULTAT: ok` ; 1 échec, arrêt ou pas de ligne `RESULTAT` ; 3 simulation ou format T3 ; 4 plafond G2 (attendre) ; 5 aucun candidat (pause et alerte, règle A6) ; 6 `STOP` ; 7 prompt refusé ; 8 durée dépassée (processus arrêté).
+Codes de sortie de `deleguer.py` : 0 `RESULTAT: ok` ; 1 échec, arrêt ou pas de ligne `RESULTAT` ; 3 simulation ou format T3 ; 4 plafond G2 (attendre) ; 5 aucun candidat (pause et alerte, règle A6) ; 6 `STOP` ; 7 prompt refusé ; 8 durée dépassée (processus arrêté) ; 9 agent figé ; 10 aucun candidat sans accord du propriétaire (demande envoyée, étape en pause).
 
 ## 4. Replis
 
@@ -51,6 +53,14 @@ Codes de sortie de `deleguer.py` : 0 `RESULTAT: ok` ; 1 échec, arrêt ou pas de
 | Plus aucun candidat | Code 5 | Étape en pause, alerte, travail qui n'en dépend pas |
 | L'enfant répond sans ligne `RESULTAT` | Code 1, pas de relance sur un autre modèle | Corrige le prompt : ce n'est pas une panne de fournisseur |
 | Dans T3 Code, un fournisseur est désactivé | — | `orchestrator_capabilities`, puis `--indisponible <fournisseur>` pour obtenir la charge utile du repli |
+
+## 4 bis. Quota du propriétaire : modèles sur accord (Q1)
+
+Opus 5.5 et Astra 6.2 consomment les abonnements du propriétaire : `routage.json` les liste dans `sur_accord`. L'outil ne les lance (ni ne donne leur charge utile T3) que sur un accord écrit **par le propriétaire** :
+
+- `python OUTILS\deleguer.py --accorder <modèle> --nombre N --heures H` : N lancements permis pendant H heures (`JOURNAUX\accords-quota.json`) ; chaque lancement en consomme un. Refusé si la commande vient d'un agent de l'usine (`USINE_ROLE` posé, code 7).
+- Sans accord en cours : le candidat est écarté (`ECARTE: … quota du propriétaire`), le rôle passe au suivant (Codex), et une demande part par `OUTILS\prevenir.py` (une par modèle tant qu'elle est ouverte, `JOURNAUX\demandes-quota.json`). `--simuler` n'envoie rien.
+- `python OUTILS\deleguer.py --accords` : accords en cours et demandes ouvertes. Un agent ne s'accorde jamais de quota lui-même.
 
 Un repli marqué `degrade` dans le routage ne valide pas une porte : elle s'écrit `a_confirmer` et se rejoue avec le modèle prévu avant l'étape qui engage de la production (A8) ou avant la release (A6).
 

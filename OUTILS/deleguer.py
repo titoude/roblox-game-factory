@@ -14,6 +14,8 @@ Usage :
   python OUTILS\\deleguer.py --role 04.relecteur-fun --format t3 --prompt-fichier <prompt.md>
   python OUTILS\\deleguer.py --liste                      tableau des rôles et de leur premier choix
   python OUTILS\\deleguer.py --role 01.veilleur --simuler [--indisponible codex]
+  python OUTILS\\deleguer.py --accorder claude-opus-5-5 --nombre 2 [--heures 12]   (propriétaire seulement)
+  python OUTILS\\deleguer.py --accords                   accords de quota en cours et demandes ouvertes
 
 Règles appliquées :
   G0  fichier STOP : aucun lancement.
@@ -24,13 +26,19 @@ Règles appliquées :
   A6  un modèle indisponible n'est pas remplacé en silence : le repli est écrit dans le journal
       et, s'il est marqué « degrade », rappelé sur la sortie (ligne REPLI:).
   A2  --auteur <fournisseur:modele> écarte ce modèle pour les rôles de relecture indépendante.
+  Q1  un modèle de routage.json « sur_accord » (Opus 5.5, Astra 6.2 : quota du propriétaire) n'est
+      lancé que sur un accord écrit par le propriétaire (--accorder, N lancements, durée bornée) ;
+      chaque lancement en consomme un. Sans accord, le rôle passe au candidat suivant (Codex) et
+      une demande d'accord part par OUTILS\\prevenir.py (une par modèle, anti-répétition).
 
 Codes de sortie : 0 l'enfant a rendu RESULTAT: ok | 1 l'enfant a rendu echec, arret, ou rien
   2 usage | 3 simulation ou format t3 (rien lancé) | 4 plafond G2 atteint | 5 aucun candidat
   disponible | 6 fichier STOP | 7 prompt refusé (secret probable) | 8 durée dépassée | 9 agent figé (aucune
-  écriture pendant silence_max_min, 20 min par défaut, réglable par rôle dans routage.json).
+  écriture pendant silence_max_min, 20 min par défaut, réglable par rôle dans routage.json)
+  10 aucun candidat sans accord du propriétaire (Q1) : demande envoyée.
 """
 import argparse
+import contextlib
 import csv
 import datetime as dt
 import glob
@@ -44,6 +52,11 @@ import sys
 import threading
 import time
 import uuid
+
+if os.name == "nt":
+    import msvcrt
+else:
+    import fcntl
 
 RACINE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROUTAGE = os.path.join(RACINE, "CONNAISSANCES", "routage.json")
@@ -127,12 +140,145 @@ def places_claude_fort(routage):
     return plafond - pris
 
 
+def modeles_sur_accord(routage):
+    return set(routage.get("sur_accord", {}).get("modeles", []))
+
+
+def chemin_sur_accord(routage, cle, defaut):
+    return os.path.join(RACINE, *routage.get("sur_accord", {}).get(cle, defaut).replace("\\", "/").split("/"))
+
+
+def lire_json_local(chemin):
+    try:
+        with io.open(chemin, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return {}
+
+
+def ecrire_json_local(chemin, donnees):
+    os.makedirs(os.path.dirname(chemin), exist_ok=True)
+    tmp = "%s.%s.tmp" % (chemin, uuid.uuid4().hex)
+    with io.open(tmp, "w", encoding="utf-8") as f:
+        json.dump(donnees, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, chemin)
+
+
+@contextlib.contextmanager
+def verrou(chemin, delai_s=30):
+    """Verrou inter-processus du système (libéré même si le processus meurt) autour d'un lire-modifier-écrire."""
+    os.makedirs(os.path.dirname(chemin), exist_ok=True)
+    with io.open(chemin + ".lock", "a+b") as f:
+        fin = time.time() + delai_s
+        while True:
+            try:
+                if os.name == "nt":
+                    f.seek(0)
+                    msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+                else:
+                    fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+                break
+            except OSError:
+                if time.time() > fin:
+                    raise TimeoutError("verrou occupé : %s.lock" % chemin)
+                time.sleep(0.02)
+        try:
+            yield
+        finally:
+            if os.name == "nt":
+                f.seek(0)
+                msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+
+
+def accords_valides(routage, horloge=time.time):
+    """Accords du propriétaire encore utilisables : {modele: {restant, expire_utc, ...}}."""
+    accords = lire_json_local(chemin_sur_accord(routage, "fichier_accords", "JOURNAUX/accords-quota.json"))
+    maintenant_s = horloge()
+    valides = {}
+    for modele, a in accords.items():
+        try:
+            expire = dt.datetime.strptime(a["expire_utc"], "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc).timestamp()
+            restant = int(a["restant"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        if restant > 0 and expire > maintenant_s:
+            valides[modele] = a
+    return valides
+
+
+def accord_present(routage, modele, horloge=time.time):
+    return modele not in modeles_sur_accord(routage) or modele in accords_valides(routage, horloge)
+
+
+def consommer_accord(routage, modele, horloge=time.time):
+    """Retire un lancement de l'accord du modèle. Vrai si le lancement est permis (Q1)."""
+    if modele not in modeles_sur_accord(routage):
+        return True
+    chemin = chemin_sur_accord(routage, "fichier_accords", "JOURNAUX/accords-quota.json")
+    with verrou(chemin):
+        if modele not in accords_valides(routage, horloge):
+            return False
+        accords = lire_json_local(chemin)
+        accords[modele]["restant"] = int(accords[modele]["restant"]) - 1
+        accords[modele]["dernier_usage_utc"] = maintenant()
+        ecrire_json_local(chemin, accords)
+    return True
+
+
+def accorder(routage, modele, nombre, heures, horloge=time.time):
+    if modele not in modeles_sur_accord(routage):
+        raise ValueError("« %s » n'est pas un modèle sur accord (routage.json, sur_accord)." % modele)
+    if nombre < 1 or heures <= 0:
+        raise ValueError("--nombre doit être ≥ 1 et --heures > 0.")
+    chemin = chemin_sur_accord(routage, "fichier_accords", "JOURNAUX/accords-quota.json")
+    expire = dt.datetime.fromtimestamp(horloge() + heures * 3600, dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    # La demande est close avant l'écriture de l'accord : un échec entre les deux rouvre une demande, jamais l'inverse.
+    demandes_chemin = chemin_sur_accord(routage, "fichier_demandes", "JOURNAUX/demandes-quota.json")
+    with verrou(demandes_chemin):
+        demandes = lire_json_local(demandes_chemin)
+        if demandes.pop(modele, None) is not None:
+            ecrire_json_local(demandes_chemin, demandes)
+    with verrou(chemin):
+        accords = lire_json_local(chemin)
+        accords[modele] = {"restant": int(nombre), "expire_utc": expire, "accorde_utc": maintenant()}
+        ecrire_json_local(chemin, accords)
+    return accords[modele]
+
+
+def prevenir(sujet, texte, cle):
+    """Message au propriétaire par OUTILS\\prevenir.py (l'anti-répétition est dans prevenir.py)."""
+    r = subprocess.run([sys.executable, os.path.join(RACINE, "OUTILS", "prevenir.py"), "envoyer", "--niveau", "important",
+                        "--sujet", sujet, "--texte", texte, "--cle", cle], capture_output=True, cwd=RACINE)
+    return r.returncode
+
+
+def demander_accord(routage, role, modele):
+    """Note la demande d'accord (JOURNAUX) et prévient le propriétaire, une fois par modèle."""
+    chemin = chemin_sur_accord(routage, "fichier_demandes", "JOURNAUX/demandes-quota.json")
+    with verrou(chemin):
+        demandes = lire_json_local(chemin)
+        deja = modele in demandes
+        d = demandes.setdefault(modele, {"premiere_demande_utc": maintenant(), "roles": []})
+        if role not in d["roles"]:
+            d["roles"].append(role)
+        d["derniere_demande_utc"] = maintenant()
+        ecrire_json_local(chemin, demandes)
+    if deja:
+        return None
+    return prevenir("Accord de quota demandé : %s" % modele,
+                    "Le rôle %s voudrait %s (quota du propriétaire). En attendant, il passe au repli Codex. "
+                    "Pour accorder : python OUTILS\\deleguer.py --accorder %s --nombre 1 --heures 12" % (role, modele, modele),
+                    "quota-" + modele)
+
+
 def cli_presente(routage, fournisseur):
     nom = routage["fournisseurs"][fournisseur]["cli"]
     return shutil.which(nom)
 
 
-def choisir(routage, role, indisponibles=(), auteur=None, pour_lancer=True):
+def choisir(routage, role, indisponibles=(), auteur=None, pour_lancer=True, pour_t3=False, horloge=time.time):
     """Rend (candidat, rang, raisons d'écart). Le premier candidat utilisable gagne."""
     if role not in routage["roles"]:
         raise SystemExit("USAGE : rôle inconnu « %s ». Voir --liste." % role)
@@ -145,6 +291,12 @@ def choisir(routage, role, indisponibles=(), auteur=None, pour_lancer=True):
         if auteur and cle == auteur and routage["roles"][role].get("interdit_si_auteur"):
             ecartes.append("%s : auteur de ce qui est relu (A2)" % cle)
             continue
+        if pour_t3 and "t3_providerInstanceId" not in routage["fournisseurs"][c["fournisseur"]]:
+            ecartes.append("%s : fournisseur non joignable depuis T3 Code" % cle)
+            continue
+        if not accord_present(routage, c["modele"], horloge):
+            ecartes.append("%s : %s" % (cle, ECART_ACCORD))
+            continue
         if pour_lancer and not cli_presente(routage, c["fournisseur"]):
             ecartes.append("%s : CLI « %s » absente" % (cle, routage["fournisseurs"][c["fournisseur"]]["cli"]))
             continue
@@ -153,6 +305,13 @@ def choisir(routage, role, indisponibles=(), auteur=None, pour_lancer=True):
             continue
         return c, rang, ecartes
     return None, -1, ecartes
+
+
+ECART_ACCORD = "quota du propriétaire, aucun accord en cours (Q1)"
+
+
+def modeles_sans_accord(ecartes):
+    return [e.split(" : ")[0].split(":", 1)[1] for e in ecartes if e.endswith(ECART_ACCORD)]
 
 
 def charge_t3(routage, role, candidat, titre, prompt):
@@ -172,7 +331,7 @@ def charge_t3(routage, role, candidat, titre, prompt):
 
 def commande_cli(routage, candidat, fichier_dernier_message):
     f = routage["fournisseurs"][candidat["fournisseur"]]
-    exe = shutil.which(f["cli"])
+    exe = shutil.which(f["cli"]) or f["cli"]
     if candidat["fournisseur"] == "codex":
         return [exe, "exec", "-m", candidat["modele"],
                 "-c", "model_reasoning_effort=%s" % candidat["effort"],
@@ -181,6 +340,10 @@ def commande_cli(routage, candidat, fichier_dernier_message):
     if candidat["fournisseur"] == "claude":
         return [exe, "-p", "--model", candidat["modele"], "--effort", candidat["effort"],
                 "--output-format", "text"] + list(f.get("cli_args_sans_interaction", []))
+    if f.get("cli_args"):
+        valeurs = {"modele": candidat["modele"], "effort": candidat["effort"], "racine": RACINE,
+                   "dernier": fichier_dernier_message}
+        return [exe] + [x.format(**valeurs) for x in f["cli_args"]]
     raise SystemExit("fournisseur inconnu : %s" % candidat["fournisseur"])
 
 
@@ -304,6 +467,12 @@ def attendre_agent(proc, prompt, fournisseur, debut, duree_max_min, silence_min,
 
 
 def lancer(routage, role, candidat, rang, prompt, jeu, titre, duree_max_min):
+    if not consommer_accord(routage, candidat["modele"]):
+        # Dernier verrou avant de dépenser : l'accord a expiré ou a été épuisé depuis le choix (Q1).
+        ecrire_journal([maintenant(), jeu or "", role, candidat["fournisseur"], candidat["modele"], candidat["effort"], rang,
+                        0, 10, "sans-accord", titre or ""])
+        return {"code_cli": 10, "verdict": None, "ligne": "", "duree_s": 0, "final": "", "journal": JOURNAL,
+                "expire": False, "fige": False, "sans_message": True, "sans_accord": True}
     os.makedirs(DOS_AGENTS, exist_ok=True)
     ident = "%s-%s" % (dt.datetime.now().strftime("%Y%m%d-%H%M%S"), uuid.uuid4().hex[:6])
     fiche = os.path.join(DOS_AGENTS, ident + ".json")
@@ -370,6 +539,10 @@ def afficher_liste(routage):
         c = r["candidats"][0]
         replis = ", ".join("%s/%s" % (x["modele"], x["effort"]) for x in r["candidats"][1:]) or "aucun (pause et alerte)"
         print("%-24s %-8s %-20s %-7s %s" % (role, c["fournisseur"], c["modele"], c["effort"], replis))
+    accords = accords_valides(routage)
+    print("sur accord du propriétaire (Q1) : %s" % (", ".join(
+        "%s (%s)" % (m, "%d lancement(s) jusqu'au %s" % (int(accords[m]["restant"]), accords[m]["expire_utc"]) if m in accords else "aucun accord")
+        for m in sorted(modeles_sur_accord(routage))) or "aucun"))
     print("plafond Claude forts simultanés : %d (orchestrateur compris : %s) ; places libres maintenant : %d" % (
         routage.get("plafond_claude_forts_simultanes", 2),
         "oui" if routage.get("orchestrateur_compte_dans_le_plafond", True) else "non",
@@ -390,9 +563,29 @@ def main(argv=None):
     p.add_argument("--indisponible", default="", help="fournisseurs ou modèles à écarter, séparés par des virgules")
     p.add_argument("--auteur", default="", help="fournisseur:modele de l'auteur de ce qui est relu (A2)")
     p.add_argument("--routage", default=ROUTAGE)
+    p.add_argument("--accorder", default="", help="modèle sur accord à permettre (propriétaire seulement, Q1)")
+    p.add_argument("--nombre", type=int, default=1, help="lancements permis par --accorder")
+    p.add_argument("--heures", type=float, default=12, help="durée de validité de --accorder")
+    p.add_argument("--accords", action="store_true", help="accords en cours et demandes ouvertes")
     a = p.parse_args(argv)
 
     routage = lire_routage(a.routage)
+    if a.accorder:
+        if os.environ.get("USINE_ROLE"):
+            print("REFUS : un agent de l'usine ne s'accorde pas de quota ; seul le propriétaire lance --accorder (Q1).")
+            return 7
+        try:
+            r = accorder(routage, a.accorder, a.nombre, a.heures)
+        except ValueError as e:
+            print("USAGE : %s" % e)
+            return 2
+        print("ACCORD: %s, %d lancement(s) jusqu'au %s" % (a.accorder, r["restant"], r["expire_utc"]))
+        return 0
+    if a.accords:
+        print(json.dumps({"accords": accords_valides(routage),
+                          "demandes": lire_json_local(chemin_sur_accord(routage, "fichier_demandes", "JOURNAUX/demandes-quota.json"))},
+                         ensure_ascii=False, indent=2))
+        return 0
     if a.liste:
         afficher_liste(routage)
         return 0
@@ -417,9 +610,20 @@ def main(argv=None):
         return 2
 
     pour_lancer = (a.format == "cli")
-    candidat, rang, ecartes = choisir(routage, a.role, indispo, a.auteur or None, pour_lancer=pour_lancer)
+    candidat, rang, ecartes = choisir(routage, a.role, indispo, a.auteur or None, pour_lancer=pour_lancer,
+                                      pour_t3=(a.format == "t3"))
     for e in ecartes:
         print("ECARTE: " + e)
+    for modele in modeles_sans_accord(ecartes):
+        if a.simuler:
+            print("ACCORD-REQUIS: %s (simulation : aucune demande envoyée)" % modele)
+        else:
+            demander_accord(routage, a.role, modele)
+            print("ACCORD-DEMANDE: %s demandé au propriétaire ; `--accorder %s` pour le permettre." % (modele, modele))
+    if candidat is None and modeles_sans_accord(ecartes) and all(
+            e.endswith(ECART_ACCORD) or "indisponible" in e for e in ecartes):
+        print("ACCORD: aucun candidat sans accord du propriétaire pour %s ; étape en pause (Q1)." % a.role)
+        return 10
     if candidat is None:
         if any("plafond G2" in e for e in ecartes):
             print("PLAFOND: aucun candidat sans dépasser le plafond G2 ; attendre la fin d'un agent Claude fort.")
@@ -432,6 +636,9 @@ def main(argv=None):
             " ; mode dégradé : " + candidat["degrade"] if candidat.get("degrade") else ""))
 
     if a.format == "t3":
+        if not a.simuler and not consommer_accord(routage, candidat["modele"]):
+            print("ACCORD: l'accord pour %s a expiré entre le choix et l'envoi ; relancer (Q1)." % candidat["modele"])
+            return 10
         print(json.dumps(charge_t3(routage, a.role, candidat, a.titre, prompt), ensure_ascii=False, indent=2))
         return 3
     if a.simuler:
@@ -451,8 +658,11 @@ def main(argv=None):
     while r["verdict"] is None and not r["expire"] and (r["code_cli"] != 0 or r["sans_message"]):
         indispo = indispo + ("%s:%s" % (candidat["fournisseur"], candidat["modele"]),)
         suivant, rang2, ecartes = choisir(routage, a.role, indispo, a.auteur or None)
-        print("ECHEC-CLI: %s %s a rendu le code %d sans message exploitable (voir %s)" % (
-            candidat["fournisseur"], candidat["modele"], r["code_cli"], os.path.relpath(r["journal"], RACINE)))
+        if r.get("sans_accord"):
+            print("SANS-ACCORD: %s %s non lancé, accord expiré ou épuisé (Q1)" % (candidat["fournisseur"], candidat["modele"]))
+        else:
+            print("ECHEC-CLI: %s %s a rendu le code %d sans message exploitable (voir %s)" % (
+                candidat["fournisseur"], candidat["modele"], r["code_cli"], os.path.relpath(r["journal"], RACINE)))
         if suivant is None:
             break
         candidat, rang = suivant, rang2
