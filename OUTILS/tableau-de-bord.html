@@ -83,12 +83,17 @@ function rendre() {
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("actif", a.getAttribute("href") === "#" + page[0]));
   const stop = E.stop ? `<div class="bandeau stop">Fichier STOP présent (G0) : aucun agent n'agit. <span class="mono">python usine.py reprendre</span> pour le retirer.</div>` : "";
   const vues = {vue, jeux, cycles, agents, journaux, alertes};
-  const garde = window.scrollY, pre = $("#j-texte"), saisie = document.activeElement && document.activeElement.id === "j-filtre";
+  const garde = window.scrollY, pre = $("#j-texte"), actif = document.activeElement,
+        saisie = actif && actif.id === "j-filtre";
+  // L'actualisation redessine l'écran : garder le focus clavier sur le même lien de fichier.
+  const focusLien = actif && $("#app").contains(actif) && actif.matches("a[data-f],a[data-j],a[href^='#']")
+    ? `a[href="${CSS.escape(actif.getAttribute("href"))}"]` : null;
   if (pre && fichierCourant) defilement = pre.scrollTop;
   $("#app").innerHTML = stop + (vues[page[0]] || vue)(page.slice(1));
   window.scrollTo(0, garde);
   const champ = $("#j-filtre");
   if (champ && filtre && saisie) { champ.focus(); champ.setSelectionRange(filtre.length, filtre.length); }
+  if (focusLien) { const l = $("#app").querySelector(focusLien); if (l) l.focus({preventScroll: true}); }
   if (page[0] === "journaux" && fichierCourant) ouvrir(fichierCourant, false);
 }
 
