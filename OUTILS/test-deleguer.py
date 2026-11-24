@@ -14,6 +14,7 @@ import os
 import subprocess
 import sys
 import tempfile
+import threading
 import time
 from contextlib import redirect_stdout
 from unittest.mock import patch
@@ -78,8 +79,9 @@ verifs = {k for k, r in roles.items() if r.get("verification") and k in etapes}
 controle("les rôles de vérification sont marqués", {"03.calcul", "03.adversaire", "03.contre-verification", "04.relecteur-fun",
                                                    "05.relecteur-code", "06.qualification", "07.revue-diff"} <= verifs)
 controle("vérification : Opus 5.5 ou Astra 6.2 d'abord, puis Codex gpt-6.1-sol en repli marqué « degrade »",
-         all(roles[k]["candidats"][0]["modele"] in sur_accord and roles[k]["candidats"][-1]["modele"] == "gpt-6.1-sol"
-             and roles[k]["candidats"][-1].get("degrade") for k in verifs))
+         all(roles[k]["candidats"][0]["modele"] in sur_accord
+             and [c for c in roles[k]["candidats"] if c["modele"] not in sur_accord][0]["modele"] == "gpt-6.1-sol"
+             and [c for c in roles[k]["candidats"] if c["modele"] not in sur_accord][0].get("degrade") for k in verifs))
 production = etapes - verifs
 controle("production : SWE 2.1 en premier choix (agent principal)",
          all(roles[k]["candidats"][0]["modele"] == "swe-2.1" for k in production))
@@ -212,6 +214,41 @@ with tempfile.TemporaryDirectory() as tmp, patch.object(d, "RACINE", tmp), \
     controle("T3 accord épuisé : charge utile Codex et nouvelle demande",
              json.loads(sortie[sortie.index("{"):])["target"]["model"] == "gpt-6.1-sol"
              and [m[2] for m in messages] == ["quota-gpt-6.2-astra"], sortie)
+
+    d.accorder(routage, "gpt-6.2-astra", 1, 1)
+    code, sortie, _, _ = principal(["--role", "03.calcul", "--format", "t3", "--simuler"])
+    controle("T3 en simulation : l'accord n'est pas consommé",
+             code == 3 and d.accords_valides(routage)["gpt-6.2-astra"]["restant"] == 1, sortie)
+
+    permis = []
+    fils = [threading.Thread(target=lambda: permis.append(d.consommer_accord(routage, "gpt-6.2-astra"))) for _ in range(8)]
+    for t in fils:
+        t.start()
+    for t in fils:
+        t.join()
+    controle("accord d'un lancement consommé en parallèle : un seul lancement permis", permis.count(True) == 1, repr(permis))
+
+    erreurs = []
+
+    def demande(role):
+        try:
+            d.demander_accord(routage, role, "claude-opus-5-5")
+        except Exception as e:
+            erreurs.append(repr(e))
+    with patch.object(d, "prevenir", return_value=0):
+        fils = [threading.Thread(target=demande, args=("03.calcul" if i % 2 else "03.adversaire",)) for i in range(8)]
+        for t in fils:
+            t.start()
+        for t in fils:
+            t.join()
+    controle("demandes d'accord concurrentes : aucune erreur, demande écrite", not erreurs
+             and set(d.lire_json_local(os.path.join(tmp, "JOURNAUX", "demandes-quota.json"))["claude-opus-5-5"]["roles"])
+             >= {"03.calcul", "03.adversaire"}, repr(erreurs))
+
+    c, _, _ = d.choisir(routage, "04.relecteur-fun", auteur="codex:gpt-6.1-sol", pour_lancer=False, pour_t3=True,
+                        horloge=lambda: time.time() + 10 * 3600)
+    controle("T3, revue du fun d'une fiche Codex sans accord : relue par un autre modèle (A2)",
+             c is not None and c["modele"] not in ("gpt-6.1-sol", "claude-opus-5-5", "gpt-6.2-astra"), repr(c))
 
     with patch.object(d.shutil, "which", return_value="devin"):
         cmd = d.commande_cli(routage, roles["05.codeur"]["candidats"][0], "dernier.txt")

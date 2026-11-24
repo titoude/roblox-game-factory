@@ -38,6 +38,7 @@ Codes de sortie : 0 l'enfant a rendu RESULTAT: ok | 1 l'enfant a rendu echec, ar
   10 aucun candidat sans accord du propriétaire (Q1) : demande envoyée.
 """
 import argparse
+import contextlib
 import csv
 import datetime as dt
 import glob
@@ -152,10 +153,39 @@ def lire_json_local(chemin):
 
 def ecrire_json_local(chemin, donnees):
     os.makedirs(os.path.dirname(chemin), exist_ok=True)
-    tmp = chemin + ".tmp"
+    tmp = "%s.%s.tmp" % (chemin, uuid.uuid4().hex)
     with io.open(tmp, "w", encoding="utf-8") as f:
         json.dump(donnees, f, ensure_ascii=False, indent=2)
     os.replace(tmp, chemin)
+
+
+@contextlib.contextmanager
+def verrou(chemin, delai_s=30, perime_s=120):
+    """Verrou inter-processus (fichier .lock créé en exclusif) autour d'un lire-modifier-écrire."""
+    os.makedirs(os.path.dirname(chemin), exist_ok=True)
+    nom = chemin + ".lock"
+    fin = time.time() + delai_s
+    while True:
+        try:
+            os.close(os.open(nom, os.O_CREAT | os.O_EXCL | os.O_WRONLY))
+            break
+        except FileExistsError:
+            try:
+                if time.time() - os.path.getmtime(nom) > perime_s:
+                    os.remove(nom)
+                    continue
+            except OSError:
+                continue
+            if time.time() > fin:
+                raise TimeoutError("verrou occupé : %s" % nom)
+            time.sleep(0.02)
+    try:
+        yield
+    finally:
+        try:
+            os.remove(nom)
+        except OSError:
+            pass
 
 
 def accords_valides(routage, horloge=time.time):
@@ -182,13 +212,14 @@ def consommer_accord(routage, modele, horloge=time.time):
     """Retire un lancement de l'accord du modèle. Vrai si le lancement est permis (Q1)."""
     if modele not in modeles_sur_accord(routage):
         return True
-    if modele not in accords_valides(routage, horloge):
-        return False
     chemin = chemin_sur_accord(routage, "fichier_accords", "JOURNAUX/accords-quota.json")
-    accords = lire_json_local(chemin)
-    accords[modele]["restant"] = int(accords[modele]["restant"]) - 1
-    accords[modele]["dernier_usage_utc"] = maintenant()
-    ecrire_json_local(chemin, accords)
+    with verrou(chemin):
+        if modele not in accords_valides(routage, horloge):
+            return False
+        accords = lire_json_local(chemin)
+        accords[modele]["restant"] = int(accords[modele]["restant"]) - 1
+        accords[modele]["dernier_usage_utc"] = maintenant()
+        ecrire_json_local(chemin, accords)
     return True
 
 
@@ -198,14 +229,16 @@ def accorder(routage, modele, nombre, heures, horloge=time.time):
     if nombre < 1 or heures <= 0:
         raise ValueError("--nombre doit être ≥ 1 et --heures > 0.")
     chemin = chemin_sur_accord(routage, "fichier_accords", "JOURNAUX/accords-quota.json")
-    accords = lire_json_local(chemin)
     expire = dt.datetime.fromtimestamp(horloge() + heures * 3600, dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    accords[modele] = {"restant": int(nombre), "expire_utc": expire, "accorde_utc": maintenant()}
-    ecrire_json_local(chemin, accords)
+    with verrou(chemin):
+        accords = lire_json_local(chemin)
+        accords[modele] = {"restant": int(nombre), "expire_utc": expire, "accorde_utc": maintenant()}
+        ecrire_json_local(chemin, accords)
     demandes_chemin = chemin_sur_accord(routage, "fichier_demandes", "JOURNAUX/demandes-quota.json")
-    demandes = lire_json_local(demandes_chemin)
-    if demandes.pop(modele, None) is not None:
-        ecrire_json_local(demandes_chemin, demandes)
+    with verrou(demandes_chemin):
+        demandes = lire_json_local(demandes_chemin)
+        if demandes.pop(modele, None) is not None:
+            ecrire_json_local(demandes_chemin, demandes)
     return accords[modele]
 
 
@@ -219,13 +252,14 @@ def prevenir(sujet, texte, cle):
 def demander_accord(routage, role, modele):
     """Note la demande d'accord (JOURNAUX) et prévient le propriétaire, une fois par modèle."""
     chemin = chemin_sur_accord(routage, "fichier_demandes", "JOURNAUX/demandes-quota.json")
-    demandes = lire_json_local(chemin)
-    deja = modele in demandes
-    d = demandes.setdefault(modele, {"premiere_demande_utc": maintenant(), "roles": []})
-    if role not in d["roles"]:
-        d["roles"].append(role)
-    d["derniere_demande_utc"] = maintenant()
-    ecrire_json_local(chemin, demandes)
+    with verrou(chemin):
+        demandes = lire_json_local(chemin)
+        deja = modele in demandes
+        d = demandes.setdefault(modele, {"premiere_demande_utc": maintenant(), "roles": []})
+        if role not in d["roles"]:
+            d["roles"].append(role)
+        d["derniere_demande_utc"] = maintenant()
+        ecrire_json_local(chemin, demandes)
     if deja:
         return None
     return prevenir("Accord de quota demandé : %s" % modele,
@@ -597,7 +631,7 @@ def main(argv=None):
             " ; mode dégradé : " + candidat["degrade"] if candidat.get("degrade") else ""))
 
     if a.format == "t3":
-        if not consommer_accord(routage, candidat["modele"]):
+        if not a.simuler and not consommer_accord(routage, candidat["modele"]):
             print("ACCORD: l'accord pour %s a expiré entre le choix et l'envoi ; relancer (Q1)." % candidat["modele"])
             return 10
         print(json.dumps(charge_t3(routage, a.role, candidat, a.titre, prompt), ensure_ascii=False, indent=2))
