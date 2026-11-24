@@ -16,6 +16,7 @@ Codes : 0 ok | 1 échec d'envoi | 2 usage | 3 STOP | 4 place inattendue ou verro
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import tempfile
@@ -52,7 +53,8 @@ def verrou_tenu(agent, place):
     try:
         with open(chemin, encoding="utf-8-sig") as fichier:
             verrou = json.load(fichier)
-        expire = datetime.fromisoformat(verrou["expire"].replace("Z", "+00:00"))
+        horodatage = re.sub(r"(\.\d{6})\d(?=Z$|[+-]\d{2}:\d{2}$|$)", r"\1", verrou["expire"])
+        expire = datetime.fromisoformat(horodatage.replace("Z", "+00:00"))
         if expire.tzinfo is None:
             expire = expire.replace(tzinfo=timezone.utc)
         if verrou["ressource"] == ressource and verrou["agent"] == agent and expire > datetime.now(timezone.utc):

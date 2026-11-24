@@ -56,6 +56,21 @@ class EnvoiStudio(unittest.TestCase):
             self.assertEqual(client.luau.call_count, 2)
             client.fermer.assert_called_once()
 
+    def test_verrou_lit_les_sept_decimales_de_powershell(self):
+        with tempfile.TemporaryDirectory() as dossier, patch.object(pousser, "RACINE", dossier):
+            verrous = Path(dossier) / "VERROUS"
+            verrous.mkdir()
+            verrou = verrous / "place_42.lock"
+            maintenant = datetime.now(timezone.utc)
+            for minutes, attendu in [(5, True), (-5, False)]:
+                with self.subTest(minutes=minutes), redirect_stdout(io.StringIO()):
+                    date = maintenant + timedelta(minutes=minutes)
+                    verrou.write_text(json.dumps({
+                        "ressource": "place:42", "agent": "producteur",
+                        "expire": date.strftime("%Y-%m-%dT%H:%M:%S.%f7Z"),
+                    }), encoding="utf-8-sig")
+                    self.assertEqual(pousser.verrou_tenu("producteur", 42), attendu)
+
     def test_stop_refuse_meme_si_le_verrou_est_detenu(self):
         with tempfile.TemporaryDirectory() as dossier, patch.object(pousser, "RACINE", dossier), \
                 patch.object(pousser, "verrou_tenu", return_value=True) as verrou, \
