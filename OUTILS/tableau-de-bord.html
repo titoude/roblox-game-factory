@@ -57,11 +57,11 @@ label.chk{color:var(--doux);font-size:12px}
 <main id="app"></main>
 <script>
 "use strict";
-let E = null, ongletJeu = null, fichierCourant = null, suivre = true;
+let E = null, ongletJeu = null, fichierCourant = null, suivre = true, filtre = "", defilement = 0;
 const $ = s => document.querySelector(s);
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const pill = (v, cls) => `<span class="pill ${esc(cls || v)}">${esc(String(v).replace(/_/g, " "))}</span>`;
-const lien = f => f ? `<a data-f="${esc(f)}">${esc(f)}</a>` : "";
+const lien = f => f ? `<a href="#journaux" data-f="${esc(f)}">${esc(f)}</a>` : "";
 const date = d => d ? esc(String(d).replace("T", " ").replace("Z", "")) : "";
 const duree = s => { s = +s || 0; const h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); return h ? `${h} h ${m} min` : m ? `${m} min ${s % 60} s` : `${s} s`; };
 const table = (cols, lignes, vide) => lignes.length ? `<table><thead><tr>${cols.map(c => `<th>${c}</th>`).join("")}</tr></thead><tbody>${lignes.join("")}</tbody></table>` : `<div class="vide">${vide}</div>`;
@@ -83,9 +83,12 @@ function rendre() {
   document.querySelectorAll("#nav a").forEach(a => a.classList.toggle("actif", a.getAttribute("href") === "#" + page[0]));
   const stop = E.stop ? `<div class="bandeau stop">Fichier STOP présent (G0) : aucun agent n'agit. <span class="mono">python usine.py reprendre</span> pour le retirer.</div>` : "";
   const vues = {vue, jeux, cycles, agents, journaux, alertes};
-  const garde = window.scrollY;
+  const garde = window.scrollY, pre = $("#j-texte"), saisie = document.activeElement && document.activeElement.id === "j-filtre";
+  if (pre && fichierCourant) defilement = pre.scrollTop;
   $("#app").innerHTML = stop + (vues[page[0]] || vue)(page.slice(1));
   window.scrollTo(0, garde);
+  const champ = $("#j-filtre");
+  if (champ && filtre && saisie) { champ.focus(); champ.setSelectionRange(filtre.length, filtre.length); }
   if (page[0] === "journaux" && fichierCourant) ouvrir(fichierCourant, false);
 }
 
@@ -191,8 +194,8 @@ function journaux() {
   E.journaux.forEach(f => (groupes[f.groupe] = groupes[f.groupe] || []).push(f));
   if (!fichierCourant && E.journaux.length) fichierCourant = E.journaux[0].fichier;
   return `<h2>Journaux</h2><div class="journaux">
-  <div class="carte fichiers">${Object.entries(groupes).map(([g, l]) => `<h3 style="margin-top:4px">${esc(g)}</h3>${l.map(f => `<a data-j="${esc(f.fichier)}" class="${f.fichier === fichierCourant ? "actif" : ""}">${esc(f.fichier)}<span class="doux">${date(f.maj)} · ${(f.taille / 1024).toFixed(1)} Ko</span></a>`).join("")}`).join("") || `<div class="vide">Aucun journal.</div>`}</div>
-  <div class="carte"><div class="outils"><b id="j-nom" class="mono"></b><span id="j-info" class="doux petit"></span><span style="margin-left:auto"></span><input type="search" id="j-filtre" placeholder="filtrer les lignes…"><label class="chk"><input type="checkbox" id="j-suivre" ${suivre ? "checked" : ""}> suivre la fin</label></div><pre class="journal" id="j-texte"></pre></div></div>`;
+  <div class="carte fichiers">${Object.entries(groupes).map(([g, l]) => `<h3 style="margin-top:4px">${esc(g)}</h3>${l.map(f => `<a href="#journaux" data-j="${esc(f.fichier)}" class="${f.fichier === fichierCourant ? "actif" : ""}">${esc(f.fichier)}<span class="doux">${date(f.maj)} · ${(f.taille / 1024).toFixed(1)} Ko</span></a>`).join("")}`).join("") || `<div class="vide">Aucun journal.</div>`}</div>
+  <div class="carte"><div class="outils"><b id="j-nom" class="mono"></b><span id="j-info" class="doux petit"></span><span style="margin-left:auto"></span><input type="search" id="j-filtre" placeholder="filtrer les lignes…" value="${esc(filtre)}"><label class="chk"><input type="checkbox" id="j-suivre" ${suivre ? "checked" : ""}> suivre la fin</label></div><pre class="journal" id="j-texte"></pre></div></div>`;
 }
 
 async function ouvrir(f, haut = true) {
@@ -205,10 +208,10 @@ async function ouvrir(f, haut = true) {
   if (!r.ok) { pre.textContent = d.erreur; return; }
   $("#j-info").textContent = `${(d.taille / 1024).toFixed(1)} Ko · modifié ${d.maj.replace("T", " ").replace("Z", "")} UTC${d.tronque ? " · fin du fichier seulement" : ""}`;
   pre.dataset.texte = d.texte; filtrer();
-  if (suivre) pre.scrollTop = pre.scrollHeight; else if (haut) pre.scrollTop = 0;
+  if (suivre) pre.scrollTop = pre.scrollHeight; else pre.scrollTop = haut ? 0 : defilement;
 }
 function filtrer() {
-  const pre = $("#j-texte"), q = ($("#j-filtre")?.value || "").toLowerCase();
+  const pre = $("#j-texte"), q = filtre.toLowerCase();
   if (!pre) return;
   pre.textContent = q ? pre.dataset.texte.split("\n").filter(l => l.toLowerCase().includes(q)).join("\n") : pre.dataset.texte;
 }
@@ -227,11 +230,11 @@ document.addEventListener("click", e => {
   if (f) { e.preventDefault(); fichierCourant = f.dataset.f; if (location.hash.startsWith("#journaux")) ouvrir(fichierCourant); else location.hash = "#journaux"; }
   if (j) { e.preventDefault(); ouvrir(j.dataset.j); }
 });
-document.addEventListener("input", e => { if (e.target.id === "j-filtre") filtrer(); });
+document.addEventListener("input", e => { if (e.target.id === "j-filtre") { filtre = e.target.value; filtrer(); } });
 document.addEventListener("change", e => { if (e.target.id === "j-suivre") suivre = e.target.checked; });
 window.addEventListener("hashchange", () => { window.scrollTo(0, 0); rendre(); });
 charger();
-setInterval(() => { if (!document.hidden && !($("#j-filtre") && $("#j-filtre").value)) charger(); }, 5000);
+setInterval(() => { if (!document.hidden) charger(); }, 5000);
 </script>
 </body>
 </html>
