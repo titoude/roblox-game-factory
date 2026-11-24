@@ -11,6 +11,7 @@ Codex (CLI `codex`) du propriétaire. Le modèle de chaque rôle vient de CONNAI
   python usine.py verifier             auto-contrôle de l'usine et tests des outils (aucun modèle lancé)
   python usine.py roles                qui fait quoi, replis, places libres
   python usine.py retours <slug>       boucle des retours joueurs d'un jeu (procédure 11)
+  python usine.py bilan <slug>         boucle d'amélioration : écrit les leçons de BILAN.json dans la mémoire (procédure 09)
   python usine.py battement [--simuler]  un battement sans modèle : mesures, retours, incidents, messages, décision
   python usine.py canaux              par où le propriétaire est prévenu (aucun secret affiché)
   python usine.py stop | reprendre     pose ou retire le fichier STOP (G0)
@@ -186,6 +187,18 @@ def cmd_cycle(demande, tours, simuler):
     return 1
 
 
+def cmd_bilan(slug):
+    """Bilan d'un jeu : la boucle d'amélioration applique BILAN.json s'il existe, sinon l'orchestrateur l'écrit (procédure 09)."""
+    if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", slug):
+        print("USAGE: slug invalide.")
+        return 2
+    if os.path.isfile(os.path.join(RACINE, "JEUX", slug, "09-bilan", "BILAN.json")):
+        code, sortie = py("boucle-amelioration.py", "appliquer", "--jeu", slug, "--commit")
+        print(sortie.strip())
+        return code
+    return cmd_cycle("bilan %s (procédure 09 : écrire JEUX\\%s\\09-bilan\\BILAN.json puis lancer OUTILS\\boucle-amelioration.py)" % (slug, slug), 2, False)
+
+
 def cmd_retours(slug):
     code, sortie = py("retours-joueurs.py", "diagnostic", "--jeu", slug)
     print(sortie.strip())
@@ -229,6 +242,8 @@ def main(argv=None):
             os.remove(f)
         print("STOP retiré.")
         return 0
+    if mot == "bilan" and len(a.demande) == 2:
+        return cmd_bilan(a.demande[1])
     if mot == "retours" and len(a.demande) == 2:
         return cmd_retours(a.demande[1])
     return cmd_cycle(" ".join(a.demande), a.tours, a.simuler)

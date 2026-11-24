@@ -24,8 +24,15 @@
 3. **Coût.** Durée et nombre de délégations par étape, itérations, temps perdu sur des blocages. Où l'usine a-t-elle attendu un humain ?
 4. **Causes, pas symptômes.** Pour les trois plus gros écarts : quelle règle manquait, laquelle était fausse, laquelle n'a pas été appliquée ?
 5. **Traiter les propositions.** Pour chaque fichier de `PROPOSITIONS\` : fusionner, refuser ou reporter ; écrire la décision dans le fichier ; le déplacer dans `traitees\`.
-6. **Mettre à jour la mémoire** (voir ci-dessous).
-7. **Clore.** Copier le bilan dans `CONNAISSANCES\BILANS\AAAA-MM-JJ-<slug>.md`, compléter `JOURNAL-DES-JEUX.md` et ses compteurs, `etat.ps1 -Jeu <slug> -Porte P9 -Resultat passe -Preuve <bilan>`.
+6. **Mettre à jour la mémoire, sans étape manuelle.** Écrire `JEUX\<slug>\09-bilan\BILAN.json` (gabarit `OUTILS\GABARITS\BILAN.exemple.json`) : prévisions avec prévu, mesuré, source et `facteur_applique` ; portes, avec chaque faux positif prouvé et la règle vérifiable qui l'aurait arrêté ; leçons, confirmations et contradictions de règles, chacune avec sa preuve ; seuils mesurés et valeur proposée. En dernier, poser `"pret": true` : sans lui, la boucle et le battement n'appliquent rien (l'analyste écrit ses tableaux avant les leçons). Puis lancer `python usine.py bilan <slug>` (ou `python OUTILS\boucle-amelioration.py appliquer --jeu <slug> --commit`). La boucle applique les conditions du tableau ci-dessous et refuse ce qui ne les remplit pas :
+   - facteur mesuré/prévu de chaque prévision dans `CONNAISSANCES\CALIBRATION.json` (médiane sur les jeux) ; écart au-delà de `seuils.json` § `bilan.ecart_tolere_pct` : règle de calibration `à calibrer`, promue `active` quand un autre jeu qui l'a appliquée tombe dans la tolérance ;
+   - faux positif de porte, leçon : nouvelle règle `à calibrer` dans le domaine de la porte ; confirmation par un autre jeu : `active` ; contradiction : barrée, `retirée`, raison gardée ;
+   - seuil : changé sur deux jeux (médiane des valeurs proposées) ou un écart massif expliqué, jamais si un jeu en cours est en échec ou en dérogation sur la porte (A4) ; version incrémentée, ligne d'historique dans `SEUILS-PORTES.md` ;
+   - propositions jugées par le rôle `09.juge-propositions` (Codex, sans repli Opus), décision écrite, fichier dans `traitees\` ; sans juge, elles attendent et P9 ne passe pas ;
+   - bloc « Leçons des bilans » de chaque skill concerné (règles des bilans et facteurs de calibration), que le jeu suivant lit ;
+   - `CONNAISSANCES\PROGRES.json` : écart moyen prévu/mesuré et faux positifs des portes, comparés au jeu précédent.
+   Le battement (`OUTILS\battement.py`) lance la boucle seul pour tout `BILAN.json` non appliqué.
+7. **Clore.** La boucle écrit `CONNAISSANCES\BILANS\AAAA-MM-JJ-<slug>.md`, la porte P9 dans `ETAT.json` et le commit `[orchestrateur] Bilan <slug> : …`. Compléter `JOURNAL-DES-JEUX.md` et ses compteurs. Skills modifiés : le rapport le dit au propriétaire (`installer-skills.ps1 -Confirmer`, G17).
 
 ## Ce qui peut changer, et à quelles conditions
 
@@ -59,8 +66,8 @@ Passe si : bilan écrit avec ses sources, toutes les propositions traitées, mé
 Tu es analyste du bilan de l'usine Roblox. Racine : %USERPROFILE%\Documents\Projets\USINE-ROBLOX.
 Lis d'abord GARDE-FOUS.md et PROCEDURES\09-BILAN.md.
 Jeu : <slug>. Pièces : JEUX\<slug>\ETAT.json, JOURNAL.md, 02-concept\FICHE-CONCEPT.md (prévisions), 03-economie\SIMULATION.md, 06-qa\RAPPORT-QA-*.md, 08-distribution\JOURNAL-CAMPAGNES.md.
-Travail : remplis les tableaux « prévu contre mesuré », « portes » et « coût » de OUTILS\GABARITS\BILAN.md. Chaque mesure avec sa source ; mesure absente = NP et sa raison. Ne conclus pas, ne propose pas de règle : c'est l'orchestrateur qui décide.
-Lecture seule sur tout le reste. N'écris pas dans CONNAISSANCES\. Aucun sous-agent.
-Sortie : JEUX\<slug>\09-bilan\TABLEAUX.md.
+Travail : remplis les tableaux « prévu contre mesuré », « portes » et « coût » de OUTILS\GABARITS\BILAN.md, et les champs previsions, portes (résultat seulement) et cout de JEUX\<slug>\09-bilan\BILAN.json (gabarit OUTILS\GABARITS\BILAN.exemple.json). Chaque mesure avec sa source ; mesure absente = NP et sa raison. Ne conclus pas, ne propose pas de règle : c'est l'orchestrateur qui décide.
+Lecture seule sur tout le reste. N'écris pas dans CONNAISSANCES\. Aucun sous-agent. Ne lance pas la boucle d'amélioration : c'est l'orchestrateur.
+Sortie : JEUX\<slug>\09-bilan\TABLEAUX.md et JEUX\<slug>\09-bilan\BILAN.json.
 Dernière ligne : RESULTAT: <ok|echec|arret> | <fichier> | <nombre de prévisions, dont mesurées>.
 ```

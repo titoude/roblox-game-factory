@@ -24,8 +24,8 @@ Lis `GARDE-FOUS.md`, `PROCEDURES\09-BILAN.md` (elle fait foi) et `CONNAISSANCES\
 3. **Coût** : délégations, durée, itérations, attentes d'un humain.
 4. **Causes** des trois plus gros écarts : règle manquante, fausse ou non appliquée.
 5. **Propositions** : fusionner, refuser ou reporter chaque fichier ; écrire la décision ; déplacer dans `traitees\`.
-6. **Mémoire** : mettre à jour `REGLES.md`, `seuils.json` et `SEUILS-PORTES.md`, les procédures, les gabarits.
-7. **Clore** : copie dans `CONNAISSANCES\BILANS\`, `JOURNAL-DES-JEUX.md` et ses compteurs, porte P9 dans `OUTILS\etat.ps1`, commit `[orchestrateur] Bilan <slug> : …`.
+6. **Mémoire, sans étape manuelle** : écrire `JEUX\<slug>\09-bilan\BILAN.json` (gabarit `OUTILS\GABARITS\BILAN.exemple.json`), poser `"pret": true` en dernier, puis `python usine.py bilan <slug>`. La boucle (`OUTILS\boucle-amelioration.py`) écrit règles, seuils, facteurs de calibration, décisions des propositions, bloc « Leçons des bilans » des skills et `PROGRES.json`, aux conditions ci-dessous. Procédures et gabarits restent à corriger à la main.
+7. **Clore** : la boucle écrit `CONNAISSANCES\BILANS\`, la porte P9 et le commit `[orchestrateur] Bilan <slug> : …` ; compléter `JOURNAL-DES-JEUX.md` et ses compteurs.
 
 ## Conditions d'un changement
 
@@ -39,6 +39,6 @@ Lis `GARDE-FOUS.md`, `PROCEDURES\09-BILAN.md` (elle fait foi) et `CONNAISSANCES\
 
 ## Analyste des tableaux
 
-Remplit `JEUX\<slug>\09-bilan\TABLEAUX.md` (prévu contre mesuré, portes, coût), chaque mesure avec sa source. Ne conclut pas, ne propose pas de règle, n'écrit pas dans `CONNAISSANCES\`. Aucun sous-agent.
+Remplit `JEUX\<slug>\09-bilan\TABLEAUX.md` (prévu contre mesuré, portes, coût) et les champs `previsions`, `portes` et `cout` de `BILAN.json`, chaque mesure avec sa source. Ne conclut pas, ne propose pas de règle, n'écrit pas dans `CONNAISSANCES\`. Aucun sous-agent.
 
 Dernière ligne de l'analyste : `RESULTAT: <ok|echec|arret> | <fichier> | <nombre de prévisions, dont mesurées>`.

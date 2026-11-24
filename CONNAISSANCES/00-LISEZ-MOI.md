@@ -8,6 +8,7 @@ Ce dossier est lu par tous les agents et s'améliore après chaque jeu.
 |---|---|---|
 | `PLAFONDS.md` | Le propriétaire seul | Avant toute dépense ou publication |
 | `REGLES.md`, `seuils.json`, `SEUILS-PORTES.md`, `MODELES-ET-QUOTAS.md`, `SOURCES-VEILLE.md`, `JOURNAL-DES-JEUX.md`, `LECONS-ARCHIPEL.md`, `BILANS\` | L'orchestrateur seul | Au bilan (`PROCEDURES\09-BILAN.md`), ou sur ordre du propriétaire |
+| `CALIBRATION.json`, `PROGRES.json` | `OUTILS\boucle-amelioration.py` (pour l'orchestrateur) | Au bilan, d'après `JEUX\<slug>\09-bilan\BILAN.json` ; jamais à la main |
 | `PROPOSITIONS\` | Tout agent | Dès qu'il constate quelque chose qui devrait changer une règle |
 
 Un agent qui n'est pas l'orchestrateur ne modifie jamais une règle : il dépose `PROPOSITIONS\AAAA-MM-JJ-<role>-<sujet>.md` (gabarit `OUTILS\GABARITS\PROPOSITION-LECON.md`).
@@ -34,3 +35,4 @@ Un commit qui touche ce dossier hors `PROPOSITIONS\` commence par `[orchestrateu
 - Les valeurs chiffrées des portes vivent dans `seuils.json` (source unique, lue aussi par les scripts). `SEUILS-PORTES.md` en donne le sens, l'origine et l'historique.
 - Les seuils ne changent qu'au bilan, sur données mesurées. Pendant un jeu, une dérogation s'écrit dans l'`ETAT.json` du jeu avec sa raison.
 - Tout ce qui est écrit ici doit pouvoir être vérifié : une règle sans origine ou une leçon sans preuve est refusée.
+- La boucle d'amélioration (`python usine.py bilan <slug>`, lancée aussi par le battement) écrit les leçons mesurées : règles, seuils, facteurs de calibration des prévisions, bloc « Leçons des bilans » des skills. `PROGRES.json` dit, jeu après jeu, si l'écart prévu/mesuré baisse.

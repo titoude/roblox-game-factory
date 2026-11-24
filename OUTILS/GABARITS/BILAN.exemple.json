@@ -1,0 +1,51 @@
+{
+  "slug": "exemple-jeu",
+  "date": "2026-12-01",
+  "type": "fin",
+  "pret": false,
+  "previsions": [
+    {
+      "cle": "premiere_action_s",
+      "libelle": "Temps jusqu'à la première action",
+      "domaine": "concept",
+      "prevu": 40,
+      "mesure": 78,
+      "facteur_applique": null,
+      "source": "JEUX/exemple-jeu/06-qa/RAPPORT-QA-1.md, chronométrage de 5 parties"
+    },
+    {
+      "cle": "j1_pct",
+      "libelle": "J1",
+      "domaine": "lancement",
+      "prevu": 10,
+      "mesure": "NP",
+      "source": "NP : cohorte de 40 joueurs, sous le seuil de 200"
+    }
+  ],
+  "portes": [
+    {"porte": "P1", "resultat": "passe"},
+    {
+      "porte": "P2",
+      "resultat": "passe",
+      "faux_positif": {
+        "constat": "premier achat à 75 s en QA pour 45 s simulés",
+        "preuve": "JEUX/exemple-jeu/06-qa/RAPPORT-QA-1.md § 3",
+        "regle": "Le simulateur compte le déplacement jusqu'au vendeur dans le temps du premier achat."
+      }
+    }
+  ],
+  "cout": {"delegations": 14, "duree_min": 320, "iterations": 5, "attente_humain_min": 45},
+  "lecons": [
+    {"domaine": "production", "regle": "Formulation vérifiable de la règle.", "preuve": "fichier, ligne ou mesure"}
+  ],
+  "confirmations": [
+    {"id": "C10", "preuve": "mesure de ce jeu qui confirme la règle (jamais le jeu qui l'a créée)"}
+  ],
+  "contradictions": [
+    {"id": "C4", "raison": "ce que la mesure contredit", "preuve": "fichier ou mesure"}
+  ],
+  "seuils": [
+    {"cle": "qa.fps_min_telephone", "mesure": 38, "propose": 33, "preuve": "RAPPORT-QA-2.md, 3 téléphones", "massif": false, "explication": ""}
+  ],
+  "a_dire_au_proprietaire": []
+}

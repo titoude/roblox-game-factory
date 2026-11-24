@@ -89,6 +89,7 @@ $suites = @(
   @{ nom = 'verificateur Luau'; fichier = 'OUTILS\test-luau-verif.py' },
   @{ nom = 'prevenir le proprietaire'; fichier = 'OUTILS\test-prevenir.py' },
   @{ nom = 'battement'; fichier = 'OUTILS\test-battement.py' },
+  @{ nom = "boucle d'amelioration des bilans"; fichier = 'OUTILS\test-boucle-amelioration.py' },
   @{ nom = 'interrupteurs a distance'; fichier = 'OUTILS\test-interrupteurs.py' },
   @{ nom = 'historique des sessions'; fichier = 'OUTILS\test-historique.py' },
   @{ nom = 'jeton longue duree claude'; fichier = 'OUTILS\test-jeton-claude.py' },
