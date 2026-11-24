@@ -5,7 +5,7 @@
 
 1. Contrôle d'identité : la place ouverte doit être celle attendue (`locale` = PlaceId 0).
    Pour une place distante, renseigner USINE_ARCHIPEL_PLACE_ID afin d'interdire la place d'Archipel.
-2. Verrou : `studio` détenu par l'agent courant (USINE_AGENT), sinon refus (G1).
+2. Verrou : `place:<placeId>` détenu par l'agent courant (USINE_AGENT), sinon refus (G1).
 3. Ordre : ReplicatedStorage, puis modules serveur, puis scripts clients, puis scripts serveur
    (*.server.lua) en dernier, pour qu'aucun script ne démarre avant ses modules.
    ServerStorage.Tests.* seulement avec --avec-tests.
@@ -14,10 +14,12 @@
 Codes : 0 ok | 1 échec d'envoi | 2 usage | 3 STOP | 4 place inattendue ou verrou absent.
 """
 import argparse
+import json
 import os
 import subprocess
 import sys
 import tempfile
+from datetime import datetime, timezone
 
 ICI = os.path.dirname(os.path.abspath(__file__))
 RACINE = os.path.dirname(ICI)
@@ -44,12 +46,21 @@ def fichiers(src, avec_tests):
     return sorted(noms, key=lambda n: (rang(n), n))
 
 
-def verrou_tenu(agent):
-    r = subprocess.run(["powershell", "-NoProfile", "-File", os.path.join(ICI, "verrou.ps1"), "liste"],
-                       capture_output=True, text=True, encoding="utf-8", errors="replace")
-    for ligne in r.stdout.splitlines():
-        if ligne.startswith("studio |") and ("agent %s " % agent) in ligne and "EXPIRE" not in ligne:
+def verrou_tenu(agent, place):
+    ressource = "place:%d" % place
+    chemin = os.path.join(RACINE, "VERROUS", "place_%d.lock" % place)
+    try:
+        with open(chemin, encoding="utf-8-sig") as fichier:
+            verrou = json.load(fichier)
+        expire = datetime.fromisoformat(verrou["expire"].replace("Z", "+00:00"))
+        if expire.tzinfo is None:
+            expire = expire.replace(tzinfo=timezone.utc)
+        if verrou["ressource"] == ressource and verrou["agent"] == agent and expire > datetime.now(timezone.utc):
             return True
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        pass
+    print("REFUS : verrou %s non détenu par %s (OUTILS\\verrou.ps1 prendre %s -agent %s)." %
+          (ressource, agent, ressource, agent))
     return False
 
 
@@ -105,8 +116,7 @@ def main(argv=None):
         print("REFUS : renseigner USINE_ARCHIPEL_PLACE_ID avant tout envoi vers une place distante.")
         return 4
     agent = os.environ.get("USINE_AGENT") or "defaut"
-    if not verrou_tenu(agent):
-        print("REFUS : verrou studio non détenu par %s (OUTILS\\verrou.ps1 prendre studio -agent %s)." % (agent, agent))
+    if not verrou_tenu(agent, attendu):
         return 4
     c = studio_mcp.Client()
     try:
@@ -130,6 +140,8 @@ def main(argv=None):
                 code = luau_de(os.path.join(src, n))
                 if arret_demande():
                     return 3
+                if not verrou_tenu(agent, place):
+                    return 4
                 r = c.luau(code)
             except Exception as e:
                 print("ECHEC %s : %s" % (n, str(e)[:400]))

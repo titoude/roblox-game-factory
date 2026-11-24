@@ -2,12 +2,14 @@
 """Contrôles Studio sans ouvrir ni modifier de place."""
 import importlib.util
 import io
+import json
 import os
 import queue
 import tempfile
 import time
 import unittest
 from contextlib import redirect_stdout
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -18,6 +20,41 @@ spec.loader.exec_module(pousser)
 
 
 class EnvoiStudio(unittest.TestCase):
+    def test_g1_exige_le_verrou_de_la_place(self):
+        with tempfile.TemporaryDirectory() as dossier, patch.object(pousser, "RACINE", dossier), \
+                patch.dict(os.environ, {"USINE_AGENT": "producteur"}), \
+                patch.object(pousser.studio_mcp, "Client") as studio, \
+                patch.object(pousser, "luau_de", return_value="return true"), redirect_stdout(io.StringIO()):
+            racine = Path(dossier)
+            src = racine / "JEUX/lave-la-tour/05-production/src"
+            src.mkdir(parents=True)
+            (src / "ReplicatedStorage.Test.lua").write_text("return true\n", encoding="utf-8")
+            verrous = racine / "VERROUS"
+            verrous.mkdir()
+            maintenant = datetime.now(timezone.utc)
+
+            def ecrire_verrou(nom, ressource, agent, expire):
+                (verrous / nom).write_text(json.dumps({
+                    "ressource": ressource, "agent": agent, "expire": expire.isoformat(),
+                }), encoding="utf-8-sig")
+
+            futur = maintenant + timedelta(minutes=5)
+            ecrire_verrou("studio.lock", "studio", "producteur", futur)
+            self.assertEqual(pousser.main(["lave-la-tour"]), 4)
+            ecrire_verrou("place_0.lock", "place:0", "autre", futur)
+            self.assertEqual(pousser.main(["lave-la-tour"]), 4)
+            ecrire_verrou("place_0.lock", "place:0", "producteur", maintenant - timedelta(minutes=5))
+            self.assertEqual(pousser.main(["lave-la-tour"]), 4)
+            studio.assert_not_called()
+
+            (verrous / "studio.lock").unlink()
+            ecrire_verrou("place_0.lock", "place:0", "producteur", futur)
+            client = studio.return_value
+            client.luau.side_effect = ["0|0|Place locale", "script envoyé"]
+            self.assertEqual(pousser.main(["lave-la-tour"]), 0)
+            self.assertEqual(client.luau.call_count, 2)
+            client.fermer.assert_called_once()
+
     def test_stop_refuse_meme_si_le_verrou_est_detenu(self):
         with tempfile.TemporaryDirectory() as dossier, patch.object(pousser, "RACINE", dossier), \
                 patch.object(pousser, "verrou_tenu", return_value=True) as verrou, \
