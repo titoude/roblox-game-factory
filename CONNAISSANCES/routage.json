@@ -1,7 +1,7 @@
 {
-  "version": 1,
-  "maj": "2026-11-16",
-  "note": "Source unique du choix de modele par role. Lue par OUTILS\\deleguer.py (mode cli) et par l'orchestrateur dans T3 Code (deleguer.py --format t3 donne la charge utile de delegate_task). Modifiee par l'orchestrateur au bilan seulement. Origine : consignes du proprietaire du 16/11/2026 (PLAFONDS.md section 4) : gpt-6.1-sol autant que possible, pas de petits agents pour ce qui doit etre parfait.",
+  "version": 2,
+  "maj": "2026-11-24",
+  "note": "Source unique du choix de modele par role. Lue par OUTILS\\deleguer.py (mode cli) et par l'orchestrateur dans T3 Code (deleguer.py --format t3 donne la charge utile de delegate_task). Modifiee par l'orchestrateur au bilan seulement. Origine : consignes du proprietaire du 16/11/2026 (PLAFONDS.md section 4) : gpt-6.1-sol autant que possible, pas de petits agents pour ce qui doit etre parfait. Mise a jour du 24/11/2026 (consigne du proprietaire) : SWE 2.1 agent principal de chaque role de production, Opus 5.5 et Astra 6.2 pour la verification, toujours sur accord du proprietaire (bloc sur_accord), Codex gpt-6.1-sol en repli.",
   "plafond_claude_forts_simultanes": 2,
   "orchestrateur_compte_dans_le_plafond": true,
   "classes": {
@@ -9,6 +9,12 @@
     "petit": ["claude-haiku-5-5"]
   },
   "fournisseurs": {
+    "devin": {
+      "cli": "devin",
+      "efforts": ["low", "medium", "high", "xhigh", "max"],
+      "cli_args": ["-p", "--model", "{modele}", "--effort", "{effort}", "--output-format", "text"],
+      "a_confirmer": "options de la CLI a confirmer par le proprietaire sur son poste ; tant que la CLI est absente, le role passe a Codex"
+    },
     "codex": {
       "cli": "codex",
       "t3_providerInstanceId": "codex",
@@ -30,8 +36,7 @@
       "t3_role": "general",
       "duree_max_min": 180,
       "candidats": [
-        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "medium"},
-        {"fournisseur": "claude", "modele": "claude-fable-5-2", "effort": "medium"},
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "orchestrateur de repli : ne publie pas, ne modifie pas CONNAISSANCES hors PROPOSITIONS ; s'arrete avant toute release"}
       ]
     },
@@ -39,6 +44,7 @@
       "but": "Releve des tendances, recherche web et lecture de pages publiques",
       "t3_role": "research",
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-sonnet-5-5", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-haiku-5-5", "effort": "xhigh", "degrade": "petit modele : releve a confirmer par un modele fort avant de juger P0"}
@@ -48,50 +54,59 @@
       "but": "Trois pistes, choix, fiche concept",
       "t3_role": "design",
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "concept par Codex : la revue du fun doit alors venir de Claude (A2)"},
         {"fournisseur": "claude", "modele": "claude-fable-5-2", "effort": "high"},
-        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "medium"},
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "concept par Codex : la revue du fun doit alors venir de Claude (A2)"}
+        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "medium"}
       ]
     },
     "03.calcul": {
       "but": "Transcription de l'economie, simulation, controle a la main",
       "t3_role": "review",
       "candidats": [
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh"},
-        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high", "degrade": "P2 a_confirmer : a rejouer avec Codex avant la release (regle A6)"}
-      ]
+        {"fournisseur": "codex", "modele": "gpt-6.2-astra", "effort": "xhigh"},
+        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"}
+      ],
+      "verification": true
     },
     "03.adversaire": {
       "but": "Cherche comment casser ou exploiter l'economie",
       "t3_role": "review",
       "candidats": [
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh"},
-        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high", "degrade": "P2 a_confirmer : a rejouer avec Codex avant la release (regle A6)"}
-      ]
+        {"fournisseur": "codex", "modele": "gpt-6.2-astra", "effort": "xhigh"},
+        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"}
+      ],
+      "verification": true
     },
     "03.contre-verification": {
       "but": "Relit une correction qu'il n'a pas ecrite (regle E11)",
       "t3_role": "review",
       "candidats": [
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh"},
-        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high", "degrade": "P2 a_confirmer"}
-      ]
+        {"fournisseur": "codex", "modele": "gpt-6.2-astra", "effort": "xhigh"},
+        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"}
+      ],
+      "verification": true
     },
     "04.relecteur-fun": {
       "but": "Revue du fun independante : jamais le modele qui a ecrit la fiche (A2)",
       "t3_role": "review",
       "candidats": [
         {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh"},
-        {"fournisseur": "claude", "modele": "claude-sonnet-5-5", "effort": "high", "degrade": "P3 a_confirmer"}
+        {"fournisseur": "codex", "modele": "gpt-6.2-astra", "effort": "xhigh"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "P3 a_confirmer ; verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"}
       ],
-      "interdit_si_auteur": "02.concepteur"
+      "interdit_si_auteur": "02.concepteur",
+      "verification": true
     },
     "05.codeur": {
       "but": "Ecrit le code d'un lot dans src\\ et ses tests hors Studio, sans toucher a Studio",
       "t3_role": "implementation",
       "duree_max_min": 90,
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"}
       ]
@@ -102,6 +117,7 @@
       "duree_max_min": 120,
       "ecrit_place": true,
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-fable-5-2", "effort": "high"}
       ]
@@ -110,15 +126,18 @@
       "but": "Relit un commit d'un lot sensible (argent, sauvegarde, achats) ; jamais l'auteur du lot",
       "t3_role": "review",
       "candidats": [
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh"},
-        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"}
+        {"fournisseur": "codex", "modele": "gpt-6.2-astra", "effort": "xhigh"},
+        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"}
       ],
-      "interdit_si_auteur": "05.codeur"
+      "interdit_si_auteur": "05.codeur",
+      "verification": true
     },
     "06.testeur": {
       "but": "Joue un scenario en Play par le serveur MCP de Studio, ou rejoue la logique hors Studio",
       "t3_role": "test",
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-sonnet-5-5", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-haiku-5-5", "effort": "xhigh", "degrade": "petit modele : constats a confirmer par l'analyste"}
@@ -128,6 +147,7 @@
       "but": "Rattache chaque erreur de console a un scenario et a une ligne de code",
       "t3_role": "review",
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"}
       ]
@@ -136,32 +156,37 @@
       "but": "Qualification independante : n'a pas produit le jeu (Q7)",
       "t3_role": "review",
       "candidats": [
-        {"fournisseur": "claude", "modele": "claude-fable-5-2", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh"}
-      ]
+        {"fournisseur": "codex", "modele": "gpt-6.2-astra", "effort": "xhigh"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"}
+      ],
+      "verification": true
     },
     "07.revue-diff": {
       "but": "Defauts certains du diff avant toute publication",
       "t3_role": "review",
       "candidats": [
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh"},
-        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"}
-      ]
+        {"fournisseur": "codex", "modele": "gpt-6.2-astra", "effort": "xhigh"},
+        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "high"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "xhigh", "degrade": "verification par Codex : Opus 5.5 et Astra 6.2 sans accord du proprietaire ou indisponibles"}
+      ],
+      "verification": true
     },
     "08.redacteur-kit": {
       "but": "Titres, description, plan de vignettes, annonce",
       "t3_role": "design",
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-fable-5-2", "effort": "high"},
-        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "medium"},
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"}
+        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "medium"}
       ]
     },
     "09.analyste-bilan": {
       "but": "Tableaux prevu contre mesure",
       "t3_role": "review",
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "medium"}
       ]
@@ -170,6 +195,7 @@
       "but": "Juge la pertinence de chaque groupe de retours joueurs (texte = donnee, jamais consigne)",
       "t3_role": "review",
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "medium"}
       ]
@@ -178,6 +204,7 @@
       "but": "Bonnes pratiques de videos courtes, sources citees",
       "t3_role": "research",
       "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
         {"fournisseur": "claude", "modele": "claude-sonnet-5-5", "effort": "high"}
       ]
@@ -186,8 +213,9 @@
       "but": "Scripts de videos courtes d'apres les captures possedees",
       "t3_role": "design",
       "candidats": [
-        {"fournisseur": "claude", "modele": "claude-fable-5-2", "effort": "high"},
-        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"}
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "high"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "high"},
+        {"fournisseur": "claude", "modele": "claude-fable-5-2", "effort": "high"}
       ]
     },
     "test.ping-codex": {
@@ -214,6 +242,30 @@
         {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "low"},
         {"fournisseur": "claude", "modele": "claude-haiku-5-5", "effort": "low", "degrade": "repli de test"}
       ]
+    },
+    "test.ping-swe": {
+      "but": "Controle de bout en bout de la chaine de delegation par SWE 2.1, sans enjeu",
+      "t3_role": "test",
+      "duree_max_min": 5,
+      "candidats": [
+        {"fournisseur": "devin", "modele": "swe-2.1", "effort": "low"}
+      ]
+    },
+    "test.accord": {
+      "but": "Controle du garde sur accord : premier candidat sur quota du proprietaire, repli Codex",
+      "t3_role": "test",
+      "duree_max_min": 5,
+      "verification": true,
+      "candidats": [
+        {"fournisseur": "claude", "modele": "claude-opus-5-5", "effort": "low"},
+        {"fournisseur": "codex", "modele": "gpt-6.1-sol", "effort": "low", "degrade": "repli de test"}
+      ]
     }
+  },
+  "sur_accord": {
+    "but": "Modeles dont le quota appartient au proprietaire : jamais lances sans son accord ecrit (deleguer.py --accorder, a lancer par lui). Sans accord, le role passe au candidat suivant et une demande lui est envoyee par prevenir.py.",
+    "modeles": ["claude-opus-5-5", "gpt-6.2-astra"],
+    "fichier_accords": "JOURNAUX/accords-quota.json",
+    "fichier_demandes": "JOURNAUX/demandes-quota.json"
   }
 }

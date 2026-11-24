@@ -1,6 +1,6 @@
 # Modèles, efforts et simultanéité
 
-> **Depuis le 16/11/2026, la source unique du choix de modèle est `CONNAISSANCES\routage.json`** (lue par `OUTILS\deleguer.py`, procédure 13). `python OUTILS\deleguer.py --liste` imprime le tableau à jour. Consignes du propriétaire (`PLAFONDS.md` § 4) : veille, calcul, revue adversariale, code, tests et analyses par Codex `gpt-6.1-sol` ; aucun petit modèle (Haiku) en premier choix ; 2 agents Claude Opus, Fable ou Sonnet au plus, **orchestrateur compris**. Le tableau « Qui fait quoi » ci-dessous est celui du cycle 1, gardé pour l'historique : là où il nomme Haiku, lire `gpt-6.1-sol`.
+> **Depuis le 16/11/2026, la source unique du choix de modèle est `CONNAISSANCES\routage.json`** (lue par `OUTILS\deleguer.py`, procédure 13). `python OUTILS\deleguer.py --liste` imprime le tableau à jour. Consignes du propriétaire (`PLAFONDS.md` § 4) : veille, calcul, revue adversariale, code, tests et analyses par Codex `gpt-6.1-sol` ; aucun petit modèle (Haiku) en premier choix ; 2 agents Claude Opus, Fable ou Sonnet au plus, **orchestrateur compris**. **Depuis le 24/11/2026** : SWE 2.1 agent principal, Opus 5.5 et Astra 6.2 pour la vérification sur accord du propriétaire seulement, Codex `gpt-6.1-sol` en repli (procédure 13 § 4 bis). Le tableau « Qui fait quoi » ci-dessous est celui du cycle 1, gardé pour l'historique : là où il nomme Haiku, lire `gpt-6.1-sol`.
 
 Identifiants relevés dans T3 Code le 15/11/2026 (`orchestrator_capabilities`). À revérifier une fois par fil d'orchestration, avant la première délégation.
 
