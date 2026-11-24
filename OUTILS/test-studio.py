@@ -11,6 +11,7 @@ import unittest
 from contextlib import redirect_stdout
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from threading import Event
 from types import SimpleNamespace
 from unittest.mock import patch
 
@@ -117,9 +118,11 @@ class TransportMCP:
         self.stdin = io.BytesIO()
         self.stdout = SimpleNamespace(readline=self.lignes.get)
         self.arrets = 0
+        self.ferme = Event()
 
     def terminate(self):
         self.arrets += 1
+        self.ferme.set()
         self.lignes.put(b"")
 
 
@@ -133,6 +136,24 @@ class ClientMCP(unittest.TestCase):
         transport = TransportMCP()
         with self.assertRaisesRegex(pousser.studio_mcp.ErreurStudio, "délai.*initialize"):
             self.client(transport, 0.05)
+        self.assertEqual(transport.arrets, 1)
+
+    def test_ecriture_bornee_meme_si_mcp_ne_lit_pas(self):
+        transport = TransportMCP(b'{"id":1,"result":{}}\n')
+        client = self.client(transport, 5)
+
+        def ecriture_bloquee(_):
+            transport.ferme.wait(3)
+            raise BrokenPipeError()
+
+        transport.stdin = SimpleNamespace(write=ecriture_bloquee)
+        debut = time.monotonic()
+        try:
+            with self.assertRaisesRegex(pousser.studio_mcp.ErreurStudio, "délai.*écriture.*tools/call"):
+                client.req("tools/call", delai_s=0.05)
+            self.assertLess(time.monotonic() - debut, 2)
+        finally:
+            client.fermer()
         self.assertEqual(transport.arrets, 1)
 
     def test_liste_studios_respecte_son_delai(self):

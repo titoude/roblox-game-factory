@@ -39,7 +39,8 @@ class Client:
         try:
             self.req("initialize", {"protocolVersion": "2024-11-05", "capabilities": {},
                                     "clientInfo": {"name": "usine-roblox", "version": "1"}})
-            self._envoyer({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}})
+            self._envoyer({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}},
+                          time.monotonic() + self.delai_s)
         except (ErreurStudio, OSError):
             self.fermer()
             raise
@@ -51,9 +52,39 @@ class Client:
         finally:
             self._lignes.put(b"")
 
-    def _envoyer(self, obj):
-        self.p.stdin.write((json.dumps(obj) + "\n").encode("utf-8"))
-        self.p.stdin.flush()
+    def _attendre(self, resultats, fin, methode, phase):
+        try:
+            restant = fin - time.monotonic()
+            if restant <= 0:
+                raise queue.Empty
+            return resultats.get(timeout=restant)
+        except queue.Empty:
+            self.fermer()
+            raise ErreurStudio("délai MCP dépassé (%s) : %s" % (phase, methode)) from None
+
+    def _envoyer(self, obj, fin):
+        donnees = memoryview((json.dumps(obj) + "\n").encode("utf-8"))
+        resultats = queue.Queue(1)
+
+        def ecrire():
+            try:
+                restant = donnees
+                while restant:
+                    ecrits = self.p.stdin.write(restant)
+                    if not ecrits:
+                        raise OSError("écriture MCP interrompue")
+                    restant = restant[ecrits:]
+                self.p.stdin.flush()
+            except (OSError, ValueError) as erreur:
+                resultats.put(erreur)
+            else:
+                resultats.put(None)
+
+        threading.Thread(target=ecrire, daemon=True).start()
+        erreur = self._attendre(resultats, fin, obj["method"], "écriture")
+        if erreur is not None:
+            self.fermer()
+            raise ErreurStudio("écriture MCP échouée : %s" % erreur) from erreur
 
     def req(self, methode, params=None, *, delai_s=None):
         if self._ferme:
@@ -61,16 +92,9 @@ class Client:
         fin = time.monotonic() + (self.delai_s if delai_s is None else min(self.delai_s, delai_s))
         self.n += 1
         rid = self.n
-        self._envoyer({"jsonrpc": "2.0", "id": rid, "method": methode, "params": params or {}})
+        self._envoyer({"jsonrpc": "2.0", "id": rid, "method": methode, "params": params or {}}, fin)
         while True:
-            try:
-                restant = fin - time.monotonic()
-                if restant <= 0:
-                    raise queue.Empty
-                ligne = self._lignes.get(timeout=restant)
-            except queue.Empty:
-                self.fermer()
-                raise ErreurStudio("délai de réponse MCP dépassé : %s" % methode) from None
+            ligne = self._attendre(self._lignes, fin, methode, "réponse")
             if not ligne:
                 self.fermer()
                 raise ErreurStudio("serveur MCP fermé")
