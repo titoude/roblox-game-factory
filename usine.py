@@ -135,6 +135,7 @@ def cmd_cycle(demande, tours, simuler):
     os.makedirs(os.path.join(RACINE, "JOURNAUX", "prompts"), exist_ok=True)
     journal = os.path.join(RACINE, "JOURNAUX", "cycles.log")
     sans_progres = 0
+    indisponibles = set()
     for tour in range(1, tours + 1):
         if os.path.exists(os.path.join(RACINE, "STOP")):
             print("STOP: fichier STOP présent, arrêt avant le tour %d." % tour)
@@ -170,7 +171,8 @@ def cmd_cycle(demande, tours, simuler):
             return 4
         if r["verdict"] is None and (r["code_cli"] != 0 or r["sans_message"]):
             # L'orchestrateur lui-même n'a pas démarré : essayer le candidat suivant.
-            suivant, rang2, _ = d.choisir(routage, "00.orchestrateur", indisponibles=("%s:%s" % (candidat["fournisseur"], candidat["modele"]),))
+            indisponibles.add("%s:%s" % (candidat["fournisseur"], candidat["modele"]))
+            suivant, rang2, _ = d.choisir(routage, "00.orchestrateur", indisponibles=indisponibles)
             if suivant is None:
                 print("ECHEC: orchestrateur indisponible, aucun repli.")
                 return 1
