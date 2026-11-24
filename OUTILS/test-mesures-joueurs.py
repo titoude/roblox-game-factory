@@ -7,6 +7,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import importlib.util
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -124,7 +125,7 @@ with tempfile.TemporaryDirectory(prefix='usine-mesures-') as temp:
         serveur.shutdown(); serveur.server_close(); fil.join()
     m.ecrire_sur(m.RACINE/'STOP','arrêt\n')
     verifier('STOP respecté', commande('juger','--jeu','test') == 2)
-compilation = subprocess.run([str(OUTILS/'bin/luau-compile.exe'),'--null',str(OUTILS/'GABARITS/luau/ServerScriptService.Jeu.MesuresService.lua')],capture_output=True)
+compilation = subprocess.run([str(OUTILS/'bin'/('luau-compile'+('.exe' if os.name=='nt' else ''))),'--null',str(OUTILS/'GABARITS/luau/ServerScriptService.Jeu.MesuresService.lua')],capture_output=True)
 verifier('compilation Luau --null', compilation.returncode == 0)
 print(f'{nombre-len(echecs)}/{nombre} contrôles passés')
 raise SystemExit(1 if echecs else 0)
