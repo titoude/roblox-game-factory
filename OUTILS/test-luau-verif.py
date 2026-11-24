@@ -78,6 +78,13 @@ def main():
         shutil.copyfile(OUTILS / "bin" / "luau-compile.exe", copie.parent / "bin" / "luau-compile.exe")
         retour, sortie = lancer(copie, racine / "0", environnement)
         verifier("analyseur seul absent : code 2", retour == 2 and "controle partiel" in sortie, sortie.strip())
+        # Un analyseur qui plante (runtime VC++ trop ancien : 0xC0000005) ne vaut pas un contrôle vert.
+        faux = racine / "faux-analyseur"
+        faux.mkdir()
+        (faux / "luau-analyze.cmd").write_text("@exit /b -1073741819\r\n", encoding="ascii", newline="")
+        environnement["PATH"] = str(faux) + os.pathsep + environnement["PATH"]
+        retour, sortie = lancer(copie, racine / "0", environnement)
+        verifier("analyseur qui plante : code 1", retour == 1 and "ANALYSE" in sortie, sortie.strip())
     return int(bool(echecs))
 
 

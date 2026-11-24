@@ -13,7 +13,23 @@ $ErrorActionPreference = 'Stop'
 $bin = Join-Path $PSScriptRoot 'bin'
 $attendus = 'luau.exe', 'luau-compile.exe', 'luau-analyze.exe'
 $manquants = @($attendus | Where-Object { -not (Test-Path (Join-Path $bin $_)) })
-if ($manquants.Count -eq 0) { "deja en place : $bin"; exit 0 }
+# luau-analyze plante (0xC0000005 dans MSVCP140) si le runtime VC++ du systeme est plus ancien que celui de la compilation.
+# Rend le message d'echec, ou rien si luau-analyze tourne.
+function Get-PlantageAnalyseur {
+  $essai = Join-Path ([IO.Path]::GetTempPath()) ("usine-luau-essai-" + [Guid]::NewGuid().ToString('N') + '.luau')
+  [IO.File]::WriteAllText($essai, "return 1`n")
+  try {
+    $ErrorActionPreference = 'Continue'
+    & (Join-Path $bin 'luau-analyze.exe') $essai 2>&1 | Out-Null
+    $code = $LASTEXITCODE
+  } finally { Remove-Item $essai -Force -ErrorAction SilentlyContinue }
+  if ($code -notin 0, 1) { "ECHEC : luau-analyze plante (code $code) : installer le runtime VC++ 2015-2022 x64 a jour (https://aka.ms/vs/17/release/vc_redist.x64.exe)" }
+}
+if ($manquants.Count -eq 0) {
+  $plantage = Get-PlantageAnalyseur
+  if ($plantage) { $plantage; exit 1 }
+  "deja en place : $bin"; exit 0
+}
 $url = 'https://github.com/luau-lang/luau/releases/latest/download/luau-windows.zip'
 if (-not $Confirmer) { "simulation : telechargerait $url vers $bin ($($manquants -join ', ') manquants). Relancer avec -Confirmer."; exit 3 }
 $libre = (Get-PSDrive C).Free
@@ -33,5 +49,7 @@ try {
     Copy-Item $src.FullName (Join-Path $bin $n) -Force
   }
   "pose : $($attendus -join ', ') dans $bin"
+  $plantage = Get-PlantageAnalyseur
+  if ($plantage) { $plantage; exit 1 }
   exit 0
 } finally { Remove-Item -Recurse -Force $tmp -ErrorAction SilentlyContinue }
