@@ -14,12 +14,17 @@ import os
 import subprocess
 import sys
 import tempfile
+from contextlib import redirect_stdout
+from unittest.mock import patch
 
 ICI = os.path.dirname(os.path.abspath(__file__))
 RACINE = os.path.dirname(ICI)
 spec = importlib.util.spec_from_file_location("deleguer", os.path.join(ICI, "deleguer.py"))
 d = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(d)
+spec = importlib.util.spec_from_file_location("usine", os.path.join(RACINE, "usine.py"))
+usine = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(usine)
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -84,6 +89,26 @@ controle("charge utile T3 Claude : option « effort »", t3["target"]["options"]
          and t3["target"]["providerInstanceId"] == "claudeAgent")
 controle("dernière ligne RESULTAT reconnue", d.dernier_resultat("bla\nRESULTAT: echec | f.md | raison\n")[0] == "echec")
 controle("absence de RESULTAT reconnue", d.dernier_resultat("bla bla")[0] is None)
+
+for codex_repond in (True, False):
+    tentatives = []
+
+    def lancer_cycle(routage, role, candidat, *args):
+        tentatives.append(candidat["modele"])
+        if candidat["fournisseur"] == "codex" and codex_repond:
+            return {"final": "ETAT_CYCLE: termine | essai", "duree_s": 0,
+                    "verdict": "ok", "code_cli": 0, "sans_message": False}
+        return {"final": "", "duree_s": 0, "verdict": None, "code_cli": 1, "sans_message": True}
+
+    with tempfile.TemporaryDirectory() as tmp, patch.object(usine, "RACINE", tmp), \
+            patch.object(usine, "charger_deleguer", return_value=d), \
+            patch.object(usine, "empreinte_etat", return_value=""), \
+            patch.object(d, "cli_presente", return_value=True), patch.object(d, "lancer", side_effect=lancer_cycle), \
+            redirect_stdout(io.StringIO()):
+        code = usine.cmd_cycle("cycle de test", 5, False)
+    controle("cycle : Opus puis Fable puis Codex" if codex_repond else "cycle : arrêt sans rejouer les candidats épuisés",
+             code == (0 if codex_repond else 1) and tentatives == ["claude-opus-5-5", "claude-fable-5-2", "gpt-6.1-sol"],
+             " -> ".join(tentatives))
 
 # 3. Ligne de commande
 code, sortie = appel(["--role", "inconnu.role", "--simuler"])

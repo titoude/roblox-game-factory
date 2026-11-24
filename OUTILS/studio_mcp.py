@@ -11,8 +11,10 @@ Codes : 0 ok | 1 erreur d'outil | 2 usage | 4 Studio ambigu ou absent.
 """
 import json
 import os
+import queue
 import subprocess
 import sys
+import threading
 import time
 
 BAT = os.path.join(os.environ.get("LOCALAPPDATA", ""), "Roblox", "mcp.bat")
@@ -23,28 +25,78 @@ class ErreurStudio(RuntimeError):
 
 
 class Client:
-    def __init__(self):
+    def __init__(self, delai_s=20):
         if not os.path.isfile(BAT):
             raise ErreurStudio("serveur MCP de Studio introuvable : %s" % BAT)
         self.p = subprocess.Popen(["cmd", "/c", BAT], stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                                   stderr=subprocess.DEVNULL, bufsize=0)
         self.n = 0
-        self.req("initialize", {"protocolVersion": "2024-11-05", "capabilities": {},
-                                "clientInfo": {"name": "usine-roblox", "version": "1"}})
-        self._envoyer({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}})
+        self.delai_s = delai_s
+        self._lignes = queue.Queue()
+        self._ferme = False
         self._studio = None
+        threading.Thread(target=self._lire, daemon=True).start()
+        try:
+            self.req("initialize", {"protocolVersion": "2024-11-05", "capabilities": {},
+                                    "clientInfo": {"name": "usine-roblox", "version": "1"}})
+            self._envoyer({"jsonrpc": "2.0", "method": "notifications/initialized", "params": {}},
+                          time.monotonic() + self.delai_s)
+        except (ErreurStudio, OSError):
+            self.fermer()
+            raise
 
-    def _envoyer(self, obj):
-        self.p.stdin.write((json.dumps(obj) + "\n").encode("utf-8"))
-        self.p.stdin.flush()
+    def _lire(self):
+        try:
+            for ligne in iter(self.p.stdout.readline, b""):
+                self._lignes.put(ligne)
+        finally:
+            self._lignes.put(b"")
 
-    def req(self, methode, params=None):
+    def _attendre(self, resultats, fin, methode, phase):
+        try:
+            restant = fin - time.monotonic()
+            if restant <= 0:
+                raise queue.Empty
+            return resultats.get(timeout=restant)
+        except queue.Empty:
+            self.fermer()
+            raise ErreurStudio("délai MCP dépassé (%s) : %s" % (phase, methode)) from None
+
+    def _envoyer(self, obj, fin):
+        donnees = memoryview((json.dumps(obj) + "\n").encode("utf-8"))
+        resultats = queue.Queue(1)
+
+        def ecrire():
+            try:
+                restant = donnees
+                while restant:
+                    ecrits = self.p.stdin.write(restant)
+                    if not ecrits:
+                        raise OSError("écriture MCP interrompue")
+                    restant = restant[ecrits:]
+                self.p.stdin.flush()
+            except (OSError, ValueError) as erreur:
+                resultats.put(erreur)
+            else:
+                resultats.put(None)
+
+        threading.Thread(target=ecrire, daemon=True).start()
+        erreur = self._attendre(resultats, fin, obj["method"], "écriture")
+        if erreur is not None:
+            self.fermer()
+            raise ErreurStudio("écriture MCP échouée : %s" % erreur) from erreur
+
+    def req(self, methode, params=None, *, delai_s=None):
+        if self._ferme:
+            raise ErreurStudio("serveur MCP fermé")
+        fin = time.monotonic() + (self.delai_s if delai_s is None else min(self.delai_s, delai_s))
         self.n += 1
         rid = self.n
-        self._envoyer({"jsonrpc": "2.0", "id": rid, "method": methode, "params": params or {}})
+        self._envoyer({"jsonrpc": "2.0", "id": rid, "method": methode, "params": params or {}}, fin)
         while True:
-            ligne = self.p.stdout.readline()
+            ligne = self._attendre(self._lignes, fin, methode, "réponse")
             if not ligne:
+                self.fermer()
                 raise ErreurStudio("serveur MCP fermé")
             try:
                 msg = json.loads(ligne.decode("utf-8"))
@@ -55,26 +107,30 @@ class Client:
                     raise ErreurStudio(json.dumps(msg["error"], ensure_ascii=False))
                 return msg.get("result")
 
-    def appel(self, outil, args=None, studio=True):
+    def appel(self, outil, args=None, studio=True, *, delai_s=None):
         args = dict(args or {})
         if studio and "studio_id" not in args:
             args["studio_id"] = self.studio()
-        r = self.req("tools/call", {"name": outil, "arguments": args}) or {}
+        r = self.req("tools/call", {"name": outil, "arguments": args}, delai_s=delai_s) or {}
         texte = "\n".join(c.get("text", json.dumps(c, ensure_ascii=False)) for c in r.get("content", []))
         if r.get("isError"):
             raise ErreurStudio(texte)
         return texte
 
     def studios(self, attente_s=20):
-        fin = time.time() + attente_s
+        fin = time.monotonic() + attente_s
         while True:
             try:
-                st = json.loads(self.appel("list_roblox_studios", {}, studio=False)).get("studios", [])
+                st = json.loads(self.appel("list_roblox_studios", {}, studio=False,
+                                           delai_s=fin - time.monotonic())).get("studios", [])
             except ValueError:
                 st = []
-            if st or time.time() > fin:
+            restant = fin - time.monotonic()
+            if st or restant <= 0:
                 return st
-            time.sleep(2)
+            time.sleep(min(2, restant))
+            if time.monotonic() >= fin:
+                return st
 
     def studio(self):
         if self._studio:
@@ -95,6 +151,9 @@ class Client:
         return self.appel("execute_luau", {"code": code, "datamodel_type": contexte})
 
     def fermer(self):
+        if self._ferme:
+            return
+        self._ferme = True
         try:
             self.p.terminate()
         except Exception:
@@ -111,6 +170,7 @@ def main(argv=None):
     if not a:
         print(__doc__)
         return 2
+    c = None
     try:
         c = Client()
         if a[0] == "studios":
@@ -129,6 +189,9 @@ def main(argv=None):
     except ErreurStudio as e:
         print("ERREUR : %s" % e)
         return 4 if "Studio" in str(e) else 1
+    finally:
+        if c is not None:
+            c.fermer()
 
 
 if __name__ == "__main__":

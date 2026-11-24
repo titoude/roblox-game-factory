@@ -4,7 +4,7 @@
 #   verifier-usine.ps1 [-Silencieux]
 #
 # Controle : structure, skills (frontmatter), fichiers vides, secrets, scripts PowerShell (syntaxe, ASCII),
-# JSON valides, suites de controles des outils, syntaxe et tests Luau, banc hors Studio des jeux,
+# JSON valides, syntaxe Python, suites de controles des outils, syntaxe et tests Luau, banc hors Studio des jeux,
 # fichier STOP, alertes ouvertes, verrous, espace disque.
 # Code de sortie : 0 si aucune erreur (les avertissements n'echouent pas), 1 sinon.
 param([switch]$Silencieux)
@@ -29,6 +29,7 @@ $attendus = @(
   'PROCEDURES\12-PROMOTION-VIDEO.md', 'PROCEDURES\13-ORCHESTRATION-MULTI-FOURNISSEURS.md', 'PROCEDURES\14-ENTREPRISE-BOUCLE-D-EXPLOITATION.md',
   'OUTILS\cu.ps1', 'OUTILS\verrou.ps1', 'OUTILS\alerte.ps1', 'OUTILS\etat.ps1', 'OUTILS\nouveau-jeu.ps1',
   'OUTILS\sim-economie.py', 'OUTILS\pousser-script.ps1', 'OUTILS\luau-verif.ps1',
+  'OUTILS\verifier-python.py',
   'usine.py', 'usine.cmd', 'CONNAISSANCES\routage.json', 'OUTILS\deleguer.py', 'OUTILS\usine_opencloud.py',
   'OUTILS\retours-joueurs.py', 'OUTILS\mesures-joueurs.py', 'OUTILS\banc-luau.py', 'OUTILS\luau\faux-roblox.luau',
   'OUTILS\monter-video.py', 'OUTILS\decision-promo.py', 'OUTILS\poser-luau.ps1',
@@ -92,12 +93,21 @@ $suites = @(
   @{ nom = 'interrupteurs a distance'; fichier = 'OUTILS\test-interrupteurs.py' },
   @{ nom = 'historique des sessions'; fichier = 'OUTILS\test-historique.py' },
   @{ nom = 'jeton longue duree claude'; fichier = 'OUTILS\test-jeton-claude.py' },
-  @{ nom = 'chien de garde des agents'; fichier = 'OUTILS\test-chien-de-garde.py' }
+  @{ nom = 'chien de garde des agents'; fichier = 'OUTILS\test-chien-de-garde.py' },
+  @{ nom = 'envoi et client Studio'; fichier = 'OUTILS\test-studio.py' },
+  @{ nom = 'verificateur Python'; fichier = 'OUTILS\test-verifier-python.py' }
 )
 $py = Get-Command python -ErrorAction SilentlyContinue
-if (-not $py) { Avis 'python absent : suites de controles des outils non lancees' }
+if (-not $py) { Avis 'python absent : syntaxe Python et suites de controles des outils non verifiees' }
 else {
   $env:PYTHONIOENCODING = 'utf-8'
+  $preferenceAvant = $ErrorActionPreference
+  try {
+    $ErrorActionPreference = 'Continue'
+    $sortie = & $py.Source (Join-Path $racine 'OUTILS\verifier-python.py') 2>&1
+    $codePython = $LASTEXITCODE
+  } finally { $ErrorActionPreference = $preferenceAvant }
+  if ($codePython -ne 0) { Err ("syntaxe Python : " + ($sortie -join ' ; ')) }
   foreach ($su in $suites) {
     $f = Join-Path $racine $su.fichier
     if (-not (Test-Path $f)) { Err "manquant : $($su.fichier)"; continue }

@@ -116,7 +116,7 @@ a = analyser(Sim(exemple, exemple["profils"]["actif"]).lancer(14400), seuils, 14
 mauvais = [x["mesure"] for x in a["lignes"] if x["verdict"] == "ÉCHEC"]
 verifier("exemple du gabarit sans échec", not mauvais, ", ".join(mauvais))
 
-# 7. Contrat public JSON et stabilité exacte de la sortie Markdown du gabarit.
+# 7. Contrat public JSON et stabilité de la sortie Markdown du gabarit.
 commande = [sys.executable, "OUTILS/sim-economie.py", "OUTILS/GABARITS/economie.exemple.json"]
 execution = subprocess.run(commande + ["--json"], cwd=RACINE, capture_output=True, timeout=30)
 donnees = json.JSONDecoder().raw_decode(execution.stdout.decode("utf-8"))[0]
@@ -134,9 +134,10 @@ for nom, profil in donnees["profils"].items():
                         for i, (t, ident, _, cout) in enumerate(simulation.achats)])
     verifier(f"{nom} : jalons horodatés exacts", profil["jalons_s"] == simulation.jalons)
 markdown = subprocess.run(commande, cwd=RACINE, capture_output=True, timeout=30)
-# Empreinte des octets stdout enregistrés avant la modification (chemin d'entrée fixe).
-verifier("Markdown du gabarit inchangé octet pour octet", markdown.returncode == 0 and
-         hashlib.sha256(markdown.stdout).hexdigest() == "16d002bde786e8210b76bdb97a37eaf0034fc4ddd74cf2b330b8d73829d16fbf")
+# Empreinte des octets stdout avec fins de ligne LF (chemin d'entrée fixe).
+verifier("Markdown du gabarit inchangé après normalisation des fins de ligne", markdown.returncode == 0 and
+         hashlib.sha256(markdown.stdout.replace(b"\r\n", b"\n")).hexdigest() ==
+         "8e2178cd211e1582b51f4b9e80c475e484330efa8711dcf41343cb076854da2e")
 
 print(f"{len(echecs)} échec(s)")
 sys.exit(1 if echecs else 0)
