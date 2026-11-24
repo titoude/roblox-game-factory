@@ -8,7 +8,7 @@ Veille → Concept → Économie → Fun → Production → QA → Release → D
                                 jeu en ligne : Retours des joueurs → lot correctif → QA → Release ; Promotion (facultative)
 ```
 
-État au 16/11/2026, fin du cycle 2 : la chaîne a tourné **de la veille au code testé hors Studio** pour le jeu n° 2 (`lave-la-tour`), et toutes les boucles d'exploitation (délégation Claude + Codex, retours joueurs, suivi des joueurs, promotion) ont leurs outils et leurs tests. **Rien n'a encore été joué dans Studio ni publié par l'usine** : Studio était verrouillé par un autre agent pendant tout le cycle. Détail, preuves et limites : `CONNAISSANCES\BILANS\CYCLE-2.md`.
+État au 19/11/2026 : la chaîne a tourné **de la veille au code testé hors Studio** pour le jeu n° 2 (`lave-la-tour`), et les boucles d'exploitation (délégation Claude + Codex, retours joueurs, suivi des joueurs, promotion) ont leurs outils et leurs tests. Le **premier Play local dans Roblox Studio** a eu lieu le 17/11 : monde et HUD à 60 images/s sur PC, trois passages de raclette par vitre, validation serveur et pièces créditées. Les trois revues du fun ont noté 5,7 / 6,1 / 6,4, sous le seuil : le jugement reste à faire sur le prototype. **Aucun jeu n'a été publié par l'usine.** Voir le [rapport du prototype](JEUX/lave-la-tour/05-production/PASSE-2-PROTOTYPE.md#premier-play-r%C3%A9el--17-novembre-2026-orchestrateur-opus-55) et le [bilan du cycle 2](CONNAISSANCES/BILANS/CYCLE-2.md).
 
 ## Démarrer
 
@@ -24,7 +24,7 @@ python usine.py "fais un jeu"     # ou : usine "fais un jeu"
 | `python usine.py "fais un jeu"` | Cycle complet, sans question : reprend le jeu en cours ; sinon veille, puis nouveau jeu. L'orchestrateur tourne par tours (`--tours N`, 8 par défaut) ; l'état vit sur disque, un tour reprend où l'autre s'arrête |
 | `python usine.py "reprends lave-la-tour"` | Toute demande de `PROCEDURES\00-ORCHESTRATION.md` |
 | `python usine.py etat` | Jeux, verrous, alertes ouvertes (aucun modèle lancé) |
-| `python usine.py verifier` | Auto-contrôle : structure, secrets, 6 suites de tests, syntaxe et tests Luau, banc des jeux |
+| `python usine.py verifier` | Auto-contrôle : structure, secrets, syntaxe Python et PowerShell, suites de tests, syntaxe et tests Luau, banc des jeux |
 | `python usine.py roles` | Quel modèle pour quel rôle, replis, places libres |
 | `python usine.py retours <slug>` | Boucle des retours joueurs d'un jeu en ligne |
 | `python usine.py battement` | Un battement sans modèle : mesures, retours, incidents, messages au propriétaire, décision de lancer ou non |
@@ -101,6 +101,7 @@ JOURNAUX\            hors git : délégations, cycles, sorties des agents
 | `GABARITS\luau\` | Modules à copier dans chaque jeu : `RetoursService` + client (bouton « Idée / bug »), `MesuresService`, `InterrupteursService`, `AvisService` (sondage), leurs tests |
 | `cu.ps1` | Capture, clic, frappe sur le bureau Windows, sous verrou `bureau` |
 | `pousser-script.ps1`, `luau\extraire-scripts.luau`, `luau\stabilite-panneaux.luau` | Envoi d'un script vers Studio ; extraction ; mesure de stabilité des panneaux (Q9) |
+| `pousser-studio.py` | Envoi groupé vers Studio sous verrou, après contrôle de la place ouverte. Pour une place distante, renseigner `USINE_ARCHIPEL_PLACE_ID` afin d'exclure la place d'Archipel |
 | `instantane-univers.ps1` | CCU daté d'une liste d'univers par l'API publique documentée |
 | `installer-skills.ps1`, `hooks\` | Copie des skills (par le propriétaire) ; crochets git (secrets, fichiers vides, `CONNAISSANCES\` réservé) |
 
@@ -120,7 +121,7 @@ Texte complet : `GARDE-FOUS.md`.
 
 Détail et preuves : `CONNAISSANCES\BILANS\CYCLE-2.md`.
 
-**Prouvé en exécution réelle (cycles 1 et 2)**
+**Prouvé en exécution réelle**
 
 1. **Délégation Claude + Codex** : par `delegate_task` dans T3 Code (18 agents au cycle 2) et par les CLI (`deleguer.py` : `codex exec`, `claude -p`, repli à l'exécution). Un tour d'orchestrateur par `usine.py`.
 2. **Veille** par lecture de pages publiques (gpt-6.1-sol : 15 pages, sources citées).
@@ -128,10 +129,11 @@ Détail et preuves : `CONNAISSANCES\BILANS\CYCLE-2.md`.
 4. **Production hors Studio** : code serveur de `lave-la-tour` exécuté sur le banc (1 774 contrôles), puis relu par un autre modèle qui y a trouvé 3 défauts P1 et un test trop faible (le rejeu des achats du simulateur prouvait que le solde suffit, pas qu'il est égal).
 5. **Retours joueurs** : chaîne complète sur des retours fictifs avec un juge réel ; modules Luau exécutés hors Studio.
 6. **Suivi des joueurs, promotion** : calculs et règles de décision testés sur des exemples.
+7. **Premier Play dans Studio**, le 17/11 sur une place locale : envoi des scripts, rendu PC et boucle de lavage observés. Il a révélé deux défauts que le banc n'avait pas vus : DataStore inaccessible sur une place non publiée et `PlayerModule` absent. Les deux ont été corrigés ; ce Play solo ne vaut pas qualification.
 
-**Jamais essayé (Studio, bureau et comptes indisponibles)**
+**Reste à valider**
 
-1. **Studio** : envoi d'un script (`pousser-script.ps1`, `execute_luau`), Play, captures ; le prototype L0 de `lave-la-tour` et sa passe 2 (porte P4) ; tout le code client.
+1. **Studio** : qualification du prototype (P4), émulation téléphone et scénarios client non joués (sons et robots achetés et visibles, notamment).
 2. **QA à plusieurs clients** (niveau B) et sur comptes réels (niveau C) ; `cu.ps1` en conditions réelles.
 3. **Release** : aucune publication par l'usine ; `open_cloud_invoke`, réglages de l'expérience, badges, page, langues.
 4. **Open Cloud** : aucun appel réel ; aucune clé de lecture n'est posée (alerte ouverte).
