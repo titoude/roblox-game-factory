@@ -3,8 +3,8 @@
 
   python OUTILS\\pousser-studio.py <slug> [--place-attendue ID|locale] [--simuler] [--avec-tests]
 
-1. Contrôle d'identité : la place ouverte doit être celle attendue (`locale` = place jamais publiée,
-   PlaceId 0). Refus si la place est une place connue d'un autre jeu (Archipel : <ARCHIPEL_PLACE_ID>).
+1. Contrôle d'identité : la place ouverte doit être celle attendue (`locale` = PlaceId 0).
+   Pour une place distante, renseigner USINE_ARCHIPEL_PLACE_ID afin d'interdire la place d'Archipel.
 2. Verrou : `studio` détenu par l'agent courant (USINE_AGENT), sinon refus (G1).
 3. Ordre : ReplicatedStorage, puis modules serveur, puis scripts clients, puis scripts serveur
    (*.server.lua) en dernier, pour qu'aucun script ne démarre avant ses modules.
@@ -23,8 +23,6 @@ ICI = os.path.dirname(os.path.abspath(__file__))
 RACINE = os.path.dirname(ICI)
 sys.path.insert(0, ICI)
 import studio_mcp  # noqa: E402
-
-PLACES_INTERDITES = {<ARCHIPEL_PLACE_ID>: "Archipel"}
 
 
 def rang(nom):
@@ -87,6 +85,16 @@ def main(argv=None):
         for n in liste:
             print("ENVOI prévu : %s" % n)
         return 0
+    if a.place_attendue == "locale":
+        attendu = 0
+    elif a.place_attendue.isascii() and a.place_attendue.isdecimal():
+        attendu = int(a.place_attendue)
+    else:
+        p.error("--place-attendue doit être « locale » ou un identifiant numérique")
+    archipel = os.environ.get("USINE_ARCHIPEL_PLACE_ID", "")
+    if attendu and not (archipel.isascii() and archipel.isdecimal() and int(archipel) > 0):
+        print("REFUS : renseigner USINE_ARCHIPEL_PLACE_ID avant tout envoi vers une place distante.")
+        return 4
     agent = os.environ.get("USINE_AGENT") or "defaut"
     if not verrou_tenu(agent):
         print("REFUS : verrou studio non détenu par %s (OUTILS\\verrou.ps1 prendre studio -agent %s)." % (agent, agent))
@@ -94,12 +102,15 @@ def main(argv=None):
     c = studio_mcp.Client()
     try:
         ident = c.luau('return tostring(game.PlaceId) .. "|" .. tostring(game.GameId) .. "|" .. game.Name')
-        place = int(ident.strip().split("|")[0] or 0)
-        print("place ouverte : %s" % ident.strip())
-        if place in PLACES_INTERDITES:
-            print("REFUS : la place ouverte est %s (%d)." % (PLACES_INTERDITES[place], place))
+        champs = ident.strip().split("|", 2)
+        if len(champs) != 3 or not (champs[0].isascii() and champs[0].isdecimal()):
+            print("REFUS : identité de la place ouverte illisible.")
             return 4
-        attendu = 0 if a.place_attendue == "locale" else int(a.place_attendue)
+        place = int(champs[0])
+        print("place ouverte : %s" % ident.strip())
+        if attendu and place == int(archipel):
+            print("REFUS : la place ouverte est Archipel (%d)." % place)
+            return 4
         if place != attendu:
             print("REFUS : place %d ouverte, %s attendue." % (place, a.place_attendue))
             return 4
