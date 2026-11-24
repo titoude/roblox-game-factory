@@ -477,6 +477,8 @@ class Pilote:
     def reserver(self, t, args):
         # Même réservation durable que battement.py --lancer : tant qu'elle existe, le battement ne lance rien.
         e = self.lire_reservation()
+        e.setdefault("evenements", [])  # clés exigées par battement.py quand il relit cet état
+        e.setdefault("absents", {})
         e["lancement"] = {"date": t["debut"], "demande": args[1] if args[0] == "retours" else args[0], "tours": int(args[2]) if len(args) > 2 else 2,
                           "origine": "tableau de bord", "id": t["id"]}
         self.ecrire_reservation(e)
@@ -529,6 +531,11 @@ class Pilote:
             if nom not in ("stop", "reprendre"):
                 if modeles and (any(ACTIONS[t["action"]][2] for t in occupe) or self.cycle_externe()):
                     return 409, {"erreur": "un cycle tourne déjà : une seule usine à la fois"}
+                # battement.py relit puis réécrit battement-etat.json : pas de battement réel pendant un cycle du
+                # tableau (réservation perdue ou rétablie après la fin), ni l'inverse.
+                if (nom == "battement" and any(t["modeles"] for t in occupe)) or (
+                        modeles and any(t["action"] == "battement" for t in occupe)):
+                    return 409, {"erreur": "battement et cycle ne tournent pas en même temps (battement-etat.json)"}
                 if any(t["action"] == nom for t in occupe):
                     return 409, {"erreur": "cette action tourne déjà"}
             maintenant = dt.datetime.now(dt.timezone.utc)

@@ -215,6 +215,14 @@ with tempfile.TemporaryDirectory() as tmp:
     res = reservation()
     controle("pilotage : interruption, réservation libérée, le reste conservé",
              code2 == 200 and fin and fin["code"] != 0 and "lancement" not in res and res.get("evenements") == ["e1"], (fin, res))
+    os.remove(os.path.join(r, "JOURNAUX", "battement-etat.json"))
+    code, d = post("/api/action", {"action": "cycle", "demande": "fais un jeu dormir", "tours": 2, "accord_modeles": True})
+    res = reservation()
+    controle("pilotage : réservation sans état préalable lisible par battement.py",
+             code == 202 and res.get("evenements") == [] and res.get("absents") == {} and "lancement" in res, (code, d, res))
+    controle("pilotage : battement réel refusé pendant un cycle", post("/api/action", {"action": "battement"})[0] == 409)
+    post("/api/interrompre", {"id": d.get("id")})
+    attendre_fin(d.get("id"))
     ecrire(r, "JOURNAUX/battement-etat.json", '{"lancement": {"date": "x", "demande": "veille", "tours": 2}}')
     controle("pilotage : cycle refusé si battement --lancer a réservé", post("/api/action", {"action": "cycle", "demande": "x", "accord_modeles": True})[0] == 409)
     controle("pilotage : réservation d'un autre gardée", reservation()["lancement"]["demande"] == "veille")
