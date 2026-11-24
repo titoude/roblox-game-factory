@@ -219,6 +219,11 @@ with tempfile.TemporaryDirectory(prefix="tests-boucle-") as tmp, \
     verifier("sans juge disponible : code 1, proposition gardée, P9 non passée",
              code == 1 and (racine / "CONNAISSANCES/PROPOSITIONS/2026-11-23-testeur-retard.md").exists()
              and "P9" not in json.loads((racine / "JEUX/jeu-b/ETAT.json").read_text(encoding="utf-8"))["portes"])
+    appliquer(racine, "jeu-b", juge=None)
+    cal = json.loads((racine / "CONNAISSANCES/CALIBRATION.json").read_text(encoding="utf-8"))
+    verifier("reprise d'un bilan incomplet : mesures du jeu 2 comptées une seule fois",
+             all(sum(m["jeu"] == "jeu-b" for m in e["mesures"]) == 1 for e in cal["previsions"].values())
+             and all(sum(m["jeu"] == "jeu-b" for m in l) == 1 for l in cal["seuils"].values() if any(m["jeu"] == "jeu-b" for m in l)))
     verifier("battement : bilan non retenté le même jour, retenté le lendemain",
              "jeu-b" not in B.bilans_prets(str(racine), "2026-11-24") and "jeu-b" in B.bilans_prets(str(racine), "2026-11-25"))
     # Passage complet sur une usine neuve : jeu 1 puis jeu 2, juge disponible.

@@ -358,6 +358,7 @@ def appliquer(racine, slug, simuler=False, juge=None, commit=False, aujourdhui=N
             r["refus"].append("seuil %s : clé numérique inconnue, valeur ou preuve absente" % cle)
             continue
         liste = cal["seuils"].setdefault(cle, [])
+        liste[:] = [m for m in liste if (m["jeu"], m["date"]) != (slug, date)]
         liste.append({"jeu": slug, "date": date, "mesure": s.get("mesure"), "propose": s["propose"], "preuve": s["preuve"]})
         jeux = {m["jeu"] for m in liste}
         massif = bool(s.get("massif") and s.get("explication"))
