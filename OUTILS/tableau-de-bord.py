@@ -61,10 +61,13 @@ DOSSIERS_LISIBLES = ("JOURNAUX", "JEUX", "CONNAISSANCES", "VEILLE", "PROCEDURES"
 FICHIERS_LISIBLES = ("ALERTES.md", "GARDE-FOUS.md", "README.md", "README.fr.md", "AGENTS.md")
 EXTENSIONS_LISIBLES = (".md", ".log", ".txt", ".csv", ".json", ".lua", ".luau")
 EXCLUS = re.compile(r"(^|/)(\.git|brut|captures|__pycache__)(/|$)")
+# G10 : aucun export de session navigateur (cookies, storageState, .ROBLOSECURITY), même rangé par erreur ici.
+SESSIONS = re.compile(r"(?i)(storage.?state|cookie|roblosecurity|^\.env|session[^/]*\.json$)")
 TAILLE_MAX = 400 * 1024
 
 
 def charger_deleguer():
+    sys.dont_write_bytecode = True  # lecture seule : pas de __pycache__ dans l'usine
     spec = importlib.util.spec_from_file_location("deleguer_tdb", os.path.join(RACINE, "OUTILS", "deleguer.py"))
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
@@ -367,7 +370,7 @@ def chemin_autorise(racine, demande):
     if not demande or "\x00" in demande:
         return None
     demande = demande.replace("\\", "/").lstrip("/")
-    if EXCLUS.search(demande):
+    if EXCLUS.search(demande) or SESSIONS.search(demande.rsplit("/", 1)[-1]):
         return None
     absolu = os.path.realpath(os.path.join(racine, demande))
     base = os.path.realpath(racine)

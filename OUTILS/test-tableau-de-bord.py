@@ -64,6 +64,8 @@ with tempfile.TemporaryDirectory() as tmp:
     ecrire(r, "JOURNAUX/agents/vif.log", "sortie de l'agent\nsk-" + "ant-" + "A" * 30 + "\n")
     ecrire(r, "VERROUS/studio.lock", json.dumps({"ressource": "studio", "agent": "a", "depuis": "2026-11-20T10:00:00Z", "expire": "2000-01-01T00:00:00Z"}))
     ecrire(r, "secret.md", "hors des dossiers lisibles")
+    ecrire(r, "JOURNAUX/storageState-roblox.json", '{"cookies": []}')
+    ecrire(r, "JOURNAUX/session-chrome.json", '{"jeton": "x"}')
 
     e = t.instantane(r)
     jeu = {j["slug"]: j for j in e["jeux"]}
@@ -109,7 +111,8 @@ with tempfile.TemporaryDirectory() as tmp:
     controle("/api/etat en JSON", code == 200 and json.loads(corps)["jeux"])
     code, corps = get("/api/fichier?chemin=JOURNAUX/agents/vif.log")
     controle("fichier lu, secret masqué", code == 200 and "[masqué]" in corps and "AAAAAAAAAAAAAAAAAAAAAAAA" not in corps, corps)
-    for mauvais in ("../" * 6 + "etc/passwd", "secret.md", "JEUX/../secret.md", "STOP", "VERROUS/studio.lock", "%2e%2e/%2e%2e/x.md"):
+    for mauvais in ("../" * 6 + "etc/passwd", "secret.md", "JEUX/../secret.md", "STOP", "VERROUS/studio.lock", "%2e%2e/%2e%2e/x.md",
+                    "JOURNAUX/storageState-roblox.json", "JOURNAUX/session-chrome.json"):
         code, _ = get("/api/fichier?chemin=" + mauvais)
         controle("refusé : " + mauvais, code == 404)
     code, _ = get("/api/etat", hote="evil.example:%d" % port)
@@ -124,6 +127,7 @@ with tempfile.TemporaryDirectory() as tmp:
     apres = sorted(os.path.relpath(os.path.join(d, f), r) for d, _, fs in os.walk(r) for f in fs)
     controle("aucun fichier créé ni supprimé par la lecture", avant == apres)
 
+controle("deleguer.py chargé sans écrire de bytecode", sys.dont_write_bytecode is True)
 controle("l'état de cette usine se lit sans erreur", t.instantane(t.RACINE)["jeux"] is not None)
 print("%d échec(s)" % echecs)
 sys.exit(1 if echecs else 0)
